@@ -19,7 +19,6 @@ public class DetermineSmells extends AbstractHandler {
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-		Set<IFile> alreadyHandledFiles = new HashSet<IFile>();
 		IEditorPart activeEditor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
 		if(activeEditor == null){
 			return null;
@@ -29,13 +28,11 @@ public class DetermineSmells extends AbstractHandler {
 			IEditorInput editorInput = activeEditor.getEditorInput();
 			if(editorInput instanceof IFileEditorInput){
 				IFile openFile = ((IFileEditorInput) editorInput).getFile();
-				if(alreadyHandledFiles.add(openFile)){
-					SmellChecker.removeAllMarkers(openFile);
-					SmellChecker.checkSmellsInFile(editorConnector, openFile);
-				}
+				SmellChecker.removeAllMarkers(openFile);
+				SmellChecker.checkSmellsInFile(editorConnector, openFile);
 			}
 		}
-		
+
 		return null;
 	}
 

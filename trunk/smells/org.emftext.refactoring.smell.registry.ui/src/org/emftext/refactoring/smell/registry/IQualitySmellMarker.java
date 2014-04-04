@@ -1,5 +1,7 @@
 package org.emftext.refactoring.smell.registry;
 
+import org.eclipse.ui.ide.IDE;
+
 
 public interface IQualitySmellMarker {
 	
@@ -14,7 +16,7 @@ public interface IQualitySmellMarker {
 	 * This attribute can be set in {@link SmellChecker#addSmellAndQuickFix(org.eclipse.core.resources.IFile, org.eclipse.emf.ecore.EObject, org.emftext.refactoring.smell.calculation.Calculation, org.emftext.refactoring.smell.calculation.CalculationResult, org.emftext.language.refactoring.rolemapping.RoleMapping, org.emftext.refactoring.editorconnector.IEditorConnector)}
 	 * and added to the marker. 
 	 */
-	public static final String EDITOR_ID	= "EDITOR_ID_ATTR";
+	public static final String EDITOR_ID	= IDE.EDITOR_ID_ATTR;
 	
 	/**
 	 * This is the ID used in the markerSupport extension. And this, on the other side, is used to create

@@ -36,9 +36,9 @@ import org.emftext.refactoring.util.RoleUtil;
 public class RemoveInterrupFromBackground extends AbstractRefactoringPostProcessor {
 
 	private static String[] NOTIFIER_STATEMENTS	= new String[]{
-													"\nNotification notification = new Notification.Builder(this)\n\t.setContentTitle(\"%s\")\n\t.build();\n", 
-													"\nNotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);\n", 
-												   	"\nnotificationManager.notify(1, notification);"
+													"\n\t\tNotification notification = new Notification.Builder(this)\n\t\t\t.setContentTitle(\"%s\")\n\t\t\t.build();\n", 
+													"\n\t\tNotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);\n", 
+												   	"\n\t\tnotificationManager.notify(1, notification);"
 													};
 
 	@Override

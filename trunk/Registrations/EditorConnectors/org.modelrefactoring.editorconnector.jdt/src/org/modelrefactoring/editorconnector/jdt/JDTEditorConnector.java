@@ -29,9 +29,10 @@ public class JDTEditorConnector implements IEditorConnector {
 	private IJavaTextResource resource;
 	private CompilationUnit javaModel;
 
-	public JDTEditorConnector(ITextEditor jdtEditor, IFile file) {
+	public JDTEditorConnector(ITextEditor jdtEditor, IJavaTextResource resource) {
+		this.resource = resource;
 		this.jdtEditor = jdtEditor;
-		this.file = file;
+		javaModel = (CompilationUnit) resource.getContents().get(0);
 	}
 
 	private void initResource(){
@@ -134,5 +135,13 @@ public class JDTEditorConnector implements IEditorConnector {
 	@Override
 	public IEditorPart getEditor() {
 		return jdtEditor;
+	}
+
+	protected void setEditor(ITextEditor jdtEditor) {
+		this.jdtEditor = jdtEditor;
+	}
+
+	protected void setModel(CompilationUnit javaModel) {
+		this.javaModel = javaModel;
 	}
 }
