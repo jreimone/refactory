@@ -44,9 +44,9 @@ public class StructureCustom extends StructureImpl {
 			ResourceSet resourceSet = resource.getResourceSet();
 			if(resourceSet != null){
 				try {
-					result = unmanagedEngineQuery(pattern, resource, resourceSet);
+//					result = unmanagedEngineQuery(pattern, resource, resourceSet);
 
-//					result = managedEngineQuery(pattern, resourceSet);
+					result = managedEngineQuery(pattern, resourceSet);
 					// IncQuery version 0.7
 					//					IQuerySpecification<?> querySpecification = QuerySpecificationRegistry.getOrCreateQuerySpecification(pattern);
 					//					if(querySpecification != null){

@@ -32,17 +32,19 @@ public class CoRefactorerFactory {
 		List<IKnowledgeBase> knowledgeBases = IKnowledgeBaseRegistry.INSTANCE.getKnowledgeBases();
 		for (IKnowledgeBase knowledgeBase : knowledgeBases) {
 			for (EObject element : boundElements) {
-				Collection<EObject> dependencies = knowledgeBase.getDependencies(element);
-				if(dependencies != null){
-					for (EObject dependency : dependencies) {
-						EObject model = EcoreUtil.getRootContainer(dependency, true);
-						Collection<EObject> modelDependencies = dependencyMap.get(model);
-						if(modelDependencies == null){
-							modelDependencies = new ArrayList<EObject>();
-							dependencyMap.put(model, modelDependencies);
-						}
-						if(!modelDependencies.contains(dependency)){
-							modelDependencies.add(dependency);
+				if(element.eResource() != null){
+					Collection<EObject> dependencies = knowledgeBase.getDependencies(element);
+					if(dependencies != null){
+						for (EObject dependency : dependencies) {
+							EObject model = EcoreUtil.getRootContainer(dependency, true);
+							Collection<EObject> modelDependencies = dependencyMap.get(model);
+							if(modelDependencies == null){
+								modelDependencies = new ArrayList<EObject>();
+								dependencyMap.put(model, modelDependencies);
+							}
+							if(!modelDependencies.contains(dependency)){
+								modelDependencies.add(dependency);
+							}
 						}
 					}
 				}
