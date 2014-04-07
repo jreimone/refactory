@@ -75,7 +75,7 @@
    </category-def>
    <category-def name="Refactory Constraint Interpreter" label="Refactory Constraint Interpreter">
       <description>
-         Refactorings can only be executed if pre- and post-conditions are satisfied. This category provides a default contraint interpreter for OCL. This interpreter uses the implementation of Dresden OCL (http://www.dresden-ocl.org).
+         Refactorings can only be executed if pre- and post-conditions are satisfied. This category provides a default constraint interpreter for OCL. This interpreter uses the implementation of Dresden OCL (http://www.dresden-ocl.org).
       </description>
    </category-def>
    <category-def name="Refactory Smells" label="Refactory Smells">
