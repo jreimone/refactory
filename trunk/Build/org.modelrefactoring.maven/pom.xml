@@ -1,0 +1,102 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.modelrefactoring</groupId>
+	<artifactId>org.modelrefactoring.maven</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>Eclipse p2 Update-Site Generation</name>
+
+	<properties>
+		<tycho-version>0.19.0</tycho-version>
+		<originalRepository>${WORKSPACE}/../../Refactory/ws/build/dist/updatesites/org.modelrefactoring.deploy/</originalRepository>
+		<targetDirectory>${WORKSPACE}/updatesite</targetDirectory>
+		<targetRepository>${targetDirectory}/repository</targetRepository>
+	</properties>
+	<build>
+		<plugins>
+			<!-- step 0: delete old generated p2 update site locally -->
+			<plugin>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>2.5</version>
+				<executions>
+					<execution>
+						<id>auto-clean</id>
+						<phase>initialize</phase>
+						<goals>
+							<goal>clean</goal>
+						</goals>
+						<configuration>
+							<filesets>
+								<fileset>
+									<directory>target</directory>
+									<includes>
+										<include>**/*</include>
+									</includes>
+									<followSymlinks>false</followSymlinks>
+								</fileset>
+							</filesets>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho.extras</groupId>
+				<artifactId>tycho-p2-extras-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<executions>
+					<execution>
+						<!-- step 1: mirror old-style update site -->
+						<id>mirror-update-sites</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>mirror</goal>
+						</goals>
+						<configuration>
+							<source>
+								<repository>
+									<url>${originalRepository}</url>
+								</repository>
+							</source>
+							<destination>${targetRepository}</destination>
+						</configuration>
+					</execution>
+					<execution>
+						<!-- step 3: generate the full p2 metadata for the mirrored artifacts -->
+						<id>generate-full-metadata</id>
+						<phase>compile</phase>
+						<goals>
+							<goal>publish-features-and-bundles</goal>
+						</goals>
+						<configuration>
+							<sourceLocation>${targetRepository}</sourceLocation>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.7</version>
+				<executions>
+					<execution>
+						<!-- step 2: strip the p2 metadata that contains the "partial IUs" 
+							that which be used for dependency resolution in Tycho -->
+						<id>remove-incomplete-metadata</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<target>
+								<delete file="${targetRepository}/content.jar" />
+								<delete file="${targetRepository}/artifacts.jar" />
+							</target>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
