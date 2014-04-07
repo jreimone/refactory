@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." default="adapt-version-in-category-file" name="Copys the category.xml before generating the p2 update site">
+<property environment="env"/>
+<property name="deployDir" value="${env.WORKSPACE}/org.modelrefactoring.deploy"/>
+<property name="repositoryDir" value="${env.WORKSPACE}/org.modelrefactoring.maven/target/repository"/>
+<property name="replacement" value="0.9.1.v201404071114"/>
+<property name="searchString" value="0.0.0.v0"/>
+
+<target name="copy-category-file">
+	<echo message="Copying category.xml..."/>
+	<copy file="${deployDir}/category.xml" todir="${repositoryDir}"/>
+</target>
+
+<target name="adapt-version-in-category-file" depends="copy-category-file">
+	<echo message="Searches for ${searchString} in category.xml and replace it with ${replacement} ..."/>
+	<replace file="${repositoryDir}/category.xml" token="${searchString}" value="${replacement}"/>
+</target>
+
+</project>
