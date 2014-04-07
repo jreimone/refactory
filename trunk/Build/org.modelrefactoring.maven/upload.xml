@@ -3,13 +3,20 @@
 <property environment="env"/>
 <property name="deployDir" value="${env.WORKSPACE}/org.modelrefactoring.deploy"/>
 <property name="repositoryDir" value="${env.WORKSPACE}/org.modelrefactoring.maven/target/repository"/>
+<property name="replacement" value="0.9.1.v201404071114"/>
+<property name="searchString" value="0.0.0.v0"/>
 
 <target name="copy-category-file">
 	<echo message="Copying category.xml..."/>
 	<copy file="${deployDir}/category.xml" todir="${repositoryDir}"/>
 </target>
 
-<target name="upload-p2-update-site" depends="copy-category-file">
+<target name="adapt-version-in-category-file" depends="copy-category-file">
+	<echo message="Searches for ${searchString} in category.xml and replace it with ${replacement} ..."/>
+	<replace file="${repositoryDir}/category.xml" token="${searchString}" value="${replacement}"/>
+</target>
+
+<target name="upload-p2-update-site" depends="adapt-version-in-category-file">
 	<echo message="Uploading generated p2 update site to modelrefactoring.org/update_trunk_p2..."/>
 	<scp todir="${env.DROPSBOX_UPLOAD_USER}:${env.DROPSBOX_UPLOAD_PASS}@www.modelrefactoring.org:/srv/www_modelrefactoring.org/update_trunk_p2" port="22" sftp="true" trust="true" verbose="true">
 		<fileset dir="${repositoryDir}" />
