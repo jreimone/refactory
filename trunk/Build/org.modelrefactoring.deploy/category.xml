@@ -39,6 +39,9 @@
    <feature url="features/org.modelrefactoring.editorconnector.gmf_0.0.0.v0.jar" id="org.modelrefactoring.editorconnector.gmf" version="0.0.0.v0">
       <category name="Refactory Editor Connectors"/>
    </feature>
+   <feature url="features/org.modelrefactoring.editorconnector.jdt_0.0.0.v0.jar" id="org.modelrefactoring.editorconnector.jdt" version="0.0.0.v0">
+      <category name="Refactory Editor Connectors"/>
+   </feature>
    <feature url="features/org.modelrefactoring.smells_0.0.0.v0.jar" id="org.modelrefactoring.smells" version="0.0.0.v0">
       <category name="Refactory Smells"/>
    </feature>
