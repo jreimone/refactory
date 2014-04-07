@@ -25,7 +25,6 @@ import org.emftext.refactoring.editorconnector.IEditorConnector;
 public class JDTEditorConnector implements IEditorConnector {
 
 	private ITextEditor jdtEditor;
-	private IFile file;
 	private IJavaTextResource resource;
 	private CompilationUnit javaModel;
 
@@ -34,19 +33,9 @@ public class JDTEditorConnector implements IEditorConnector {
 		this.jdtEditor = jdtEditor;
 		javaModel = (CompilationUnit) resource.getContents().get(0);
 	}
-
-	private void initResource(){
-		if(resource == null){
-			URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
-			ResourceSet rs = new ResourceSetImpl();
-			resource = (IJavaTextResource) rs.getResource(uri, true);
-			javaModel = (CompilationUnit) resource.getContents().get(0);
-		}
-	}
 	
 	@Override
 	public List<EObject> handleSelection(ISelection selection) {
-		initResource();
 		IJavaLocationMap locationMap = resource.getLocationMap();
 		ITextSelection textSelection = (ITextSelection) selection;
 		int startOffset = textSelection.getOffset();
@@ -82,7 +71,6 @@ public class JDTEditorConnector implements IEditorConnector {
 
 	@Override
 	public void selectEObjects(List<EObject> objectsToSelect) {
-		initResource();
 		try {
 			IJavaLocationMap locationMap = resource.getLocationMap();
 			if (objectsToSelect.size() > 0) {
@@ -106,13 +94,11 @@ public class JDTEditorConnector implements IEditorConnector {
 
 	@Override
 	public EObject getModel() {
-		initResource();
 		return javaModel;
 	}
 
 	@Override
 	public void setMarkingForEObject(EObject element, IMarker marker) {
-		initResource();
 		IJavaLocationMap locationMap = resource.getLocationMap();
 		if(element.eIsProxy()){
 			ResourceSet resourceSet = resource.getResourceSet();
