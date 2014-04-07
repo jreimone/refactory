@@ -13,6 +13,15 @@
 		<targetDirectory>${WORKSPACE}/target</targetDirectory>
 		<targetRepository>${targetDirectory}/repository</targetRepository>
 	</properties>
+
+	<repositories>
+		<repository>
+			<id>eclipse-kepler</id>
+			<url>http://download.eclipse.org/releases/kepler</url>
+			<layout>p2</layout>
+		</repository>
+	</repositories>
+
 	<build>
 		<plugins>
 			<!-- step 0: delete old generated p2 update site locally -->
