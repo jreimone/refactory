@@ -54,6 +54,11 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/milest
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/milestone/plugins/org.eclipse.incquery.tooling.core_0.8.0.201402281506.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/milestone/plugins/org.eclipse.incquery.tooling.generator.model_0.8.0.201402281506.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/milestone/plugins/org.eclipse.incquery.databinding.runtime_0.8.0.201402281506.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/milestone/plugins/org.eclipse.incquery.tooling.ui_0.8.0.201402281506.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/milestone/plugins/org.eclipse.incquery.patternlanguage.ui_0.8.0.201402281506.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/milestone/plugins/org.eclipse.incquery.patternlanguage.emf.ui_0.8.0.201402281506.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/milestone/plugins/org.eclipse.incquery.tooling.generator.sampleui_0.8.0.201402281506.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/milestone/plugins/org.eclipse.incquery.tooling.generator.model.ui_0.8.0.201402281506.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/milestone/features/org.eclipse.incquery.runtime.feature_0.8.0.201402281506.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/milestone/features/org.eclipse.incquery.sdk.feature_0.8.0.201402281506.jar
 // and ANTLR is needed
