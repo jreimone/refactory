@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." default="upload-p2-update-site" name="Uploads the p2 update site to modelrefactoring.org/update_trunk_p2">
+<property environment="env"/>
+<property name="deployDir" value="${env.WORKSPACE}/org.modelrefactoring.deploy"/>
+<property name="repositoryDir" value="${env.WORKSPACE}/org.modelrefactoring.maven/target/repository"/>
+
+<target name="copy-category-file">
+	<echo message="Copying category.xml..."/>
+	<copy file="${deployDir}/category.xml" todir="${repositoryDir}"/>
+</target>
+
+<target name="upload-p2-update-site" depends="copy-category-file">
+	<echo message="Uploading generated p2 update site to modelrefactoring.org/update_trunk_p2..."/>
+	<scp todir="${env.DROPSBOX_UPLOAD_USER}:${env.DROPSBOX_UPLOAD_PASS}@www.modelrefactoring.org:/srv/www_modelrefactoring.org/update_trunk_p2" port="22" sftp="true" trust="true" verbose="true">
+		<fileset dir="${repositoryDir}" />
+	</scp>
+</target>
+
+</project>
