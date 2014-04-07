@@ -195,13 +195,16 @@ public class RefactoringMenuContributor extends ExtensionContributionFactory {
 			command.setHandler(handler);
 		}
 		IParameter refactorerParam = createParameter(refactorer, commandID, "refactorer", "instance");
-		IParameter editorConnectorParam = createParameter(editorConnector, commandID, "editorConnector", "instance");
+		IParameter editorConnectorParam = null;
 		IParameter editingDomainParam = null;
 		IParameter activeEditorParam = null;
-		EditingDomain transactionalEditingDomain = editorConnector.getTransactionalEditingDomain();
-		if(transactionalEditingDomain != null){
-			editingDomainParam = createParameter(transactionalEditingDomain, commandID, "editingDomain", "instance");
-			activeEditorParam = createParameter(activeEditor, commandID, "activeEditor", "instance");
+		if(editorConnector != null){
+			editorConnectorParam = createParameter(editorConnector, commandID, "editorConnector", "instance");
+			EditingDomain transactionalEditingDomain = editorConnector.getTransactionalEditingDomain();
+			if(transactionalEditingDomain != null){
+				editingDomainParam = createParameter(transactionalEditingDomain, commandID, "editingDomain", "instance");
+				activeEditorParam = createParameter(activeEditor, commandID, "activeEditor", "instance");
+			}
 		}
 		IParameter[] parameters = null;
 		if(editingDomainParam == null && activeEditorParam == null){
