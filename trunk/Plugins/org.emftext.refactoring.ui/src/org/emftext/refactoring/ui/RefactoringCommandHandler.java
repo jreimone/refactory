@@ -58,20 +58,22 @@ public class RefactoringCommandHandler extends AbstractHandler {
 		try {
 			parameters = event.getCommand().getParameters();
 			for (IParameter parameter : parameters) {
-				IParameterValues values = parameter.getValues();
-				@SuppressWarnings("rawtypes")
-				Map parameterValues = values.getParameterValues();
-				Object instance = parameterValues.get("instance");
-				if(instance instanceof IRefactorer){
-					refactorer = (IRefactorer) instance;
-					IValueProviderFactory factory = new BasicValueProviderFactory(refactorer);
-					refactorer.setValueProviderFactory(factory);
-				} else if(instance instanceof IEditorConnector){
-					connector = (IEditorConnector) instance;
-				} else if(instance instanceof IEditorPart){
-					activeEditor = (IEditorPart) instance;
-				} else if(instance instanceof EditingDomain){
-					diagramTransactionalEditingDomain = (EditingDomain) instance;
+				if(parameter != null){
+					IParameterValues values = parameter.getValues();
+					@SuppressWarnings("rawtypes")
+					Map parameterValues = values.getParameterValues();
+					Object instance = parameterValues.get("instance");
+					if(instance instanceof IRefactorer){
+						refactorer = (IRefactorer) instance;
+						IValueProviderFactory factory = new BasicValueProviderFactory(refactorer);
+						refactorer.setValueProviderFactory(factory);
+					} else if(instance instanceof IEditorConnector){
+						connector = (IEditorConnector) instance;
+					} else if(instance instanceof IEditorPart){
+						activeEditor = (IEditorPart) instance;
+					} else if(instance instanceof EditingDomain){
+						diagramTransactionalEditingDomain = (EditingDomain) instance;
+					}
 				}
 			}
 		} catch (NotDefinedException e) {
