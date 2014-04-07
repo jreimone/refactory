@@ -9,7 +9,7 @@
 
 	<properties>
 		<tycho-version>0.19.0</tycho-version>
-		<originalRepository>${WORKSPACE}/../../Refactory/ws/build/dist/updatesites/org.modelrefactoring.deploy/</originalRepository>
+		<originalRepository>${JENKINS_HOME}/job/Refactory/ws/build/dist/updatesites/org.modelrefactoring.deploy/</originalRepository>
 		<targetDirectory>${WORKSPACE}/updatesite</targetDirectory>
 		<targetRepository>${targetDirectory}/repository</targetRepository>
 	</properties>
