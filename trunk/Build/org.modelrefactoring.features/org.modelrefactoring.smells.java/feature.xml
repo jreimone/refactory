@@ -42,6 +42,11 @@ Contributors:
       <import plugin="org.eclipse.incquery.runtime"/>
       <import plugin="org.emftext.refactoring.smell.registry.ui"/>
       <import plugin="org.emftext.language.java.resource"/>
+      <import plugin="org.emftext.language.java.edit"/>
+      <import plugin="org.emftext.language.java.resource.bcel"/>
+      <import plugin="org.emftext.language.java.resource.java"/>
+      <import plugin="org.emftext.language.java.resource.java.ui"/>
+      <import plugin="org.emftext.language.java.resource.jdt"/>
    </requires>
 
    <plugin
