@@ -41,6 +41,7 @@ Contributors:
       <import plugin="org.emftext.refactoring.smell.calculation"/>
       <import plugin="org.eclipse.incquery.runtime"/>
       <import plugin="org.emftext.refactoring.smell.registry.ui"/>
+      <import plugin="org.emftext.language.java.resource"/>
    </requires>
 
    <plugin
