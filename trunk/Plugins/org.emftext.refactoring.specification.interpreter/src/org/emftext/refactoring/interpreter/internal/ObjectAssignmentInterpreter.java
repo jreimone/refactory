@@ -310,7 +310,12 @@ public class ObjectAssignmentInterpreter{
 				if(values.size() == 1){
 					return getEObjectWithRoleFromPath(role, values.get(0), tempPairs);
 				} else {
-					throw new UnsupportedOperationException("This case must be implemented!");
+					List<EObject> result = new ArrayList<EObject>();
+					for (EObject value : values) {
+						result.addAll(getEObjectWithRoleFromPath(role, value, tempPairs));
+					}
+					return result;
+//					throw new UnsupportedOperationException("This case must be implemented!");
 				}
 			}
 			throw new UnsupportedOperationException("This case must be implemented!");
@@ -398,9 +403,4 @@ public class ObjectAssignmentInterpreter{
 	public Object getRoleRuntimeValue() {
 		return roleBinding;
 	}
-//
-//	@Override
-//	public IValueProvider<List<EObject>, EObject> getDefaultValueProvider(RoleMapping roleMapping) {
-//		return new DialogOneListElementProvider("Select one " + classForValueProvider.getName(), roleMapping);
-//	}
 }
