@@ -93,6 +93,7 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/kepler/2013092
 
 // needs Apache Commons Lang
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130827064939/repository/plugins/org.apache.commons.lang_2.6.0.v201205030909.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130827064939/repository/plugins/org.apache.commons.lang.source_2.6.0.v201205030909.jar
 
 // more stuff from Orbit
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20140114142710/repository/plugins/org.apache.commons.io_2.0.1.v201105210651.jar
