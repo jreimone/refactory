@@ -36,7 +36,15 @@ Contributors:
       <import plugin="org.eclipse.core.runtime"/>
       <import plugin="org.emftext.refactoring.registry.rolemapping"/>
       <import plugin="org.eclipse.emf.ecore"/>
-      <import plugin="org.dresdenocl.facade"/>
+      <import plugin="org.dresdenocl.essentialocl.standardlibrary"/>
+      <import plugin="org.dresdenocl.model"/>
+      <import plugin="org.dresdenocl.modelinstance"/>
+      <import plugin="org.dresdenocl.parser"/>
+      <import plugin="org.dresdenocl.metamodels.ecore"/>
+      <import plugin="org.dresdenocl.modelbus"/>
+      <import plugin="org.dresdenocl.modelinstancetype.ecore"/>
+      <import plugin="org.dresdenocl.language.ocl.staticsemantics"/>
+      <import plugin="org.dresdenocl.interpreter"/>
    </requires>
 
    <plugin
