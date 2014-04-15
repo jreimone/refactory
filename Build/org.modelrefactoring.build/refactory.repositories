@@ -43,24 +43,23 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/compare/do
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/compare/downloads/drops/1.3.2/R20120918-1125/emf-compare-update-1.3.2.zip!plugins/org.eclipse.emf.compare.match_1.3.2.v20120918-1125.jar
 
 // IncQuery
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/milestone/plugins/org.eclipse.incquery.patternlanguage_0.8.0.201402281506.jar
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/milestone/plugins/org.eclipse.incquery.patternlanguage.emf_0.8.0.201402281506.jar
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/milestone/plugins/org.eclipse.incquery.runtime_0.8.0.201402281506.jar
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/milestone/plugins/org.eclipse.incquery.runtime.base_0.8.0.201402281506.jar
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/milestone/plugins/org.eclipse.incquery.runtime.rete_0.8.0.201402281506.jar
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/milestone/plugins/org.eclipse.incquery.runtime.matchers_0.8.0.201402281506.jar
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/milestone/plugins/org.eclipse.incquery.runtime.base.itc_0.8.0.201402281506.jar
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/milestone/plugins/org.eclipse.incquery.runtime.evm_0.8.0.201402281506.jar
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/milestone/plugins/org.eclipse.incquery.tooling.core_0.8.0.201402281506.jar
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/milestone/plugins/org.eclipse.incquery.tooling.generator.model_0.8.0.201402281506.jar
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/milestone/plugins/org.eclipse.incquery.databinding.runtime_0.8.0.201402281506.jar
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/milestone/plugins/org.eclipse.incquery.tooling.ui_0.8.0.201402281506.jar
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/milestone/plugins/org.eclipse.incquery.patternlanguage.ui_0.8.0.201402281506.jar
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/milestone/plugins/org.eclipse.incquery.patternlanguage.emf.ui_0.8.0.201402281506.jar
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/milestone/plugins/org.eclipse.incquery.tooling.generator.sampleui_0.8.0.201402281506.jar
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/milestone/plugins/org.eclipse.incquery.tooling.generator.model.ui_0.8.0.201402281506.jar
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/milestone/features/org.eclipse.incquery.runtime.feature_0.8.0.201402281506.jar
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/milestone/features/org.eclipse.incquery.sdk.feature_0.8.0.201402281506.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/release/plugins/org.eclipse.incquery.patternlanguage_0.7.2.201403071538.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/release/plugins/org.eclipse.incquery.patternlanguage.emf_0.7.2.201403071538.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/release/plugins/org.eclipse.incquery.runtime_0.7.2.201403071538.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/release/plugins/org.eclipse.incquery.runtime.base_0.7.2.201403071538.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/release/plugins/org.eclipse.incquery.runtime.rete_0.7.2.201403071538.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/release/plugins/org.eclipse.incquery.runtime.base.itc_0.7.2.201403071538.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/release/plugins/org.eclipse.incquery.runtime.evm_0.7.2.201403071538.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/release/plugins/org.eclipse.incquery.tooling.core_0.7.2.201403071538.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/release/plugins/org.eclipse.incquery.tooling.ui_0.7.2.201403071538.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/release/plugins/org.eclipse.incquery.patternlanguage.ui_0.7.2.201403071538.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/release/plugins/org.eclipse.incquery.patternlanguage.emf.ui_0.7.2.201403071538.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/release/plugins/org.eclipse.incquery.tooling.generator.sampleui_0.7.2.201403071538.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/release/plugins/org.eclipse.incquery.tooling.generator.model.ui_0.7.2.201403071538.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/release/plugins/org.eclipse.incquery.tooling.generator.model_0.7.2.201403071538.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/release/plugins/org.eclipse.incquery.databinding.runtime_0.7.2.201403071538.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/release/features/org.eclipse.incquery.runtime.feature_0.7.2.201403071538.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/release/features/org.eclipse.incquery.sdk.feature_0.7.2.201403071538.jar
 // and ANTLR is needed
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/org.antlr.runtime_3.2.0.v201101311130.jar
 
