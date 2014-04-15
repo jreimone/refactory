@@ -1,6 +1,8 @@
 package org.modelrefactoring.incquery.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,13 +22,13 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.incquery.patternlanguage.emf.EMFPatternLanguageStandaloneSetup;
 import org.eclipse.incquery.patternlanguage.emf.eMFPatternLanguage.PatternModel;
-import org.eclipse.incquery.patternlanguage.emf.specification.SpecificationBuilder;
 import org.eclipse.incquery.patternlanguage.patternLanguage.Pattern;
 import org.eclipse.incquery.runtime.api.IPatternMatch;
 import org.eclipse.incquery.runtime.api.IQuerySpecification;
 import org.eclipse.incquery.runtime.api.IncQueryEngine;
 import org.eclipse.incquery.runtime.api.IncQueryMatcher;
 import org.eclipse.incquery.runtime.exception.IncQueryException;
+import org.eclipse.incquery.runtime.extensibility.QuerySpecificationRegistry;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.resource.JaMoPPUtil;
 import org.emftext.language.java.resource.java.util.JavaResourceUtil;
@@ -44,21 +46,40 @@ public class IncQueryHeadlessTest {
 		System.out.println("file: " + javaResource.getURI().toString());
 		try {
 			ResourceSet rs = javaResource.getResourceSet();
-			IncQueryEngine engine = IncQueryEngine.on(rs);
-			// A specification builder is used to translate patterns to query specifications
-			SpecificationBuilder builder = new SpecificationBuilder();
-			// attempt to retrieve a registered query specification		    
-			IQuerySpecification<? extends IncQueryMatcher<? extends IPatternMatch>> querySpecification = builder.getOrCreateSpecification(pattern);
-			IncQueryMatcher<? extends IPatternMatch> matcher = engine.getMatcher(querySpecification);
-			Collection<? extends IPatternMatch> matches = matcher.getAllMatches();
-			assertEquals("", 2, matches.size());
-			for (IPatternMatch match : matches) {
-				System.out.println(match);
-			}
+			incQueryOld(rs);
 		} catch (IncQueryException e) {
 			e.printStackTrace();
 		}
 	}
+
+	private void incQueryOld(ResourceSet rs) throws IncQueryException {
+		IQuerySpecification<?> querySpecification = QuerySpecificationRegistry.getOrCreateQuerySpecification(pattern);
+		if(querySpecification != null){
+			IncQueryEngine engine = IncQueryEngine.on(rs);
+			IncQueryMatcher<? extends IPatternMatch> matcher = querySpecification.getMatcher(engine);
+			if (matcher!=null) {
+				Collection<? extends IPatternMatch> matches = matcher.getAllMatches();
+				assertEquals("", 2, matches.size());
+				for (IPatternMatch match : matches) {
+					System.out.println(match);
+				}
+			}
+		}
+	}
+
+//	private void incQueryNew(ResourceSet rs) throws IncQueryException {
+//		IncQueryEngine engine = IncQueryEngine.on(rs);
+//		// A specification builder is used to translate patterns to query specifications
+//		SpecificationBuilder builder = new SpecificationBuilder();
+//		// attempt to retrieve a registered query specification		    
+//		IQuerySpecification<? extends IncQueryMatcher<? extends IPatternMatch>> querySpecification = builder.getOrCreateSpecification(pattern);
+//		IncQueryMatcher<? extends IPatternMatch> matcher = engine.getMatcher(querySpecification);
+//		Collection<? extends IPatternMatch> matches = matcher.getAllMatches();
+//		assertEquals("", 2, matches.size());
+//		for (IPatternMatch match : matches) {
+//			System.out.println(match);
+//		}
+//	}
 
 	@BeforeClass
 	public static void setUp(){
