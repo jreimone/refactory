@@ -20,13 +20,13 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
 /**
- * The root preference page
+ * The root preference page.
  */
 public class OperatorsPreferencePage extends PreferencePage implements IWorkbenchPreferencePage {
 	
 	public void init(IWorkbench workbench) {
 		setPreferenceStore(org.modelrefactoring.evolution.operators.resource.operators.ui.OperatorsUIPlugin.getDefault().getPreferenceStore());
-		setDescription("Operators Text Editor Preferences");
+		setDescription(org.modelrefactoring.evolution.operators.resource.operators.ui.OperatorsUIResourceBundle.ROOT_PREFERENCE_PAGE_DESCRIPTION);
 	}
 	
 	@Override
@@ -40,8 +40,9 @@ public class OperatorsPreferencePage extends PreferencePage implements IWorkbenc
 		gd = new GridData(GridData.BEGINNING);
 		settingComposite.setLayout(layout);
 		settingComposite.setLayoutData(gd);
+		
 		Link link = new Link(settingComposite, SWT.NONE);
-		link.setText("Go to <A href=\"http://www.emftext.org\">www.emftext.org</A> for more information.");
+		link.setText(org.modelrefactoring.evolution.operators.resource.operators.ui.OperatorsUIResourceBundle.ROOT_PREFERENCE_PAGE_TEXT);
 		link.setSize(140, 40);
 		link.addSelectionListener(new SelectionListener() {
 			public void widgetSelected(SelectionEvent e) {

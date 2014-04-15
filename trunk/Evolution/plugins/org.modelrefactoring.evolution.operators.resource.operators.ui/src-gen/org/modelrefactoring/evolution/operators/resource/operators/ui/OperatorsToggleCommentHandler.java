@@ -6,6 +6,8 @@
  */
 package org.modelrefactoring.evolution.operators.resource.operators.ui;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
@@ -32,7 +34,7 @@ public class OperatorsToggleCommentHandler extends AbstractHandler {
 	
 	private IDocument document;
 	private ITextOperationTarget operationTarget;
-	private java.util.Map<String, String[]> prefixesMap;
+	private Map<String, String[]> prefixesMap;
 	
 	@Override
 	
@@ -58,7 +60,7 @@ public class OperatorsToggleCommentHandler extends AbstractHandler {
 			return null;
 		}
 		
-		prefixesMap = new java.util.LinkedHashMap<String, String[]>();
+		prefixesMap = new LinkedHashMap<String, String[]>();
 		prefixesMap.put(IDocument.DEFAULT_CONTENT_TYPE, COMMENT_PREFIXES);
 		
 		ISelection currentSelection = editor.getSelectionProvider().getSelection();

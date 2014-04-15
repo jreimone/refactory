@@ -23,13 +23,19 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.WeakHashMap;
 
 import org.dresdenocl.essentialocl.standardlibrary.OclBoolean;
-import org.dresdenocl.facade.Ocl2ForEclipseFacade;
+import org.dresdenocl.interpreter.IOclInterpreter;
+import org.dresdenocl.interpreter.OclInterpreterPlugin;
+import org.dresdenocl.language.ocl.resource.ocl.Ocl22Parser;
+import org.dresdenocl.metamodels.ecore.EcoreMetamodelPlugin;
 import org.dresdenocl.model.IModel;
-import org.dresdenocl.model.ModelAccessException;
 import org.dresdenocl.model.metamodel.IMetamodel;
+import org.dresdenocl.modelbus.ModelBusPlugin;
 import org.dresdenocl.modelinstance.IModelInstance;
+import org.dresdenocl.modelinstance.IModelInstanceType;
+import org.dresdenocl.modelinstancetype.ecore.EcoreModelInstanceTypePlugin;
 import org.dresdenocl.modelinstancetype.exception.TypeNotFoundInModelException;
 import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
 import org.dresdenocl.parser.ParseException;
@@ -38,6 +44,7 @@ import org.dresdenocl.pivotmodel.Constraint;
 import org.dresdenocl.pivotmodel.Type;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -47,10 +54,8 @@ import org.emftext.refactoring.registry.rolemapping.IInterpretationResult;
 
 public class OCLConstraintInterpreter implements IConstraintInterpreter {
 
-	public OCLConstraintInterpreter() {
-		// TODO Auto-generated constructor stub
-	}
-
+	private static Map<IModelInstance, IOclInterpreter> cachedInterpreters = new WeakHashMap<IModelInstance, IOclInterpreter>();
+	
 	@Override
 	public boolean canInterprete(Object constraint) {
 		if(constraint instanceof Constraint){
@@ -64,10 +69,10 @@ public class OCLConstraintInterpreter implements IConstraintInterpreter {
 		Exception ex = null;
 		try {
 			Constraint oclConstraint = (Constraint) constraint;
-			IMetamodel metaModel = Ocl2ForEclipseFacade.getMetaModel(Ocl2ForEclipseFacade.ECORE_META_MODEL);
+			IMetamodel metaModel = getMetaModel(EcoreMetamodelPlugin.ID);
 			IModel metamodelOCL = metaModel.getModelProvider().getModel(mmResource);
 			IModelInstance modelInstance;
-			modelInstance = Ocl2ForEclipseFacade.getEmptyModelInstance(metamodelOCL, Ocl2ForEclipseFacade.ECORE_MODEL_INSTANCE_TYPE);
+			modelInstance = getEmptyModelInstance(metamodelOCL, EcoreModelInstanceTypePlugin.PLUGIN_ID);
 			List<ConstrainableElement> constrainedElements = oclConstraint.getConstrainedElement();
 			Set<EClassifier> contextSet = new HashSet<EClassifier>();
 			for (ConstrainableElement constrainableElement : constrainedElements) {
@@ -88,7 +93,7 @@ public class OCLConstraintInterpreter implements IConstraintInterpreter {
 				}
 			}
 			for (IModelInstanceElement modelInstanceElement : modelInstanceElements) {
-				org.dresdenocl.interpreter.IInterpretationResult result = Ocl2ForEclipseFacade.interpretConstraint(oclConstraint, modelInstance, modelInstanceElement);
+				org.dresdenocl.interpreter.IInterpretationResult result = interpretConstraint(oclConstraint, modelInstance, modelInstanceElement);
 				if(result != null && !result.getResult().oclIsInvalid().isTrue() 
 						&& !result.getResult().oclIsUndefined().isTrue() 
 						&& !((OclBoolean) result.getResult()).isTrue()) {
@@ -121,8 +126,6 @@ public class OCLConstraintInterpreter implements IConstraintInterpreter {
 			}
 		} catch (IllegalArgumentException e) {
 			ex = e;
-		} catch (ModelAccessException e) {
-			ex = e;
 		} catch (TypeNotFoundInModelException e) {
 			ex = e;
 		}
@@ -134,16 +137,14 @@ public class OCLConstraintInterpreter implements IConstraintInterpreter {
 		Map<String, Object> constraints = new HashMap<String, Object>();
 		if(constraintFile != null){
 			try {
-				IMetamodel metaModel = Ocl2ForEclipseFacade.getMetaModel(Ocl2ForEclipseFacade.ECORE_META_MODEL);
+				IMetamodel metaModel =getMetaModel(EcoreMetamodelPlugin.ID);
 				IModel metamodelOCL = metaModel.getModelProvider().getModel(mmResource);
 				constraintFile = FileLocator.resolve(constraintFile);
-				List<Constraint> parseConstraints = Ocl2ForEclipseFacade.parseConstraints(constraintFile, metamodelOCL, true);
+				List<Constraint> parseConstraints = parseConstraints(URI.createFileURI(constraintFile.getFile()), metamodelOCL, true);
 				for (Constraint constraint : parseConstraints) {
 					constraints.put(constraint.getName(), constraint);
 				}
 			} catch (IllegalArgumentException e) {
-				// do nothing
-			} catch (ParseException e) {
 				// do nothing
 			} catch (IOException e) {
 				// do nothing
@@ -152,4 +153,55 @@ public class OCLConstraintInterpreter implements IConstraintInterpreter {
 		return constraints;
 	}
 
+	// ###############################################################
+	// following methods where taken from Dresden OCL since the facade plugin is not installed
+	// ###############################################################
+	
+	private static IMetamodel getMetaModel(String id) {
+		IMetamodel result = null;
+		if(id != null){
+			result = ModelBusPlugin.getMetamodelRegistry().getMetamodel(id);
+		}
+		return result;
+	}
+
+	private static IModelInstance getEmptyModelInstance(IModel model, String modelInstanceTypeID) {
+		IModelInstanceType modelInstanceType;
+		modelInstanceType = getModelInstanceType(modelInstanceTypeID);
+
+		IModelInstance result;
+
+		result = modelInstanceType.getModelInstanceProvider().createEmptyModelInstance(model);
+
+		return result;
+	}
+
+	private static IModelInstanceType getModelInstanceType(String id) {
+		IModelInstanceType result;
+		result = ModelBusPlugin.getModelInstanceTypeRegistry().getModelInstanceType(id);
+		return result;
+	}
+
+	private static List<Constraint> parseConstraints(URI uri, IModel model, boolean addToModel) {
+		try {
+			return Ocl22Parser.INSTANCE.doParse(model, uri, addToModel);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public static org.dresdenocl.interpreter.IInterpretationResult interpretConstraint(Constraint constraint, IModelInstance modelInstance, IModelInstanceElement modelInstanceElement) {
+		org.dresdenocl.interpreter.IInterpretationResult result;
+		IOclInterpreter interpreter;
+		if (cachedInterpreters.containsKey(modelInstance)) {
+			interpreter = cachedInterpreters.get(modelInstance);
+		}
+		else {
+			interpreter = OclInterpreterPlugin.createInterpreter(modelInstance);
+			cachedInterpreters.put(modelInstance, interpreter);
+		}
+		result = interpreter.interpretConstraint(constraint, modelInstanceElement);
+		return result;
+	}
 }

@@ -18,6 +18,7 @@ import java.util.Map;
 import java.util.Set;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -71,10 +72,10 @@ public class OperatorsResourceUtil {
 	
 	public static String getProxyIdentifier(EObject eObject) {
 		String deresolvedReference = null;
-		if (eObject instanceof org.eclipse.emf.ecore.EObject) {
-			org.eclipse.emf.ecore.EObject eObjectToDeResolve = (org.eclipse.emf.ecore.EObject) eObject;
+		if (eObject instanceof EObject) {
+			EObject eObjectToDeResolve = (EObject) eObject;
 			if (eObjectToDeResolve.eIsProxy()) {
-				deresolvedReference = ((org.eclipse.emf.ecore.InternalEObject) eObjectToDeResolve).eProxyURI().fragment();
+				deresolvedReference = ((InternalEObject) eObjectToDeResolve).eProxyURI().fragment();
 				// If the proxy was created by EMFText, we can try to recover the identifier from
 				// the proxy URI
 				if (deresolvedReference != null && deresolvedReference.startsWith(org.modelrefactoring.evolution.operators.resource.operators.IOperatorsContextDependentURIFragment.INTERNAL_URI_FRAGMENT_PREFIX)) {
@@ -109,17 +110,38 @@ public class OperatorsResourceUtil {
 	}
 	
 	/**
-	 * Returns the resource after parsing the given text.
+	 * Returns the resource after parsing the given text. This method is deprecated
+	 * because it uses the default platform encoding. Use {@link #getResource(byte[])}
+	 * instead.
 	 */
+	@Deprecated
 	public static Resource getResource(String text) {
 		ResourceSet resourceSet = new ResourceSetImpl();
 		return getResource(text, resourceSet);
 	}
 	
 	/**
-	 * Returns the resource after parsing the given text.
+	 * Returns the resource after parsing the given text. This method is deprecated
+	 * because it uses the default platform encoding. Use {@link #getResource(byte[],
+	 * ResourceSet)} instead.
 	 */
+	@Deprecated
 	public static Resource getResource(String text, ResourceSet resourceSet) {
+		return getResource(text.getBytes(), resourceSet);
+	}
+	
+	/**
+	 * Returns the resource after parsing the given bytes.
+	 */
+	public static Resource getResource(byte[] content) {
+		ResourceSet resourceSet = new ResourceSetImpl();
+		return getResource(content, resourceSet);
+	}
+	
+	/**
+	 * Returns the resource after parsing the given bytes.
+	 */
+	public static Resource getResource(byte[] content, ResourceSet resourceSet) {
 		org.modelrefactoring.evolution.operators.resource.operators.mopp.OperatorsMetaInformation metaInformation = new org.modelrefactoring.evolution.operators.resource.operators.mopp.OperatorsMetaInformation();
 		metaInformation.registerResourceFactory();
 		URI uri = URI.createURI("temp." + metaInformation.getSyntaxName());
@@ -127,7 +149,7 @@ public class OperatorsResourceUtil {
 		if (resource == null) {
 			return null;
 		}
-		ByteArrayInputStream inputStream = new ByteArrayInputStream(text.getBytes());
+		ByteArrayInputStream inputStream = new ByteArrayInputStream(content);
 		try {
 			resource.load(inputStream, null);
 		} catch (IOException ioe) {

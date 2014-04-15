@@ -7,6 +7,14 @@ Bundle-Activator: org.emftext.refactoring.oclinterpreter.Activator
 Require-Bundle: org.eclipse.core.runtime,
  org.emftext.refactoring.registry.rolemapping,
  org.eclipse.emf.ecore,
- org.dresdenocl.facade
+ org.dresdenocl.essentialocl.standardlibrary,
+ org.dresdenocl.model,
+ org.dresdenocl.modelinstance,
+ org.dresdenocl.parser,
+ org.dresdenocl.metamodels.ecore,
+ org.dresdenocl.modelbus,
+ org.dresdenocl.modelinstancetype.ecore,
+ org.dresdenocl.language.ocl.staticsemantics,
+ org.dresdenocl.interpreter
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6

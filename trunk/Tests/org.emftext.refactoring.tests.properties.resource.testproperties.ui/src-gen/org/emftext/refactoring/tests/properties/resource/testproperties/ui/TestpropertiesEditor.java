@@ -6,6 +6,8 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties.ui;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -20,6 +22,7 @@ import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IResourceDeltaVisitor;
+import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -62,6 +65,7 @@ import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.IStorageEditorInput;
 import org.eclipse.ui.contexts.IContextService;
 import org.eclipse.ui.editors.text.TextEditor;
 import org.eclipse.ui.part.FileEditorInput;
@@ -219,7 +223,14 @@ public class TestpropertiesEditor extends TextEditor implements IEditingDomainPr
 	}
 	
 	private void initializeResourceObject(IEditorInput editorInput) {
-		FileEditorInput input = (FileEditorInput) editorInput;
+		if (editorInput instanceof FileEditorInput) {
+			initializeResourceObjectFromFile((FileEditorInput) editorInput);
+		} else if (editorInput instanceof IStorageEditorInput) {
+			initializeResourceObjectFromStorage((IStorageEditorInput) editorInput);
+		}
+	}
+	
+	private void initializeResourceObjectFromFile(FileEditorInput input) {
 		IFile inputFile = input.getFile();
 		org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesNature.activate(inputFile.getProject());
 		String path = inputFile.getFullPath().toString();
@@ -242,7 +253,7 @@ public class TestpropertiesEditor extends TextEditor implements IEditingDomainPr
 					setResource((org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextResource) demandLoadedResource);
 				} else {
 					// the resource was not loaded by an EMFText resource, but some other EMF resource
-					org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesUIPlugin.showErrorDialog("No EMFText resource.", "The file '" + uri.lastSegment() + "' of type '" + uri.fileExtension() + "' can not be handled by the TestpropertiesEditor.");
+					org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesUIPlugin.showErrorDialog("Invalid resource.", "The file '" + uri.lastSegment() + "' of type '" + uri.fileExtension() + "' can not be handled by the TestpropertiesEditor.");
 					// close this editor because it can not present the resource
 					close(false);
 				}
@@ -251,6 +262,23 @@ public class TestpropertiesEditor extends TextEditor implements IEditingDomainPr
 			}
 		} else {
 			setResource(loadedResource);
+		}
+	}
+	
+	private void initializeResourceObjectFromStorage(IStorageEditorInput input) {
+		URI uri = null;
+		try {
+			IStorage storage = input.getStorage();
+			InputStream inputStream = storage.getContents();
+			uri = URI.createURI(storage.getName(), true);
+			ResourceSet resourceSet = getResourceSet();
+			org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextResource resource = (org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextResource) resourceSet.createResource(uri);
+			resource.load(inputStream, null);
+			setResource(resource);
+		} catch (CoreException e) {
+			org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesUIPlugin.logError("Exception while loading resource (" + uri + ") in " + getClass().getSimpleName() + ".", e);
+		} catch (IOException e) {
+			org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesUIPlugin.logError("Exception while loading resource (" + uri + ") in " + getClass().getSimpleName() + ".", e);
 		}
 	}
 	

@@ -5,7 +5,6 @@ Bundle-SymbolicName: org.emftext.language.java.refactoring.smell.android;singlet
 Bundle-Version: 1.0.0
 Bundle-ClassPath: rolemappings/,
  .
-Export-Package: org.emftext.refactoring.languages.java.smell.android.refactorings
 Require-Bundle: org.emftext.refactoring.smell.calculation,
  org.eclipse.pde.core,
  org.eclipse.emf.transaction,

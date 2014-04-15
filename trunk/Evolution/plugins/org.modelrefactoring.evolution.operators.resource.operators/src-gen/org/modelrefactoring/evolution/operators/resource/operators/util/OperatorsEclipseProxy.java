@@ -146,6 +146,30 @@ public class OperatorsEclipseProxy {
 	}
 	
 	/**
+	 * Returns the encoding for this resource that is specified in the workspace file
+	 * properties or determined by the default workspace encoding in Eclipse.
+	 */
+	public String getPlatformResourceEncoding(URI uri) {
+		// We can't determine the encoding if the platform is not running.
+		if (!new org.modelrefactoring.evolution.operators.resource.operators.util.OperatorsRuntimeUtil().isEclipsePlatformRunning()) {
+			return null;
+		}
+		if (uri != null && uri.isPlatform()) {
+			String platformString = uri.toPlatformString(true);
+			IResource platformResource = ResourcesPlugin.getWorkspace().getRoot().findMember(platformString);
+			if (platformResource instanceof IFile) {
+				IFile file = (IFile) platformResource;
+				try {
+					return file.getCharset();
+				} catch (CoreException ce) {
+					new org.modelrefactoring.evolution.operators.resource.operators.util.OperatorsRuntimeUtil().logWarning("Could not determine encoding of platform resource: " + uri.toString(), ce);
+				}
+			}
+		}
+		return null;
+	}
+	
+	/**
 	 * Checks all registered EMF validation constraints. Note: EMF validation does not
 	 * work if OSGi is not running.
 	 */
@@ -232,30 +256,6 @@ public class OperatorsEclipseProxy {
 				addStatus(child, resource, root, problemType);
 			}
 		}
-	}
-	
-	/**
-	 * Returns the encoding for this resource that is specified in the workspace file
-	 * properties or determined by the default workspace encoding in Eclipse.
-	 */
-	public String getPlatformResourceEncoding(URI uri) {
-		// We can't determine the encoding if the platform is not running.
-		if (!new org.modelrefactoring.evolution.operators.resource.operators.util.OperatorsRuntimeUtil().isEclipsePlatformRunning()) {
-			return null;
-		}
-		if (uri != null && uri.isPlatform()) {
-			String platformString = uri.toPlatformString(true);
-			IResource platformResource = ResourcesPlugin.getWorkspace().getRoot().findMember(platformString);
-			if (platformResource instanceof IFile) {
-				IFile file = (IFile) platformResource;
-				try {
-					return file.getCharset();
-				} catch (CoreException ce) {
-					new org.modelrefactoring.evolution.operators.resource.operators.util.OperatorsRuntimeUtil().logWarning("Could not determine encoding of platform resource: " + uri.toString(), ce);
-				}
-			}
-		}
-		return null;
 	}
 	
 }

@@ -166,7 +166,7 @@ public class OperatorsParser extends OperatorsANTLRParserBase {
     					public String getMessage() {
     						return errorMessage;
     					}
-    					public java.util.Collection<org.modelrefactoring.evolution.operators.resource.operators.IOperatorsQuickFix> getQuickFixes() {
+    					public Collection<org.modelrefactoring.evolution.operators.resource.operators.IOperatorsQuickFix> getQuickFixes() {
     						return null;
     					}
     				}, column, line, startIndex, stopIndex);

@@ -20,13 +20,13 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
 /**
- * The root preference page
+ * The root preference page.
  */
 public class TestpropertiesPreferencePage extends PreferencePage implements IWorkbenchPreferencePage {
 	
 	public void init(IWorkbench workbench) {
 		setPreferenceStore(org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesUIPlugin.getDefault().getPreferenceStore());
-		setDescription("Testproperties Text Editor Preferences");
+		setDescription(org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesUIResourceBundle.ROOT_PREFERENCE_PAGE_DESCRIPTION);
 	}
 	
 	@Override
@@ -40,8 +40,9 @@ public class TestpropertiesPreferencePage extends PreferencePage implements IWor
 		gd = new GridData(GridData.BEGINNING);
 		settingComposite.setLayout(layout);
 		settingComposite.setLayoutData(gd);
+		
 		Link link = new Link(settingComposite, SWT.NONE);
-		link.setText("Go to <A href=\"http://www.emftext.org\">www.emftext.org</A> for more information.");
+		link.setText(org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesUIResourceBundle.ROOT_PREFERENCE_PAGE_TEXT);
 		link.setSize(140, 40);
 		link.addSelectionListener(new SelectionListener() {
 			public void widgetSelected(SelectionEvent e) {

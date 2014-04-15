@@ -157,7 +157,7 @@ public class TestpropertiesParser extends TestpropertiesANTLRParserBase {
     					public String getMessage() {
     						return errorMessage;
     					}
-    					public java.util.Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesQuickFix> getQuickFixes() {
+    					public Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesQuickFix> getQuickFixes() {
     						return null;
     					}
     				}, column, line, startIndex, stopIndex);

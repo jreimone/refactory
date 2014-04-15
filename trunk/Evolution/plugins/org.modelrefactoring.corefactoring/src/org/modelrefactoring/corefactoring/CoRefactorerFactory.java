@@ -32,7 +32,7 @@ public class CoRefactorerFactory {
 		List<IKnowledgeBase> knowledgeBases = IKnowledgeBaseRegistry.INSTANCE.getKnowledgeBases();
 		for (IKnowledgeBase knowledgeBase : knowledgeBases) {
 			for (EObject element : boundElements) {
-				if(element.eResource() != null){
+//				if(element.eResource() != null){
 					Collection<EObject> dependencies = knowledgeBase.getDependencies(element);
 					if(dependencies != null){
 						for (EObject dependency : dependencies) {
@@ -47,7 +47,7 @@ public class CoRefactorerFactory {
 							}
 						}
 					}
-				}
+//				}
 			}
 		}
 		List<CoRefactorer> coRefactorers = new ArrayList<CoRefactorer>();

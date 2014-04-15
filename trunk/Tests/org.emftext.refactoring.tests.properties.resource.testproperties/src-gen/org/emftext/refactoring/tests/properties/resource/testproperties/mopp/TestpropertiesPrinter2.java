@@ -18,12 +18,14 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.InternalEObject;
 
 public class TestpropertiesPrinter2 implements org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextPrinter {
 	
@@ -655,10 +657,10 @@ public class TestpropertiesPrinter2 implements org.emftext.refactoring.tests.pro
 		printFormattingElements(eObject, foundFormattingElements, layoutInformations, referenceLayout);
 		// proxy objects must be printed differently
 		String deresolvedReference = null;
-		if (referencedObject instanceof org.eclipse.emf.ecore.EObject) {
-			org.eclipse.emf.ecore.EObject eObjectToDeResolve = (org.eclipse.emf.ecore.EObject) referencedObject;
+		if (referencedObject instanceof EObject) {
+			EObject eObjectToDeResolve = (EObject) referencedObject;
 			if (eObjectToDeResolve.eIsProxy()) {
-				deresolvedReference = ((org.eclipse.emf.ecore.InternalEObject) eObjectToDeResolve).eProxyURI().fragment();
+				deresolvedReference = ((InternalEObject) eObjectToDeResolve).eProxyURI().fragment();
 				// If the proxy was created by EMFText, we can try to recover the identifier from
 				// the proxy URI
 				if (deresolvedReference != null && deresolvedReference.startsWith(org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesContextDependentURIFragment.INTERNAL_URI_FRAGMENT_PREFIX)) {
@@ -746,8 +748,8 @@ public class TestpropertiesPrinter2 implements org.emftext.refactoring.tests.pro
 		resource.addProblem(new org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesProblem(errorMessage, org.emftext.refactoring.tests.properties.resource.testproperties.TestpropertiesEProblemType.PRINT_PROBLEM, org.emftext.refactoring.tests.properties.resource.testproperties.TestpropertiesEProblemSeverity.WARNING), cause);
 	}
 	
-	protected org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesLayoutInformationAdapter getLayoutInformationAdapter(org.eclipse.emf.ecore.EObject element) {
-		for (org.eclipse.emf.common.notify.Adapter adapter : element.eAdapters()) {
+	protected org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesLayoutInformationAdapter getLayoutInformationAdapter(EObject element) {
+		for (Adapter adapter : element.eAdapters()) {
 			if (adapter instanceof org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesLayoutInformationAdapter) {
 				return (org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesLayoutInformationAdapter) adapter;
 			}
