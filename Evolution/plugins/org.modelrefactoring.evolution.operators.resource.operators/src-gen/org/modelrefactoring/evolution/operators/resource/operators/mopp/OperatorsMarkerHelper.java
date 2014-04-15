@@ -83,7 +83,7 @@ public class OperatorsMarkerHelper {
 		}
 		
 		private void scheduleRunCommandsJob() {
-			Job job = new Job("updating markers") {
+			Job job = new Job(org.modelrefactoring.evolution.operators.resource.operators.OperatorsResourceBundle.UPDATING_MARKERS_JOB_NAME) {
 				@Override
 				protected IStatus run(IProgressMonitor monitor) {
 					runCommands();

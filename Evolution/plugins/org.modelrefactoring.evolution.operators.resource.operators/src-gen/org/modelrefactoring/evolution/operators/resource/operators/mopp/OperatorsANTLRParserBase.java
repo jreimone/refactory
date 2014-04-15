@@ -17,7 +17,11 @@ import org.antlr.runtime3_4_0.Parser;
 import org.antlr.runtime3_4_0.RecognizerSharedState;
 import org.antlr.runtime3_4_0.Token;
 import org.antlr.runtime3_4_0.TokenStream;
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
@@ -149,8 +153,8 @@ public abstract class OperatorsANTLRParserBase extends Parser implements org.mod
 		anonymousTokens.clear();
 	}
 	
-	protected org.modelrefactoring.evolution.operators.resource.operators.mopp.OperatorsLayoutInformationAdapter getLayoutInformationAdapter(org.eclipse.emf.ecore.EObject element) {
-		for (org.eclipse.emf.common.notify.Adapter adapter : element.eAdapters()) {
+	protected org.modelrefactoring.evolution.operators.resource.operators.mopp.OperatorsLayoutInformationAdapter getLayoutInformationAdapter(EObject element) {
+		for (Adapter adapter : element.eAdapters()) {
 			if (adapter instanceof org.modelrefactoring.evolution.operators.resource.operators.mopp.OperatorsLayoutInformationAdapter) {
 				return (org.modelrefactoring.evolution.operators.resource.operators.mopp.OperatorsLayoutInformationAdapter) adapter;
 			}
@@ -160,7 +164,7 @@ public abstract class OperatorsANTLRParserBase extends Parser implements org.mod
 		return newAdapter;
 	}
 	
-	protected <ContainerType extends org.eclipse.emf.ecore.EObject, ReferenceType extends org.eclipse.emf.ecore.EObject> void registerContextDependentProxy(final org.modelrefactoring.evolution.operators.resource.operators.mopp.OperatorsContextDependentURIFragmentFactory<ContainerType, ReferenceType> factory, final ContainerType container, final org.eclipse.emf.ecore.EReference reference, final String id, final org.eclipse.emf.ecore.EObject proxy) {
+	protected <ContainerType extends EObject, ReferenceType extends EObject> void registerContextDependentProxy(final org.modelrefactoring.evolution.operators.resource.operators.mopp.OperatorsContextDependentURIFragmentFactory<ContainerType, ReferenceType> factory, final ContainerType container, final EReference reference, final String id, final EObject proxy) {
 		final int position;
 		if (reference.isMany()) {
 			position = ((java.util.List<?>) container.eGet(reference)).size();
@@ -235,12 +239,12 @@ public abstract class OperatorsANTLRParserBase extends Parser implements org.mod
 		terminateParsing = true;
 	}
 	
-	protected void addMapEntry(org.eclipse.emf.ecore.EObject element, org.eclipse.emf.ecore.EStructuralFeature structuralFeature, org.modelrefactoring.evolution.operators.resource.operators.mopp.OperatorsDummyEObject dummy) {
+	protected void addMapEntry(EObject element, EStructuralFeature structuralFeature, org.modelrefactoring.evolution.operators.resource.operators.mopp.OperatorsDummyEObject dummy) {
 		Object value = element.eGet(structuralFeature);
 		Object mapKey = dummy.getValueByName("key");
 		Object mapValue = dummy.getValueByName("value");
-		if (value instanceof org.eclipse.emf.common.util.EMap<?, ?>) {
-			org.eclipse.emf.common.util.EMap<Object, Object> valueMap = org.modelrefactoring.evolution.operators.resource.operators.util.OperatorsMapUtil.castToEMap(value);
+		if (value instanceof EMap<?, ?>) {
+			EMap<Object, Object> valueMap = org.modelrefactoring.evolution.operators.resource.operators.util.OperatorsMapUtil.castToEMap(value);
 			if (mapKey != null && mapValue != null) {
 				valueMap.put(mapKey, mapValue);
 			}
@@ -249,13 +253,13 @@ public abstract class OperatorsANTLRParserBase extends Parser implements org.mod
 	
 	@SuppressWarnings("unchecked")
 	
-	public boolean addObjectToList(org.eclipse.emf.ecore.EObject container, int featureID, Object object) {
+	public boolean addObjectToList(EObject container, int featureID, Object object) {
 		return ((java.util.List<Object>) container.eGet(container.eClass().getEStructuralFeature(featureID))).add(object);
 	}
 	
 	@SuppressWarnings("unchecked")
 	
-	public boolean addObjectToList(org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EStructuralFeature feature, Object object) {
+	public boolean addObjectToList(EObject container, EStructuralFeature feature, Object object) {
 		return ((java.util.List<Object>) container.eGet(feature)).add(object);
 	}
 	

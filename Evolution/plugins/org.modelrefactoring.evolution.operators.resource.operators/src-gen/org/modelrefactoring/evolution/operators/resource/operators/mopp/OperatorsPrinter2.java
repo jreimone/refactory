@@ -18,12 +18,14 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.InternalEObject;
 
 public class OperatorsPrinter2 implements org.modelrefactoring.evolution.operators.resource.operators.IOperatorsTextPrinter {
 	
@@ -679,10 +681,10 @@ public class OperatorsPrinter2 implements org.modelrefactoring.evolution.operato
 		printFormattingElements(eObject, foundFormattingElements, layoutInformations, referenceLayout);
 		// proxy objects must be printed differently
 		String deresolvedReference = null;
-		if (referencedObject instanceof org.eclipse.emf.ecore.EObject) {
-			org.eclipse.emf.ecore.EObject eObjectToDeResolve = (org.eclipse.emf.ecore.EObject) referencedObject;
+		if (referencedObject instanceof EObject) {
+			EObject eObjectToDeResolve = (EObject) referencedObject;
 			if (eObjectToDeResolve.eIsProxy()) {
-				deresolvedReference = ((org.eclipse.emf.ecore.InternalEObject) eObjectToDeResolve).eProxyURI().fragment();
+				deresolvedReference = ((InternalEObject) eObjectToDeResolve).eProxyURI().fragment();
 				// If the proxy was created by EMFText, we can try to recover the identifier from
 				// the proxy URI
 				if (deresolvedReference != null && deresolvedReference.startsWith(org.modelrefactoring.evolution.operators.resource.operators.IOperatorsContextDependentURIFragment.INTERNAL_URI_FRAGMENT_PREFIX)) {
@@ -770,8 +772,8 @@ public class OperatorsPrinter2 implements org.modelrefactoring.evolution.operato
 		resource.addProblem(new org.modelrefactoring.evolution.operators.resource.operators.mopp.OperatorsProblem(errorMessage, org.modelrefactoring.evolution.operators.resource.operators.OperatorsEProblemType.PRINT_PROBLEM, org.modelrefactoring.evolution.operators.resource.operators.OperatorsEProblemSeverity.WARNING), cause);
 	}
 	
-	protected org.modelrefactoring.evolution.operators.resource.operators.mopp.OperatorsLayoutInformationAdapter getLayoutInformationAdapter(org.eclipse.emf.ecore.EObject element) {
-		for (org.eclipse.emf.common.notify.Adapter adapter : element.eAdapters()) {
+	protected org.modelrefactoring.evolution.operators.resource.operators.mopp.OperatorsLayoutInformationAdapter getLayoutInformationAdapter(EObject element) {
+		for (Adapter adapter : element.eAdapters()) {
 			if (adapter instanceof org.modelrefactoring.evolution.operators.resource.operators.mopp.OperatorsLayoutInformationAdapter) {
 				return (org.modelrefactoring.evolution.operators.resource.operators.mopp.OperatorsLayoutInformationAdapter) adapter;
 			}

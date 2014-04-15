@@ -6,12 +6,14 @@
  */
 package org.modelrefactoring.evolution.operators.resource.operators.ui;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.swt.graphics.Image;
 
 /**
  * A proposal for completing an incomplete document.
  */
-public class OperatorsCompletionProposal implements java.lang.Comparable<OperatorsCompletionProposal> {
+public class OperatorsCompletionProposal implements Comparable<OperatorsCompletionProposal> {
 	
 	/**
 	 * The terminal that was expected at the cursor position.
@@ -28,14 +30,14 @@ public class OperatorsCompletionProposal implements java.lang.Comparable<Operato
 	 * The structural feature (attribute or non-containment reference) that was
 	 * expected at the cursor position.
 	 */
-	private org.eclipse.emf.ecore.EStructuralFeature structuralFeature;
+	private EStructuralFeature structuralFeature;
 	
 	/**
 	 * The container objects that covers the cursor position. This container object
 	 * may not be contained in the resource we're computing proposals for. See {@link
 	 * #materialize(Runnable)} for an explanation of this.
 	 */
-	private org.eclipse.emf.ecore.EObject container;
+	private EObject container;
 	
 	/**
 	 * The image that will be shown in the pop-up containing the completion proposals.
@@ -45,7 +47,7 @@ public class OperatorsCompletionProposal implements java.lang.Comparable<Operato
 	/**
 	 * The root object of the resource for which this proposal was computed.
 	 */
-	private org.eclipse.emf.ecore.EObject root;
+	private EObject root;
 	
 	/**
 	 * The target object, if this proposal suggests to insert a reference to another
@@ -75,7 +77,7 @@ public class OperatorsCompletionProposal implements java.lang.Comparable<Operato
 	 */
 	private boolean matchesPrefix;
 	
-	public OperatorsCompletionProposal(org.modelrefactoring.evolution.operators.resource.operators.mopp.OperatorsExpectedTerminal expectedTerminal, String insertString, String prefix, boolean matchesPrefix, org.eclipse.emf.ecore.EStructuralFeature structuralFeature, org.eclipse.emf.ecore.EObject container) {
+	public OperatorsCompletionProposal(org.modelrefactoring.evolution.operators.resource.operators.mopp.OperatorsExpectedTerminal expectedTerminal, String insertString, String prefix, boolean matchesPrefix, EStructuralFeature structuralFeature, EObject container) {
 		super();
 		this.expectedTerminal = expectedTerminal;
 		this.insertString = insertString;
@@ -85,17 +87,17 @@ public class OperatorsCompletionProposal implements java.lang.Comparable<Operato
 		this.container = container;
 	}
 	
-	public OperatorsCompletionProposal(org.modelrefactoring.evolution.operators.resource.operators.mopp.OperatorsExpectedTerminal expectedTerminal, String insertString, String prefix, boolean matchesPrefix, org.eclipse.emf.ecore.EStructuralFeature structuralFeature, org.eclipse.emf.ecore.EObject container, Image image) {
+	public OperatorsCompletionProposal(org.modelrefactoring.evolution.operators.resource.operators.mopp.OperatorsExpectedTerminal expectedTerminal, String insertString, String prefix, boolean matchesPrefix, EStructuralFeature structuralFeature, EObject container, Image image) {
 		this(expectedTerminal, insertString, prefix, matchesPrefix, structuralFeature, container);
 		this.image = image;
 	}
 	
-	public OperatorsCompletionProposal(org.modelrefactoring.evolution.operators.resource.operators.mopp.OperatorsExpectedTerminal expectedTerminal, String insertString, String prefix, boolean matchesPrefix, org.eclipse.emf.ecore.EStructuralFeature structuralFeature, org.eclipse.emf.ecore.EObject container, Image image, String displayString) {
+	public OperatorsCompletionProposal(org.modelrefactoring.evolution.operators.resource.operators.mopp.OperatorsExpectedTerminal expectedTerminal, String insertString, String prefix, boolean matchesPrefix, EStructuralFeature structuralFeature, EObject container, Image image, String displayString) {
 		this(expectedTerminal, insertString, prefix, matchesPrefix, structuralFeature, container, image);
 		this.displayString = displayString;
 	}
 	
-	public org.eclipse.emf.ecore.EObject getRoot() {
+	public EObject getRoot() {
 		return root;
 	}
 	
@@ -121,7 +123,7 @@ public class OperatorsCompletionProposal implements java.lang.Comparable<Operato
 		return matchesPrefix;
 	}
 	
-	public void setRoot(org.eclipse.emf.ecore.EObject root) {
+	public void setRoot(EObject root) {
 		this.root = root;
 	}
 	
@@ -153,11 +155,11 @@ public class OperatorsCompletionProposal implements java.lang.Comparable<Operato
 		return structuralFeature != null;
 	}
 	
-	public org.eclipse.emf.ecore.EStructuralFeature getStructuralFeature() {
+	public EStructuralFeature getStructuralFeature() {
 		return structuralFeature;
 	}
 	
-	public org.eclipse.emf.ecore.EObject getContainer() {
+	public EObject getContainer() {
 		return container;
 	}
 	

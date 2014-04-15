@@ -13,6 +13,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 
 /**
@@ -24,9 +25,16 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 public class TestpropertiesTaskItemBuilder {
 	
 	public void build(IFile resource, ResourceSet resourceSet, IProgressMonitor monitor) {
-		monitor.setTaskName("Searching for task items in " + new org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesMetaInformation().getSyntaxName() + " files");
+		// We use one tick from the parent monitor because the BuilderAdapter reserves one
+		// tick for finding task items.
+		SubProgressMonitor subMonitor = new SubProgressMonitor(monitor, 1);
+		// We define the overall work to be 3 ticks (removing markers, scanning the
+		// resource, creating new markers).
+		subMonitor.beginTask("Searching for task items in " + new org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesMetaInformation().getSyntaxName() + " files", 3);
 		new org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesMarkerHelper().removeAllMarkers(resource, IMarker.TASK);
+		subMonitor.worked(1);
 		if (isInBinFolder(resource)) {
+			subMonitor.done();
 			return;
 		}
 		java.util.List<org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesTaskItem> taskItems = new java.util.ArrayList<org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesTaskItem>();
@@ -58,6 +66,7 @@ public class TestpropertiesTaskItemBuilder {
 		} catch (IOException e) {
 			// Ignore this
 		}
+		subMonitor.worked(1);
 		
 		for (org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesTaskItem taskItem : taskItems) {
 			java.util.Map<String, Object> markerAttributes = new java.util.LinkedHashMap<String, Object>();
@@ -69,6 +78,8 @@ public class TestpropertiesTaskItemBuilder {
 			markerAttributes.put(IMarker.MESSAGE, taskItem.getMessage());
 			new org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesMarkerHelper().createMarker(resource, IMarker.TASK, markerAttributes);
 		}
+		subMonitor.worked(1);
+		subMonitor.done();
 	}
 	
 	public String getBuilderMarkerId() {

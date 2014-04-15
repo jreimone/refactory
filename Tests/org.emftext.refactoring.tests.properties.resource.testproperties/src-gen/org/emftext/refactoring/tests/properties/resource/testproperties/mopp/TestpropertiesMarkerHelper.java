@@ -83,7 +83,7 @@ public class TestpropertiesMarkerHelper {
 		}
 		
 		private void scheduleRunCommandsJob() {
-			Job job = new Job("updating markers") {
+			Job job = new Job(org.emftext.refactoring.tests.properties.resource.testproperties.TestpropertiesResourceBundle.UPDATING_MARKERS_JOB_NAME) {
 				@Override
 				protected IStatus run(IProgressMonitor monitor) {
 					runCommands();

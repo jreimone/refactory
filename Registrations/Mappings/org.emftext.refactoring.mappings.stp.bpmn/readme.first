@@ -1,7 +1,11 @@
-How to install the BPMN modeler including its metamodel in Juno:
+How to install the BPMN modeler including its metamodel in Kepler:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 * Help -> Install New Software...
 * use "http://download.eclipse.org/bpmn2-modeler/updates/kepler/1.0.1"
 * install "BPMN2 Diagram Editor"
 * restart Eclipse
+
+Maybe this will remove exceptions during start-up because of EValidator errors?:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+* menu Window -> Preferences -> Model Validation -> Constraints
+* de-activate Core BPMN 2.0 Constraints

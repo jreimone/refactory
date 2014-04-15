@@ -36,14 +36,15 @@ import org.eclipse.ui.ide.IDE;
 
 public class TestpropertiesNewFileWizard extends Wizard implements INewWizard {
 	
-	private String categoryId = null;
-	private org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesNewFileWizardPage page;
-	private ISelection selection;
-	private String newName = null;
+	protected String categoryId = null;
+	protected org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesNewFileWizardPage page;
+	protected ISelection selection;
+	protected String newName = null;
 	
 	public TestpropertiesNewFileWizard() {
 		super();
 		setNeedsProgressMonitor(true);
+		setWindowTitle(org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesUIResourceBundle.NEW_FILE_WIZARD_WINDOW_TITLE);
 	}
 	
 	public String getCategoryId() {
@@ -121,7 +122,7 @@ public class TestpropertiesNewFileWizard extends Wizard implements INewWizard {
 	 * The worker method. It will find the container, create the file if missing or
 	 * just replace its contents, and open the editor on the newly created file.
 	 */
-	private void doFinish(String containerName, String fileName, IProgressMonitor monitor) throws CoreException {
+	protected void doFinish(String containerName, String fileName, IProgressMonitor monitor) throws CoreException {
 		// create a sample file
 		monitor.beginTask("Creating " + fileName, 2);
 		final IFile file = getFile(fileName, containerName);
@@ -149,7 +150,7 @@ public class TestpropertiesNewFileWizard extends Wizard implements INewWizard {
 		monitor.worked(1);
 	}
 	
-	private IFile getFile(String fileName, String containerName) throws CoreException {
+	protected IFile getFile(String fileName, String containerName) throws CoreException {
 		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 		IResource resource = root.findMember(new Path(containerName));
 		if (!resource.exists() || !(resource instanceof IContainer)) {
@@ -161,13 +162,13 @@ public class TestpropertiesNewFileWizard extends Wizard implements INewWizard {
 	}
 	
 	/**
-	 * We will initialize file contents with a sample text.
+	 * Initializes file contents with a sample text.
 	 */
-	private InputStream openContentStream() {
+	protected InputStream openContentStream() {
 		return new ByteArrayInputStream(new org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesMetaInformation().getNewFileContentProvider().getNewFileContent(newName).getBytes());
 	}
 	
-	private void throwCoreException(String message) throws CoreException {
+	protected void throwCoreException(String message) throws CoreException {
 		IStatus status = new Status(IStatus.ERROR, "NewFileContentPrinter", IStatus.OK, message, null);
 		throw new CoreException(status);
 	}

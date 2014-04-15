@@ -8,7 +8,9 @@ package org.modelrefactoring.evolution.operators.resource.operators.ui;
 
 import java.net.URL;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.IExecutableExtension;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
@@ -29,13 +31,13 @@ import org.osgi.framework.Bundle;
  * .
  * It is responsible for offering an example project via the new dialog of Eclipse.
  */
-public class OperatorsNewProjectWizard extends Wizard implements INewWizard, org.eclipse.core.runtime.IExecutableExtension {
+public class OperatorsNewProjectWizard extends Wizard implements INewWizard, IExecutableExtension {
 	
 	/**
 	 * The name of the ZIP file that is used as content for the new project (relative
-	 * to the resource UI plugin's root).
+	 * to the root of the resource UI plug-in).
 	 */
-	public final static String NEW_PROJECT_ZIP_FILE_NAME = "newProject.zip";
+	public final static String NEW_PROJECT_ZIP_FILE_NAME = org.modelrefactoring.evolution.operators.resource.operators.ui.OperatorsUIResourceBundle.NEW_PROJECT_ZIP_FILE_NAME;
 	
 	/**
 	 * The single page provided by this base implementation. It provides all the
@@ -46,7 +48,7 @@ public class OperatorsNewProjectWizard extends Wizard implements INewWizard, org
 	/**
 	 * The name of the project creation page
 	 */
-	private String pageName = "New " + new org.modelrefactoring.evolution.operators.resource.operators.mopp.OperatorsMetaInformation().getSyntaxName() + " Project";
+	private String pageName = org.modelrefactoring.evolution.operators.resource.operators.ui.OperatorsUIResourceBundle.NEW_PROJECT_WIZARD_PAGE_NAME;
 	
 	/**
 	 * The title of the project creation page
@@ -56,12 +58,12 @@ public class OperatorsNewProjectWizard extends Wizard implements INewWizard, org
 	/**
 	 * The description of the project creation page
 	 */
-	private String pageDescription = "Enter a name and select a location where the new project shall be created.";
+	private String pageDescription = org.modelrefactoring.evolution.operators.resource.operators.ui.OperatorsUIResourceBundle.NEW_PROJECT_WIZARD_PAGE_DESCRIPTION;
 	
 	/**
-	 *  The name of the project in the project creation page
+	 * The name of the project in the project creation page
 	 */
-	private String  pageProjectName = "";
+	private String pageProjectName = org.modelrefactoring.evolution.operators.resource.operators.ui.OperatorsUIResourceBundle.NEW_PROJECT_WIZARD_PROJECT_NAME;
 	
 	/**
 	 * The configuration element associated with this new project wizard
@@ -107,9 +109,9 @@ public class OperatorsNewProjectWizard extends Wizard implements INewWizard, org
 	 */
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		// Set default image for all wizard pages
-		IPath path = new Path("icons/new_project_wizban.gif");
+		IPath path = new Path(org.modelrefactoring.evolution.operators.resource.operators.ui.OperatorsUIResourceBundle.NEW_PROJECT_WIZARD_PAGE_ICON);
 		Bundle bundle = org.modelrefactoring.evolution.operators.resource.operators.ui.OperatorsUIPlugin.getDefault().getBundle();
-		URL url = org.eclipse.core.runtime.FileLocator.find(bundle, path, null);
+		URL url = FileLocator.find(bundle, path, null);
 		ImageDescriptor descriptor = ImageDescriptor.createFromURL(url);
 		setDefaultPageImageDescriptor(descriptor);
 		
@@ -119,6 +121,7 @@ public class OperatorsNewProjectWizard extends Wizard implements INewWizard, org
 		wizardNewProjectCreationPage.setInitialProjectName(pageProjectName);
 		
 		this.addPage(wizardNewProjectCreationPage);
+		setWindowTitle(org.modelrefactoring.evolution.operators.resource.operators.ui.OperatorsUIResourceBundle.NEW_PROJECT_WIZARD_WINDOW_TITLE);
 	}
 	
 	public void setInitializationData(IConfigurationElement config, String propertyName, Object data) throws CoreException {

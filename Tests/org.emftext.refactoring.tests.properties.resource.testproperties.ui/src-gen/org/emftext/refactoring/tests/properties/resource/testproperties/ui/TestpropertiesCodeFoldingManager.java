@@ -242,6 +242,11 @@ public class TestpropertiesCodeFoldingManager {
 	 * Saves the code folding state into the given memento.
 	 */
 	public void saveCodeFolding(IMemento memento) {
+		// The annotation model might be null if the editor opened an storage input
+		// instead of a file input.
+		if (projectionAnnotationModel == null) {
+			return;
+		}
 		Iterator<?> annotationIt = projectionAnnotationModel.getAnnotationIterator();
 		while (annotationIt.hasNext()) {
 			ProjectionAnnotation annotation = (ProjectionAnnotation) annotationIt.next();

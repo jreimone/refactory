@@ -6,6 +6,30 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties.ui;
 
+import java.io.ByteArrayInputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import org.eclipse.core.runtime.Platform;
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EEnumLiteral;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.provider.EcoreItemProviderAdapterFactory;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
+import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
+import org.eclipse.emf.edit.provider.resource.ResourceItemProviderAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.swt.graphics.Image;
 
@@ -26,18 +50,18 @@ public class TestpropertiesCodeCompletionHelper {
 	 * 'cursorOffset'. The proposals are derived using the meta information, i.e., the
 	 * generated language plug-in.
 	 * 
-	 * @param originalResource
+	 * @param originalResource the resource to compute completions for
 	 * @param content the documents content
-	 * @param cursorOffset
+	 * @param cursorOffset the current offset of the cursor
 	 * 
-	 * @return
+	 * @return an array of completion proposals
 	 */
 	public org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal[] computeCompletionProposals(org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextResource originalResource, String content, int cursorOffset) {
-		org.eclipse.emf.ecore.resource.ResourceSet resourceSet = new org.eclipse.emf.ecore.resource.impl.ResourceSetImpl();
+		ResourceSet resourceSet = new ResourceSetImpl();
 		// the shadow resource needs the same URI because reference resolvers may use the
 		// URI to resolve external references
 		org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextResource resource = (org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextResource) resourceSet.createResource(originalResource.getURI());
-		java.io.ByteArrayInputStream inputStream = new java.io.ByteArrayInputStream(content.getBytes());
+		ByteArrayInputStream inputStream = new ByteArrayInputStream(content.getBytes());
 		org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesMetaInformation metaInformation = resource.getMetaInformation();
 		org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextParser parser = metaInformation.createParser(inputStream, null);
 		org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal[] expectedElements = parseToExpectedElements(parser, resource, cursorOffset);
@@ -47,16 +71,18 @@ public class TestpropertiesCodeCompletionHelper {
 		if (expectedElements.length == 0) {
 			return new org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal[0];
 		}
-		java.util.List<org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal> expectedAfterCursor = java.util.Arrays.asList(getElementsExpectedAt(expectedElements, cursorOffset));
-		java.util.List<org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal> expectedBeforeCursor = java.util.Arrays.asList(getElementsExpectedAt(expectedElements, cursorOffset - 1));
+		List<org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal> expectedAfterCursor = Arrays.asList(getElementsExpectedAt(expectedElements, cursorOffset));
+		List<org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal> expectedBeforeCursor = Arrays.asList(getElementsExpectedAt(expectedElements, cursorOffset - 1));
 		setPrefixes(expectedAfterCursor, content, cursorOffset);
 		setPrefixes(expectedBeforeCursor, content, cursorOffset);
+		
 		// First, we derive all possible proposals from the set of elements that are
 		// expected at the cursor position.
-		java.util.Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal> allProposals = new java.util.LinkedHashSet<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal>();
-		java.util.Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal> rightProposals = deriveProposals(expectedAfterCursor, content, resource, cursorOffset);
-		java.util.Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal> leftProposals = deriveProposals(expectedBeforeCursor, content, resource, cursorOffset - 1);
+		Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal> allProposals = new LinkedHashSet<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal>();
+		Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal> rightProposals = deriveProposals(expectedAfterCursor, content, resource, cursorOffset);
+		Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal> leftProposals = deriveProposals(expectedBeforeCursor, content, resource, cursorOffset - 1);
 		removeKeywordsEndingBeforeIndex(leftProposals, cursorOffset);
+		
 		// Second, the set of left proposals (i.e., the ones before the cursor) is checked
 		// for emptiness. If the set is empty, the right proposals (i.e., the ones after
 		// the cursor) are also considered. If the set is not empty, the right proposal
@@ -73,23 +99,25 @@ public class TestpropertiesCodeCompletionHelper {
 		if (leftMatchingProposals == 0) {
 			allProposals.addAll(rightProposals);
 		}
+		
 		// Third, the proposals are sorted according to their relevance. Proposals that
 		// matched the prefix are preferred over ones that did not. Finally, proposals are
 		// sorted alphabetically.
-		final java.util.List<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal> sortedProposals = new java.util.ArrayList<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal>(allProposals);
-		java.util.Collections.sort(sortedProposals);
-		org.eclipse.emf.ecore.EObject root = null;
+		final List<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal> sortedProposals = new ArrayList<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal>(allProposals);
+		Collections.sort(sortedProposals);
+		EObject root = null;
 		if (!resource.getContents().isEmpty()) {
 			root = resource.getContents().get(0);
 		}
 		for (org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal proposal : sortedProposals) {
 			proposal.setRoot(root);
 		}
+		
 		return sortedProposals.toArray(new org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal[sortedProposals.size()]);
 	}
 	
 	public org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal[] parseToExpectedElements(org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextParser parser, org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextResource resource, int cursorOffset) {
-		final java.util.List<org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal> expectedElements = parser.parseToExpectedElements(null, resource, cursorOffset);
+		final List<org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal> expectedElements = parser.parseToExpectedElements(null, resource, cursorOffset);
 		if (expectedElements == null) {
 			return new org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal[0];
 		}
@@ -102,17 +130,17 @@ public class TestpropertiesCodeCompletionHelper {
 	 * Removes all expected elements that refer to the same terminal and that start at
 	 * the same position.
 	 */
-	protected void removeDuplicateEntries(java.util.List<org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal> expectedElements) {
+	protected void removeDuplicateEntries(List<org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal> expectedElements) {
 		int size = expectedElements.size();
 		// We split the list of expected elements into buckets where each bucket contains
 		// the elements that start at the same position.
-		java.util.Map<Integer, java.util.List<org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal>> map = new java.util.LinkedHashMap<Integer, java.util.List<org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal>>();
+		Map<Integer, List<org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal>> map = new LinkedHashMap<Integer, List<org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal>>();
 		for (int i = 0; i < size; i++) {
 			org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal elementAtIndex = expectedElements.get(i);
 			int start1 = elementAtIndex.getStartExcludingHiddenTokens();
-			java.util.List<org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal> list = map.get(start1);
+			List<org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal> list = map.get(start1);
 			if (list == null) {
-				list = new java.util.ArrayList<org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal>();
+				list = new ArrayList<org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal>();
 				map.put(start1, list);
 			}
 			list.add(elementAtIndex);
@@ -120,14 +148,14 @@ public class TestpropertiesCodeCompletionHelper {
 		
 		// Then, we remove all duplicate elements from each bucket individually.
 		for (int position : map.keySet()) {
-			java.util.List<org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal> list = map.get(position);
+			List<org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal> list = map.get(position);
 			removeDuplicateEntriesFromBucket(list);
 		}
 		
 		// After removing all duplicates, we merge the buckets.
 		expectedElements.clear();
 		for (int position : map.keySet()) {
-			java.util.List<org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal> list = map.get(position);
+			List<org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal> list = map.get(position);
 			expectedElements.addAll(list);
 		}
 	}
@@ -137,7 +165,7 @@ public class TestpropertiesCodeCompletionHelper {
 	 * method assumes that the given list of expected terminals contains only elements
 	 * that start at the same position.
 	 */
-	protected void removeDuplicateEntriesFromBucket(java.util.List<org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal> expectedElements) {
+	protected void removeDuplicateEntriesFromBucket(List<org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal> expectedElements) {
 		int size = expectedElements.size();
 		for (int i = 0; i < size - 1; i++) {
 			org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal elementAtIndex = expectedElements.get(i);
@@ -154,7 +182,7 @@ public class TestpropertiesCodeCompletionHelper {
 		}
 	}
 	
-	protected void removeInvalidEntriesAtEnd(java.util.List<org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal> expectedElements) {
+	protected void removeInvalidEntriesAtEnd(List<org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal> expectedElements) {
 		for (int i = 0; i < expectedElements.size() - 1;) {
 			org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal elementAtIndex = expectedElements.get(i);
 			org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal elementAtNext = expectedElements.get(i + 1);
@@ -179,7 +207,7 @@ public class TestpropertiesCodeCompletionHelper {
 	/**
 	 * Removes all proposals for keywords that end before the given index.
 	 */
-	protected void removeKeywordsEndingBeforeIndex(java.util.Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal> proposals, int index) {
+	protected void removeKeywordsEndingBeforeIndex(Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal> proposals, int index) {
 		java.util.List<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal> toRemove = new java.util.ArrayList<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal>();
 		for (org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal proposal : proposals) {
 			org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal expectedTerminal = proposal.getExpectedTerminal();
@@ -195,10 +223,11 @@ public class TestpropertiesCodeCompletionHelper {
 		proposals.removeAll(toRemove);
 	}
 	
-	protected String findPrefix(java.util.List<org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal> expectedElements, org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal expectedAtCursor, String content, int cursorOffset) {
+	protected String findPrefix(List<org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal> expectedElements, org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal expectedAtCursor, String content, int cursorOffset) {
 		if (cursorOffset < 0) {
 			return "";
 		}
+		
 		int end = 0;
 		for (org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal expectedElement : expectedElements) {
 			if (expectedElement == expectedAtCursor) {
@@ -214,15 +243,15 @@ public class TestpropertiesCodeCompletionHelper {
 		return prefix;
 	}
 	
-	protected java.util.Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal> deriveProposals(java.util.List<org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal> expectedElements, String content, org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextResource resource, int cursorOffset) {
-		java.util.Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal> resultSet = new java.util.LinkedHashSet<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal>();
+	protected Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal> deriveProposals(List<org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal> expectedElements, String content, org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextResource resource, int cursorOffset) {
+		Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal> resultSet = new LinkedHashSet<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal>();
 		for (org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal expectedElement : expectedElements) {
 			resultSet.addAll(deriveProposals(expectedElement, content, resource, cursorOffset));
 		}
 		return resultSet;
 	}
 	
-	protected java.util.Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal> deriveProposals(final org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal expectedTerminal, String content, org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextResource resource, int cursorOffset) {
+	protected Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal> deriveProposals(final org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal expectedTerminal, String content, org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextResource resource, int cursorOffset) {
 		org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesExpectedElement expectedElement = (org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesExpectedElement) expectedTerminal.getTerminal();
 		if (expectedElement instanceof org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedCsString) {
 			org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedCsString csString = (org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedCsString) expectedElement;
@@ -235,9 +264,9 @@ public class TestpropertiesCodeCompletionHelper {
 			return handleEnumerationTerminal(expectedTerminal, expectedEnumerationTerminal, expectedTerminal.getPrefix());
 		} else if (expectedElement instanceof org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedStructuralFeature) {
 			final org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedStructuralFeature expectedFeature = (org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedStructuralFeature) expectedElement;
-			final org.eclipse.emf.ecore.EStructuralFeature feature = expectedFeature.getFeature();
-			final org.eclipse.emf.ecore.EClassifier featureType = feature.getEType();
-			final org.eclipse.emf.ecore.EObject container = findCorrectContainer(expectedTerminal);
+			final EStructuralFeature feature = expectedFeature.getFeature();
+			final EClassifier featureType = feature.getEType();
+			final EObject container = findCorrectContainer(expectedTerminal);
 			
 			// Here it gets really crazy. We need to modify the model in a way that reflects
 			// the state the model would be in, if the expected terminal were present. After
@@ -246,13 +275,13 @@ public class TestpropertiesCodeCompletionHelper {
 			// required for different completion situations. This can be particularly observed
 			// when the user has not yet typed a character that starts an element to be
 			// completed.
-			final java.util.Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal> proposals = new java.util.ArrayList<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal>();
+			final Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal> proposals = new ArrayList<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal>();
 			expectedTerminal.materialize(new Runnable() {
 				
 				public void run() {
-					if (feature instanceof org.eclipse.emf.ecore.EReference) {
-						org.eclipse.emf.ecore.EReference reference = (org.eclipse.emf.ecore.EReference) feature;
-						if (featureType instanceof org.eclipse.emf.ecore.EClass) {
+					if (feature instanceof EReference) {
+						EReference reference = (EReference) feature;
+						if (featureType instanceof EClass) {
 							if (reference.isContainment()) {
 								// the FOLLOW set should contain only non-containment references
 								assert false;
@@ -260,10 +289,10 @@ public class TestpropertiesCodeCompletionHelper {
 								proposals.addAll(handleNCReference(expectedTerminal, container, reference, expectedTerminal.getPrefix(), expectedFeature.getTokenName()));
 							}
 						}
-					} else if (feature instanceof org.eclipse.emf.ecore.EAttribute) {
-						org.eclipse.emf.ecore.EAttribute attribute = (org.eclipse.emf.ecore.EAttribute) feature;
-						if (featureType instanceof org.eclipse.emf.ecore.EEnum) {
-							org.eclipse.emf.ecore.EEnum enumType = (org.eclipse.emf.ecore.EEnum) featureType;
+					} else if (feature instanceof EAttribute) {
+						EAttribute attribute = (EAttribute) feature;
+						if (featureType instanceof EEnum) {
+							EEnum enumType = (EEnum) featureType;
 							proposals.addAll(handleEnumAttribute(expectedTerminal, expectedFeature, enumType, expectedTerminal.getPrefix(), container));
 						} else {
 							// handle EAttributes (derive default value depending on the type of the
@@ -282,13 +311,13 @@ public class TestpropertiesCodeCompletionHelper {
 			// there should be no other class implementing IExpectedElement
 			assert false;
 		}
-		return java.util.Collections.emptyList();
+		return Collections.emptyList();
 	}
 	
-	protected java.util.Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal> handleEnumAttribute(org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal expectedTerminal, org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedStructuralFeature expectedFeature, org.eclipse.emf.ecore.EEnum enumType, String prefix, org.eclipse.emf.ecore.EObject container) {
-		java.util.Collection<org.eclipse.emf.ecore.EEnumLiteral> enumLiterals = enumType.getELiterals();
-		java.util.Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal> result = new java.util.LinkedHashSet<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal>();
-		for (org.eclipse.emf.ecore.EEnumLiteral literal : enumLiterals) {
+	protected Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal> handleEnumAttribute(org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal expectedTerminal, org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedStructuralFeature expectedFeature, EEnum enumType, String prefix, EObject container) {
+		Collection<EEnumLiteral> enumLiterals = enumType.getELiterals();
+		Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal> result = new LinkedHashSet<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal>();
+		for (EEnumLiteral literal : enumLiterals) {
 			String unResolvedLiteral = literal.getLiteral();
 			// use token resolver to get de-resolved value of the literal
 			org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTokenResolverFactory tokenResolverFactory = metaInformation.getTokenResolverFactory();
@@ -300,17 +329,17 @@ public class TestpropertiesCodeCompletionHelper {
 		return result;
 	}
 	
-	protected java.util.Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal> handleNCReference(org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal expectedTerminal, org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EReference reference, String prefix, String tokenName) {
+	protected Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal> handleNCReference(org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal expectedTerminal, EObject container, EReference reference, String prefix, String tokenName) {
 		// proposals for non-containment references are derived by calling the reference
 		// resolver switch in fuzzy mode.
 		org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesReferenceResolverSwitch resolverSwitch = metaInformation.getReferenceResolverSwitch();
 		org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTokenResolverFactory tokenResolverFactory = metaInformation.getTokenResolverFactory();
-		org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesReferenceResolveResult<org.eclipse.emf.ecore.EObject> result = new org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesReferenceResolveResult<org.eclipse.emf.ecore.EObject>(true);
+		org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesReferenceResolveResult<EObject> result = new org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesReferenceResolveResult<EObject>(true);
 		resolverSwitch.resolveFuzzy(prefix, container, reference, 0, result);
-		java.util.Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesReferenceMapping<org.eclipse.emf.ecore.EObject>> mappings = result.getMappings();
+		Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesReferenceMapping<EObject>> mappings = result.getMappings();
 		if (mappings != null) {
-			java.util.Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal> resultSet = new java.util.LinkedHashSet<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal>();
-			for (org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesReferenceMapping<org.eclipse.emf.ecore.EObject> mapping : mappings) {
+			Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal> resultSet = new LinkedHashSet<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal>();
+			for (org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesReferenceMapping<EObject> mapping : mappings) {
 				Image image = null;
 				if (mapping instanceof org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesElementMapping<?>) {
 					org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesElementMapping<?> elementMapping = (org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesElementMapping<?>) mapping;
@@ -318,8 +347,8 @@ public class TestpropertiesCodeCompletionHelper {
 					// de-resolve reference to obtain correct identifier
 					org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver(tokenName);
 					final String identifier = tokenResolver.deResolve(elementMapping.getIdentifier(), reference, container);
-					if (target instanceof org.eclipse.emf.ecore.EObject) {
-						image = getImage((org.eclipse.emf.ecore.EObject) target);
+					if (target instanceof EObject) {
+						image = getImage((EObject) target);
 					}
 					boolean matchesPrefix = matches(identifier, prefix);
 					org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal proposal = new org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal(expectedTerminal, identifier, prefix, matchesPrefix, reference, container, image);
@@ -329,11 +358,11 @@ public class TestpropertiesCodeCompletionHelper {
 			}
 			return resultSet;
 		}
-		return java.util.Collections.emptyList();
+		return Collections.emptyList();
 	}
 	
-	protected java.util.Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal> handleAttribute(org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal expectedTerminal, org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedStructuralFeature expectedFeature, org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EAttribute attribute, String prefix) {
-		java.util.Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal> resultSet = new java.util.LinkedHashSet<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal>();
+	protected Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal> handleAttribute(org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal expectedTerminal, org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedStructuralFeature expectedFeature, EObject container, EAttribute attribute, String prefix) {
+		Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal> resultSet = new LinkedHashSet<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal>();
 		Object[] defaultValues = attributeValueProvider.getDefaultValues(attribute);
 		if (defaultValues != null) {
 			for (Object defaultValue : defaultValues) {
@@ -357,17 +386,17 @@ public class TestpropertiesCodeCompletionHelper {
 	/**
 	 * Creates a set of completion proposals from the given keyword.
 	 */
-	protected java.util.Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal> handleKeyword(org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal expectedTerminal, org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedCsString csString, String prefix, org.eclipse.emf.ecore.EObject container) {
+	protected Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal> handleKeyword(org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal expectedTerminal, org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedCsString csString, String prefix, EObject container) {
 		String proposal = csString.getValue();
 		boolean matchesPrefix = matches(proposal, prefix);
-		return java.util.Collections.singleton(new org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal(expectedTerminal, proposal, prefix, matchesPrefix, null, container));
+		return Collections.singleton(new org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal(expectedTerminal, proposal, prefix, matchesPrefix, null, container));
 	}
 	
 	/**
 	 * Creates a set of (two) completion proposals from the given boolean terminal.
 	 */
-	protected java.util.Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal> handleBooleanTerminal(org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal expectedTerminal, org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedBooleanTerminal expectedBooleanTerminal, String prefix) {
-		java.util.Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal> result = new java.util.LinkedHashSet<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal>(2);
+	protected Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal> handleBooleanTerminal(org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal expectedTerminal, org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedBooleanTerminal expectedBooleanTerminal, String prefix) {
+		Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal> result = new LinkedHashSet<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal>(2);
 		org.emftext.refactoring.tests.properties.resource.testproperties.grammar.TestpropertiesBooleanTerminal booleanTerminal = expectedBooleanTerminal.getBooleanTerminal();
 		result.addAll(handleLiteral(expectedTerminal, booleanTerminal.getAttribute(), prefix, booleanTerminal.getTrueLiteral()));
 		result.addAll(handleLiteral(expectedTerminal, booleanTerminal.getAttribute(), prefix, booleanTerminal.getFalseLiteral()));
@@ -378,22 +407,22 @@ public class TestpropertiesCodeCompletionHelper {
 	 * Creates a set of completion proposals from the given enumeration terminal. For
 	 * each enumeration literal one proposal is created.
 	 */
-	protected java.util.Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal> handleEnumerationTerminal(org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal expectedTerminal, org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedEnumerationTerminal expectedEnumerationTerminal, String prefix) {
-		java.util.Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal> result = new java.util.LinkedHashSet<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal>(2);
+	protected Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal> handleEnumerationTerminal(org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal expectedTerminal, org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedEnumerationTerminal expectedEnumerationTerminal, String prefix) {
+		Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal> result = new LinkedHashSet<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal>(2);
 		org.emftext.refactoring.tests.properties.resource.testproperties.grammar.TestpropertiesEnumerationTerminal enumerationTerminal = expectedEnumerationTerminal.getEnumerationTerminal();
-		java.util.Map<String, String> literalMapping = enumerationTerminal.getLiteralMapping();
+		Map<String, String> literalMapping = enumerationTerminal.getLiteralMapping();
 		for (String literalName : literalMapping.keySet()) {
 			result.addAll(handleLiteral(expectedTerminal, enumerationTerminal.getAttribute(), prefix, literalMapping.get(literalName)));
 		}
 		return result;
 	}
 	
-	protected java.util.Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal> handleLiteral(org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal expectedTerminal, org.eclipse.emf.ecore.EAttribute attribute, String prefix, String literal) {
+	protected Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal> handleLiteral(org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal expectedTerminal, EAttribute attribute, String prefix, String literal) {
 		if ("".equals(literal)) {
-			return java.util.Collections.emptySet();
+			return Collections.emptySet();
 		}
 		boolean matchesPrefix = matches(literal, prefix);
-		return java.util.Collections.singleton(new org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal(expectedTerminal, literal, prefix, matchesPrefix, null, null));
+		return Collections.singleton(new org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal(expectedTerminal, literal, prefix, matchesPrefix, null, null));
 	}
 	
 	/**
@@ -401,7 +430,7 @@ public class TestpropertiesCodeCompletionHelper {
 	 * the current document content, the cursor position, and the position where the
 	 * element is expected.
 	 */
-	protected void setPrefixes(java.util.List<org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal> expectedElements, String content, int cursorOffset) {
+	protected void setPrefixes(List<org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal> expectedElements, String content, int cursorOffset) {
 		if (cursorOffset < 0) {
 			return;
 		}
@@ -412,7 +441,7 @@ public class TestpropertiesCodeCompletionHelper {
 	}
 	
 	public org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal[] getElementsExpectedAt(org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal[] allExpectedElements, int cursorOffset) {
-		java.util.List<org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal> expectedAtCursor = new java.util.ArrayList<org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal>();
+		List<org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal> expectedAtCursor = new ArrayList<org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal>();
 		for (int i = 0; i < allExpectedElements.length; i++) {
 			org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal expectedElement = allExpectedElements[i];
 			int startIncludingHidden = expectedElement.getStartIncludingHiddenTokens();
@@ -457,32 +486,32 @@ public class TestpropertiesCodeCompletionHelper {
 		return (proposal.toLowerCase().startsWith(prefix.toLowerCase()) || org.emftext.refactoring.tests.properties.resource.testproperties.util.TestpropertiesStringUtil.matchCamelCase(prefix, proposal) != null) && !proposal.equals(prefix);
 	}
 	
-	protected Image getImage(org.eclipse.emf.ecore.EObject element) {
-		if (!org.eclipse.core.runtime.Platform.isRunning()) {
+	protected Image getImage(EObject element) {
+		if (!Platform.isRunning()) {
 			return null;
 		}
-		org.eclipse.emf.edit.provider.ComposedAdapterFactory adapterFactory = new org.eclipse.emf.edit.provider.ComposedAdapterFactory(org.eclipse.emf.edit.provider.ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
-		adapterFactory.addAdapterFactory(new org.eclipse.emf.edit.provider.resource.ResourceItemProviderAdapterFactory());
-		adapterFactory.addAdapterFactory(new org.eclipse.emf.ecore.provider.EcoreItemProviderAdapterFactory());
-		adapterFactory.addAdapterFactory(new org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory());
+		ComposedAdapterFactory adapterFactory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
+		adapterFactory.addAdapterFactory(new ResourceItemProviderAdapterFactory());
+		adapterFactory.addAdapterFactory(new EcoreItemProviderAdapterFactory());
+		adapterFactory.addAdapterFactory(new ReflectiveItemProviderAdapterFactory());
 		AdapterFactoryLabelProvider labelProvider = new AdapterFactoryLabelProvider(adapterFactory);
 		return labelProvider.getImage(element);
 	}
 	
-	protected org.eclipse.emf.ecore.EObject findCorrectContainer(org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal expectedTerminal) {
-		org.eclipse.emf.ecore.EObject container = expectedTerminal.getContainer();
-		org.eclipse.emf.ecore.EClass ruleMetaclass = expectedTerminal.getTerminal().getRuleMetaclass();
+	protected EObject findCorrectContainer(org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal expectedTerminal) {
+		EObject container = expectedTerminal.getContainer();
+		EClass ruleMetaclass = expectedTerminal.getTerminal().getRuleMetaclass();
 		if (ruleMetaclass.isInstance(container)) {
 			// container is correct for expected terminal
 			return container;
 		}
 		// the container is wrong
-		org.eclipse.emf.ecore.EObject parent = null;
-		org.eclipse.emf.ecore.EObject previousParent = null;
-		org.eclipse.emf.ecore.EObject correctContainer = null;
-		org.eclipse.emf.ecore.EObject hookableParent = null;
+		EObject parent = null;
+		EObject previousParent = null;
+		EObject correctContainer = null;
+		EObject hookableParent = null;
 		org.emftext.refactoring.tests.properties.resource.testproperties.grammar.TestpropertiesContainmentTrace containmentTrace = expectedTerminal.getContainmentTrace();
-		org.eclipse.emf.ecore.EClass startClass = containmentTrace.getStartClass();
+		EClass startClass = containmentTrace.getStartClass();
 		org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesContainedFeature currentLink = null;
 		org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesContainedFeature previousLink = null;
 		org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesContainedFeature[] containedFeatures = containmentTrace.getPath();
@@ -491,7 +520,7 @@ public class TestpropertiesCodeCompletionHelper {
 			if (i > 0) {
 				previousLink = containedFeatures[i - 1];
 			}
-			org.eclipse.emf.ecore.EClass containerClass = currentLink.getContainerClass();
+			EClass containerClass = currentLink.getContainerClass();
 			hookableParent = findHookParent(container, startClass, currentLink, parent);
 			if (hookableParent != null) {
 				// we found the correct parent
@@ -526,9 +555,9 @@ public class TestpropertiesCodeCompletionHelper {
 		
 		hookableParent = findHookParent(container, startClass, currentLink, parent);
 		
-		final org.eclipse.emf.ecore.EObject finalHookableParent = hookableParent;
-		final org.eclipse.emf.ecore.EStructuralFeature finalFeature = currentLink.getFeature();
-		final org.eclipse.emf.ecore.EObject finalParent = parent;
+		final EObject finalHookableParent = hookableParent;
+		final EStructuralFeature finalFeature = currentLink.getFeature();
+		final EObject finalParent = parent;
 		if (parent != null && hookableParent != null) {
 			expectedTerminal.setAttachmentCode(new Runnable() {
 				
@@ -544,8 +573,8 @@ public class TestpropertiesCodeCompletionHelper {
 	 * Walks up the containment hierarchy to find an EObject that is able to hold
 	 * (contain) the given object.
 	 */
-	protected org.eclipse.emf.ecore.EObject findHookParent(org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EClass startClass, org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesContainedFeature currentLink, org.eclipse.emf.ecore.EObject object) {
-		org.eclipse.emf.ecore.EClass containerClass = currentLink.getContainerClass();
+	protected EObject findHookParent(EObject container, EClass startClass, org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesContainedFeature currentLink, EObject object) {
+		EClass containerClass = currentLink.getContainerClass();
 		while (container != null) {
 			if (containerClass.isInstance(object)) {
 				if (startClass.equals(container.eClass())) {

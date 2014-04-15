@@ -45,8 +45,8 @@ public class TestpropertiesNewFileWizardPage extends WizardPage {
 	 */
 	public TestpropertiesNewFileWizardPage(ISelection selection, String fileExtension) {
 		super("wizardPage");
-		setTitle("Create new testproperties file");
-		setDescription("This wizard creates a new file with *." + fileExtension + " extension that can be opened with the EMFText editor.");
+		setTitle(org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesUIResourceBundle.NEW_FILE_WIZARD_PAGE_TITLE);
+		setDescription(org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesUIResourceBundle.NEW_FILE_WIZARD_DESCRIPTION);
 		this.selection = selection;
 		this.fileExtension = fileExtension;
 	}
@@ -100,7 +100,7 @@ public class TestpropertiesNewFileWizardPage extends WizardPage {
 	 * Tests if the current workbench selection is a suitable container to use.
 	 */
 	private void initialize() {
-		String name = "new_file";
+		String name = org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesUIResourceBundle.NEW_FILE_WIZARD_FILE_NAME;
 		if (selection != null && selection.isEmpty() == false && selection instanceof IStructuredSelection) {
 			IStructuredSelection ssel = (IStructuredSelection) selection;
 			if (ssel.size() > 1) {
@@ -120,12 +120,28 @@ public class TestpropertiesNewFileWizardPage extends WizardPage {
 					container = resource.getParent();
 					// we use the name of the currently selected file instead of 'new_file'.
 					name = resource.getFullPath().removeFileExtension().lastSegment();
+					name = name + "." + fileExtension;
 				}
 				IPath fullPath = container.getFullPath();
 				containerText.setText(fullPath.toString());
 			}
 		}
-		fileText.setText(name + "." + fileExtension);
+		
+		// Select default name for new file
+		fileText.setText(name);
+		
+		// Select file name without extension
+		int indexOfDot = name.lastIndexOf(".");
+		if (indexOfDot > 0) {
+			fileText.setSelection(0, indexOfDot);
+		}
+	}
+	
+	public void setVisible(boolean visible) {
+		super.setVisible(visible);
+		if (visible) {
+			fileText.setFocus();
+		}
 	}
 	
 	/**
@@ -188,4 +204,5 @@ public class TestpropertiesNewFileWizardPage extends WizardPage {
 	public String getFileName() {
 		return fileText.getText();
 	}
+	
 }

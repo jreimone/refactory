@@ -10,11 +10,28 @@
             patternName="dataTransmissionWithoutCompressionOptimised">
       </structureCalculation>
       <structureCalculation
+            smellMessage="Physical GPS component is requested too early."
             description="Searches for classes being subclasses of android.app.Activity and requesting the GPS component in the onCreate() method already. This means, the physical GPS resource is requested too early since the user cannot even interact with the app while the onCreate() method is executed."
-            patternName="earlyResourceBinding"
             patternResource="queries/org/emftext/refactoring/smell/java/energy/earlyBinding.eiq"
-            smellMessage="Physical GPS component is requested too early.">
+            patternName="earlyResourceBinding">
       </structureCalculation>
    </extension>
-
+   <!--
+   <extension
+         id="org.emftext.refactoring.smell.java.energy.dataTransmissionWithoutCompressionOptimised"
+         point="org.eclipse.incquery.runtime.queryspecification">
+      <matcher
+            querySpecificationProvider="org.emftext.refactoring.smell.java.energy.util.DataTransmissionWithoutCompressionOptimisedQuerySpecification$Provider"
+            id="org.emftext.refactoring.smell.java.energy.dataTransmissionWithoutCompressionOptimised">
+      </matcher>
+   </extension>
+   <extension
+         id="org.emftext.refactoring.smell.java.energy.earlyResourceBinding"
+         point="org.eclipse.incquery.runtime.queryspecification">
+      <matcher
+            querySpecificationProvider="org.emftext.refactoring.smell.java.energy.util.EarlyResourceBindingQuerySpecification$Provider"
+            id="org.emftext.refactoring.smell.java.energy.earlyResourceBinding">
+      </matcher>
+   </extension>
+	-->
 </plugin>
