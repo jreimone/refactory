@@ -80,53 +80,5 @@
             nsUri="http://www.emftext.org/java">
       </postprocessor>
    </extension>
-   <extension
-         id="org.emftext.refactoring.languages.java.smell.android.interruptingFromBackground"
-         point="org.eclipse.incquery.runtime.queryspecification">
-      <matcher
-            querySpecificationProvider="org.emftext.refactoring.languages.java.smell.android.util.InterruptingFromBackgroundQuerySpecification$Provider"
-            id="org.emftext.refactoring.languages.java.smell.android.interruptingFromBackground">
-      </matcher>
-   </extension>
-   <extension
-         id="org.emftext.refactoring.languages.java.smell.android.noMemoryResolver"
-         point="org.eclipse.incquery.runtime.queryspecification">
-      <matcher
-            querySpecificationProvider="org.emftext.refactoring.languages.java.smell.android.util.NoMemoryResolverQuerySpecification$Provider"
-            id="org.emftext.refactoring.languages.java.smell.android.noMemoryResolver">
-      </matcher>
-   </extension>
-   <extension
-         id="org.emftext.refactoring.languages.java.smell.android.durableWakeLock"
-         point="org.eclipse.incquery.runtime.queryspecification">
-      <matcher
-            querySpecificationProvider="org.emftext.refactoring.languages.java.smell.android.util.DurableWakeLockQuerySpecification$Provider"
-            id="org.emftext.refactoring.languages.java.smell.android.durableWakeLock">
-      </matcher>
-   </extension>
-   <extension
-         id="org.emftext.refactoring.languages.java.smell.android.rigidAlarmManager"
-         point="org.eclipse.incquery.runtime.queryspecification">
-      <matcher
-            querySpecificationProvider="org.emftext.refactoring.languages.java.smell.android.util.RigidAlarmManagerQuerySpecification$Provider"
-            id="org.emftext.refactoring.languages.java.smell.android.rigidAlarmManager">
-      </matcher>
-   </extension>
-   <extension
-         id="org.emftext.refactoring.languages.java.smell.android.trackingHardwareIdMethodCall"
-         point="org.eclipse.incquery.runtime.queryspecification">
-      <matcher
-            querySpecificationProvider="org.emftext.refactoring.languages.java.smell.android.util.TrackingHardwareIdMethodCallQuerySpecification$Provider"
-            id="org.emftext.refactoring.languages.java.smell.android.trackingHardwareIdMethodCall">
-      </matcher>
-   </extension>
-   <extension
-         id="org.emftext.refactoring.languages.java.smell.android.trackingHardwareId"
-         point="org.eclipse.incquery.runtime.queryspecification">
-      <matcher
-            querySpecificationProvider="org.emftext.refactoring.languages.java.smell.android.util.TrackingHardwareIdQuerySpecification$Provider"
-            id="org.emftext.refactoring.languages.java.smell.android.trackingHardwareId">
-      </matcher>
-   </extension>
 
 </plugin>
