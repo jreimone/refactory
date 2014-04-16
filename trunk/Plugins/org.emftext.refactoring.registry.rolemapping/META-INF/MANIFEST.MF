@@ -19,4 +19,5 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: org.emftext.refactoring.ltk,
  org.emftext.refactoring.registry.rolemapping,
- org.emftext.refactoring.registry.rolemapping.exceptions
+ org.emftext.refactoring.registry.rolemapping.exceptions,
+ org.emftext.refactoring.registry.rolemapping.impl
