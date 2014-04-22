@@ -16,7 +16,7 @@
 	
 <target name="copy-category-file" depends="copy-repository-pom-file">
 	<echo message="Copying category.xml..."/>
-	<copy file="${deployDir}/category.xml" todir="${repositoryDir}" overwrite="true"/>
+	<copy file="${deployDir}/category.xml" todir="${repositoryDir}/target/repository" overwrite="true"/>
 </target>
 
 </project>
