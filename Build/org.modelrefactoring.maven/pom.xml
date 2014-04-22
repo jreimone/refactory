@@ -10,6 +10,7 @@
 	<properties>
 		<tycho-version>0.20.0</tycho-version>
 		<originalRepository>${JENKINS_HOME}/jobs/Refactory/workspace/build/dist/updatesites/org.modelrefactoring.deploy/</originalRepository>
+		<rootTarget>${WORKSPACE}/updateSite</rootTarget>
 		<targetDirectory>${WORKSPACE}/updateSite/target</targetDirectory>
 		<targetRepository>${targetDirectory}/repository</targetRepository>
 		<updateSiteName>Refactory p2 Trunk Update Site</updateSiteName>
@@ -43,7 +44,7 @@
 									<url>${originalRepository}</url>
 								</repository>
 							</source>
-							<destination>${targetRepository}</destination>
+							<destination>${rootTarget}</destination>
 							<name>${updateSiteName}</name>
 						</configuration>
 					</execution>
@@ -55,7 +56,7 @@
 							<goal>publish-features-and-bundles</goal>
 						</goals>
 						<configuration>
-							<sourceLocation>${targetRepository}</sourceLocation>
+							<sourceLocation>${rootTarget}</sourceLocation>
 						</configuration>
 					</execution>
 				</executions>
@@ -75,8 +76,8 @@
 						</goals>
 						<configuration>
 							<target>
-								<delete file="${targetRepository}/content.jar" />
-								<delete file="${targetRepository}/artifacts.jar" />
+								<delete file="${rootTarget}/content.jar" />
+								<delete file="${rootTarget}/artifacts.jar" />
 							</target>
 						</configuration>
 					</execution>
