@@ -4,7 +4,7 @@
 	<groupId>org.modelrefactoring</groupId>
 	<artifactId>org.modelrefactoring.maven</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>pom</packaging>
+	<packaging>eclipse-repository</packaging>
 	<name>Eclipse p2 Update-Site Generation</name>
 
 	<properties>
