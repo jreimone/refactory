@@ -36,6 +36,46 @@
 		<plugins>
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>target-platform-configuration</artifactId>
+				<version>${tycho-version}</version>
+				<configuration>
+					<!-- the following filter is needed because of the ObjectTeams bug: 
+						https://bugs.eclipse.org/bugs/show_bug.cgi?id=350133#c40 -->
+					<!-- filtering: http://wiki.eclipse.org/Tycho/Target_Platform#Filtering -->
+					<!-- <filters> <filter> <type>eclipse-plugin</type> <id>org.eclipse.jdt.core</id> 
+						<restrictTo> <versionRange>[3.9.0.v20130604-1421,3.9.1.v20130905-0837]</versionRange> 
+						</restrictTo> </filter> </filters> -->
+					<environments>
+						<environment>
+							<os>linux</os>
+							<ws>gtk</ws>
+							<arch>x86</arch>
+						</environment>
+						<environment>
+							<os>linux</os>
+							<ws>gtk</ws>
+							<arch>x86_64</arch>
+						</environment>
+						<environment>
+							<os>win32</os>
+							<ws>win32</ws>
+							<arch>x86</arch>
+						</environment>
+						<environment>
+							<os>win32</os>
+							<ws>win32</ws>
+							<arch>x86_64</arch>
+						</environment>
+						<environment>
+							<os>macosx</os>
+							<ws>cocoa</ws>
+							<arch>x86_64</arch>
+						</environment>
+					</environments>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-maven-plugin</artifactId>
 				<version>${tycho-version}</version>
 				<extensions>true</extensions>
