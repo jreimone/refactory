@@ -77,7 +77,7 @@
 					<execution>
 						<id>generate-categories</id>
 						<goals>
-							<goal>tycho-p2-publisher:publish-categories</goal>
+							<goal>publish-categories</goal>
 						</goals>
 					</execution>
 				</executions>
