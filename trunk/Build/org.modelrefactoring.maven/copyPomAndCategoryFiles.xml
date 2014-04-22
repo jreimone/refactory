@@ -7,9 +7,14 @@
 <target name="copy-pom-file">
 	<echo message="Copying pom.xml..."/>
 	<copy file="${basedir}/pom.xml" todir="${repositoryDir}" overwrite="true"/>
-</target>	
+</target>
 	
-<target name="copy-category-file" depends="copy-pom-file">
+<target name="copy-repository-pom-file" depends="copy-pom-file">
+	<echo message="Copying generateRepositoryPom.xml..."/>
+	<copy file="${basedir}/generateRepositoryPom.xml" todir="${repositoryDir}/target/repository" overwrite="true"/>
+</target>
+	
+<target name="copy-category-file" depends="copy-repository-pom-file">
 	<echo message="Copying category.xml..."/>
 	<copy file="${deployDir}/category.xml" todir="${repositoryDir}" overwrite="true"/>
 </target>
