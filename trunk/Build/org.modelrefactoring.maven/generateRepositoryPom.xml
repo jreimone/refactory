@@ -1,0 +1,156 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.modelrefactoring</groupId>
+	<artifactId>org.modelrefactoring.maven</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>eclipse-repository</packaging>
+	<name>Eclipse p2 Update-Site Generation (with categories)</name>
+
+	<properties>
+		<tycho-version>0.20.0</tycho-version>
+		<originalRepository>${JENKINS_HOME}/jobs/Refactory/workspace/build/dist/updatesites/org.modelrefactoring.deploy/</originalRepository>
+		<targetDirectory>${WORKSPACE}/updateSite/target</targetDirectory>
+		<targetRepository>${targetDirectory}/repository</targetRepository>
+		<updateSiteName>Refactory p2 Trunk Update Site</updateSiteName>
+	</properties>
+
+	<repositories>
+		<repository>
+			<id>eclipse-kepler</id>
+			<url>http://download.eclipse.org/releases/kepler</url>
+			<layout>p2</layout>
+		</repository>
+	</repositories>
+
+	<build>
+	<!-- 
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.eclipse.tycho</groupId>
+					<artifactId>tycho-p2-publisher-plugin</artifactId>
+					<version>${tycho-version}</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		 -->
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>target-platform-configuration</artifactId>
+				<version>${tycho-version}</version>
+				<configuration>
+					<!-- the following filter is needed because of the ObjectTeams bug: 
+						https://bugs.eclipse.org/bugs/show_bug.cgi?id=350133#c40 -->
+					<!-- filtering: http://wiki.eclipse.org/Tycho/Target_Platform#Filtering -->
+					<!-- <filters> <filter> <type>eclipse-plugin</type> <id>org.eclipse.jdt.core</id> 
+						<restrictTo> <versionRange>[3.9.0.v20130604-1421,3.9.1.v20130905-0837]</versionRange> 
+						</restrictTo> </filter> </filters> -->
+					<environments>
+						<environment>
+							<os>linux</os>
+							<ws>gtk</ws>
+							<arch>x86</arch>
+						</environment>
+						<environment>
+							<os>linux</os>
+							<ws>gtk</ws>
+							<arch>x86_64</arch>
+						</environment>
+						<environment>
+							<os>win32</os>
+							<ws>win32</ws>
+							<arch>x86</arch>
+						</environment>
+						<environment>
+							<os>win32</os>
+							<ws>win32</ws>
+							<arch>x86_64</arch>
+						</environment>
+						<environment>
+							<os>macosx</os>
+							<ws>cocoa</ws>
+							<arch>x86_64</arch>
+						</environment>
+					</environments>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-maven-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<extensions>true</extensions>
+			</plugin>
+			<!-- 
+			<plugin>
+				<groupId>org.eclipse.tycho.extras</groupId>
+				<artifactId>tycho-p2-extras-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<executions>
+					<execution>
+						<id>mirror-update-sites</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>mirror</goal>
+						</goals>
+						<configuration>
+							<source>
+								<repository>
+									<url>${originalRepository}</url>
+								</repository>
+							</source>
+							<destination>${targetRepository}</destination>
+							<name>${updateSiteName}</name>
+						</configuration>
+					</execution>
+					<execution>
+						<id>generate-full-metadata</id>
+						<phase>compile</phase>
+						<goals>
+							<goal>publish-features-and-bundles</goal>
+						</goals>
+						<configuration>
+							<sourceLocation>${targetRepository}</sourceLocation>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-p2-publisher-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<executions>
+					<execution>
+						<id>generate-categories</id>
+						<goals>
+							<goal>publish-categories</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.7</version>
+				<executions>
+					<execution>
+						<id>remove-incomplete-metadata</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<target>
+								<delete file="${targetRepository}/content.jar" />
+								<delete file="${targetRepository}/artifacts.jar" />
+							</target>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			 -->
+		</plugins>
+	</build>
+
+</project>
