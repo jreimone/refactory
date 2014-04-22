@@ -2,7 +2,7 @@
 <project basedir="." default="copy-category-file" name="Copys the category.xml before generating the p2 update site">
 <property environment="env"/>
 <property name="deployDir" value="${env.JENKINS_HOME}/jobs/Refactory/workspace/build/dist/updatesites/org.modelrefactoring.deploy/"/>
-<property name="repositoryDir" value="${env.WORKSPACE}/target/repository"/>
+<property name="repositoryDir" value="${env.WORKSPACE}/updateSite"/>
 
 <target name="copy-pom-file">
 	<echo message="Copying pom.xml..."/>
