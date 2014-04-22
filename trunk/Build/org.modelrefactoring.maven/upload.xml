@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project basedir="." default="upload-p2-update-site" name="Uploads the p2 update site to modelrefactoring.org/update_trunk_p2">
 <property environment="env"/>
-<property name="repositoryDir" value="${env.WORKSPACE}/org.modelrefactoring.maven/target/repository"/>
+<property name="repositoryDir" value="${env.WORKSPACE}/target/repository"/>
 
 <target name="upload-p2-update-site">
 	<echo message="Uploading generated p2 update site to modelrefactoring.org/update_trunk_p2..."/>
