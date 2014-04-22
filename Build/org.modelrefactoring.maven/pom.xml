@@ -10,7 +10,7 @@
 	<properties>
 		<tycho-version>0.20.0</tycho-version>
 		<originalRepository>${JENKINS_HOME}/jobs/Refactory/workspace/build/dist/updatesites/org.modelrefactoring.deploy/</originalRepository>
-		<targetDirectory>${WORKSPACE}/org.modelrefactoring.maven/target</targetDirectory>
+		<targetDirectory>${WORKSPACE}/target</targetDirectory>
 		<targetRepository>${targetDirectory}/repository</targetRepository>
 		<updateSiteName>Refactory p2 Trunk Update Site</updateSiteName>
 	</properties>
