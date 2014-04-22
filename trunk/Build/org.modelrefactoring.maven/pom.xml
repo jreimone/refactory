@@ -8,10 +8,11 @@
 	<name>Eclipse p2 Update-Site Generation</name>
 
 	<properties>
-		<tycho-version>0.19.0</tycho-version>
+		<tycho-version>0.20.0</tycho-version>
 		<originalRepository>${JENKINS_HOME}/jobs/Refactory/workspace/build/dist/updatesites/org.modelrefactoring.deploy/</originalRepository>
 		<targetDirectory>${WORKSPACE}/org.modelrefactoring.maven/target</targetDirectory>
 		<targetRepository>${targetDirectory}/repository</targetRepository>
+		<updateSiteName>Refactory p2 Trunk Update Site</updateSiteName>
 	</properties>
 
 	<repositories>
@@ -23,6 +24,15 @@
 	</repositories>
 
 	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.eclipse.tycho</groupId>
+					<artifactId>tycho-p2-publisher-plugin</artifactId>
+					<version>${tycho-version}</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 		<plugins>
 			<plugin>
 				<groupId>org.eclipse.tycho.extras</groupId>
@@ -43,6 +53,7 @@
 								</repository>
 							</source>
 							<destination>${targetRepository}</destination>
+							<name>${updateSiteName}</name>
 						</configuration>
 					</execution>
 					<execution>
@@ -57,6 +68,11 @@
 						</configuration>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-p2-publisher-plugin</artifactId>
+				<version>${tycho-version}</version>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
