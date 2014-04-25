@@ -8,5 +8,6 @@ Require-Bundle: org.emftext.language.refactoring.rolemapping,
  org.eclipse.equinox.common,
  org.eclipse.emf.ecore.change,
  org.emftext.language.appflow,
- org.emftext.language.refactoring.specification
+ org.emftext.language.refactoring.specification,
+ org.emftext.refactoring.util
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
