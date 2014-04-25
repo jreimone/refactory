@@ -2,17 +2,17 @@ ROLEMODELMAPPING FOR <http://www.emftext.org/language/appflow>
 
 "Encapsulate In Panel" maps <ExtractXwithReferenceClass> {
 
-	Extract := screenmodel.Widget;
+	Extract := appflow.screenmodel.Widget;
 	
-	OrigContainer := screenmodel.Composite {
+	OrigContainer := appflow.screenmodel.Composite {
 		extracts := compounds;
 	};
 	
-	NewContainer := widgets.Panel(newName -> name){
+	NewContainer := appflow.widgets.Panel(newName -> name){
 		moved := compounds;
 	};
 	
-	ContainerContainer := screenmodel.Composite {
+	ContainerContainer := appflow.screenmodel.Composite {
 		source := compounds;
 		target := compounds;
 	};
