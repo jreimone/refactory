@@ -63,6 +63,8 @@ public class ComplexLatexTableGenAction extends Action {
 				File tableFile = File.createTempFile("refactoringsComplex_", ".latex", tempDir);
 				tableFile.deleteOnExit();
 				FileWriter writer = new FileWriter(tableFile);
+				writer.append("\\documentclass{scrartcl}\n\n\\usepackage{longtable}\n\n\\begin{document}\n\n");
+				writer.append("\n\n%%%%%%%%%%%%%% TABLE START %%%%%%%%%%%%%%\n");
 				writer.append("\\begingroup\n");
 				writer.append("\\footnotesize\n");
 				writer.append("\\begin{longtable}{|l|l|c|c|c|c|}\n");
@@ -72,34 +74,36 @@ public class ComplexLatexTableGenAction extends Action {
 				for (TreeObject object : invisibleRoot.getChildren()) {
 					if (object instanceof TreeParent && !(object instanceof TreeMetaModelParent)) {
 						TreeParent parent = (TreeParent) object;
-						RoleModel roleModel = (RoleModel) parent.getObject();
-						writer.append("\\multicolumn{6}{|c|}{\\textit{" + StringUtil.convertCamelCaseToWords(roleModel.getName()) + "}}\\\\ \\hline\n");
-						for (TreeObject child : parent.getChildren()) {
-							if (child instanceof TreeMetaModelParent) {
-								TreeMetaModelParent metamodelParent = (TreeMetaModelParent) child;
-								TreeObject[] metamodelChildren = metamodelParent.getChildren();
-								for (TreeObject treeObject : metamodelChildren) {
-									if (treeObject instanceof TreeLeaf) {
-										TreeLeaf leaf = (TreeLeaf) treeObject;
-										String mmName = StringUtil.firstLetterUpperCase(metamodelParent.getMetamodel().getName());
-										mmName = mmName.replaceAll("_", " ");
-										writer.append(mmName);
-										writer.append(" & ");
-										RoleMapping mapping = (RoleMapping) leaf.getObject();
-										writer.append(StringUtil.convertCamelCaseToWords(mapping.getName()));
-										writer.append(" & ");
-										boolean hasPostProcessor = leaf.hasPostProcessorRegistered();
-										if (hasPostProcessor) {
-											writer.append("X");
+						if(parent.getChildren().length > 0){
+							RoleModel roleModel = (RoleModel) parent.getObject();
+							writer.append("\\multicolumn{6}{|c|}{\\textit{" + StringUtil.convertCamelCaseToWords(roleModel.getName()) + "}}\\\\ \\hline\n");
+							for (TreeObject child : parent.getChildren()) {
+								if (child instanceof TreeMetaModelParent) {
+									TreeMetaModelParent metamodelParent = (TreeMetaModelParent) child;
+									TreeObject[] metamodelChildren = metamodelParent.getChildren();
+									for (TreeObject treeObject : metamodelChildren) {
+										if (treeObject instanceof TreeLeaf) {
+											TreeLeaf leaf = (TreeLeaf) treeObject;
+											String mmName = StringUtil.firstLetterUpperCase(metamodelParent.getMetamodel().getName());
+											mmName = mmName.replaceAll("_", " ");
+											writer.append(mmName);
+											writer.append(" & ");
+											RoleMapping mapping = (RoleMapping) leaf.getObject();
+											writer.append(StringUtil.convertCamelCaseToWords(mapping.getName()));
+											writer.append(" & ");
+											boolean hasPostProcessor = leaf.hasPostProcessorRegistered();
+											if (hasPostProcessor) {
+												writer.append("X");
+											}
+											writer.append(" & ");
+											writer.append(String.valueOf(metamodelParent.getCountMetaclasses()));
+											writer.append(" & ");
+											writer.append(String.valueOf(metamodelParent.getCountStructuralFeatures()));
+											writer.append(" & ");
+											int sum = metamodelParent.getCountMetaclasses() + metamodelParent.getCountStructuralFeatures();
+											writer.append(String.valueOf(sum));
+											writer.append("\\\\ \\hline\n");
 										}
-										writer.append(" & ");
-										writer.append(String.valueOf(metamodelParent.getCountMetaclasses()));
-										writer.append(" & ");
-										writer.append(String.valueOf(metamodelParent.getCountStructuralFeatures()));
-										writer.append(" & ");
-										int sum = metamodelParent.getCountMetaclasses() + metamodelParent.getCountStructuralFeatures();
-										writer.append(String.valueOf(sum));
-										writer.append("\\\\ \\hline\n");
 									}
 								}
 							}
@@ -108,6 +112,8 @@ public class ComplexLatexTableGenAction extends Action {
 				}
 				writer.append("\\end{longtable}\n");
 				writer.append("\\endgroup\n");
+				writer.append("\n\n%%%%%%%%%%%%%% TABLE END %%%%%%%%%%%%%%\n");
+				writer.append("\n\n\\end{document}");
 				writer.close();
 			}
 		} catch (IOException e) {
