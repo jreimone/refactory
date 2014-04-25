@@ -37,13 +37,13 @@ import org.emftext.refactoring.util.StringUtil;
  *
  */
 public class ComplexWikiTableGenAction extends Action {
-	
+
 	private static final String EVEN_COLOR = "#D3D3D3";
 	private static final String ZOO_PREFIX = "EMFText_Concrete_Syntax_Zoo_";
-	
+
 
 	private RegistryViewContentProvider contentProvider;
-	
+
 	/**
 	 * @param refactoringStatisticView
 	 */
@@ -69,7 +69,7 @@ public class ComplexWikiTableGenAction extends Action {
 				tableFile.deleteOnExit();
 				FileWriter writer = new FileWriter(tableFile);
 				int specificCount = countSpecificRefactorings(invisibleRoot);
-				int genericCount = invisibleRoot.getChildren().length;
+				int genericCount = countGenericRefactorings(invisibleRoot);
 				RegistryUtil.log("Reused " + genericCount + " generic refactorings for " + specificCount + " specific refactorings.", IStatus.INFO);
 				writer.append("Reused '''" + genericCount + "''' generic refactorings for '''" + specificCount + "''' specific refactorings.\n");
 				writer.append("{| class=\"wikitable sortable\" border=\"1\" style=\"width:100%;border-collapse:collapse;border:1px solid;\"\n");
@@ -80,54 +80,56 @@ public class ComplexWikiTableGenAction extends Action {
 				String style = "";
 				for (TreeObject roleModelParent : invisibleRoot.getChildren()) {
 					if (roleModelParent instanceof TreeParent && !(roleModelParent instanceof TreeMetaModelParent)) {
-						RoleModel rolemodel = (RoleModel) roleModelParent.getObject();
-						String roleModelName = rolemodel.getName().replace(" ", "_");
-						writer.append("|-\n");
-						writer.append("! [[Refactoring:" + roleModelName + "|" + StringUtil.convertCamelCaseToWords(roleModelName) + "]]\n");
-						writer.append("| colspan=\"2\"|\n");
-						writer.append("{| class=\"wikitable\" style=\"width:100%;\"\n");
-						writer.append("! width=\"50%\" align=\"right\" |\n");
-						writer.append("! width=\"50%\" align=\"right\" |\n");
+						if(((TreeParent) roleModelParent).getChildren().length > 0){
+							RoleModel rolemodel = (RoleModel) roleModelParent.getObject();
+							String roleModelName = rolemodel.getName().replace(" ", "_");
+							writer.append("|-\n");
+							writer.append("! [[Refactoring:" + roleModelName + "|" + StringUtil.convertCamelCaseToWords(roleModelName) + "]]\n");
+							writer.append("| colspan=\"2\"|\n");
+							writer.append("{| class=\"wikitable\" style=\"width:100%;\"\n");
+							writer.append("! width=\"50%\" align=\"right\" |\n");
+							writer.append("! width=\"50%\" align=\"right\" |\n");
 
-						for (TreeObject metamodelChild : ((TreeParent) roleModelParent).getChildren()) {
-							if (metamodelChild instanceof TreeMetaModelParent) {
-								even++;
-								if (even % 2 == 0) {
-									style = "style=\"background:" + EVEN_COLOR + ";\"";
-								} else {
-									style = "";
-								}
-								writer.append("|- " + style + "\n");
-								EPackage metamodel = ((TreeMetaModelParent) metamodelChild).getMetamodel();
-								String metamodelShort = StringUtil.firstLetterUpperCase(metamodel.getName());
-								TreeObject[] mappingChildren = ((TreeParent) metamodelChild).getChildren();
-								if (mappingChildren.length > 1) {
-									writer.append("| [[" + ZOO_PREFIX + metamodelShort + "|" + metamodelShort + "]]\n");
-									writer.append("| \n");
-									writer.append("{| \n");
-									for (TreeObject mappingChild : mappingChildren) {
-										if (mappingChild instanceof TreeLeaf) {
-											RoleMapping mapping = (RoleMapping) mappingChild.getObject();
-											writer.append(" | [[Refactoring:" + roleModelName + ":" + metamodelShort + ":" + mapping.getName().replace(" ", "_") + "|" + StringUtil.convertCamelCaseToWords(mapping.getName()) + "]]\n");
-											writer.append(" |- \n");
-										}
+							for (TreeObject metamodelChild : ((TreeParent) roleModelParent).getChildren()) {
+								if (metamodelChild instanceof TreeMetaModelParent) {
+									even++;
+									if (even % 2 == 0) {
+										style = "style=\"background:" + EVEN_COLOR + ";\"";
+									} else {
+										style = "";
 									}
-									writer.append(" |} \n");
-									//											writer.append("|- \n");
-								} else {
-									TreeObject mappingLeaf = mappingChildren[0];
-									RoleMapping mapping = (RoleMapping) mappingLeaf.getObject();
-									writer.append("| [[" + ZOO_PREFIX + metamodelShort + "|" + metamodelShort + "]]\n");
-									writer.append("| [[Refactoring:" + roleModelName + ":" + metamodelShort + ":" + mapping.getName().replace(" ", "_") + "|" + StringUtil.convertCamelCaseToWords(mapping.getName()) + "]]\n");
-									//											writer.append("|- \n");
-								}
-								TreeObject[] children = ((TreeParent) roleModelParent).getChildren();
-								if (children[children.length - 1].equals(metamodelChild)) {
-									writer.append("|- \n");
+									writer.append("|- " + style + "\n");
+									EPackage metamodel = ((TreeMetaModelParent) metamodelChild).getMetamodel();
+									String metamodelShort = StringUtil.firstLetterUpperCase(metamodel.getName());
+									TreeObject[] mappingChildren = ((TreeParent) metamodelChild).getChildren();
+									if (mappingChildren.length > 1) {
+										writer.append("| [[" + ZOO_PREFIX + metamodelShort + "|" + metamodelShort + "]]\n");
+										writer.append("| \n");
+										writer.append("{| \n");
+										for (TreeObject mappingChild : mappingChildren) {
+											if (mappingChild instanceof TreeLeaf) {
+												RoleMapping mapping = (RoleMapping) mappingChild.getObject();
+												writer.append(" | [[Refactoring:" + roleModelName + ":" + metamodelShort + ":" + mapping.getName().replace(" ", "_") + "|" + StringUtil.convertCamelCaseToWords(mapping.getName()) + "]]\n");
+												writer.append(" |- \n");
+											}
+										}
+										writer.append(" |} \n");
+										//											writer.append("|- \n");
+									} else {
+										TreeObject mappingLeaf = mappingChildren[0];
+										RoleMapping mapping = (RoleMapping) mappingLeaf.getObject();
+										writer.append("| [[" + ZOO_PREFIX + metamodelShort + "|" + metamodelShort + "]]\n");
+										writer.append("| [[Refactoring:" + roleModelName + ":" + metamodelShort + ":" + mapping.getName().replace(" ", "_") + "|" + StringUtil.convertCamelCaseToWords(mapping.getName()) + "]]\n");
+										//											writer.append("|- \n");
+									}
+									TreeObject[] children = ((TreeParent) roleModelParent).getChildren();
+									if (children[children.length - 1].equals(metamodelChild)) {
+										writer.append("|- \n");
+									}
 								}
 							}
+							writer.append("|}\n\n");
 						}
-						writer.append("|}\n\n");
 					}
 				}
 				writer.append("|}");
@@ -136,6 +138,19 @@ public class ComplexWikiTableGenAction extends Action {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	private int countGenericRefactorings(TreeParent invisibleRoot) {
+		int count = 0;
+		for (TreeObject child : invisibleRoot.getChildren()) {
+			if(child instanceof TreeParent){
+				TreeParent treeParent = (TreeParent) child;
+				if(treeParent.getChildren().length > 0){
+					count++;
+				}
+			}
+		}
+		return count;
 	}
 
 	private int countSpecificRefactorings(TreeParent invisibleRoot) {
