@@ -18,7 +18,7 @@
        point="org.emftext.refactoring.postprocessor">
     <postprocessor
           mapping_name="Create Initial State"
-          nsUri="http://www.emftext.org/language/egui"
+          nsUri="http://www.emftext.org/language/appflow"
           postprocessor="org.emftext.language.egui.refactoring.CreateInitialStatePostProcessor">
     </postprocessor>
  </extension>

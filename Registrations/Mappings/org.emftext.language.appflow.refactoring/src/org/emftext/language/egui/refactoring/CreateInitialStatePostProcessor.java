@@ -20,7 +20,6 @@ package org.emftext.language.egui.refactoring;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -39,6 +38,7 @@ import org.emftext.language.appflow.statemodel.Transition;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.registry.rolemapping.AbstractRefactoringPostProcessor;
+import org.emftext.refactoring.util.RoleUtil;
 
 /**
  * @author Jan Reimann
@@ -47,10 +47,8 @@ import org.emftext.refactoring.registry.rolemapping.AbstractRefactoringPostProce
 public class CreateInitialStatePostProcessor extends AbstractRefactoringPostProcessor {
 
 	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap, ResourceSet resourceSet, ChangeDescription change) {
-		StateModel stateModel = (StateModel) getEObjectsForRole(
-				roleRuntimeInstanceMap, "DerivationContainer").get(0);
-		Transition transition = (Transition) getEObjectsForRole(
-				roleRuntimeInstanceMap, "Derivation").get(0);
+		StateModel stateModel = RoleUtil.getFirstObjectForRole("DerivationContainer", StateModel.class, roleRuntimeInstanceMap);
+		Transition transition = RoleUtil.getFirstObjectForRole("Derivation", Transition.class, roleRuntimeInstanceMap);
 		createInitialState(stateModel, transition);
 		return Status.OK_STATUS;
 	}
@@ -69,16 +67,6 @@ public class CreateInitialStatePostProcessor extends AbstractRefactoringPostProc
 		transition.setSource(initialState);
 	}
 
-	private List<EObject> getEObjectsForRole(Map<Role, List<EObject>> roleRuntimeInstanceMap, String roleName) {
-		Set<Role> roles = roleRuntimeInstanceMap.keySet();
-		for (Role role : roles) {
-			if (role.getName().equals(roleName)) {
-				return roleRuntimeInstanceMap.get(role);
-			}
-		}
-		return null;
-	}
-	
 	public IStatus process(Map<Role, List<EObject>> roleRuntimeInstanceMap, ResourceSet resourceSet, ChangeDescription change, RefactoringSpecification refSpec) {
 		return process(roleRuntimeInstanceMap, resourceSet, change);
 	}
