@@ -12,7 +12,7 @@
       <styles xmi:type="notation:SortingStyle" xmi:id="_Fvqx6iKmEeKLXve17CTS8Q"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_Fvqx6yKmEeKLXve17CTS8Q"/>
     </children>
-    <styles xmi:type="notation:ShapeStyle" xmi:id="_Fvqx4SKmEeKLXve17CTS8Q" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_Fvqx4SKmEeKLXve17CTS8Q" fontColor="4210752" fontName="Segoe UI" fontHeight="10" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="cods.ecore#//cods/CODS"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Fvqx4iKmEeKLXve17CTS8Q" x="70" y="60"/>
   </children>
@@ -28,7 +28,7 @@
       <styles xmi:type="notation:SortingStyle" xmi:id="_Fvqx9iKmEeKLXve17CTS8Q"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_Fvqx9yKmEeKLXve17CTS8Q"/>
     </children>
-    <styles xmi:type="notation:ShapeStyle" xmi:id="_Fvqx7SKmEeKLXve17CTS8Q" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_Fvqx7SKmEeKLXve17CTS8Q" fontColor="4210752" fontName="Segoe UI" fontHeight="10" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="cods.ecore#//cods/DomainSpecificEvolutionSpecification"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Fvqx7iKmEeKLXve17CTS8Q" x="-5" y="180"/>
   </children>
@@ -44,7 +44,7 @@
       <styles xmi:type="notation:SortingStyle" xmi:id="_FvqyAiKmEeKLXve17CTS8Q"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_FvqyAyKmEeKLXve17CTS8Q"/>
     </children>
-    <styles xmi:type="notation:ShapeStyle" xmi:id="_Fvqx-SKmEeKLXve17CTS8Q" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_Fvqx-SKmEeKLXve17CTS8Q" fontColor="4210752" fontName="Segoe UI" fontHeight="10" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="cods.ecore#//cods/EvolutionDefinition"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Fvqx-iKmEeKLXve17CTS8Q" x="-60" y="280"/>
   </children>
@@ -63,7 +63,7 @@
       <styles xmi:type="notation:SortingStyle" xmi:id="_LKA6tyKmEeKLXve17CTS8Q"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_LKA6uCKmEeKLXve17CTS8Q"/>
     </children>
-    <styles xmi:type="notation:ShapeStyle" xmi:id="_LJ3JsSKmEeKLXve17CTS8Q" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_LJ3JsSKmEeKLXve17CTS8Q" fontColor="4210752" fontName="Segoe UI" fontHeight="10" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="cods.ecore#//architecture/MegaModel"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_LJ3JsiKmEeKLXve17CTS8Q" x="385" y="55"/>
   </children>
@@ -82,7 +82,7 @@
       <styles xmi:type="notation:SortingStyle" xmi:id="_8VTOl459EeO-CIpo86JznA"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_8VTOmI59EeO-CIpo86JznA"/>
     </children>
-    <styles xmi:type="notation:ShapeStyle" xmi:id="_8VPkMY59EeO-CIpo86JznA" fontColor="4210752" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_8VPkMY59EeO-CIpo86JznA" fontColor="4210752" fontName="Sans" fontHeight="10" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="platform:/resource/org.modelrefactoring.evolution.coed/metamodel/coed.ecore#//CoEvolutionDefinition"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_8VPkMo59EeO-CIpo86JznA" x="185" y="280"/>
   </children>
@@ -101,7 +101,7 @@
       <styles xmi:type="notation:SortingStyle" xmi:id="_TQVm96R3EeOyIfmqNk1Wzw"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_TQVm-KR3EeOyIfmqNk1Wzw"/>
     </children>
-    <styles xmi:type="notation:ShapeStyle" xmi:id="_TQQHYaR3EeOyIfmqNk1Wzw" fontColor="4210752" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_TQQHYaR3EeOyIfmqNk1Wzw" fontColor="4210752" fontName="Sans" fontHeight="10" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="cods.ecore#//architecture/ReferenceModel"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_TQQHYqR3EeOyIfmqNk1Wzw" x="380" y="170"/>
   </children>

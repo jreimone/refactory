@@ -12,7 +12,7 @@
       <styles xmi:type="notation:SortingStyle" xmi:id="_fTzI6iKlEeKLXve17CTS8Q"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_fTzI6yKlEeKLXve17CTS8Q"/>
     </children>
-    <styles xmi:type="notation:ShapeStyle" xmi:id="_fTzI4SKlEeKLXve17CTS8Q" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_fTzI4SKlEeKLXve17CTS8Q" fontColor="4210752" fontName="Segoe UI" fontHeight="10" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="cods.ecore#//architecture/Model"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_fTzI4iKlEeKLXve17CTS8Q" x="375" y="80"/>
   </children>
@@ -28,7 +28,7 @@
       <styles xmi:type="notation:SortingStyle" xmi:id="_fTzI9iKlEeKLXve17CTS8Q"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_fTzI9yKlEeKLXve17CTS8Q"/>
     </children>
-    <styles xmi:type="notation:ShapeStyle" xmi:id="_fTzI7SKlEeKLXve17CTS8Q" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_fTzI7SKlEeKLXve17CTS8Q" fontColor="4210752" fontName="Segoe UI" fontHeight="10" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="cods.ecore#//architecture/ReferenceModel"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_fTzI7iKlEeKLXve17CTS8Q" x="190" y="200"/>
   </children>
@@ -44,7 +44,7 @@
       <styles xmi:type="notation:SortingStyle" xmi:id="_fT856iKlEeKLXve17CTS8Q"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_fT856yKlEeKLXve17CTS8Q"/>
     </children>
-    <styles xmi:type="notation:ShapeStyle" xmi:id="_fT854SKlEeKLXve17CTS8Q" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_fT854SKlEeKLXve17CTS8Q" fontColor="4210752" fontName="Segoe UI" fontHeight="10" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="cods.ecore#//architecture/TerminalModel"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_fT854iKlEeKLXve17CTS8Q" x="560" y="205"/>
   </children>
@@ -60,7 +60,7 @@
       <styles xmi:type="notation:SortingStyle" xmi:id="_fT859iKlEeKLXve17CTS8Q"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_fT859yKlEeKLXve17CTS8Q"/>
     </children>
-    <styles xmi:type="notation:ShapeStyle" xmi:id="_fT857SKlEeKLXve17CTS8Q" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_fT857SKlEeKLXve17CTS8Q" fontColor="4210752" fontName="Segoe UI" fontHeight="10" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="cods.ecore#//architecture/TransformationModel"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_fT857iKlEeKLXve17CTS8Q" x="415" y="300"/>
   </children>
@@ -84,7 +84,7 @@
       <styles xmi:type="notation:SortingStyle" xmi:id="_fT86AiKlEeKLXve17CTS8Q"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_fT86AyKlEeKLXve17CTS8Q"/>
     </children>
-    <styles xmi:type="notation:ShapeStyle" xmi:id="_fT85-SKlEeKLXve17CTS8Q" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_fT85-SKlEeKLXve17CTS8Q" fontColor="4210752" fontName="Segoe UI" fontHeight="10" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="cods.ecore#//architecture/MegaModel"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_fT85-iKlEeKLXve17CTS8Q" x="815" y="285"/>
   </children>
@@ -100,7 +100,7 @@
       <styles xmi:type="notation:SortingStyle" xmi:id="_fT86DiKlEeKLXve17CTS8Q"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_fT86DyKlEeKLXve17CTS8Q"/>
     </children>
-    <styles xmi:type="notation:ShapeStyle" xmi:id="_fT86BSKlEeKLXve17CTS8Q" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_fT86BSKlEeKLXve17CTS8Q" fontColor="4210752" fontName="Segoe UI" fontHeight="10" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="cods.ecore#//architecture/MetaMetaModel"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_fT86BiKlEeKLXve17CTS8Q" x="115" y="300"/>
   </children>
@@ -116,7 +116,7 @@
       <styles xmi:type="notation:SortingStyle" xmi:id="_fT86GiKlEeKLXve17CTS8Q"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_fT86GyKlEeKLXve17CTS8Q"/>
     </children>
-    <styles xmi:type="notation:ShapeStyle" xmi:id="_fT86ESKlEeKLXve17CTS8Q" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_fT86ESKlEeKLXve17CTS8Q" fontColor="4210752" fontName="Segoe UI" fontHeight="10" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="cods.ecore#//architecture/MetaModel"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_fT86EiKlEeKLXve17CTS8Q" x="260" y="300"/>
   </children>
@@ -132,7 +132,7 @@
       <styles xmi:type="notation:SortingStyle" xmi:id="_fT86JiKlEeKLXve17CTS8Q"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_fT86JyKlEeKLXve17CTS8Q"/>
     </children>
-    <styles xmi:type="notation:ShapeStyle" xmi:id="_fT86HSKlEeKLXve17CTS8Q" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_fT86HSKlEeKLXve17CTS8Q" fontColor="4210752" fontName="Segoe UI" fontHeight="10" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="cods.ecore#//architecture/InstanceModel"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_fT86HiKlEeKLXve17CTS8Q" x="570" y="300"/>
   </children>
@@ -151,7 +151,7 @@
       <styles xmi:type="notation:SortingStyle" xmi:id="_wO3i5yKlEeKLXve17CTS8Q"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_wO3i6CKlEeKLXve17CTS8Q"/>
     </children>
-    <styles xmi:type="notation:ShapeStyle" xmi:id="_wOuY8SKlEeKLXve17CTS8Q" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_wOuY8SKlEeKLXve17CTS8Q" fontColor="4210752" fontName="Segoe UI" fontHeight="10" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EPackage"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_wOuY8iKlEeKLXve17CTS8Q" x="90" y="425"/>
   </children>
@@ -170,7 +170,7 @@
       <styles xmi:type="notation:SortingStyle" xmi:id="_1Wye9yKlEeKLXve17CTS8Q"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_1Wye-CKlEeKLXve17CTS8Q"/>
     </children>
-    <styles xmi:type="notation:ShapeStyle" xmi:id="_1Wot8SKlEeKLXve17CTS8Q" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_1Wot8SKlEeKLXve17CTS8Q" fontColor="4210752" fontName="Segoe UI" fontHeight="10" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EObject"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_1Wot8iKlEeKLXve17CTS8Q" x="500" y="425"/>
   </children>
