@@ -22,10 +22,11 @@ import java.util.List;
 
 import org.dresdenocl.language.ocl.ImplicitFeatureCallCS;
 import org.dresdenocl.language.ocl.InvariantExpCS;
-import org.dresdenocl.language.ocl.NamedElementCS;
+import org.dresdenocl.language.ocl.ModelElementCS;
 import org.dresdenocl.language.ocl.NavigationCallExp;
 import org.dresdenocl.language.ocl.OclExpressionCS;
 import org.dresdenocl.language.ocl.OclFactory;
+import org.dresdenocl.language.ocl.PathNameSimpleCS;
 import org.dresdenocl.language.ocl.PrePostOrBodyDeclarationCS;
 import org.dresdenocl.language.ocl.SimpleNameCS;
 import org.dresdenocl.pivotmodel.PivotModelFactory;
@@ -142,7 +143,9 @@ public class PostProcessingHelper {
 			if(context != null && context instanceof NavigationCallExp && replacee instanceof NavigationCallExp){
 				NavigationCallExp contextNC = (NavigationCallExp) context;
 				NavigationCallExp replaceeNC = (NavigationCallExp) replacee;
-				NamedElementCS newNamedLiteral = createNewNamedLiteral((SimpleNameCS) replacement);
+//				SimpleNameCS newNamedLiteral = createNewNamedLiteral((SimpleNameCS) replacement);
+//				SimpleNameCS newNamedLiteral = createNewSimpleNameCS((SimpleNameCS) replacement);
+				ModelElementCS newNamedLiteral = createNewModelElementCS((SimpleNameCS) replacement);
 				OclExpressionCS replaceSource = replaceeNC.getSource();
 				OclExpressionCS contextSource = contextNC.getSource();
 				int lastIndex = -1;
@@ -165,7 +168,8 @@ public class PostProcessingHelper {
 					}
 				}
 			} else {
-				NamedElementCS newNamedLiteral = createNewNamedLiteral((SimpleNameCS) replacement);			
+//				NamedElementCS newNamedLiteral = createNewNamedLiteral((SimpleNameCS) replacement);
+				ModelElementCS newNamedLiteral = createNewModelElementCS((SimpleNameCS) replacement);	
 
 				EObject replaceeParent = replacee.eContainer();
 				EReference containmentFeature = replacee.eContainmentFeature();
@@ -181,12 +185,26 @@ public class PostProcessingHelper {
 	 * @param original
 	 * @return
 	 */
-	public static NamedElementCS createNewNamedLiteral(SimpleNameCS original) {
-		NamedElementCS newNamedLiteral = OclFactory.eINSTANCE.createNamedElementCS();
+//	public static NamedElementCS createNewNamedLiteral(SimpleNameCS original) {
+//		NamedElementCS newNamedLiteral = OclFactory.eINSTANCE.createNamedElementCS();
+//		Property tempProperty = PivotModelFactory.eINSTANCE.createProperty();
+//		tempProperty.setName(original.getSimpleName());
+//		newNamedLiteral.setNamedElement(tempProperty);
+//		return newNamedLiteral;
+//	}
+	
+	public static ModelElementCS createNewModelElementCS(SimpleNameCS original) {
+		ModelElementCS newModelElementCS = OclFactory.eINSTANCE.createModelElementCS();
+		PathNameSimpleCS pathNameSimpleCS = OclFactory.eINSTANCE.createPathNameSimpleCS();
 		Property tempProperty = PivotModelFactory.eINSTANCE.createProperty();
 		tempProperty.setName(original.getSimpleName());
-		newNamedLiteral.setNamedElement(tempProperty);
-		return newNamedLiteral;
+		pathNameSimpleCS.setNamedElement(tempProperty);
+		return newModelElementCS;
 	}
 
+//	public static SimpleNameCS createNewSimpleNameCS(SimpleNameCS original) {
+//		SimpleNameCS newNamedLiteral = OclFactory.eINSTANCE.createSimpleNameCS();
+//		newNamedLiteral.setSimpleName(original.getSimpleName());
+//		return newNamedLiteral;
+//	}
 }
