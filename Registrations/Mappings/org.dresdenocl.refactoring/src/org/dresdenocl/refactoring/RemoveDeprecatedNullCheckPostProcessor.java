@@ -3,6 +3,18 @@ package org.dresdenocl.refactoring;
 import java.util.List;
 import java.util.Map;
 
+import org.dresdenocl.language.ocl.ClassifierContextDeclarationCS;
+import org.dresdenocl.language.ocl.EqualityOperationCallExpCS;
+import org.dresdenocl.language.ocl.ImplicitFeatureCallCS;
+import org.dresdenocl.language.ocl.ImplicitOperationCallCS;
+import org.dresdenocl.language.ocl.IntegerLiteralExpCS;
+import org.dresdenocl.language.ocl.NavigationCallExp;
+import org.dresdenocl.language.ocl.NullLiteralExpCS;
+import org.dresdenocl.language.ocl.OclExpressionCS;
+import org.dresdenocl.language.ocl.OclFactory;
+import org.dresdenocl.language.ocl.OperationCallBinaryExpCS;
+import org.dresdenocl.language.ocl.RelationalOperationCallExpCS;
+import org.dresdenocl.pivotmodel.Operation;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -14,19 +26,6 @@ import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.ltk.IModelRefactoringWizardPage;
 import org.emftext.refactoring.registry.rolemapping.AbstractRefactoringPostProcessor;
 import org.emftext.refactoring.util.RoleUtil;
-
-import tudresden.ocl20.pivot.language.ocl.ClassifierContextDeclarationCS;
-import tudresden.ocl20.pivot.language.ocl.EqualityOperationCallExpCS;
-import tudresden.ocl20.pivot.language.ocl.ImplicitFeatureCallCS;
-import tudresden.ocl20.pivot.language.ocl.ImplicitOperationCallCS;
-import tudresden.ocl20.pivot.language.ocl.IntegerLiteralExpCS;
-import tudresden.ocl20.pivot.language.ocl.NavigationCallExp;
-import tudresden.ocl20.pivot.language.ocl.NullLiteralExpCS;
-import tudresden.ocl20.pivot.language.ocl.OclExpressionCS;
-import tudresden.ocl20.pivot.language.ocl.OclFactory;
-import tudresden.ocl20.pivot.language.ocl.OperationCallBinaryExpCS;
-import tudresden.ocl20.pivot.language.ocl.RelationalOperationCallExpCS;
-import tudresden.ocl20.pivot.pivotmodel.Operation;
 
 public class RemoveDeprecatedNullCheckPostProcessor extends AbstractRefactoringPostProcessor {
 

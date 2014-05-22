@@ -23,6 +23,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.dresdenocl.language.ocl.ClassifierContextDeclarationCS;
+import org.dresdenocl.language.ocl.DefinitionExpOperationCS;
+import org.dresdenocl.language.ocl.DefinitionExpPropertyCS;
+import org.dresdenocl.language.ocl.InvariantExpCS;
+import org.dresdenocl.language.ocl.LetExpCS;
+import org.dresdenocl.language.ocl.NamedElementCS;
+import org.dresdenocl.language.ocl.PrePostOrBodyDeclarationCS;
+import org.dresdenocl.language.ocl.TupleLiteralExpCS;
+import org.dresdenocl.language.ocl.TupleTypeCS;
+import org.dresdenocl.language.ocl.VariableDeclarationCS;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.BasicEList;
@@ -35,16 +45,6 @@ import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.ltk.IModelRefactoringWizardPage;
 import org.emftext.refactoring.registry.rolemapping.AbstractRefactoringPostProcessor;
 
-import tudresden.ocl20.pivot.language.ocl.ClassifierContextDeclarationCS;
-import tudresden.ocl20.pivot.language.ocl.DefinitionExpOperationCS;
-import tudresden.ocl20.pivot.language.ocl.DefinitionExpPropertyCS;
-import tudresden.ocl20.pivot.language.ocl.InvariantExpCS;
-import tudresden.ocl20.pivot.language.ocl.LetExpCS;
-import tudresden.ocl20.pivot.language.ocl.NamedLiteralExpCS;
-import tudresden.ocl20.pivot.language.ocl.PrePostOrBodyDeclarationCS;
-import tudresden.ocl20.pivot.language.ocl.TupleLiteralExpCS;
-import tudresden.ocl20.pivot.language.ocl.TupleTypeCS;
-import tudresden.ocl20.pivot.language.ocl.VariableDeclarationCS;
 
 /**
  * @author Michael Muck
@@ -141,8 +141,8 @@ public class RemoveUnusedVariableDeclarationsPP extends AbstractRefactoringPostP
 			int usesFound = 0;
 			while (checkIt.hasNext()) {
 				EObject checkObj = checkIt.next();
-				if (checkObj instanceof NamedLiteralExpCS) {
-					if (((NamedLiteralExpCS)checkObj).getNamedElement().getName().equals(checkName)) {
+				if (checkObj instanceof NamedElementCS) {
+					if (((NamedElementCS)checkObj).getNamedElement().getName().equals(checkName)) {
 						usesFound++;
 					}
 				}

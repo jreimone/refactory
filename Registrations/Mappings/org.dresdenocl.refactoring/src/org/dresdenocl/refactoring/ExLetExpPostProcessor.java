@@ -23,42 +23,34 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.dresdenocl.language.ocl.BodyDeclarationCS;
+import org.dresdenocl.language.ocl.ContextDeclarationCS;
+import org.dresdenocl.language.ocl.ImplicitFeatureCallCS;
+import org.dresdenocl.language.ocl.InvariantExpCS;
+import org.dresdenocl.language.ocl.LetExpCS;
+import org.dresdenocl.language.ocl.NavigationCallExp;
+import org.dresdenocl.language.ocl.OclExpressionCS;
+import org.dresdenocl.language.ocl.OclFactory;
+import org.dresdenocl.language.ocl.OperationCallBaseExpCS;
+import org.dresdenocl.language.ocl.PackageDeclarationCS;
+import org.dresdenocl.language.ocl.PrePostOrBodyDeclarationCS;
+import org.dresdenocl.language.ocl.PropertyCallBaseExpCS;
+import org.dresdenocl.language.ocl.SimpleNameCS;
+import org.dresdenocl.language.ocl.VariableDeclarationWithInitCS;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.change.ChangeDescription;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.ltk.IModelRefactoringWizardPage;
 import org.emftext.refactoring.registry.rolemapping.AbstractRefactoringPostProcessor;
 import org.emftext.refactoring.util.RoleUtil;
-
-import tudresden.ocl20.pivot.datatypes.DatatypesFactory;
-import tudresden.ocl20.pivot.language.ocl.BodyDeclarationCS;
-import tudresden.ocl20.pivot.language.ocl.ContextDeclarationCS;
-import tudresden.ocl20.pivot.language.ocl.ImplicitFeatureCallCS;
-import tudresden.ocl20.pivot.language.ocl.IntegerLiteralExpCS;
-import tudresden.ocl20.pivot.language.ocl.InvariantExpCS;
-import tudresden.ocl20.pivot.language.ocl.LetExpCS;
-import tudresden.ocl20.pivot.language.ocl.NamedLiteralExpCS;
-import tudresden.ocl20.pivot.language.ocl.NavigationCallExp;
-import tudresden.ocl20.pivot.language.ocl.OclExpressionCS;
-import tudresden.ocl20.pivot.language.ocl.OclFactory;
-import tudresden.ocl20.pivot.language.ocl.OperationCallBaseExpCS;
-import tudresden.ocl20.pivot.language.ocl.PackageDeclarationCS;
-import tudresden.ocl20.pivot.language.ocl.PrePostOrBodyDeclarationCS;
-import tudresden.ocl20.pivot.language.ocl.PropertyCallBaseExpCS;
-import tudresden.ocl20.pivot.language.ocl.SimpleNameCS;
-import tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitCS;
-import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
-import tudresden.ocl20.pivot.pivotmodel.Property;
 
 /**
  * @author Michael Muck

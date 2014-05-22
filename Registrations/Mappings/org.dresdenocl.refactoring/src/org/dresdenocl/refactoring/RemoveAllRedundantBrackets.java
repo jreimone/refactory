@@ -19,6 +19,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.dresdenocl.language.ocl.BracketExpCS;
+import org.dresdenocl.language.ocl.ContextDeclarationCS;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -30,8 +32,6 @@ import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.ltk.IModelRefactoringWizardPage;
 import org.emftext.refactoring.registry.rolemapping.AbstractRefactoringPostProcessor;
 
-import tudresden.ocl20.pivot.language.ocl.BracketExpCS;
-import tudresden.ocl20.pivot.language.ocl.ContextDeclarationCS;
 
 /**
  * @author Michael Muck
