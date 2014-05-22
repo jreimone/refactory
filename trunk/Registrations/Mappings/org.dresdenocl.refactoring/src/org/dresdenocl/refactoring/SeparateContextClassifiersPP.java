@@ -22,6 +22,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.dresdenocl.datatypes.impl.DatatypesFactoryImpl;
+import org.dresdenocl.language.ocl.ClassifierContextDeclarationCS;
+import org.dresdenocl.language.ocl.InvariantOrDefinitionCS;
+import org.dresdenocl.language.ocl.PackageDeclarationCS;
+import org.dresdenocl.language.ocl.impl.OclFactoryImpl;
+import org.dresdenocl.pivotmodel.impl.PivotModelFactoryImpl;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.EList;
@@ -33,13 +39,6 @@ import org.emftext.language.refactoring.refactoring_specification.RefactoringSpe
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.ltk.IModelRefactoringWizardPage;
 import org.emftext.refactoring.registry.rolemapping.AbstractRefactoringPostProcessor;
-
-import tudresden.ocl20.pivot.datatypes.impl.DatatypesFactoryImpl;
-import tudresden.ocl20.pivot.language.ocl.ClassifierContextDeclarationCS;
-import tudresden.ocl20.pivot.language.ocl.InvariantOrDefinitionCS;
-import tudresden.ocl20.pivot.language.ocl.PackageDeclarationCS;
-import tudresden.ocl20.pivot.language.ocl.impl.OclFactoryImpl;
-import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelFactoryImpl;
 
 /**
  * @author Michael Muck

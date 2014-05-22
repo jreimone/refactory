@@ -22,6 +22,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.dresdenocl.language.ocl.IteratorExpCS;
+import org.dresdenocl.language.ocl.LetExpCS;
+import org.dresdenocl.language.ocl.NamedElementCS;
+import org.dresdenocl.language.ocl.OclExpressionCS;
+import org.dresdenocl.language.ocl.PackageDeclarationCS;
+import org.dresdenocl.language.ocl.SimpleNameCS;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.BasicEList;
@@ -33,20 +39,14 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.ltk.IModelRefactoringWizardPage;
-import org.emftext.refactoring.registry.rolemapping.IRefactoringPostProcessor;
+import org.emftext.refactoring.registry.rolemapping.AbstractRefactoringPostProcessor;
 import org.emftext.refactoring.util.RoleUtil;
 
-import tudresden.ocl20.pivot.language.ocl.IteratorExpCS;
-import tudresden.ocl20.pivot.language.ocl.LetExpCS;
-import tudresden.ocl20.pivot.language.ocl.NamedLiteralExpCS;
-import tudresden.ocl20.pivot.language.ocl.OclExpressionCS;
-import tudresden.ocl20.pivot.language.ocl.PackageDeclarationCS;
-import tudresden.ocl20.pivot.language.ocl.SimpleNameCS;
 /**
  * @author Michael Muck
  *
  */
-public class OCLPostProcessor implements IRefactoringPostProcessor {
+public class OCLPostProcessor extends AbstractRefactoringPostProcessor {
 	
 	
 	String origName;
@@ -108,9 +108,9 @@ public class OCLPostProcessor implements IRefactoringPostProcessor {
 		Iterator<EObject> it = parent.eAllContents();
 		while (it.hasNext()) {
 			EObject akt = it.next();
-			if (akt instanceof NamedLiteralExpCS && ((NamedLiteralExpCS)akt).getNamedElement().getName().equals(origName)) {
+			if (akt instanceof NamedElementCS && ((NamedElementCS)akt).getNamedElement().getName().equals(origName)) {
 				//we found a variable reference with the original name
-				((NamedLiteralExpCS)akt).getNamedElement().setName(newName);
+				((NamedElementCS)akt).getNamedElement().setName(newName);
 			}
 		}
 		return true;
@@ -143,10 +143,10 @@ public class OCLPostProcessor implements IRefactoringPostProcessor {
 		
 		while (scopeIt.hasNext()) {
 			EObject akt = scopeIt.next();
-			if (akt instanceof NamedLiteralExpCS && ((NamedLiteralExpCS)akt).getNamedElement().getName().equals(origName)) {
+			if (akt instanceof NamedElementCS && ((NamedElementCS)akt).getNamedElement().getName().equals(origName)) {
 				//we found a variable reference with the original name
 				System.out.println("	- found variable to rename");
-				NamedLiteralExpCS aktRef = (NamedLiteralExpCS) akt;
+				NamedElementCS aktRef = (NamedElementCS) akt;
 				//check if it can be renamed or if it is an iterator variable that does not reference the variable to rename
 				Boolean renamingOK = true;
 				if (hasOverlapping) {
@@ -184,7 +184,7 @@ public class OCLPostProcessor implements IRefactoringPostProcessor {
 
 	//checks if the given variable is contained in one of the iterators or not
 	//if it is not, it is a reference to the variable to rename and renaming would be true
-	private Boolean referencesSelection(NamedLiteralExpCS aktRef, EList<IteratorExpCS> overlappingIterators) {
+	private Boolean referencesSelection(NamedElementCS aktRef, EList<IteratorExpCS> overlappingIterators) {
 		
 		for (int i = 0; i < overlappingIterators.size(); i++) {
 			Iterator<EObject> it = overlappingIterators.get(i).eAllContents();

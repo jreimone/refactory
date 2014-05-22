@@ -18,10 +18,21 @@ package org.dresdenocl.refactoring;
 import java.util.List;
 import java.util.Map;
 
+import org.dresdenocl.language.ocl.BracketExpCS;
+import org.dresdenocl.language.ocl.IteratorExpCS;
+import org.dresdenocl.language.ocl.LetExpCS;
+import org.dresdenocl.language.ocl.LogicalAndOperationCallExpCS;
+import org.dresdenocl.language.ocl.LogicalImpliesOperationCallExpCS;
+import org.dresdenocl.language.ocl.LogicalNotOperationCallExpCS;
+import org.dresdenocl.language.ocl.LogicalOrOperationCallExpCS;
+import org.dresdenocl.language.ocl.LogicalXorOperationCallExpCS;
+import org.dresdenocl.language.ocl.NamedElementCS;
+import org.dresdenocl.language.ocl.OclExpressionCS;
+import org.dresdenocl.language.ocl.OclFactory;
+import org.dresdenocl.language.ocl.PackageDeclarationCS;
+import org.dresdenocl.language.ocl.VariableDeclarationWithInitCS;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.emf.common.util.BasicEList;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -34,27 +45,13 @@ import org.emftext.refactoring.ltk.IModelRefactoringWizardPage;
 import org.emftext.refactoring.registry.rolemapping.AbstractRefactoringPostProcessor;
 import org.emftext.refactoring.util.RoleUtil;
 
-import tudresden.ocl20.pivot.language.ocl.BracketExpCS;
-import tudresden.ocl20.pivot.language.ocl.IteratorExpCS;
-import tudresden.ocl20.pivot.language.ocl.LetExpCS;
-import tudresden.ocl20.pivot.language.ocl.LogicalAndOperationCallExpCS;
-import tudresden.ocl20.pivot.language.ocl.LogicalImpliesOperationCallExpCS;
-import tudresden.ocl20.pivot.language.ocl.LogicalNotOperationCallExpCS;
-import tudresden.ocl20.pivot.language.ocl.LogicalOrOperationCallExpCS;
-import tudresden.ocl20.pivot.language.ocl.LogicalXorOperationCallExpCS;
-import tudresden.ocl20.pivot.language.ocl.NamedLiteralExpCS;
-import tudresden.ocl20.pivot.language.ocl.OclExpressionCS;
-import tudresden.ocl20.pivot.language.ocl.OclFactory;
-import tudresden.ocl20.pivot.language.ocl.PackageDeclarationCS;
-import tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitCS;
-
 public class InlineVariablePP extends AbstractRefactoringPostProcessor {
 	
 	private EObject constraintRoot;
 	
 	
 	private VariableDeclarationWithInitCS selectedDeclaration;
-	private NamedLiteralExpCS selectedReference;
+	private NamedElementCS selectedReference;
 	private LetExpCS letExpression;
 	private String variableName;
 	
@@ -73,7 +70,7 @@ public class InlineVariablePP extends AbstractRefactoringPostProcessor {
 			return Status.OK_STATUS;
 		}
 		selectedDeclaration = RoleUtil.getFirstObjectForRole("Selection", VariableDeclarationWithInitCS.class, roleRuntimeInstanceMap);
-		selectedReference = RoleUtil.getFirstObjectForRole("Selection", NamedLiteralExpCS.class, roleRuntimeInstanceMap);
+		selectedReference = RoleUtil.getFirstObjectForRole("Selection", NamedElementCS.class, roleRuntimeInstanceMap);
 		
 		IStatus refactoringStatus = Status.CANCEL_STATUS;
 		
@@ -160,8 +157,8 @@ public class InlineVariablePP extends AbstractRefactoringPostProcessor {
 		TreeIterator<EObject> iterator = letExpression.getOclExpression().eAllContents();
 		while (iterator.hasNext()) {
 			EObject akt = iterator.next();
-			if (akt instanceof NamedLiteralExpCS) {
-				NamedLiteralExpCS aktLit = (NamedLiteralExpCS) akt;
+			if (akt instanceof NamedElementCS) {
+				NamedElementCS aktLit = (NamedElementCS) akt;
 				if (aktLit.getNamedElement().getName().equals(variableName)) {
 					inlineReference(declaration, aktLit);
 				}
@@ -183,7 +180,7 @@ public class InlineVariablePP extends AbstractRefactoringPostProcessor {
 	}
 	
 	
-	private IStatus inlineReference(OclExpressionCS inlineExpression, NamedLiteralExpCS replacee) {
+	private IStatus inlineReference(OclExpressionCS inlineExpression, NamedElementCS replacee) {
 		IStatus status = Status.CANCEL_STATUS;
 		//here we are at a place, where the variable should be integrated
 		EObject container = replacee.eContainer();

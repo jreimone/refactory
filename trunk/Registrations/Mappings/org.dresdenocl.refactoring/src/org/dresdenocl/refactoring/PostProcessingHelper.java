@@ -20,21 +20,20 @@ package org.dresdenocl.refactoring;
 
 import java.util.List;
 
+import org.dresdenocl.language.ocl.ImplicitFeatureCallCS;
+import org.dresdenocl.language.ocl.InvariantExpCS;
+import org.dresdenocl.language.ocl.NamedElementCS;
+import org.dresdenocl.language.ocl.NavigationCallExp;
+import org.dresdenocl.language.ocl.OclExpressionCS;
+import org.dresdenocl.language.ocl.OclFactory;
+import org.dresdenocl.language.ocl.PrePostOrBodyDeclarationCS;
+import org.dresdenocl.language.ocl.SimpleNameCS;
+import org.dresdenocl.pivotmodel.PivotModelFactory;
+import org.dresdenocl.pivotmodel.Property;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-
-import tudresden.ocl20.pivot.language.ocl.ImplicitFeatureCallCS;
-import tudresden.ocl20.pivot.language.ocl.InvariantExpCS;
-import tudresden.ocl20.pivot.language.ocl.NamedLiteralExpCS;
-import tudresden.ocl20.pivot.language.ocl.NavigationCallExp;
-import tudresden.ocl20.pivot.language.ocl.OclExpressionCS;
-import tudresden.ocl20.pivot.language.ocl.OclFactory;
-import tudresden.ocl20.pivot.language.ocl.PrePostOrBodyDeclarationCS;
-import tudresden.ocl20.pivot.language.ocl.SimpleNameCS;
-import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
-import tudresden.ocl20.pivot.pivotmodel.Property;
 
 /**
  * @author Michael Muck
@@ -143,7 +142,7 @@ public class PostProcessingHelper {
 			if(context != null && context instanceof NavigationCallExp && replacee instanceof NavigationCallExp){
 				NavigationCallExp contextNC = (NavigationCallExp) context;
 				NavigationCallExp replaceeNC = (NavigationCallExp) replacee;
-				NamedLiteralExpCS newNamedLiteral = createNewNamedLiteral((SimpleNameCS) replacement);
+				NamedElementCS newNamedLiteral = createNewNamedLiteral((SimpleNameCS) replacement);
 				OclExpressionCS replaceSource = replaceeNC.getSource();
 				OclExpressionCS contextSource = contextNC.getSource();
 				int lastIndex = -1;
@@ -166,7 +165,7 @@ public class PostProcessingHelper {
 					}
 				}
 			} else {
-				NamedLiteralExpCS newNamedLiteral = createNewNamedLiteral((SimpleNameCS) replacement);			
+				NamedElementCS newNamedLiteral = createNewNamedLiteral((SimpleNameCS) replacement);			
 
 				EObject replaceeParent = replacee.eContainer();
 				EReference containmentFeature = replacee.eContainmentFeature();
@@ -182,8 +181,8 @@ public class PostProcessingHelper {
 	 * @param original
 	 * @return
 	 */
-	public static NamedLiteralExpCS createNewNamedLiteral(SimpleNameCS original) {
-		NamedLiteralExpCS newNamedLiteral = OclFactory.eINSTANCE.createNamedLiteralExpCS();
+	public static NamedElementCS createNewNamedLiteral(SimpleNameCS original) {
+		NamedElementCS newNamedLiteral = OclFactory.eINSTANCE.createNamedElementCS();
 		Property tempProperty = PivotModelFactory.eINSTANCE.createProperty();
 		tempProperty.setName(original.getSimpleName());
 		newNamedLiteral.setNamedElement(tempProperty);
