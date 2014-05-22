@@ -4,7 +4,7 @@ IMPORTS <http://www.tu-dresden.de/ocl20/pivot/2007/pivotmodel> <http://www.tu-dr
 
 "Extract Variable" maps <SelectXWithVar> {
 	Selection := OclExpressionCS;
-	Nameable := SimpleNameCS( name -> simpleName);
+	Nameable := PathNameCS( name -> simpleName);
 }
 
 
@@ -20,5 +20,5 @@ IMPORTS <http://www.tu-dresden.de/ocl20/pivot/2007/pivotmodel> <http://www.tu-dr
 }
 
 "Inline Variable Here" maps <SelectX> {
-	Selection := NamedLiteralExpCS;
+	Selection := NamedElementCS;
 }
