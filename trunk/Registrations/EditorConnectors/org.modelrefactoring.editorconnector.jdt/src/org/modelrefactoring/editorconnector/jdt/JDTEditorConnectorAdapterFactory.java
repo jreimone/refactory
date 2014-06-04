@@ -8,6 +8,7 @@ import java.util.Map;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IAdapterFactory;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jdt.internal.ui.javaeditor.CompilationUnitEditor;
@@ -37,8 +38,11 @@ public class JDTEditorConnectorAdapterFactory implements IAdapterFactory {
 					URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
 					ResourceSet rs = new ResourceSetImpl();
 					IJavaTextResource resource = (IJavaTextResource) rs.getResource(uri, true);
-					editorConnector = new JDTEditorConnector(textEditor, resource);
-					fileEditorConnectorMap.put(file, editorConnector);
+					EObject model = resource.getContents().get(0);
+					if(model instanceof CompilationUnit){
+						editorConnector = new JDTEditorConnector(textEditor, resource);
+						fileEditorConnectorMap.put(file, editorConnector);
+					}
 				} else {
 					IJavaTextResource resource = (IJavaTextResource) editorConnector.getModel().eResource();
 					resource.unload();
@@ -50,7 +54,7 @@ public class JDTEditorConnectorAdapterFactory implements IAdapterFactory {
 					CompilationUnit compilationUnit = (CompilationUnit) resource.getContents().get(0);
 					editorConnector.setModel(compilationUnit);
 				}
-				if(!editorConnector.getEditor().equals(textEditor)){
+				if(editorConnector != null && !editorConnector.getEditor().equals(textEditor)){
 					editorConnector.setEditor(textEditor);
 				}
 				return editorConnector;
