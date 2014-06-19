@@ -1,84 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<plugin>
-
-   <extension
-         point="org.emftext.refactoring.smell.registry.ui.calculation">
-      <structureCalculation
-            smellMessage="A WakeLock should be acquired with a timeout."
-            description="Transforms acquire statement to use timeout."
-            patternResource="queries/org/emftext/refactoring/languages/java/smell/android/durableWakeLock.eiq"
-            patternName="durableWakeLock">
-      </structureCalculation>
-      <structureCalculation
-            smellMessage="Override Implement the onLowMemory() method"
-            description="Lets the activity class override onLowMemory() method."
-            patternResource="queries/org/emftext/refactoring/languages/java/smell/android/noMemoryResolver.eiq"
-            patternName="noMemoryResolver">
-      </structureCalculation>
-      <structureCalculation
-            smellMessage="Background services and broadcast recievers should not call interrupting tasks."
-            description="Removes the toast statement from background task"
-            patternResource="queries/org/emftext/refactoring/languages/java/smell/android/interruptingFromBackground.eiq"
-            patternName="interruptingFromBackground">
-      </structureCalculation>
-      <structureCalculation
-            smellMessage="The inexact alarm manager should be used if exact execution is not needed."
-            description="Replaces the exact AlarmManager with an inexact"
-            patternResource="queries/org/emftext/refactoring/languages/java/smell/android/rigidAlarmManager.eiq"
-            patternName="rigidAlarmManager">
-      </structureCalculation>
-      <structureCalculation
-            smellMessage="The IMEI should not be used for security reasons."
-            description="Uses a unique generated id for tracking the hardware id."
-            patternResource="queries/org/emftext/refactoring/languages/java/smell/android/trackingHardwareId.eiq"
-            patternName="trackingHardwareId">
-      </structureCalculation>
-   </extension>
-   <extension
-         point="org.emftext.refactoring.rolemapping">
-      <rolemapping
-            rolemapping_resource="rolemappings/AquireWakeLockWithTimeout.rolemapping">
-      </rolemapping>
-      <rolemapping
-            rolemapping_resource="rolemappings/OverrideOnLowMemory.rolemapping">
-      </rolemapping>
-      <rolemapping
-            rolemapping_resource="rolemappings/RemoveToastFromBackground.rolemapping">
-      </rolemapping>
-      <rolemapping
-            rolemapping_resource="rolemappings/UseInexactAlarmManager.rolemapping">
-      </rolemapping>
-      <rolemapping
-            rolemapping_resource="rolemappings/UseUniqueGeneratedId.rolemapping">
-      </rolemapping>
-   </extension>
-   <extension
-         point="org.emftext.refactoring.postprocessor">
-      <postprocessor
-            mapping_name="Transform acquire statement to use timeout"
-            postprocessor="org.emftext.refactoring.languages.java.smell.android.refactorings.AcquireWakeLockWithTimeout"
-            nsUri="http://www.emftext.org/java">
-      </postprocessor>
-      <postprocessor
-            mapping_name="Let activity class override onLowMemory() method"
-            postprocessor="org.emftext.refactoring.languages.java.smell.android.refactorings.OverrideOnLowMemoryResolver"
-            nsUri="http://www.emftext.org/java">
-      </postprocessor>
-      <postprocessor
-            postprocessor="org.emftext.refactoring.languages.java.smell.android.refactorings.RemoveInterrupFromBackground"
-            mapping_name="Remove toast statement from background task"
-            nsUri="http://www.emftext.org/java">
-      </postprocessor>
-      <postprocessor
-            mapping_name="Replace exact with inexact AlarmManager"
-            postprocessor="org.emftext.refactoring.languages.java.smell.android.refactorings.SetInexactAlarmManager"
-            nsUri="http://www.emftext.org/java">
-      </postprocessor>
-      <postprocessor
-            mapping_name="Use unique generated id for tracking hardware id"
-            postprocessor="org.emftext.refactoring.languages.java.smell.android.refactorings.UseUUID"
-            nsUri="http://www.emftext.org/java">
-      </postprocessor>
-   </extension>
-
+<?xml version="1.0" encoding="UTF-8"?><plugin>
+  <extension point="org.emftext.refactoring.smell.registry.ui.calculation">
+    <structureCalculation description="Transforms acquire statement to use timeout." patternName="durableWakeLock" patternResource="queries/org/emftext/refactoring/languages/java/smell/android/durableWakeLock.eiq" smellMessage="A WakeLock should be acquired with a timeout."/>
+    <structureCalculation description="Lets the activity class override onLowMemory() method." patternName="noMemoryResolver" patternResource="queries/org/emftext/refactoring/languages/java/smell/android/noMemoryResolver.eiq" smellMessage="Override Implement the onLowMemory() method"/>
+    <structureCalculation description="Removes the toast statement from background task" patternName="interruptingFromBackground" patternResource="queries/org/emftext/refactoring/languages/java/smell/android/interruptingFromBackground.eiq" smellMessage="Background services and broadcast recievers should not call interrupting tasks."/>
+    <structureCalculation description="Replaces the exact AlarmManager with an inexact" patternName="rigidAlarmManager" patternResource="queries/org/emftext/refactoring/languages/java/smell/android/rigidAlarmManager.eiq" smellMessage="The inexact alarm manager should be used if exact execution is not needed."/>
+    <structureCalculation description="Uses a unique generated id for tracking the hardware id." patternName="trackingHardwareId" patternResource="queries/org/emftext/refactoring/languages/java/smell/android/trackingHardwareId.eiq" smellMessage="The IMEI should not be used for security reasons."/>
+  </extension>
+  <extension point="org.emftext.refactoring.rolemapping">
+    <rolemapping rolemapping_resource="rolemappings/AquireWakeLockWithTimeout.rolemapping"/>
+    <rolemapping rolemapping_resource="rolemappings/OverrideOnLowMemory.rolemapping"/>
+    <rolemapping rolemapping_resource="rolemappings/RemoveToastFromBackground.rolemapping"/>
+    <rolemapping rolemapping_resource="rolemappings/UseInexactAlarmManager.rolemapping"/>
+    <rolemapping rolemapping_resource="rolemappings/UseUniqueGeneratedId.rolemapping"/>
+  </extension>
+  <extension point="org.emftext.refactoring.postprocessor">
+    <postprocessor mapping_name="Transform acquire statement to use timeout" nsUri="http://www.emftext.org/java" postprocessor="org.emftext.refactoring.languages.java.smell.android.refactorings.AcquireWakeLockWithTimeout"/>
+    <postprocessor mapping_name="Let activity class override onLowMemory() method" nsUri="http://www.emftext.org/java" postprocessor="org.emftext.refactoring.languages.java.smell.android.refactorings.OverrideOnLowMemoryResolver"/>
+    <postprocessor mapping_name="Remove toast statement from background task" nsUri="http://www.emftext.org/java" postprocessor="org.emftext.refactoring.languages.java.smell.android.refactorings.RemoveInterrupFromBackground"/>
+    <postprocessor mapping_name="Replace exact with inexact AlarmManager" nsUri="http://www.emftext.org/java" postprocessor="org.emftext.refactoring.languages.java.smell.android.refactorings.SetInexactAlarmManager"/>
+    <postprocessor mapping_name="Use unique generated id for tracking hardware id" nsUri="http://www.emftext.org/java" postprocessor="org.emftext.refactoring.languages.java.smell.android.refactorings.UseUUID"/>
+  </extension>
 </plugin>
