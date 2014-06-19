@@ -1,0 +1,12 @@
+CONFERENCE "InternationalConference" ("Jon Doe")
+
+TRACK "A" :
+	AT 09:00 : TALK "TalkA" PRESENTED BY "Jon Doe"
+
+AT 12:30 LUNCH 
+
+TRACK "B" :
+	AT 14:00 : TALK "TalkB" PRESENTED BY "Jon Doe"
+
+REGISTERED SPEAKERS : 
+	"Jon Doe" FROM Country

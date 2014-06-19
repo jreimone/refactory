@@ -1,0 +1,3 @@
+Selected element := Class::Person
+
+Position to move: after ObjectProperty::hasAddress

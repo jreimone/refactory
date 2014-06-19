@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project default="run-tests-org.emftext.refactoring.rolemodelmatching.test" name="Rolemodel Matching Test">
+
+<target name="run-tests-org.emftext.refactoring.rolemodelmatching.test">
+	<property environment="env" />
+	<property test_result_dir="${dropsboxBuildDir}/${dropsboxTestResultsDir}" />
+	<property file="${dropsboxBuildDir}/org.dropsbox/local.build.properties" />
+	
+	<delete file="${dropsboxBuildDir}/test-classpath-rolemodelmatching.jar" />
+	<mkdir dir="${test_result_dir}/results-org.emftext.refactoring.rolemodelmatching.test" />
+	<path id="test-classpath-org.emftext.refactoring.rolemodelmatching.test">
+		<pathelement path="${dropsboxBuildDir}/org.emftext.refactoring.rolemodelmatching.test/bin"/>
+		<pathelement path="${dropsboxBuildDir}/org.emftext.language.refactoring.roles/bin"/>
+		<pathelement path="${dropsboxBuildDir}/org.emftext.language.refactoring.roles.resource.rolestext/bin"/>
+		<pathelement path="${dropsboxBuildDir}/org.emftext.language.ecore.resource.text/bin"/>
+		<pathelement path="${dropsboxBuildDir}/org.emftext.sdk.concretesyntax/bin"/>
+		<pathelement path="${dropsboxBuildDir}/org.emftext.commons.antlr3_4_0/bin"/>
+		<pathelement path="${dropsboxBuildDir}/org.emftext.access/bin"/>
+		<pathelement path="${dropsboxBuildDir}/org.emftext.refactoring.registry.rolemodel/bin"/>
+		<pathelement path="${dropsboxBuildDir}/org.emftext.refactoring.util/bin"/>
+		<pathelement path="${dropsboxBuildDir}/org.emftext.language.refactoring.rolemapping/bin"/>
+		<pathelement path="${dropsboxBuildDir}/org.emftext.language.refactoring.specification/bin"/>
+		<pathelement path="${dropsboxBuildDir}/org.emftext.language.ecore.resource/bin"/>
+		
+		<fileset dir="${eclipse.home}/">
+			<include name="plugins/**/*.jar" />
+			<!-- we must exclude ANT because it conflicts with the running ANT version-->
+			<exclude name="plugins/org.apache.ant*/**/*.jar" />
+		</fileset>
+	</path>
+	
+	<manifestclasspath property="prop-test-classpath-org.emftext.refactoring.rolemodelmatching.test" jarfile="${dropsboxBuildDir}/test-classpath-rolemodelmatching.jar" maxparentlevels="10">
+		<classpath refid="test-classpath-org.emftext.refactoring.rolemodelmatching.test" />
+	</manifestclasspath>
+	
+	<jar destfile="${dropsboxBuildDir}/test-classpath-rolemodelmatching.jar">
+		<manifest>
+			<attribute name="Class-Path" value="${prop-test-classpath-org.emftext.refactoring.rolemodelmatching.test}"/>
+		</manifest>
+	</jar>
+	
+	<mkdir dir="${test_result_dir}/results-org.emftext.refactoring.rolemodelmatching.test" />
+	<mkdir dir="${env.WORKSPACE}/results-org.emftext.refactoring.rolemodelmatching.test" />
+	<junit haltonfailure="false" haltonerror="false" fork="true" dir="org.emftext.refactoring.rolemodelmatching.test" maxmemory="2048m">
+		<jvmarg value="-ea" />
+		<classpath>
+			<path path="{dropsboxBuildDir}/test-classpath-rolemodelmatching.jar"/>
+		</classpath>
+		<formatter type="xml"/>
+		<batchtest todir="${test_result_dir}/results-org.emftext.refactoring.rolemodelmatching.test">
+			<fileset dir="{dropsboxBuildDir}/org.emftext.refactoring.rolemodelmatching.test/src">
+				<include name="**/**Test.java"/>
+			</fileset>
+		</batchtest>
+	</junit>
+	<junitreport todir="${test_result_dir}/results-org.emftext.refactoring.rolemodelmatching.test" tofile="SUITE-org.emftext.refactoring.rolemodelmatching.test.xml">
+		<fileset dir="${test_result_dir}/results-org.emftext.refactoring.rolemodelmatching.test">
+			<include name="TEST-*.xml"/>
+		</fileset>
+		<report format="frames" todir="${test_result_dir}/results-org.emftext.refactoring.rolemodelmatching.test"/>
+	</junitreport>
+	<copy todir="${env.WORKSPACE}/results-org.emftext.refactoring.rolemodelmatching.test">
+		<fileset dir="${test_result_dir}/results-org.emftext.refactoring.rolemodelmatching.test"/>
+	</copy>
+</target>
+
+</project>

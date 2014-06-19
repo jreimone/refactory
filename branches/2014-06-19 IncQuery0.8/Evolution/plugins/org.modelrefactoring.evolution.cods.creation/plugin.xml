@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+   <extension-point id="org.modelrefactoring.evolution.cods" name="Model Kinds" schema="schema/kinds.exsd"/>
+
+   <extension
+         id="id1"
+         point="org.eclipse.e4.workbench.model">
+      <processor
+            beforefragment="true"
+            class="org.modelrefactoring.evolution.cods.creation.MegamodelRegistrationProcessor">
+      </processor>
+   </extension>
+
+</plugin>

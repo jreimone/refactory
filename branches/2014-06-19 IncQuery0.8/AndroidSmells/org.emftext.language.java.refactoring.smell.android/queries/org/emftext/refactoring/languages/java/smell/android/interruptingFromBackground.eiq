@@ -1,0 +1,50 @@
+package org.emftext.refactoring.languages.java.smell.android
+
+import "http://www.emftext.org/java/commons"
+import "http://www.emftext.org/java/classifiers"
+import "http://www.emftext.org/java/members"
+import "http://www.emftext.org/java/parameters"
+import "http://www.emftext.org/java/types"
+import "http://www.emftext.org/java/references"
+import "http://www.emftext.org/java/variables"
+import "http://www.emftext.org/java/statements"
+
+
+pattern interruptingFromBackground(expression:ExpressionStatement){
+	Class.^extends(actualClass, superClassRef);
+	NamespaceClassifierReference.classifierReferences(superClassRef, classifierReference);
+	ClassifierReference.target(classifierReference, superClass);
+	find isServiceOrBroadcastReciever(superClass);
+	
+	find startsActivityOrToast(expression);
+	Class.members(actualClass, method);
+	find parentContainsSomething+(method, expression);
+}
+
+private pattern startsActivityOrToast(expression) {
+	ExpressionStatement.expression(expression, startToastMethod);
+	IdentifierReference.target.name(startToastMethod, "Toast");
+	IdentifierReference.next(startToastMethod, toastExpression);
+	MethodCall.target.name(toastExpression, "makeText");
+	MethodCall.next(toastExpression, showToastExpression);
+	MethodCall.target.name(showToastExpression, "show");
+} or {
+	ExpressionStatement.expression(expression, startActivitiyMethod);
+	MethodCall.target.name(startActivitiyMethod, "startActivity");
+}
+
+private pattern isServiceOrBroadcastReciever(class) {
+	find isClassOf(class, "Service");
+} or {
+	find isClassOf(class, "BroadcastReciever");
+}
+
+private pattern isClassOf(class, className) {
+	Class.name(class, className);
+}
+
+private pattern parentContainsSomething(parent, child){
+	LocalVariableStatement.variable(parent, child);
+} or {
+	StatementListContainer.statements(parent, child);
+}

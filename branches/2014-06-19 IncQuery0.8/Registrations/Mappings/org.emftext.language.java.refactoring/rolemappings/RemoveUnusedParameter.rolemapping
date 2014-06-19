@@ -1,0 +1,10 @@
+ROLEMODELMAPPING FOR <http://www.emftext.org/java>
+
+"Remove Unused Parameters" maps <RemoveUnusedContainedX> { 
+	
+	RemoveeContainer := java.members.ClassMethod{
+		removees := parameters;
+	};
+	
+	Removee := java.parameters.Parameter; 
+}

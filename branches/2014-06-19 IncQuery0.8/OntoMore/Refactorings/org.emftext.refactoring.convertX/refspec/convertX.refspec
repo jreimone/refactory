@@ -1,0 +1,12 @@
+REFACTORING FOR <ConvertX> 
+
+STEPS {
+	object source := Source from filter(INPUT);
+	object container := Container as trace(INPUT);
+	
+	assign source.name for ValueStore.variable;	
+	remove source;
+	
+	create new target:Target in container;
+	assign ValueStore.variable for target.name; 	
+}

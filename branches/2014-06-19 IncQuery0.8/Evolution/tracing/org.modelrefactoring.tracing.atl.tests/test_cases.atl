@@ -1,0 +1,156 @@
+module vapodi_base_stub;
+create VAPODI_TRACE : VAPODI_TRACE_METAMODEL from alibi:alibi;
+
+rule test_ST () {
+	to
+		jim : Persons!Male (fullName <- 'jim'),
+		kasandra : Persons!Female  (fullName <- 'kasandra'),
+		julia : Persons!Female  (fullName <- 'julia')
+	do {
+		'kasandra'.println();
+		'above_was_expected_output_now_comes_actual_output'.println();
+		thisModule.CFS_push_model_variable(kasandra,#EXISTENCE,#LIGHT_UNIVERSE);
+		thisModule.ST_put_model_variable(jim); -- dep: jim <- kasandra
+		thisModule.ST_put_model_variable(julia); -- dep: jim <- julia; doesn't steal entry
+		thisModule.CFS_pop();
+		thisModule.CFS_push_deps_of_model_variable(jim);
+		thisModule.CFS_print(); -- should include kasandra and only her
+		thisModule.ST_drop_model_variable(jim);
+		thisModule.ST_drop_model_variable(julia);
+	}
+}
+
+rule test_ST_model_vars_put_drop_fail() {
+	to
+		jim : Persons!Male (fullName <- 'jim'),
+		kasandra : Persons!Female  (fullName <- 'kasandra'),
+		julia : Persons!Female  (fullName <- 'julia')
+	do {
+		'kasandra'.println();
+		'VAPODI RUNTIME ERROR'.println();
+		'An assertion failed with message:'.println();
+		'removed a variable 0 times from ST_model_variables which should have been there exactly once'.println();
+		'(runtime should likely be terminated, but ATL doesn\'t have respective facilities)'.println();
+		'above_was_expected_output_now_comes_actual_output'.println();
+		
+		thisModule.CFS_push_model_variable(kasandra,#EXISTENCE,#LIGHT_UNIVERSE);
+		thisModule.ST_put_model_variable(jim); -- dep: jim <- kasandra
+		thisModule.ST_put_model_variable(julia); -- dep: jim <- julia; doesn't steal entry
+		thisModule.CFS_pop();
+		thisModule.CFS_push_deps_of_model_variable(jim);
+		thisModule.CFS_print(); -- should include kasandra and only her
+		thisModule.ST_drop_model_variable(kasandra); -- but not on ST
+		
+	}
+}
+
+rule test_ST_model_attribute_variables () {
+	to
+		jim : Persons!Male (fullName <- 'jim'),
+		kasandra : Persons!Female  (fullName <- 'kasandra'),
+		julia : Persons!Female  (fullName <- 'julia')
+	do {
+		'-'.println();
+		'above_was_expected_output_now_comes_actual_output'.println();
+		thisModule.ST_put_model_attribute_variable(jim,'fullName');
+		
+	}
+}
+
+rule test_failing () {
+	do {
+		'lorem ipsum'.println();
+		'above_was_expected_output_now_comes_actual_output'.println();
+		'hakuna matata'.println();
+		
+	}
+}
+
+rule ST_model_var_put_drop() {
+	to
+		jim : Persons!Male (fullName <- 'Eric')
+	do {
+		'(empty)'.println();
+		'Eric'.println();
+		'(empty)'.println();
+		'above_was_expected_output_now_comes_actual_output'.println();
+		
+		thisModule.ST_model_variables_print();
+		thisModule.ST_put_model_variable(jim);
+		thisModule.ST_model_variables_print();
+		thisModule.ST_drop_model_variable(jim);
+		thisModule.ST_model_variables_print();
+		
+		
+	}
+}
+
+rule ST_prim_var_put_drop_cfs_empty() {
+	using {
+		jim : String = 'Jim';
+	}
+		do {
+		'(empty)'.println();
+		'Jim: (empty CFS)'.println();
+		'Jim: (no entries for this symbol)'.println();
+		'above_was_expected_output_now_comes_actual_output'.println();
+		
+		thisModule.ST_print_prim_variables();
+		thisModule.ST_put_prim_variable(jim);
+		thisModule.ST_print_prim_variables();
+		thisModule.ST_drop_prim_variable(jim);
+		thisModule.ST_print_prim_variables();
+		
+		
+	}
+}
+
+rule ST_prim_var_put_drop() {
+	using {
+		jim : String = 'Jim';
+	}
+	to
+		eric : Persons!Male (fullName <- 'Eric')
+	do {
+		'(empty)'.println();
+		'Jim: Eric'.println();
+		'Jim: (no entries for this symbol)'.println();
+		'above_was_expected_output_now_comes_actual_output'.println();
+		
+		thisModule.CFS_push_model_variable(eric,#EXISTENCE, #LIGHT_UNIVERSE);
+		
+		thisModule.ST_print_prim_variables();
+		thisModule.ST_put_prim_variable(jim);
+		thisModule.ST_print_prim_variables();
+		thisModule.ST_drop_prim_variable(jim);
+		thisModule.ST_print_prim_variables();
+		
+		
+	}
+}
+
+rule ST_prim_var_push() {
+	using {
+		jim : String = 'Jim';
+	}
+	to
+		eric : Persons!Male (fullName <- 'Eric')
+	do {
+		'Eric'.println();
+		'(empty)'.println();
+		'Eric'.println();
+		
+		'above_was_expected_output_now_comes_actual_output'.println();
+		
+		thisModule.CFS_push_model_variable(eric,#EXISTENCE, #LIGHT_UNIVERSE);
+		thisModule.CFS_print();
+		
+		thisModule.ST_put_prim_variable(jim);
+		
+		thisModule.CFS_pop();
+		thisModule.CFS_print();
+		
+		thisModule.ST_push_deps_of_prim_variable(jim);
+		thisModule.CFS_print();
+	}
+}

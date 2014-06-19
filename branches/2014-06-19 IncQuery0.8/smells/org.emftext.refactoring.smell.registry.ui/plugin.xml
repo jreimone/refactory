@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+<extension-point id="calculation" name="Smell Calculation" schema="schema/calculation.exsd"/>
+
+   <extension
+         id="id1"
+         point="org.eclipse.e4.workbench.model">
+      <fragment
+            uri="fragment.e4xmi">
+      </fragment>
+      <processor
+            beforefragment="true"
+            class="org.emftext.refactoring.smell.registry.ModelRegistration">
+      </processor>
+   </extension>
+   <extension
+         id="org.emftext.refactoring.smell.problem"
+         name="Quality Smell"
+         point="org.eclipse.core.resources.markers">
+      <persistent
+            value="true">
+      </persistent>
+      <super
+            type="org.eclipse.core.resources.problemmarker">
+      </super>
+     <!-- <super
+            type="org.eclipse.core.resources.problemmarker">
+      </super> -->
+      <super
+            type="org.eclipse.emf.ecore.diagnostic">
+      </super>
+      <attribute
+            name="roleMapping">
+      </attribute>
+   </extension>
+   <extension
+         point="org.eclipse.ui.ide.markerResolution">
+      <markerResolutionGenerator
+            class="org.emftext.refactoring.smell.registry.SmellResolutionQuickFixer"
+            markerType="org.emftext.refactoring.smell.problem">
+      </markerResolutionGenerator>
+   </extension>
+   <!-- <extension
+         point="org.eclipse.ui.ide.markerImageProviders">
+      <imageprovider
+            icon="icons/poop.png"
+            id="org.emftext.refactoring.smell.problem.imageprovider"
+            markertype="org.emftext.refactoring.smell.problem">
+      </imageprovider>
+   </extension>
+   -->
+   <extension
+         point="org.eclipse.ui.editors.annotationTypes">
+      <type
+            markerSeverity="1"
+            markerType="org.emftext.refactoring.smell.problem"
+            name="org.emftext.refactoring.smell.problem.annotation">
+      </type>
+   </extension>
+   <extension
+         point="org.eclipse.ui.editors.markerAnnotationSpecification">
+      <specification
+            annotationType="org.emftext.refactoring.smell.problem.annotation"
+            colorPreferenceKey="smell.occurrenceIndicationColor"
+            colorPreferenceValue="128,128,0"
+            contributesToHeader="true"
+            highlightPreferenceKey="smell.occurrenceHighlighting"
+            highlightPreferenceValue="true"
+            icon="icons/poop.png"
+            includeOnPreferencePage="true"
+            isGoToNextNavigationTarget="true"
+            isGoToNextNavigationTargetKey="smell.isOccurrenceGoToNextNavigationTarget"
+            isGoToPreviousNavigationTarget="true"
+            isGoToPreviousNavigationTargetKey="smell.isOccurrenceGoToPreviousNavigationTarget"
+            label="Quality Smells"
+            overviewRulerPreferenceKey="smell.occurrenceIndicationInOverviewRuler"
+            overviewRulerPreferenceValue="true"
+            presentationLayer="4"
+            showInNextPrevDropdownToolbarAction="true"
+            showInNextPrevDropdownToolbarActionKey="smell.showOccurrenceInNextPrevDropdownToolbarAction"
+            textPreferenceKey="smell.occurrenceIndication"
+            textPreferenceValue="true"
+            textStylePreferenceKey="smell.occurrenceTextStyle"
+            textStylePreferenceValue="SQUIGGLES"
+            verticalRulerPreferenceKey="smell.occurrenceIndicationInVerticalRuler"
+            verticalRulerPreferenceValue="true">
+	  </specification>
+   </extension>
+   <extension
+         point="org.eclipse.ui.ide.markerSupport">
+      <markerContentGenerator
+            id="org.emftext.refactoring.smell.problem.contentgenerator"
+            name="Quality Smell Marker Content Generator">
+         <markerTypeReference
+               id="org.emftext.refactoring.smell.problem">
+         </markerTypeReference>
+         <markerFieldReference
+               id="org.eclipse.ui.ide.resourceField">
+         </markerFieldReference>
+         <markerFieldReference
+               id="org.eclipse.ui.ide.severityAndDescriptionField">
+         </markerFieldReference>
+         <markerFieldReference
+               id="org.eclipse.ui.ide.pathField">
+         </markerFieldReference>
+      </markerContentGenerator>
+   </extension>
+
+</plugin>

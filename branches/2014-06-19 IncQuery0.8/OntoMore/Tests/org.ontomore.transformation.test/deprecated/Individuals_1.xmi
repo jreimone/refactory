@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="ASCII"?>
+<individuals:Person
+	xmi:version="2.0"
+	xmlns:xmi="http://www.omg.org/XMI"
+	xmlns:individuals="http://www.ontomore.org/test/transformation/individuals.owl"
+/>

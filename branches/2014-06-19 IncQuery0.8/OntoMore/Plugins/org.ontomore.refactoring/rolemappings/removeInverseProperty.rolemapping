@@ -1,0 +1,10 @@
+ROLEMODELMAPPING FOR <http://org.emftext/owl.ecore>
+
+"Remove Inverse Property" maps <RemoveContainedX> { 
+
+	  Container := ObjectProperty {
+		removees := inverseProperties:ObjectPropertyReference -> objectProperty;
+	};
+	
+	Removee := ObjectProperty;
+}

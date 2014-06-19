@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+	
+	<extension
+         point="org.emftext.refactoring.rolemapping">
+      <rolemapping
+            rolemapping_resource="rolemappings/introduceItemGroup.rolemapping">
+            <mappingIcon
+                  icon="icons/IntroduceItemGroup.gif"
+                  mapping_name="IntroduceItemGroup">
+            </mappingIcon>
+      </rolemapping>
+      <rolemapping
+            rolemapping_resource="rolemappings/renameOption.rolemapping">
+            <mappingIcon
+                  icon="icons/RenameOption.gif"
+                  mapping_name="RenameOption">
+            </mappingIcon>
+      </rolemapping>
+      <rolemapping
+            rolemapping_resource="rolemappings/moveXloosely.rolemapping">
+      </rolemapping>
+   </extension>
+</plugin>

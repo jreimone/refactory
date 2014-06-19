@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Prolog rules plugin for inverse references
+Bundle-SymbolicName: org.modelrefactoring.evolution.prolog.inversereferences;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.modelrefactoring.evolution.prolog.inversereferences.Activator
+Bundle-Vendor: modelrefactoring.org
+Require-Bundle: org.eclipse.core.runtime,
+ org.modelrefactoring.evolution.prolog.registry
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy

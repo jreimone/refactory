@@ -1,0 +1,16 @@
+ROLEMODELMAPPING FOR <http://www.emftext.org/language/pl0> 
+
+ExtractStatements maps <ExtractXwithReferenceClass> { 
+	OrigContainer := Body {
+		extracts := statements;	
+	}; 
+	Extract := Statement; 
+	NewContainer := ProcedureDeclaration (newName -> name) ; 
+	MovedReference := CallStatement {
+		containerRef := procedure;
+	}; 
+	ContainerContainer := Block {
+		source := body;
+	} ;
+
+}

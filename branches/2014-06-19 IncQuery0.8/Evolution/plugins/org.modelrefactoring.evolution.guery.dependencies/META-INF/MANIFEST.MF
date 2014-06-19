@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Inversereferences
+Bundle-SymbolicName: org.modelrefactoring.evolution.guery.dependencies;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.modelrefactoring.evolution.guery.inversereferences.Activator
+Require-Bundle: org.eclipse.core.runtime,
+ org.modelrefactoring.evolution.guery.registry
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

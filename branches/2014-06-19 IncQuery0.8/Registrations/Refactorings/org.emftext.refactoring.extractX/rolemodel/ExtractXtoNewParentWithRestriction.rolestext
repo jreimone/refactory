@@ -1,0 +1,17 @@
+RoleModel ExtractXtoNewParentWithRestriction{
+input ROLE Extractee;
+ROLE OrigContainer;
+ROLE NewContainer(newName);
+ROLE NewContainerParent;
+// this is the new role
+ROLE OrigContainerParent;
+ROLE ContainerContainer;
+transitive: OrigContainer [1..1] <>- Extractee extracts [0..*];
+transitive: NewContainer [1..1] <>- Extractee moved [0..*];
+transitive: NewContainerParent [1..1] <>- NewContainer child [0..*];
+transitive: ContainerContainer [1..1] <>- NewContainerParent targetParent [0..*];    
+transitive: OrigContainer [1..*] -- NewContainer reference [1..*];
+transitive: ContainerContainer [1..1] <>- OrigContainerParent sourceParent [0..*];
+transitive: OrigContainerParent [1..1] <>- OrigContainer source [0..*];                                                                       
+OrigContainerParent |-| NewContainerParent;
+}

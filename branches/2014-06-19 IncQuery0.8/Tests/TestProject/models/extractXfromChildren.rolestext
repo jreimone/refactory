@@ -1,0 +1,15 @@
+RoleModel ExtractXfromChildren{
+	input ROLE Extractee;
+ 	ROLE ContainerContainer;
+ 	ROLE OrigContainer;
+ 	ROLE NewContainer (input newName);
+
+
+transitive :
+
+ 	ContainerContainer  [1..1] <>- OrigContainer source [1..1];
+transitive :
+ 	ContainerContainer  [1..1] <>- NewContainer target [1..1];
+transitive :
+ 	OrigContainer  [1..1] <>- Extractee extracts [1..*];
+}

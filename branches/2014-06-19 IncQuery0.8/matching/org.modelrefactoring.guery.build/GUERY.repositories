@@ -1,0 +1,82 @@
+// BuildBoost extensions
+git:https://github.com/DevBoost/BuildBoost.git!Extensions/EMF/
+git:https://github.com/DevBoost/BuildBoost.git!Extensions/EMFText/
+git:https://github.com/DevBoost/TestUtils.git
+git:https://github.com/DevBoost/BuildBoost.git!Extensions/UpdateSite/
+git:https://github.com/DevBoost/BuildBoost.git!Extensions/JUnit/
+
+// Eclipse Platform
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.3-201306052000/eclipse-SDK-4.3-win32-x86_64.zip
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.3-201306052000/eclipse-platform-4.3-win32-x86_64.zip
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.3-201306052000/eclipse-4.3-delta-pack.zip
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.3-201306052000/org.eclipse.pde-4.3.zip
+
+// JUnit4 needed
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.2.2-201302041200/eclipse-SDK-4.2.2-win32-x86_64.zip!eclipse/plugins/org.junit4_4.8.1.v20120523-1257/META-INF/MANIFEST.MF
+
+// EMF
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/emf/downloads/drops/2.9.0/R201306100406/emf-xsd-SDK-2.9.0.zip
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/emf/downloads/drops/2.9.0/R201306100406/emf-xsd-Examples-2.9.0.zip!eclipse/plugins/org.eclipse.emf.examples.library_2.5.0.v20130610-0406.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/emf/downloads/drops/2.9.0/R201306100406/emf-xsd-Examples-2.9.0.zip!eclipse/plugins/org.eclipse.emf.examples.library.editor_2.5.0.v20130610-0406.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/emf/downloads/drops/2.9.0/R201306100406/emf-xsd-Examples-2.9.0.zip!eclipse/plugins/org.eclipse.emf.examples.library.edit_2.5.0.v20130610-0406.jar
+
+// EMF Validation (core plugin and feature)
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/validation/downloads/drops/1.7.0/R201306111341/emf-validation-runtime-1.7.0.zip!eclipse/plugins/org.eclipse.emf.validation_1.7.0.201306111341.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/validation/downloads/drops/1.7.0/R201306111341/emf-validation-runtime-1.7.0.zip!eclipse/plugins/org.eclipse.emf.validation.ocl_1.4.0.201306111341.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/validation/downloads/drops/1.7.0/R201306111341/emf-validation-runtime-1.7.0.zip!eclipse/plugins/org.eclipse.emf.validation.ui_1.7.0.201306111341.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/validation/downloads/drops/1.7.0/R201306111341/emf-validation-runtime-1.7.0.zip!eclipse/plugins/org.eclipse.emf.validation.ui.ide_1.3.0.201306111341.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/validation/downloads/drops/1.7.0/R201306111341/emf-validation-runtime-1.7.0.zip!eclipse/features/org.eclipse.emf.validation_1.7.0.201306111341/feature.xml
+
+// needs MDT OCL
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/ocl/updates/releases/4.1.0/plugins/org.eclipse.ocl_3.3.0.v20130610-1317.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/ocl/updates/releases/4.1.0/plugins/org.eclipse.ocl.ecore_3.3.0.v20130520-1222.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/ocl/updates/releases/4.1.0/plugins/org.eclipse.ocl.common_1.1.0.v20130531-0544.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/ocl/updates/releases/4.1.0/plugins/lpg.runtime.java_2.0.17.v201004271640.jar
+
+//EMFText (required to generate languages)
+//git:https://github.com/DevBoost/BuildBoost.git!Extensions/EMFText/
+dynamicfile:http://www.emftext.org/update_trunk/org.emftext.deploy-complete.zip
+
+// Google Guava
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/com.google.guava_12.0.0.v201212092141.jar
+
+// ANTLR
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/org.antlr.runtime_3.2.0.v201101311130.jar
+
+// JDOM
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/org.jdom_1.1.1.v201101151400.jar
+
+// Apache
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/org.apache.commons.collections_3.2.0.v2013030210310.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/org.apache.log4j_1.2.15.v201012070815.jar
+//get:http://ftp-stud.hs-esslingen.de/pub/Mirrors/ftp.apache.org/dist//commons/configuration/binaries/commons-configuration-1.9-bin.zip!commons-configuration-1.9.jar
+//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20130517111416/repository/plugins/org.apache.commons.lang_2.6.0.v201205030909.jar
+
+// Refactory Dependencies
+svn:svn+ssh://hudson@svn-st.inf.tu-dresden.de/srv/svn/refactory/trunk/Plugins/org.emftext.language.refactoring.rolemapping
+svn:svn+ssh://hudson@svn-st.inf.tu-dresden.de/srv/svn/refactory/trunk/Plugins/org.emftext.language.refactoring.rolemapping.resource.rolemapping
+svn:svn+ssh://hudson@svn-st.inf.tu-dresden.de/srv/svn/refactory/trunk/Plugins/org.emftext.language.refactoring.roles.resource.rolestext
+svn:svn+ssh://hudson@svn-st.inf.tu-dresden.de/srv/svn/refactory/trunk/Plugins/org.emftext.language.refactoring.roles
+svn:svn+ssh://hudson@svn-st.inf.tu-dresden.de/srv/svn/refactory/trunk/Plugins/org.emftext.refactoring.registry.rolemodel
+svn:svn+ssh://hudson@svn-st.inf.tu-dresden.de/srv/svn/refactory/trunk/Plugins/org.emftext.refactoring.registry.rolemapping
+svn:svn+ssh://hudson@svn-st.inf.tu-dresden.de/srv/svn/refactory/trunk/Plugins/org.emftext.refactoring.util
+svn:svn+ssh://hudson@svn-st.inf.tu-dresden.de/srv/svn/refactory/trunk/Plugins/org.emftext.language.refactoring.specification
+svn:svn+ssh://hudson@svn-st.inf.tu-dresden.de/srv/svn/refactory/trunk/Plugins/org.emftext.refactoring.registry.refactoringspecification
+
+// JaMoPP
+get:http://jamopp.org/update_trunk/org.jamopp.deploy-complete.zip
+
+// PL/0 for Mapping
+git:https://github.com/DevBoost/EMFText-Zoo.git!Inhabitants/PL0/
+
+// TimedAutomata for Mapping
+git:https://github.com/DevBoost/EMFText-Zoo.git!Inhabitants/TimedAutomata/
+
+// UML2
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/uml2/downloads/drops/4.1.1/R201309020826/mdt-uml2-runtime-4.1.1.zip
+
+// BPMN2
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/bpmn2/downloads/drops/0.7/S20111111/site.zip!site/plugins/org.eclipse.bpmn2_0.7.0.201111091619.jar
+
+// FeatureMapper
+// get:http://featuremapper.org/update/featuremapper-0.8.9.201210111140.zip

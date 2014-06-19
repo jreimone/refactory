@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/org.modelrefactoring.runtime_0.0.0.v0.jar" id="org.modelrefactoring.runtime" version="0.0.0.v0">
+      <category name="Refactory Core"/>
+   </feature>
+   <feature url="features/org.modelrefactoring.sdk_0.0.0.v0.jar" id="org.modelrefactoring.sdk" version="0.0.0.v0">
+      <category name="Refactory Core"/>
+   </feature>
+   <feature url="features/org.modelrefactoring.genericrefactorings_0.0.0.v0.jar" id="org.modelrefactoring.genericrefactorings" version="0.0.0.v0">
+      <category name="Refactory Core"/>
+   </feature>
+   <feature url="features/org.modelrefactoring.indexconnector.sokan_0.0.0.v0.jar" id="org.modelrefactoring.indexconnector.sokan" version="0.0.0.v0">
+      <category name="Refactory Core"/>
+   </feature>
+   <feature url="features/org.modelrefactoring.mappings.ecore_0.0.0.v0.jar" id="org.modelrefactoring.mappings.ecore" version="0.0.0.v0">
+      <category name="Refactory Mappings"/>
+   </feature>
+   <feature url="features/org.modelrefactoring.mappings.uml2_0.0.0.v0.jar" id="org.modelrefactoring.mappings.uml2" version="0.0.0.v0">
+      <category name="Refactory Mappings"/>
+   </feature>
+   <feature url="features/org.modelrefactoring.mappings.roles_0.0.0.v0.jar" id="org.modelrefactoring.mappings.roles" version="0.0.0.v0">
+      <category name="Refactory Mappings"/>
+   </feature>
+   <feature url="features/org.modelrefactoring.mappings.pl0_0.0.0.v0.jar" id="org.modelrefactoring.mappings.pl0" version="0.0.0.v0">
+      <category name="Refactory Mappings"/>
+   </feature>
+   <feature url="features/org.modelrefactoring.mappings.stp.bpmn_0.0.0.v0.jar" id="org.modelrefactoring.mappings.stp.bpmn" version="0.0.0.v0">
+      <category name="Refactory Mappings"/>
+   </feature>
+   <feature url="features/org.modelrefactoring.constraintinterpreter.ocl_0.0.0.v0.jar" id="org.modelrefactoring.constraintinterpreter.ocl" version="0.0.0.v0">
+      <category name="Refactory Constraint Interpreter"/>
+   </feature>
+   <feature url="features/org.modelrefactoring.editorconnector.emftext_0.0.0.v0.jar" id="org.modelrefactoring.editorconnector.emftext" version="0.0.0.v0">
+      <category name="Refactory Editor Connectors"/>
+   </feature>
+   <feature url="features/org.modelrefactoring.editorconnector.xtext_0.0.0.v0.jar" id="org.modelrefactoring.editorconnector.xtext" version="0.0.0.v0">
+      <category name="Refactory Editor Connectors"/>
+   </feature>
+   <feature url="features/org.modelrefactoring.editorconnector.gmf_0.0.0.v0.jar" id="org.modelrefactoring.editorconnector.gmf" version="0.0.0.v0">
+      <category name="Refactory Editor Connectors"/>
+   </feature>
+   <feature url="features/org.modelrefactoring.editorconnector.jdt_0.0.0.v0.jar" id="org.modelrefactoring.editorconnector.jdt" version="0.0.0.v0">
+      <category name="Refactory Editor Connectors"/>
+   </feature>
+   <feature url="features/org.modelrefactoring.smells_0.0.0.v0.jar" id="org.modelrefactoring.smells" version="0.0.0.v0">
+      <category name="Refactory Smells"/>
+   </feature>
+   <feature url="features/org.modelrefactoring.smells.ecore_0.0.0.v0.jar" id="org.modelrefactoring.smells.ecore" version="0.0.0.v0">
+      <category name="Refactory Smells"/>
+   </feature>
+   <feature url="features/org.modelrefactoring.smells.roles_0.0.0.v0.jar" id="org.modelrefactoring.smells.roles" version="0.0.0.v0">
+      <category name="Refactory Smells"/>
+   </feature>
+   <feature url="features/org.modelrefactoring.smells.java_0.0.0.v0.jar" id="org.modelrefactoring.smells.java" version="0.0.0.v0">
+      <category name="Refactory Smells"/>
+   </feature>
+   <category-def name="Refactory Core" label="Refactory Core">
+      <description>
+         Contains all core features needed to use Refactory.
+      </description>
+   </category-def>
+   <category-def name="Refactory Editor Connectors" label="Refactory Editor Connectors">
+      <description>
+         Contains all currently available editor connectors. An editor connector is used to support additional editors containing EMF-based models (in particular EObjects). If one provides a new editor connector it is possible to invoke model refactorings via right-clicking model elements in this editor.
+      </description>
+   </category-def>
+   <category-def name="Refactory Mappings" label="Refactory Mappings">
+      <description>
+         To provide refactorings for a concrete modeling language a mapping from generic refactorings to the metamodel is needed. This category contains some default mappings to directly support refactorings for ecore, UML or BPMN.
+      </description>
+   </category-def>
+   <category-def name="Refactory Constraint Interpreter" label="Refactory Constraint Interpreter">
+      <description>
+         Refactorings can only be executed if pre- and post-conditions are satisfied. This category provides a default contraint interpreter for OCL. This interpreter uses the implementation of Dresden OCL (http://www.dresden-ocl.org).
+      </description>
+   </category-def>
+   <category-def name="Refactory Smells" label="Refactory Smells">
+      <description>
+         Use the features contained herein to support quality smells. They indicate structures badly satisfying specific qualities. One can register refactorings for quality smells which then will be provided as quick fixes to resolve the quality smells.
+      </description>
+   </category-def>
+</site>

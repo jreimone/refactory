@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            class="org.emftext.refactoring.ui.RefactoringMenuContributor"
+            locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+      </menuContribution>
+   </extension>
+   <extension
+         id="modelContribution"
+         point="org.eclipse.e4.workbench.model">
+      <fragment
+            uri="fragment.e4xmi">
+      </fragment>
+      <processor
+            beforefragment="true"
+            class="org.emftext.refactoring.ui.StartUpRegistrations">
+      </processor>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            class="org.emftext.refactoring.ui.preferences.RefactoryPreferencePage"
+            id="org.emftext.refactoring.ui.preferences"
+            name="Refactory">
+      </page>
+   </extension>
+   <extension
+         point="org.eclipse.ltk.ui.refactoring.changePreviewViewers">
+      <changePreviewViewer
+            class="org.emftext.refactoring.ltk.ModelChangePreviewer"
+            id="org.emftext.refactoring.ui.changePreviewViewer">
+         <enablement>
+            <instanceof
+                  value="org.emftext.refactoring.ltk.ModelRefactoringChange">
+            </instanceof></enablement>
+      </changePreviewViewer>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <category
+            description="Refactory Command category"
+            id="org.emftext.refactoring.commands"
+            name="Refactory">
+      </category>
+   </extension>
+   <!--
+   <extension
+         point="org.eclipse.ltk.core.refactoring.refactoringContributions">
+      <contribution
+            class="org.emftext.refactoring.ltk.GenericRefactoringContribution"
+            id="org.emftext.refactoring.ui.genericRefactoringContribution">
+      </contribution>
+   </extension>
+   -->
+</plugin>

@@ -1,0 +1,19 @@
+ROLEMODELMAPPING FOR <http://www.emftext.org/language/simplegui> 
+
+"ncapsulate In Panel" maps <ExtractXwithReferenceClass> {
+
+	Extract := UIElement;
+	
+	OrigContainer := Container {
+		extracts := children;
+	};
+	
+	NewContainer := Panel(newName -> name){
+		moved := children;
+	};
+	
+	ContainerContainer := Container {
+		source := children;
+		target := children;
+	};
+} 

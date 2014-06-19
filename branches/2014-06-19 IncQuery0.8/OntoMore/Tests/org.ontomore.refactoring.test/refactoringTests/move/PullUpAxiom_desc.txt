@@ -1,0 +1,22 @@
+----------------------------
+## Pull Up Axiom
+----------------------------
+-- Description
+Move the selected axiom to the (existing) super class.
+This should work for arbitrary axioms (meta class "Description") of classes.
+
+-- Generic Refactoring
+"Move X"
+
+-- Problem
+Not yet supported by Refactory:
+java.lang.UnsupportedOperationException: This case must be implemented!
+	at org.emftext.refactoring.interpreter.internal.ObjectAssignmentInterpreter.getEObjectWithRoleFromPath(ObjectAssignmentInterpreter.java:359)
+
+For arbitrary movements the refactoring is becoming more complex and doesn't fit to "Move X" any more. 
+Similar to "Move X". The difference is, that the type of the reference has to be considered.
+"Move X" defines a reference between source and target container, that don't exists in
+this case between the classes of the ontology!
+	SourceContainer := Class;
+	TargetContainer := Class;
+	Movee := Description;

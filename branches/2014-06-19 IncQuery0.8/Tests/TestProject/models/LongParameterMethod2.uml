@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xmi:id="_eZ7IcORyEeKXo6QGHUzdpg" name="ModelWithLongParameterMethods">
+  <packagedElement xmi:type="uml:Class" xmi:id="_jPS78ORyEeKXo6QGHUzdpg" name="SmellingClass">
+    <ownedOperation xmi:id="_dllE8ORzEeKXo6QGHUzdpg" name="smellingOperation">
+      <ownedParameter xmi:id="_lMlSkORzEeKXo6QGHUzdpg" name="p1"/>
+      <ownedParameter xmi:id="_oV3-wORzEeKXo6QGHUzdpg" name="p2"/>
+      <ownedParameter xmi:id="_qoQREORzEeKXo6QGHUzdpg" name="p3"/>
+      <ownedParameter xmi:id="_sBUVwORzEeKXo6QGHUzdpg" name="p4"/>
+    </ownedOperation>
+  </packagedElement>
+</uml:Model>

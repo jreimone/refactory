@@ -1,0 +1,1856 @@
+Prefix: : <http://www.buschmais.com/fronto.owl#>
+
+Ontology: <http://www.buschmais.com/fronto.owl>
+
+
+Annotations: 
+    owl:versionInfo "erste Version"^^xsd:string,
+    rdfs:label "Freelancer Ontology"@en,
+    rdfs:label "FrOnto"^^xsd:string,
+    rdfs:label "Freelancer-Ontologie"@de,
+    rdfs:comment "Ontologie zur Beschreibung von Freelancern, Projekten und Unternehmen."^^xsd:string
+
+AnnotationProperty: owl:versionInfo
+
+    
+AnnotationProperty: rdfs:comment
+
+    
+AnnotationProperty: rdfs:label
+
+    
+Datatype: xsd:dateTime
+
+    
+Datatype: xsd:int
+
+    
+Datatype: xsd:string
+
+    
+Datatype: xsd:boolean
+
+    
+Datatype: rdf:PlainLiteral
+
+    
+ObjectProperty: hatSprache
+
+    Domain: 
+        Sprachfertigkeit
+    
+    Range: 
+        Sprache
+    
+    
+ObjectProperty: hatProjektteilnahme
+
+    Domain: 
+        Profil
+    
+    Range: 
+        Projektteilnahme
+    
+    
+ObjectProperty: erfordertTechnik
+
+    SubPropertyOf: 
+        hatTechnik
+    
+    Domain: 
+        Stellenausschreibung
+    
+    
+ObjectProperty: gehoertZurBranche
+
+    Annotations: 
+        rdfs:label "belongsToIndustry"@en
+    
+    Domain: 
+        Unternehmen
+    
+    Range: 
+        Branche
+    
+    
+ObjectProperty: hatTeilnahmeDauer
+
+    Domain: 
+        Projektteilnahme
+    
+    Range: 
+        Zeitraum
+    
+    
+ObjectProperty: arbeitetImMomentFuer
+
+    Domain: 
+        Freelancer
+    
+    Range: 
+        Unternehmen
+    
+    
+ObjectProperty: hatFaehigkeit
+
+    Annotations: 
+        rdfs:label "hasSkill"@en
+    
+    Range: 
+        Kenntnis
+    
+    
+ObjectProperty: erfordertKenntnisVon
+
+    Annotations: 
+        rdfs:label "requiresKnowledgeOf"@en
+    
+    SubPropertyOf: 
+        hatTechnik
+    
+    Domain: 
+        Taetigkeit
+    
+    
+ObjectProperty: hatKonferenzbeteiligung
+
+    Domain: 
+        Freelancer
+    
+    Range: 
+        Konferenzbeteiligung
+    
+    
+ObjectProperty: hatStellenausschreibung
+
+    Annotations: 
+        rdfs:label "hasVacancy"@en
+    
+    Domain: 
+        Projekt
+    
+    Range: 
+        Stellenausschreibung
+    
+    InverseOf: 
+        gehoertZuProjekt
+    
+    
+ObjectProperty: gehoertZuProjekt
+
+    InverseOf: 
+        hatStellenausschreibung
+    
+    
+ObjectProperty: hatOrt
+
+    Domain: 
+        Adresse
+    
+    Range: 
+        Ort
+    
+    
+ObjectProperty: hatTechnik
+
+    Range: 
+        Technik
+    
+    
+ObjectProperty: beschreibtFreelancer
+
+    Domain: 
+        Profil
+    
+    Range: 
+        Freelancer
+    
+    InverseOf: 
+        hatProfil
+    
+    
+ObjectProperty: hatFertigkeit
+
+    SubPropertyOf: 
+        hatFaehigkeit
+    
+    Domain: 
+        Freelancer
+    
+    
+ObjectProperty: fuehrtProjektDurch
+
+    Domain: 
+        Unternehmen
+    
+    Range: 
+        Projekt
+    
+    InverseOf: 
+        durchgefuehrtVon
+    
+    
+ObjectProperty: hatProfil
+
+    InverseOf: 
+        beschreibtFreelancer
+    
+    
+ObjectProperty: hatGearbeitetFuer
+
+    Domain: 
+        Freelancer
+    
+    Range: 
+        Unternehmen
+    
+    
+ObjectProperty: erfordertTaetigkeit
+
+    Annotations: 
+        rdfs:label "requiresActivity"@en
+    
+    SubPropertyOf: 
+        hatFaehigkeit
+    
+    Domain: 
+        Stellenausschreibung
+    
+    
+ObjectProperty: durchgefuehrtVon
+
+    InverseOf: 
+        fuehrtProjektDurch
+    
+    
+ObjectProperty: hatSprachfertigkeit
+
+    SubPropertyOf: 
+        hatFaehigkeit
+    
+    Domain: 
+        Person
+    
+    Range: 
+        Sprachfertigkeit
+    
+    
+ObjectProperty: hatKonferenz
+
+    Domain: 
+        Konferenzbeteiligung
+    
+    Range: 
+        Konferenz
+    
+    
+ObjectProperty: hatSprachlevel
+
+    Domain: 
+        Sprachfertigkeit
+    
+    Range: 
+        Sprachlevel
+    
+    
+ObjectProperty: hatFachlichenSchwerpunkt
+
+    SubPropertyOf: 
+        hatFaehigkeit
+    
+    Domain: 
+        Freelancer
+    
+    
+ObjectProperty: befindetSichIn
+
+    Characteristics: 
+        Transitive
+    
+    Domain: 
+        Region
+    
+    Range: 
+        Region
+    
+    InverseOf: 
+        enthaelt
+    
+    
+ObjectProperty: enthaelt
+
+    Characteristics: 
+        Transitive
+    
+    InverseOf: 
+        befindetSichIn
+    
+    
+ObjectProperty: hatAdresse
+
+    Annotations: 
+        rdfs:comment "Postadresse"
+    
+    Range: 
+        Adresse
+    
+    
+ObjectProperty: hatAusgeuebteTaetigkeit
+
+    SubPropertyOf: 
+        hatFaehigkeit
+    
+    Domain: 
+        Projektteilnahme
+    
+    
+ObjectProperty: istAnsaessigIn
+
+    Annotations: 
+        rdfs:label "isLocatedIn"@en
+    
+    SubPropertyChain: 
+        hatAdresse o hatOrt o befindetSichIn
+    
+    
+ObjectProperty: kenntTechnik
+
+    SubPropertyOf: 
+        hatTechnik
+    
+    Domain: 
+        Freelancer
+    
+    
+ObjectProperty: ausgefuehrtIn
+
+    Domain: 
+        Projektteilnahme
+    
+    Range: 
+        Branche
+         or Unternehmen
+    
+    
+ObjectProperty: hatVerfuegbarkeit
+
+    
+DataProperty: hatStrasse
+
+    Annotations: 
+        rdfs:label "hasStreet"@en,
+        rdfs:label "hatStrasse"@de
+    
+    Characteristics: 
+        Functional
+    
+    Domain: 
+        Adresse
+    
+    Range: 
+        xsd:string
+    
+    
+DataProperty: hatAnfangsdatum
+
+    Characteristics: 
+        Functional
+    
+    Domain: 
+        Zeitraum
+    
+    Range: 
+        xsd:dateTime
+    
+    
+DataProperty: hatPostleitzahl
+
+    Characteristics: 
+        Functional
+    
+    Domain: 
+        Adresse
+    
+    Range: 
+        xsd:string
+    
+    
+DataProperty: hatStundensatz
+
+    Annotations: 
+        rdfs:comment "hasSalary"@en
+    
+    Characteristics: 
+        Functional
+    
+    Domain: 
+        Stellenausschreibung
+    
+    Range: 
+        xsd:int
+    
+    
+DataProperty: hatName
+
+    Range: 
+        xsd:string
+    
+    
+DataProperty: istSofortVerfuegbar
+
+    Characteristics: 
+        Functional
+    
+    Domain: 
+        Verfuegbarkeit
+    
+    Range: 
+        xsd:boolean
+    
+    
+DataProperty: hatEnddatum
+
+    Characteristics: 
+        Functional
+    
+    Domain: 
+        Zeitraum
+    
+    Range: 
+        xsd:dateTime
+    
+    
+DataProperty: hatGeburtstag
+
+    Characteristics: 
+        Functional
+    
+    Domain: 
+        Person
+    
+    Range: 
+        xsd:dateTime
+    
+    
+DataProperty: hatBeteiligungAnKonferenz
+
+    Domain: 
+        Konferenzbeteiligung
+    
+    Range: 
+        xsd:string
+    
+    
+DataProperty: hatTelefonnummer
+
+    Domain: 
+        Person
+    
+    Range: 
+        xsd:string
+    
+    
+DataProperty: hatAbschluss
+
+    Domain: 
+        Person
+    
+    Range: 
+        xsd:string
+    
+    
+DataProperty: hatEMailAdresse
+
+    Domain: 
+        Person
+    
+    Range: 
+        xsd:string
+    
+    
+DataProperty: wurdeZuletztAktualisiertAm
+
+    Domain: 
+        Profil
+    
+    Range: 
+        xsd:dateTime
+    
+    
+DataProperty: hatBeschreibung
+
+    Range: 
+        xsd:string
+    
+    
+DataProperty: istNachVereinbarungVerfuegbar
+
+    Characteristics: 
+        Functional
+    
+    Domain: 
+        Verfuegbarkeit
+    
+    Range: 
+        xsd:boolean
+    
+    
+Class: JavaTechnik
+
+    Annotations: 
+        rdfs:label "JavaTechnique"@en
+    
+    EquivalentTo: 
+        {Java , JavaEE , JavaSE}
+    
+    SubClassOf: 
+        Technik
+    
+    
+Class: Ort
+
+    Annotations: 
+        rdfs:label "City"@en,
+        rdfs:comment "Eine Stadt oder Ortschaft."
+    
+    SubClassOf: 
+        Region
+    
+    
+Class: SonstigeTaetigkeit
+
+    SubClassOf: 
+        Taetigkeit
+    
+    
+Class: Projekt
+
+    Annotations: 
+        rdfs:comment "Eine durch seine Einmaligkeit gekennzeichnete Taetigkeit mehrerer Menschen, die ein gemeinsames Ziel verfolgen.",
+        rdfs:label "Project"@en
+    
+    SubClassOf: 
+        (hatStellenausschreibung some Stellenausschreibung)
+         and (hatStellenausschreibung only Stellenausschreibung)
+    
+    
+Class: Land
+
+    Annotations: 
+        rdfs:comment "Ein geografisches Land.",
+        rdfs:label "Country"@en
+    
+    SubClassOf: 
+        Region
+    
+    
+Class: Branche
+
+    Annotations: 
+        rdfs:comment "Wirtschaftszweig; Zusammenfassung aller Unternehmen, die ein gemeinsames oder aehnliches Ziel verfolgen.",
+        rdfs:label "Industry"@en
+    
+    
+Class: Zeitraum
+
+    Annotations: 
+        rdfs:comment "Ein zeitlicher Bereich, der durch  einem Anfangs- und einem Endzeitpunkt gekennzeichnet ist.",
+        rdfs:label "TimeFrame"@en
+    
+    SubClassOf: 
+        hatAnfangsdatum exactly 1 xsd:dateTime,
+        hatEnddatum exactly 1 xsd:dateTime
+    
+    
+Class: Profil
+
+    Annotations: 
+        rdfs:label "Profile"@en,
+        rdfs:comment "Beschreibung des beruflichen Wertegangs eines Freelancers."
+    
+    SubClassOf: 
+        (hatProjektteilnahme some Projektteilnahme)
+         and (hatProjektteilnahme only Projektteilnahme),
+        wurdeZuletztAktualisiertAm some xsd:dateTime,
+        (beschreibtFreelancer only Freelancer)
+         and (beschreibtFreelancer exactly 1 Freelancer)
+    
+    
+Class: Sprache
+
+    Annotations: 
+        rdfs:label "Language"@en,
+        rdfs:label "Sprache"@de,
+        rdfs:comment "Eine natuerliche Sprache"
+    
+    
+Class: TelekommunikationsUnternehmen
+
+    Annotations: 
+        rdfs:label "TelecommunicationCompany"@en
+    
+    EquivalentTo: 
+        Unternehmen
+         and (gehoertZurBranche value Telekommunikation)
+    
+    
+Class: Framework
+
+    Annotations: 
+        rdfs:comment "Sammlung von Programmteilen, die in vielen Anwendungsbereichen eingesetzt und wiederverwendet werden koennen."
+    
+    SubClassOf: 
+        Technik
+    
+    
+Class: Technik
+
+    Annotations: 
+        rdfs:label "Technique"@en,
+        rdfs:comment "Eine Technik bezogen auf den IT-Sektor"
+    
+    SubClassOf: 
+        Kenntnis
+    
+    
+Class: Sprachfertigkeit
+
+    Annotations: 
+        rdfs:label "LanguageSkill"@en,
+        rdfs:comment "Die Fertigkeit eine Sprache zu sprechen."
+    
+    SubClassOf: 
+        hatSprache only Sprache,
+        hatSprachlevel only Sprachlevel,
+        Kenntnis,
+        hatSprachlevel exactly 1 Sprachlevel,
+        hatSprache exactly 1 Sprache
+    
+    
+Class: Verfuegbarkeit
+
+    Annotations: 
+        rdfs:label "Availability"@en,
+        rdfs:comment "Zeitraum, in dem ein Freelancer bereit ist fuer ein neues Projekt zu arbeiten."
+    
+    SubClassOf: 
+        istSofortVerfuegbar exactly 1 xsd:boolean,
+        istNachVereinbarungVerfuegbar exactly 1 xsd:boolean,
+        Zeitraum
+    
+    
+Class: EntwicklungsTaetigkeit
+
+    Annotations: 
+        rdfs:label "ImplementationActivity"@en
+    
+    SubClassOf: 
+        Taetigkeit
+    
+    
+Class: Unternehmen
+
+    Annotations: 
+        rdfs:comment "Ein Betrieb, der in kaufmaennischer Weise Produkte fertigt oder Dienstleistungen anbietet.",
+        rdfs:label "Company"@en
+    
+    SubClassOf: 
+        (gehoertZurBranche some Branche)
+         and (gehoertZurBranche only Branche),
+        Agent
+    
+    DisjointWith: 
+        Person
+    
+    
+Class: OfficeProdukt
+
+    Annotations: 
+        rdfs:comment "Ein Computerprogramm zur Erledigung von Buerotaetigkeiten.",
+        rdfs:label "OfficeProduct"@en
+    
+    SubClassOf: 
+        Produkt
+    
+    
+Class: Konferenzbeteiligung
+
+    Annotations: 
+        rdfs:label "ConferenceAttendance"@en,
+        rdfs:comment "Anwesenheit auf einer Konferenz."
+    
+    SubClassOf: 
+        hatBeteiligungAnKonferenz some xsd:string,
+        (hatKonferenz some Konferenz)
+         and (hatKonferenz only Konferenz)
+    
+    
+Class: Betriebssystem
+
+    Annotations: 
+        rdfs:label "OperatingSystem"@en
+    
+    SubClassOf: 
+        Technik
+    
+    
+Class: Sprachlevel
+
+    Annotations: 
+        rdfs:comment "Umfang der Faehigkeit mit anderen Menschen in einer bestimmten Sprache zu kommunizieren.",
+        rdfs:label "LanguageSkillLevel"@en
+    
+    
+Class: Stellenausschreibung
+
+    Annotations: 
+        rdfs:comment "Beschreibung einer offenen Position in einem Projekt.",
+        rdfs:label "Vacancy"@en
+    
+    SubClassOf: 
+        (erfordertTechnik some Technik)
+         and (erfordertTechnik only Technik),
+        hatStundensatz some xsd:int,
+        (erfordertTaetigkeit some Taetigkeit)
+         and (erfordertTaetigkeit only Taetigkeit)
+    
+    
+Class: EuropaeischerFreelancer
+
+    Annotations: 
+        rdfs:label "EuropeanFreelancer"@en
+    
+    EquivalentTo: 
+        Freelancer
+         and (istAnsaessigIn value Europa)
+    
+    
+Class: Produkt
+
+    Annotations: 
+        rdfs:comment "Ein Computerprogramm oder Softwaresystem.",
+        rdfs:label "Product"@en
+    
+    SubClassOf: 
+        Technik
+    
+    
+Class: ProjektMitLeitenderTaetigkeit
+
+    Annotations: 
+        rdfs:label "ProjectWithLeadershipActivity"@en
+    
+    EquivalentTo: 
+        Projekt
+         and (hatStellenausschreibung some (erfordertTaetigkeit some LeitendeTaetigkeit))
+    
+    
+Class: FreelancerMitJavaKenntnissen
+
+    Annotations: 
+        rdfs:label "FreelancerWithJavaSkills"@en
+    
+    EquivalentTo: 
+        Freelancer
+         and (hatFaehigkeit some JavaTechnik)
+    
+    
+Class: Projektteilnahme
+
+    Annotations: 
+        rdfs:comment "Die Beteiligung eines Freelancers an einem Projekt.",
+        rdfs:label "ProjectContribution"@en
+    
+    SubClassOf: 
+        (hatAusgeuebteTaetigkeit some Taetigkeit)
+         and (hatAusgeuebteTaetigkeit only Taetigkeit),
+        (ausgefuehrtIn some 
+            (Branche
+             or Unternehmen))
+         and (ausgefuehrtIn only 
+            (Branche
+             or Unternehmen)),
+        (hatTeilnahmeDauer only Zeitraum)
+         and (hatTeilnahmeDauer exactly 1 Zeitraum)
+    
+    
+Class: Standard
+
+    Annotations: 
+        rdfs:comment "Ein Standard, Empfehlung oder Spezifikation einer offiziellen Standardisierungsorganisation, wie W3C, OMG oder ISO."
+    
+    SubClassOf: 
+        Technik
+    
+    
+Class: Konferenz
+
+    Annotations: 
+        rdfs:comment "Veranstaltung zum Wissensaustausch.",
+        rdfs:label "Conference"@en
+    
+    
+Class: Person
+
+    Annotations: 
+        rdfs:comment "Ein Mensch."
+    
+    SubClassOf: 
+        hatAbschluss some xsd:string,
+        hatGeburtstag some xsd:dateTime,
+        Agent,
+        (hatSprachfertigkeit some Sprachfertigkeit)
+         and (hatSprachfertigkeit only Sprachfertigkeit),
+        (hatAdresse some Adresse)
+         and (hatAdresse only Adresse),
+        hatEMailAdresse some xsd:string,
+        hatTelefonnummer some xsd:string
+    
+    DisjointWith: 
+        Unternehmen
+    
+    
+Class: Programmiersprache
+
+    Annotations: 
+        rdfs:comment "Eine Programmiersprache.",
+        rdfs:label "ProgrammingLanguage"@en
+    
+    SubClassOf: 
+        Technik
+    
+    
+Class: GutBezahlteStelle
+
+    Annotations: 
+        rdfs:label "GoodPaidVacancy"@en
+    
+    EquivalentTo: 
+        Stellenausschreibung
+         and (hatStundensatz some xsd:int[>= "70"^^xsd:int])
+    
+    DisjointWith: 
+        SchlechtBezahlteStelle
+    
+    
+Class: Methode
+
+    Annotations: 
+        rdfs:label "Method"@en,
+        rdfs:comment "Vorgehensmodell oder Methodologie der IT-Branche"
+    
+    SubClassOf: 
+        Kenntnis
+    
+    
+Class: Taetigkeit
+
+    Annotations: 
+        rdfs:label "Activity"@en,
+        rdfs:comment "Auszufuehrende Taetigkeit einer Person innerhalb eines Projekts."
+    
+    SubClassOf: 
+        erfordertKenntnisVon only Technik,
+        Kenntnis
+    
+    
+Class: SoftSkill
+
+    Annotations: 
+        rdfs:comment "Faehigkeiten, welche die Kommunikation und zwischenmenschliche Zusammenarbeit unterstuetzen."
+    
+    SubClassOf: 
+        Kenntnis
+    
+    
+Class: DesignTaetigkeit
+
+    SubClassOf: 
+        Taetigkeit
+    
+    
+Class: Kontinent
+
+    Annotations: 
+        rdfs:comment "Einer der sieben geografischen Kontinente.",
+        rdfs:label "Continent"@en
+    
+    SubClassOf: 
+        Region
+    
+    
+Class: Freelancer
+
+    Annotations: 
+        rdfs:comment "Ein Freiberufler der IT-Branche."
+    
+    SubClassOf: 
+        (kenntTechnik some Technik)
+         and (kenntTechnik only Technik),
+        hatKonferenzbeteiligung only Konferenzbeteiligung,
+        hatGearbeitetFuer only Unternehmen,
+        arbeitetImMomentFuer only Unternehmen,
+        (hatFertigkeit some Kenntnis)
+         and (hatFertigkeit only Kenntnis),
+        (hatFachlichenSchwerpunkt some Kenntnis)
+         and (hatFachlichenSchwerpunkt only Kenntnis),
+        Person
+    
+    
+Class: Adresse
+
+    Annotations: 
+        rdfs:comment "Eine Postadresse.",
+        rdfs:label "Address"@en
+    
+    SubClassOf: 
+        hatStrasse some xsd:string,
+        hatPostleitzahl some xsd:string,
+        hatOrt exactly 1 Ort,
+        hatOrt only Ort
+    
+    
+Class: SchlechtBezahlteStelle
+
+    Annotations: 
+        rdfs:label "BadPaidVacancy"@en
+    
+    EquivalentTo: 
+        Stellenausschreibung
+         and (not (GutBezahlteStelle))
+    
+    DisjointWith: 
+        GutBezahlteStelle
+    
+    
+Class: Region
+
+    Annotations: 
+        rdfs:comment "Geografische Region"
+    
+    SubClassOf: 
+        (befindetSichIn some Region)
+         and (befindetSichIn only Region)
+    
+    
+Class: ProjektmanagementProdukt
+
+    Annotations: 
+        rdfs:label "ProjectmanagementProduct"@en
+    
+    SubClassOf: 
+        Produkt
+    
+    
+Class: StellenausschreibungFuerEntwicklung
+
+    Annotations: 
+        rdfs:label "VacancyForImplementation"@en
+    
+    EquivalentTo: 
+        Stellenausschreibung
+         and (erfordertTaetigkeit some EntwicklungsTaetigkeit)
+    
+    
+Class: owl:Thing
+
+    
+Class: LeitendeTaetigkeit
+
+    Annotations: 
+        rdfs:label "LeadershipActivity"@en
+    
+    SubClassOf: 
+        Taetigkeit
+    
+    
+Class: Agent
+
+    Annotations: 
+        rdfs:comment "Eine natuerliche oder juristische Person."
+    
+    
+Class: Kenntnis
+
+    Annotations: 
+        rdfs:label "Skill"@en,
+        rdfs:comment "Fachbereich, in dem sich eine Person auskennt oder dessen Kenntnis in Projekten von einer Person gefordert ist."
+    
+    
+Class: Datenbank
+
+    Annotations: 
+        rdfs:label "Database"@en,
+        rdfs:comment "Eine Datenbank oder Datenbankmanagementsystem."
+    
+    SubClassOf: 
+        Technik
+    
+    
+Class: MedizinischesUnternehmen
+
+    Annotations: 
+        rdfs:label "HealthCareCompany"@en
+    
+    EquivalentTo: 
+        Unternehmen
+         and (gehoertZurBranche value Medizin)
+    
+    
+Class: TestTaetigkeit
+
+    SubClassOf: 
+        Taetigkeit
+    
+    
+Individual: JSF
+
+    Types: 
+        Framework
+    
+    
+Individual: Kanada
+
+    Types: 
+        Land
+    
+    Facts:  
+     befindetSichIn  Nordamerika
+    
+    
+Individual: Vietnam
+
+    Types: 
+        Land
+    
+    Facts:  
+     befindetSichIn  Asien
+    
+    
+Individual: Koreanisch
+
+    Types: 
+        Sprache
+    
+    
+Individual: York
+
+    Types: 
+        Ort
+    
+    Facts:  
+     befindetSichIn  VereinigtesKoenigreich
+    
+    
+Individual: Scrum
+
+    Types: 
+        Methode
+    
+    
+Individual: Bill
+
+    Types: 
+        Freelancer
+    
+    
+Individual: Sofia
+
+    Types: 
+        Ort
+    
+    Facts:  
+     befindetSichIn  Bulgarien
+    
+    
+Individual: DB2
+
+    Types: 
+        Datenbank
+    
+    
+Individual: Praesentation
+
+    Types: 
+        SoftSkill
+    
+    
+Individual: MSSQLServer
+
+    Types: 
+        Datenbank
+    
+    
+Individual: Lettland
+
+    Types: 
+        Land
+    
+    Facts:  
+     befindetSichIn  Europa
+    
+    
+Individual: Projekt001Adresse
+
+    Types: 
+        Adresse
+    
+    Facts:  
+     hatOrt  Riga,
+     hatPostleitzahl  "SA1 ZT3"^^xsd:string,
+     hatStrasse  "Oak Road 23"^^xsd:string
+    
+    
+Individual: Testen
+
+    Types: 
+        TestTaetigkeit
+    
+    
+Individual: SA1
+
+    Types: 
+        Stellenausschreibung
+    
+    Facts:  
+     erfordertTaetigkeit  LeitendeEntwicklung,
+     erfordertTechnik  JavaEE,
+     hatStundensatz  "80"^^xsd:int
+    
+    
+Individual: Riga
+
+    Types: 
+        Ort
+    
+    Facts:  
+     befindetSichIn  Lettland
+    
+    
+Individual: Deutschland
+
+    Types: 
+        Land
+    
+    Facts:  
+     befindetSichIn  Europa
+    
+    
+Individual: Oracle11g
+
+    Types: 
+        Datenbank
+    
+    
+Individual: Italienisch
+
+    Types: 
+        Sprache
+    
+    
+Individual: Portigisisch
+
+    Types: 
+        Sprache
+    
+    
+Individual: Cobol
+
+    Types: 
+        Programmiersprache
+    
+    
+Individual: MobilPhono
+
+    Types: 
+        Unternehmen
+    
+    Facts:  
+     gehoertZurBranche  Telekommunikation
+    
+    
+Individual: Englisch
+
+    Types: 
+        Sprache
+    
+    
+Individual: OOA
+
+    Types: 
+        Methode
+    
+    
+Individual: Asien
+
+    Types: 
+        Kontinent
+    
+    
+Individual: VereinigtesKoenigreich
+
+    Types: 
+        Land
+    
+    Facts:  
+     befindetSichIn  Europa
+    
+    
+Individual: Afrika
+
+    Types: 
+        Kontinent
+    
+    
+Individual: TechTrent
+
+    Types: 
+        Unternehmen
+    
+    
+Individual: Russisch
+
+    Types: 
+        Sprache
+    
+    
+Individual: oeffentlicheHand
+
+    Annotations: 
+        rdfs:comment "PublicSector"@en
+    
+    Types: 
+        Branche
+    
+    
+Individual: Hanoi
+
+    Types: 
+        Ort
+    
+    Facts:  
+     befindetSichIn  Vietnam
+    
+    
+Individual: OOSE2010
+
+    Types: 
+        Konferenz
+    
+    
+Individual: OWL
+
+    Types: 
+        Standard
+    
+    
+Individual: fortgeschritten
+
+    Types: 
+        Sprachlevel
+    
+    
+Individual: InnoVatio
+
+    Types: 
+        Unternehmen
+    
+    Facts:  
+     fuehrtProjektDurch  Projekt001
+    
+    
+Individual: Bulgarien
+
+    Types: 
+        Land
+    
+    Facts:  
+     befindetSichIn  Europa
+    
+    
+Individual: Muttersprache
+
+    Types: 
+        Sprachlevel
+    
+    
+Individual: USA
+
+    Types: 
+        Land
+    
+    Facts:  
+     befindetSichIn  Nordamerika
+    
+    
+Individual: Dallas
+
+    Types: 
+        Ort
+    
+    Facts:  
+     befindetSichIn  USA
+    
+    
+Individual: Jane
+
+    Types: 
+        Freelancer
+    
+    
+Individual: JavaSE
+
+    Types: 
+        Framework
+    
+    
+Individual: Toronto
+
+    Types: 
+        Ort
+    
+    Facts:  
+     befindetSichIn  Kanada
+    
+    
+Individual: Alice
+
+    Types: 
+        Freelancer
+    
+    
+Individual: JIRA
+
+    Types: 
+        Produkt
+    
+    
+Individual: Datenbankdesign
+
+    Types: 
+        DesignTaetigkeit
+    
+    
+Individual: Kasachstan
+
+    Types: 
+        Land
+    
+    Facts:  
+     befindetSichIn  Asien
+    
+    
+Individual: MaxOSX
+
+    Types: 
+        Betriebssystem
+    
+    
+Individual: fliessend
+
+    Types: 
+        Sprachlevel
+    
+    
+Individual: JavaProgrammierung
+
+    Types: 
+        EntwicklungsTaetigkeit
+    
+    Facts:  
+     erfordertKenntnisVon  Java
+    
+    
+Individual: Systementwurf
+
+    Types: 
+        DesignTaetigkeit
+    
+    
+Individual: Nordamerika
+
+    Types: 
+        Kontinent
+    
+    
+Individual: Coaching
+
+    Types: 
+        SoftSkill
+    
+    
+Individual: JohnsProfil
+
+    Types: 
+        Profil
+    
+    Facts:  
+     hatProjektteilnahme  JohnPT1,
+     beschreibtFreelancer  John,
+     hatName  "Profil von John Doe"^^xsd:string
+    
+    
+Individual: Tom
+
+    Types: 
+        Freelancer
+    
+    
+Individual: Franzoesisch
+
+    Types: 
+        Sprache
+    
+    
+Individual: Linux
+
+    Types: 
+        Betriebssystem
+    
+    
+Individual: KB1
+
+    Types: 
+        Konferenzbeteiligung
+    
+    Facts:  
+     hatKonferenz  OOSE2010,
+     hatBeteiligungAnKonferenz  "Vortrag zum Thema \"Wie baue ich objektorientierte Softwaresysteme?\""^^xsd:string
+    
+    
+Individual: Datenbankadministration
+
+    Types: 
+        SonstigeTaetigkeit
+    
+    
+Individual: Suedamerika
+
+    Types: 
+        Kontinent
+    
+    
+Individual: Bauwesen
+
+    Annotations: 
+        rdfs:comment "StructuralEngineering"@en
+    
+    Types: 
+        Branche
+    
+    
+Individual: Chile
+
+    Types: 
+        Land
+    
+    Facts:  
+     befindetSichIn  Suedamerika
+    
+    
+Individual: XML
+
+    Types: 
+        Standard
+    
+    
+Individual: Clojure
+
+    Types: 
+        Programmiersprache
+    
+    
+Individual: Versicherungen
+
+    Annotations: 
+        rdfs:comment "Insurance"@en
+    
+    Types: 
+        Branche
+    
+    
+Individual: LeitendeEntwicklung
+
+    Types: 
+        LeitendeTaetigkeit
+    
+    
+Individual: Betty
+
+    Types: 
+        Freelancer
+    
+    
+Individual: EJB
+
+    Types: 
+        Framework
+    
+    
+Individual: CppProgrammierung
+
+    Types: 
+        EntwicklungsTaetigkeit
+    
+    
+Individual: CORBA
+
+    Types: 
+        Standard
+    
+    
+Individual: Sally
+
+    Types: 
+        Freelancer
+    
+    
+Individual: Hudson
+
+    Types: 
+        Produkt
+    
+    
+Individual: Lima
+
+    Types: 
+        Ort
+    
+    Facts:  
+     befindetSichIn  Chile
+    
+    
+Individual: Java
+
+    Types: 
+        Programmiersprache
+    
+    
+Individual: JohnPT1
+
+    Types: 
+        Projektteilnahme
+    
+    Facts:  
+     ausgefuehrtIn  Telekommunikation,
+     hatAusgeuebteTaetigkeit  Projektfuehrung,
+     hatTeilnahmeDauer  TD1
+    
+    
+Individual: SemWebConf2009
+
+    Types: 
+        Konferenz
+    
+    
+Individual: Astana
+
+    Types: 
+        Ort
+    
+    Facts:  
+     befindetSichIn  Kasachstan
+    
+    
+Individual: RDF
+
+    Types: 
+        Standard
+    
+    
+Individual: Projekt001
+
+    Types: 
+        Projekt
+    
+    Facts:  
+     hatStellenausschreibung  SA1,
+     hatAdresse  Projekt001Adresse,
+     hatStellenausschreibung  SA2,
+     hatBeschreibung  "Erweiterung eines bestehenden Managementsystems zur Verwaltung von Kunden- und Zahlungsdaten um eine neue Middlewareloesung zur integration von Legacy-Systemen und der Erweiterung um eine neue Web-Portal-Loesung."^^xsd:string
+    
+    
+Individual: Futuritis
+
+    Types: 
+        Unternehmen
+    
+    
+Individual: Japanisch
+
+    Types: 
+        Sprache
+    
+    
+Individual: TD1
+
+    Types: 
+        Zeitraum
+    
+    Facts:  
+     hatAnfangsdatum  "2010-10-01T00:00:00"^^xsd:dateTime,
+     hatEnddatum  "2011-03-01T00:00:00"^^xsd:dateTime
+    
+    
+Individual: Grundkenntnisse
+
+    Types: 
+        Sprachlevel
+    
+    
+Individual: Dresden
+
+    Types: 
+        Ort
+    
+    Facts:  
+     befindetSichIn  Deutschland
+    
+    
+Individual: verhandlungssicher
+
+    Types: 
+        Sprachlevel
+    
+    
+Individual: Redmine
+
+    Types: 
+        Produkt
+    
+    
+Individual: Lagos
+
+    Types: 
+        Ort
+    
+    Facts:  
+     befindetSichIn  Nigeria
+    
+    
+Individual: Scala
+
+    Types: 
+        Programmiersprache
+    
+    
+Individual: Bob
+
+    Types: 
+        Freelancer
+    
+    
+Individual: Cpp
+
+    Annotations: 
+        rdfs:label "C++"
+    
+    Types: 
+        Programmiersprache
+    
+    
+Individual: SA2
+
+    Types: 
+        Stellenausschreibung
+    
+    Facts:  
+     erfordertTechnik  Java,
+     erfordertTaetigkeit  JavaProgrammierung,
+     hatStundensatz  "50"^^xsd:int
+    
+    
+Individual: JohnsAdresse
+
+    Types: 
+        Adresse
+    
+    Facts:  
+     hatOrt  York,
+     hatStrasse  "MainStreet"^^xsd:string,
+     hatPostleitzahl  "AZ5 SE3"^^xsd:string
+    
+    
+Individual: Forschung
+
+    Annotations: 
+        rdfs:comment "Research"@en
+    
+    Types: 
+        Branche
+    
+    
+Individual: MSOffice
+
+    Types: 
+        OfficeProdukt
+    
+    
+Individual: Spanisch
+
+    Types: 
+        Sprache
+    
+    
+Individual: Projektfuehrung
+
+    Types: 
+        LeitendeTaetigkeit
+    
+    
+Individual: OpenOffice
+
+    Types: 
+        OfficeProdukt
+    
+    
+Individual: MSProject
+
+    Types: 
+        ProjektmanagementProdukt
+    
+    
+Individual: Ada
+
+    Types: 
+        Programmiersprache
+    
+    
+Individual: Chinesisch
+
+    Types: 
+        Sprache
+    
+    
+Individual: Europa
+
+    Annotations: 
+        rdfs:label "Europe"@en
+    
+    Types: 
+        Kontinent
+    
+    
+Individual: John
+
+    Types: 
+        Freelancer
+    
+    Facts:  
+     hatAdresse  JohnsAdresse,
+     hatFachlichenSchwerpunkt  JavaEE,
+     hatFertigkeit  JavaSE,
+     hatFertigkeit  JavaEE,
+     hatFertigkeit  OOD,
+     hatKonferenzbeteiligung  KB1,
+     hatFertigkeit  OOA,
+     hatGeburtstag  "1975-08-26T00:00:00"^^xsd:dateTime,
+     hatName  "John Doe"^^xsd:string,
+     hatAbschluss  "Diplominformatiker, TU Dresden, 2001"^^xsd:string
+    
+    
+Individual: Greenhooper
+
+    Types: 
+        ProjektmanagementProdukt
+    
+    
+Individual: Ruby
+
+    Types: 
+        Programmiersprache
+    
+    
+Individual: Telekommunikation
+
+    Annotations: 
+        rdfs:label "Telecommunication"@en
+    
+    Types: 
+        Branche
+    
+    
+Individual: Windows7
+
+    Types: 
+        Betriebssystem
+    
+    
+Individual: Deutsch
+
+    Types: 
+        Sprache
+    
+    
+Individual: HealthCareTec
+
+    Types: 
+        Unternehmen
+    
+    Facts:  
+     gehoertZurBranche  Medizin
+    
+    
+Individual: JavaEE
+
+    Types: 
+        Framework
+    
+    
+Individual: MDSD
+
+    Types: 
+        Methode
+    
+    
+Individual: OOD
+
+    Types: 
+        Methode
+    
+    
+Individual: Finanzen
+
+    Annotations: 
+        rdfs:comment "Finances"@en
+    
+    Types: 
+        Branche
+    
+    
+Individual: Medizin
+
+    Annotations: 
+        rdfs:label "HealthCare"@en
+    
+    Types: 
+        Branche
+    
+    
+Individual: Python
+
+    Types: 
+        Programmiersprache
+    
+    
+Individual: Nigeria
+
+    Types: 
+        Land
+    
+    Facts:  
+     befindetSichIn  Afrika
+    
+    
+DisjointClasses: 
+    Datenbank,Framework,Produkt,Programmiersprache,Standard
+
+DisjointClasses: 
+    Methode,SoftSkill,Sprachfertigkeit,Technik,Taetigkeit
+
+DisjointClasses: 
+    Adresse,Agent,Branche,Kenntnis,Konferenz,Konferenzbeteiligung,Profil,Projekt,Projektteilnahme,Region,Sprache,Sprachlevel,Stellenausschreibung,Zeitraum
+
+DisjointClasses: 
+    Kontinent,Land,Ort
+

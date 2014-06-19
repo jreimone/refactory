@@ -1,0 +1,20 @@
+ROLEMODELMAPPING FOR <http://org.emftext/owl.ecore>
+
+"Pull up data property" maps <RereferenceSubX> {
+	 
+	 Base := DataProperty{
+	 	//originalReference := domain:ClassAtomic;
+	 	originalReference := domain:Disjunction -> conjunctions:Conjunction -> primaries:ClassAtomic;
+	 };
+	  
+	 Source := ClassAtomic{
+	 	reference := clazz;
+	 	newReference := clazz;
+	 };
+	 
+	 OrigReference := Class{
+	 	relatedElements := superClassesDescriptions:ClassAtomic -> clazz;
+	 };
+	 
+	 NewReference := Class;
+}

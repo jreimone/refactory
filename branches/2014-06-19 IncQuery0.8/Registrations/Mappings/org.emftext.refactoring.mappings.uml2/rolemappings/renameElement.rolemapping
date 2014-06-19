@@ -1,0 +1,5 @@
+ROLEMODELMAPPING FOR <http://www.eclipse.org/uml2/3.0.0/UML>
+
+"Rename Element" maps <RenameX> { 
+	 Nameable := NamedElement(name -> name) ; 
+}

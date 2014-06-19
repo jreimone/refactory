@@ -1,0 +1,12 @@
+/**
+Removes certain elements from a selected container.
+Used in "Remove Inverse Reference" (Ecore).
+*/
+RoleModel RemoveContainedX {
+
+	input ROLE Container;
+ 	ROLE Removee;
+
+ 	Container  [1..1] <>- Removee removees [1..*];
+
+}

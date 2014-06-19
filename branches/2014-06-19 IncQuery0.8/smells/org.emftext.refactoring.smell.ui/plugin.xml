@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         id="id2"
+         point="org.eclipse.e4.workbench.model">
+      <fragment
+            uri="fragment.e4xmi">
+      </fragment>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            category="org.emftext.refactoring.ui.preferences"
+            class="org.emftext.refactoring.smell.ui.preferences.QualitySmellsPreferencePage"
+            id="org.emftext.refactoring.preferences.smells.qualitySmells"
+            name="Quality Smells">
+      </page>
+      <page
+            category="org.emftext.refactoring.preferences.smells.qualitySmells"
+            class="org.emftext.refactoring.smell.ui.preferences.GenericSmellPreferencePage"
+            id="org.emftext.refactoring.preferences.smells.qualitySmells.generic"
+            name="Generic Quality Smells">
+      </page>
+      <page
+            category="org.emftext.refactoring.preferences.smells.qualitySmells"
+            class="org.emftext.refactoring.smell.ui.preferences.GenericQualityPreferencePage"
+            id="org.emftext.refactoring.preferences.smells.qualitySmells.qualities"
+            name="Generic Qualities">
+      </page>
+      <page
+            category="org.emftext.refactoring.preferences.smells.qualitySmells"
+            class="org.emftext.refactoring.smell.ui.preferences.ConcreteSmellPreferencePage"
+            id="org.emftext.refactoring.preferences.smells.qualitySmells.concrete"
+            name="Concrete Smells">
+      </page>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            category="org.emftext.refactory.ui.view"
+            class="org.emftext.refactoring.smell.ui.views.QualitiesView"
+            icon="icons/qualities.gif"
+            id="org.emftext.refactoring.smell.ui.views.QualitiesView"
+            name="Qualities">
+      </view>
+      <view
+            category="org.emftext.refactory.ui.view"
+            class="org.emftext.refactoring.smell.ui.views.QualitySmellsView"
+            icon="icons/poop.png"
+            id="org.emftext.refactoring.smell.ui.views.QualitySmellsView"
+            name="Quality Smells">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            id="org.emftext.refactoring.smell.ui.determine"
+            name="Determine Smells for open resource">
+      </command>
+      <command
+            id="org.emftext.refactoring.smell.ui.remove"
+            name="Remove All Active Smells">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="org.emftext.refactoring.smell.ui.handlers.DetermineSmells"
+            commandId="org.emftext.refactoring.smell.ui.determine">
+      </handler>
+      <handler
+            class="org.emftext.refactoring.smell.ui.handlers.RemoveSmells"
+            commandId="org.emftext.refactoring.smell.ui.remove">
+      </handler>
+      <handler
+            class="org.eclipse.ui.internal.views.markers.QuickFixHandler"
+            commandId="org.eclipse.jdt.ui.edit.text.java.correction.assist.proposals">
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="toolbar:org.emftext.refactoring.smell.ui.views.QualitySmellsView">
+         <command
+               commandId="org.emftext.refactoring.smell.ui.determine"
+               icon="icons/start.gif"
+               label="Determine Smells for open resource"
+               style="push">
+         </command>
+      </menuContribution>
+      <menuContribution
+            allPopups="false"
+            locationURI="toolbar:org.emftext.refactoring.smell.ui.views.QualitySmellsView">
+         <command
+               commandId="org.emftext.refactoring.smell.ui.remove"
+               icon="icons/remove.gif"
+               label="Remove All Active Smells"
+               style="push">
+         </command>
+      </menuContribution>
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:org.emftext.refactoring.smell.ui.views.QualitySmellsView">
+         <command
+               commandId="org.eclipse.jdt.ui.edit.text.java.correction.assist.proposals"
+               icon="icons/poop_remove.png"
+               label="Quick Fix Refactoring"
+               style="push">
+         </command>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="org.emftext.refactoring.smell.ui.perspective.RefactoryPerspectiveFactory"
+            icon="icons/Logo_R_32x32.png"
+            id="org.emftext.refactoring.smell.ui.perspectives."
+            name="Refactory">
+      </perspective>
+   </extension>
+
+</plugin>

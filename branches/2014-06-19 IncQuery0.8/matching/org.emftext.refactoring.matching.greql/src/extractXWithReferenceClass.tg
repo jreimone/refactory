@@ -1,0 +1,11 @@
+from containerContainer, origContainer, newContainer, extract, movedReference:V{Node}
+
+with containerContainer -->{Connection} origContainer and
+containerContainer -->{Connection} newContainer and
+origContainer -->{Connection} extract and
+newContainer -->{Connection} extract and
+origContainer -->{Connection} movedReference and
+movedReference -->{Connection} newContainer
+
+report containerContainer.name, origContainer.name, newContainer.name, extract.name, movedReference.name
+end

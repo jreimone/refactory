@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Test1
+Bundle-SymbolicName: org.ontomore.refactoring.totest
+Bundle-Version: 1.0.0
+Bundle-Vendor: Erik Tittel
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

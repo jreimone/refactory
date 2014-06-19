@@ -1,0 +1,104 @@
+epackage refactoring_specification ; 
+
+// plain Java imports
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EClass; 
+import org.eclipse.emf.common.util.EList; 
+import org.eclipse.emf.common.util.BasicEList; 
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Set;
+import java.util.LinkedHashSet;
+
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+
+// import of other EClasses
+import roles.Role;
+eclass RefactoringSpecification { 
+	getDeclaredVariables ( ) { 
+			EList <Variable> variables = new BasicEList <Variable> ( ) ; 
+			EList <Instruction> instructions = getInstructions ( ) ; 
+			for ( Instruction instruction : instructions ) { 
+				if ( instruction instanceof VariableDeclarationCommand ) { 
+					Variable var = ( ( VariableDeclarationCommand ) instruction ) .getVariable ( ) ; 
+					if ( var != null ) { 
+						variables .add ( var ) ; 
+					} 
+				} 
+			} 
+			return variables ; 
+	}
+	
+	getDeclaredIndexVariables ( ) { 
+			List <IndexVariable> variables = new ArrayList<IndexVariable>(); 
+			EList <Instruction> instructions = getInstructions ( ) ; 
+			for (Instruction instruction : instructions){ 
+				if (instruction instanceof IndexAssignmentCommand) { 
+					IndexVariable var = ((IndexAssignmentCommand) instruction).getVariable(); 
+					if (var != null) { 
+						variables.add(var); 
+					} 
+				} 
+			} 
+			return new BasicEList<IndexVariable>(variables); 
+	}
+		
+		 
+	getVariableByName ( ) { 
+			EList < Variable > variables = getDeclaredVariables ( ) ; 
+			for ( Variable variable : variables ) { 
+				if ( variable .getName ( ) .equals ( name ) ) { 
+					return variable ; 
+				} 
+			} 
+			return null ; 
+		} 
+		
+	getInstructionsReferencingRole() {
+		Set<Instruction> instructions = new LinkedHashSet<Instruction>();
+		List<Instruction> usedInstructions = getInstructions();
+		for (Instruction instruction : usedInstructions) {
+			boolean isReferencingObject = isRoleReferencedByObject(referencedRole, instruction);
+			if (isReferencingObject) {
+				instructions.add(instruction);
+			}
+			TreeIterator<EObject> iterator = EcoreUtil.getAllContents(instruction, true);
+			while (iterator.hasNext()) {
+				EObject eObject = (EObject) iterator.next();
+				isReferencingObject = isRoleReferencedByObject(referencedRole, eObject);
+				if (isReferencingObject) {
+					instructions.add(instruction);
+				}
+			}
+		}
+		return new BasicEList<Instruction>(instructions);
+	}
+	
+	isRoleReferencedByObject() {
+		EClass metaclass = eObject.eClass();
+		List<EReference> references = metaclass.getEAllReferences();
+		for (EReference reference : references) {
+			if (!reference.isContainment()) {
+				EClassifier classifier = reference.getEType();
+				if (classifier.isInstance(referencedRole)) {
+					Object value = eObject.eGet(reference);
+					if (value instanceof Role) {
+						if (((Role) value).equals(referencedRole)) {
+							return true;
+						}
+					} else if (value instanceof List<?>) {
+						for (Object listObject : (List<?>) value) {
+							if (listObject.equals(referencedRole)) {
+								return true;
+							}
+						}
+					}
+				}
+			}
+		}
+		return false;
+	}
+} 

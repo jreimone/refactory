@@ -1,0 +1,10 @@
+ROLEMODELMAPPING FOR <http://www.eclipse.org/emf/2002/Ecore>
+
+"Remove Inverse Reference" maps <RemoveContainedX> { 
+
+	Container := EReference {
+		removees := eOpposite;
+	};
+	
+	Removee := EReference;
+}

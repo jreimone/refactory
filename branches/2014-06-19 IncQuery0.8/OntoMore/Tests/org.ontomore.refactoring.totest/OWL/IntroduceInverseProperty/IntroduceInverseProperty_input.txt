@@ -1,0 +1,3 @@
+Selected element := ObjectProperty::hasProject
+
+iri (ObjectProperty) := hasEmployee 

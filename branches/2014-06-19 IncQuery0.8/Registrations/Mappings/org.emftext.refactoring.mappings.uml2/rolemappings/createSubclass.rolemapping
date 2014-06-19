@@ -1,0 +1,21 @@
+ROLEMODELMAPPING FOR <http://www.eclipse.org/uml2/3.0.0/UML> 
+
+/**
+ * Create Subclass - creates an empty subclass of a selected class.
+ *
+ * TODO define correct mapping
+ */
+"Create Subclass" maps <IntroduceReferenceClass> { 
+	 
+	 DerivationContainer := Package {
+	 	derivation := packagedElement;
+	 };
+	 
+	 // TODO jreimann: remove mapping of second attribute
+	 Derivation := Class(attribute1 -> name, attribute2 -> name) {
+	 	derivees := redefinedClassifier;
+	 };
+	 
+	 Derivee := Class;
+}	
+	

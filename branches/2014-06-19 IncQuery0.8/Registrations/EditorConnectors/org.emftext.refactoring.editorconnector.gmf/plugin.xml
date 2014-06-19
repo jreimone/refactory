@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+<!--
+   <extension
+         point="org.emftext.refactoring.editorconnector">
+      <editorconnector
+            editorconnector="org.eclipse.gmf.refactoring.editorconnector.GMFEditorConnector">
+      </editorconnector>
+   </extension>
+   -->
+<extension
+         point="org.eclipse.core.runtime.adapters">
+      <factory
+            adaptableType="org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor"
+            class="org.eclipse.gmf.refactoring.editorconnector.GMFEditorConnectorAdapterFactory">
+         <adapter
+               type="org.emftext.refactoring.editorconnector.IEditorConnector">
+         </adapter>
+      </factory>
+   </extension>
+</plugin>

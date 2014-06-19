@@ -1,0 +1,27 @@
+from containerReference: E{Connection},
+    //referer:  inIncidences{Connection}(movedReference),
+    source:  inIncidences{Connection}(origContainer),
+    target:  outIncidences{Connection}(containerContainer),
+    extracts: outIncidences{Connection}(origContainer),
+    moved:    outIncidences{Connection}(newContainer),
+    origContainer:V{Node},
+    movedReference:V{Node},
+    referer: extractPaths(pathSystem(origContainer, -->{Connection@thisEdge.connectionType ="AGGREGATION"}*))
+with  let trace:=vertexTrace(referer) in
+  		movedReference =trace[count(trace)-1]
+  and containerReference.connectionType = "ASSOCIATION"
+  //and referer.connectionType            = "AGGREGATION"
+  and source.connectionType            = "AGGREGATION"
+  and target.connectionType            = "AGGREGATION"
+  and extracts.connectionType          = "AGGREGATION"
+  and omega(target) = newContainer
+  and omega(moved)  = extract
+reportSet
+  containerContainer.name, origContainer.name, newContainer.name, extract.name, movedReference.name,
+  source.name, target.name, extracts.name, moved.name, containerReference.name, referer
+end
+where //movedReference    := alpha(containerReference),
+      newContainer      := omega(containerReference),
+      //origContainer      := alpha(referer),
+      containerContainer := alpha(source),
+      extract            := omega(extracts)

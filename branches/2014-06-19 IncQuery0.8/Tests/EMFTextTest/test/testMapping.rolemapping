@@ -1,0 +1,11 @@
+ROLEMODELMAPPING FOR <http://www.eclipse.org/emf/2002/Ecore>
+
+TestRuntimeRegistration maps <TestRoles> {
+	Derivation := EClass(attribute1 -> name){
+		derivees := eSuperTypes; 
+	};
+	DerivationContainer := EPackage{
+		derivation := eClassifiers;
+	};
+	TestInput := EClass;
+}

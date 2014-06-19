@@ -1,0 +1,18 @@
+----------------------------
+## Duplicate Class
+----------------------------
+-- Description
+Creates a new Class with the given name and copies the superclasses from the selected Class.
+
+-- Issues
+This refactoring might advanced by copying all Object- and DataProperties that belong
+to the selected Class. 
+
+-- Generic Refactoring
+"Duplicate With Reference" (OntoMore)
+
+-- Problems
+Refactoring works only when only one superclass is referenced.
+With several superclasses only the first is copied.
+With no superclasses nothing happens the message 
+"Refactoring rolled back because of some infos" is given.

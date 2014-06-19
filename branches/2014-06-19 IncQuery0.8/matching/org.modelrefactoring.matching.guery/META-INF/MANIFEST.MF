@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Matching
+Bundle-SymbolicName: org.modelrefactoring.matching.guery
+Bundle-Version: 1.0.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.emftext.language.refactoring.roles.resource.rolestext,
+ org.emftext.language.refactoring.rolemapping,
+ org.emftext.language.refactoring.rolemapping.resource.rolemapping,
+ org.modelrefactoring.guery,
+ org.modelrefactoring.guery.graph,
+ org.modelrefactoring.guery.resource.guery
+Export-Package: org.modelrefactoring.matching.guery

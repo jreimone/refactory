@@ -1,0 +1,189 @@
+/*******************************************************************************
+ * Copyright (c) 2006-2012
+ * Software Technology Group, Dresden University of Technology
+ * DevBoost GmbH, Berlin, Amtsgericht Charlottenburg, HRB 140026
+ * 
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *   Software Technology Group - TU Dresden, Germany;
+ *   DevBoost GmbH - Berlin, Germany
+ *      - initial API and implementation
+ ******************************************************************************/
+/**
+ * 
+ */
+package org.emftext.refactoring.interpreter.internal;
+
+import java.util.List;
+import java.util.Map;
+
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.emftext.language.refactoring.refactoring_specification.AFTER;
+import org.emftext.language.refactoring.refactoring_specification.ConcreteIndex;
+import org.emftext.language.refactoring.refactoring_specification.Constants;
+import org.emftext.language.refactoring.refactoring_specification.ConstantsReference;
+import org.emftext.language.refactoring.refactoring_specification.FIRST;
+import org.emftext.language.refactoring.refactoring_specification.IndexAssignmentCommand;
+import org.emftext.language.refactoring.refactoring_specification.LAST;
+import org.emftext.language.refactoring.refactoring_specification.ObjectReference;
+import org.emftext.language.refactoring.refactoring_specification.VariableReference;
+import org.emftext.language.refactoring.roles.Role;
+import org.emftext.refactoring.interpreter.IRefactoringStatus;
+import org.emftext.refactoring.interpreter.RefactoringStatus;
+import org.emftext.refactoring.util.RoleUtil;
+
+/**
+ * @author Jan Reimann
+ *
+ */
+public class IndexAssignmentInterpreter {
+
+	private RefactoringInterpreterContext context;
+	private Map<Role, List<EObject>> roleBindings;
+	
+	public IRefactoringStatus interpreteIndexCommand(IndexAssignmentCommand command, RefactoringInterpreterContext context, Map<Role, List<EObject>> roleBindings){
+		this.context = context;
+		this.roleBindings = roleBindings;
+		boolean result = true;
+		if(command instanceof FIRST){
+			result = interpreteFirst((FIRST) command);
+		}
+		if(command instanceof ConcreteIndex){
+			result = interpreteConcreteIndex((ConcreteIndex) command);
+		}
+		if(command instanceof LAST){
+			result = interpreteLast((LAST) command);
+		}
+		if(command instanceof AFTER){
+			result = interpreteAfter((AFTER) command);
+		}
+		if(!result){
+			return new RefactoringStatus(IRefactoringStatus.WARNING, "Couldn't determine the correct position in the model");
+		}
+		return new RefactoringStatus(IRefactoringStatus.OK);
+	}
+	
+	private boolean interpreteAfter(AFTER after) {
+		ObjectReference reference = after.getReference();
+		if(reference instanceof VariableReference){
+			EObject object = (EObject) context.getObjectForVariable(((VariableReference) reference).getVariable());
+			return setIndexForAfter(after, object);
+		}
+		if(reference instanceof ConstantsReference){
+			ConstantsReference constantsReference = (ConstantsReference) reference;
+			Constants constant = constantsReference.getReferencedConstant();
+			List<? extends EObject> elements = null;
+			switch (constant) {
+			case INPUT:
+				Role inputRole = RoleUtil.determineInputRole(roleBindings, constantsReference);
+				if(inputRole == null){
+					return false;
+				} else {
+					elements = roleBindings.get(inputRole);
+				}
+			default:
+				break;
+			}
+			if(elements == null){
+				return false;
+			}
+			EObject firstElement = elements.get(0);
+			return setIndexForAfter(after, firstElement);
+		}
+		return false;
+	}
+
+	private boolean setIndexForAfter(AFTER after, EObject object) {
+		// TODO: extract methods in this class and consolidate them !!!!
+		EObject parent = object.eContainer();
+		if(parent == null){
+			// object is root
+			if(EcoreUtil.getRootContainer(object).equals(object)){
+				context.setIndexForVariable(after.getVariable(), 0);
+				return true;
+			}
+			return true;
+		}
+		EStructuralFeature feature = object.eContainingFeature();
+		if(feature.isMany()){
+			int index = ((List<?>) parent.eGet(feature)).indexOf(object);
+			index++;
+			context.setIndexForVariable(after.getVariable(), index);
+			return true;
+		} else {
+			context.setIndexForVariable(after.getVariable(), 0);
+			return true;
+		}
+	}
+
+	private boolean interpreteFirst(FIRST first){
+		ObjectReference reference = first.getReference();
+		if(reference instanceof VariableReference){
+			EObject object = (EObject) context.getObjectForVariable(((VariableReference) reference).getVariable());
+			return setIndexForFIRST(first, object);
+		}
+		if(reference instanceof ConstantsReference){
+			ConstantsReference constantsReference = (ConstantsReference) reference;
+			Constants constant = constantsReference.getReferencedConstant();
+			List<EObject> elements = null;
+			switch (constant) {
+			case INPUT:
+				Role inputRole = RoleUtil.determineInputRole(roleBindings, constantsReference);
+				if(inputRole == null){
+					return false;
+				} else {
+					elements = roleBindings.get(inputRole);
+				}
+			default:
+				break;
+			}
+			if(elements == null){
+				return false;
+			}
+			EObject firstElement = elements.get(0);
+			return setIndexForFIRST(first, firstElement);
+		}
+		return false;
+	}
+
+	/**
+	 * @param first
+	 * @param object
+	 * @return
+	 */
+	private boolean setIndexForFIRST(FIRST first, EObject object) {
+		EObject parent = object.eContainer();
+		if(parent == null){
+			// object is root
+			if(EcoreUtil.getRootContainer(object).equals(object)){
+				context.setIndexForVariable(first.getVariable(), 0);
+				return true;
+			}
+			return true;
+		}
+		EStructuralFeature feature = object.eContainingFeature();
+		if(feature.isMany()){
+			int index = ((List<?>) parent.eGet(feature)).indexOf(object);
+			context.setIndexForVariable(first.getVariable(), index);
+			return true;
+		} else {
+			context.setIndexForVariable(first.getVariable(), 0);
+			return true;
+		}
+	}
+	
+	private boolean interpreteConcreteIndex(ConcreteIndex index){
+		context.setIndexForVariable(index.getVariable(), index.getIndex());
+		return true;
+	}
+	
+	private boolean interpreteLast(LAST last){
+		throw new UnsupportedOperationException("implement LAST");
+	}
+}

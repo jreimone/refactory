@@ -1,0 +1,13 @@
+REFACTORING FOR <DuplicateWithReference> 
+
+STEPS { 
+	object base := Base from filter(INPUT);
+	object container := Container as trace (INPUT);
+	object appendix := Appendix from path(INPUT);
+	
+	index positionAfterBase := after(base);
+	
+	create new newObject:Duplicate in container at positionAfterBase;
+	assign newObject.name;
+	set use of appendix in newObject;
+} 

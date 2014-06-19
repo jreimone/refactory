@@ -1,0 +1,19 @@
+REFACTORING FOR <ReplaceFeatureInContainer> 
+
+STEPS { 
+	object container := Container from uptree(INPUT);
+	object featureContainer := FeatureContainer as trace(INPUT);
+	object origFeature := OrigFeature from filter(INPUT);
+	
+	index afterOrigFeature := after(origFeature);
+	create new newFeature:NewFeature in featureContainer at afterOrigFeature;
+	assign newFeature.name;
+	
+	index afterFeatureContainer := after(featureContainer);
+	create new range:Range in container at afterFeatureContainer;
+	assign range.name;
+	
+	set use of range in newFeature;
+	
+	remove origFeature;
+}

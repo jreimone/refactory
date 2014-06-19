@@ -1,0 +1,28 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: EMFText Parser Plugin: refspec
+Bundle-SymbolicName: org.emftext.language.refactoring.specification.resource.refspec;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Vendor: Software Technology Group - TU Dresden Germany
+Require-Bundle: org.eclipse.core.runtime;resolution:=optional,
+  org.eclipse.core.resources;resolution:=optional,
+  org.eclipse.emf.ecore,
+  org.eclipse.emf.ecore.change,
+  org.eclipse.emf.validation;resolution:=optional,
+  org.emftext.access;resolution:=optional,
+  org.emftext.refactoring.registry.rolemodel,
+  org.emftext.refactoring.util,
+  org.emftext.refactoring.registry.refactoringspecification,
+  org.emftext.commons.antlr3_4_0,
+  org.emftext.language.refactoring.specification,
+  org.emftext.language.refactoring.roles
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.emftext.language.refactoring.specification.resource,
+  org.emftext.language.refactoring.specification.resource.analysis,
+  org.emftext.language.refactoring.specification.resource.mopp,
+  org.emftext.language.refactoring.specification.resource.debug,
+  org.emftext.language.refactoring.specification.resource.launch,
+  org.emftext.language.refactoring.specification.resource.grammar,
+  org.emftext.language.refactoring.specification.resource.util
+Bundle-Activator: org.emftext.language.refactoring.specification.resource.mopp.RefspecPlugin

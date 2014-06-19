@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            name="%view.name"
+            icon="icons/obj16/req_plugins_obj.gif"
+            category="org.eclipse.pde.ui"
+            class="org.eclipse.pde.internal.visualization.dependency.views.PluginVisualizationView"
+            id="org.eclipse.pde.visualization.views.SampleView">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="org.eclipse.pde.ui.PDEPerspective">
+         <view
+               relationship="bottom"
+               id="org.eclipse.pde.visualization.views.SampleView">
+         </view>
+      </perspectiveExtension>
+   </extension>
+</plugin>

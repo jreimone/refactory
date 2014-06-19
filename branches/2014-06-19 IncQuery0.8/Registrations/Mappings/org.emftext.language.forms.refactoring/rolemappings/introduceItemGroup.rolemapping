@@ -1,0 +1,20 @@
+ROLEMODELMAPPING FOR <http://www.emftext.org/language/forms> 
+
+"Introduce Item Group" maps <ExtractXwithReferenceClass> {
+
+	Extract := Item;
+	
+	OrigContainer := Group {
+		extracts := items;
+//		referer := form;
+	};
+	
+	NewContainer := Group(newName -> name){
+		moved := items;
+	};
+	
+	ContainerContainer := Form {
+		source := groups;
+		target := groups;
+	};
+} 

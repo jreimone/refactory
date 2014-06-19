@@ -1,0 +1,9 @@
+REFACTORING FOR <MoveXloosely> 
+
+STEPS { 
+	object containerObject := Container from uptree(INPUT);
+	object neighborObject := containerObject.neighbor;
+	index targetIndex := after(neighborObject);
+	
+	move Container.movedElements to containerObject at targetIndex;
+} 

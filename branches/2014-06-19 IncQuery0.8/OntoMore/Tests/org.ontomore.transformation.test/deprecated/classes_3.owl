@@ -1,0 +1,25 @@
+Prefix: : <http://www.ontomore.org/test/transformation/classes.owl#>
+
+Ontology: <http://www.ontomore.org/test/transformation/classes.owl>
+
+Class: Person
+
+Class: Human
+	EquivalentTo: Person
+
+Class: Employee
+	SubClassOf: livesIn some Country
+
+Class: GermanEmployee
+	EquivalentTo:
+		Employee that
+		livesIn only Germany and
+		livesIn some Germany	
+
+Class: Country
+
+Class: Germany
+	SubClassOf: Country
+
+ObjectProperty: livesIn
+	Characteristics: Functional

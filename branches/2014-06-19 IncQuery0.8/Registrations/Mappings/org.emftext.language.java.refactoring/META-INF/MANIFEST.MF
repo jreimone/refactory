@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: JaMoPP Refactorings
+Bundle-SymbolicName: org.emftext.language.java.refactoring;singleton:=true
+Bundle-Version: 0.0.1.qualifier
+Bundle-Activator: org.emftext.jamopp.refactoring.Activator
+Bundle-Vendor: Jan Reimann
+Require-Bundle: org.eclipse.core.runtime,
+ org.emftext.refactoring.registry.rolemapping,
+ org.emftext.language.java,
+ org.emftext.language.refactoring.roles,
+ org.eclipse.emf.ecore.change,
+ org.emftext.language.refactoring.specification,
+ org.emftext.refactoring.util,
+ org.emftext.language.java.resource.java
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy

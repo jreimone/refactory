@@ -1,0 +1,18 @@
+ROLEMODELMAPPING FOR <http://www.eclipse.org/emf/2002/Ecore> 
+
+/**
+ * This refactoring extracts a set of EClassifiers to a new sub EPackage.
+ */
+"Extract Sub EPackage" maps <ExtractSubX> {
+
+	Extractee := EClassifier;
+	
+	OrigContainer := EPackage {
+		extracts := eClassifiers;
+		newParent := eSubpackages;
+	};
+	
+	NewContainer := EPackage(name -> name) {
+		moved := eClassifiers;
+	};
+}

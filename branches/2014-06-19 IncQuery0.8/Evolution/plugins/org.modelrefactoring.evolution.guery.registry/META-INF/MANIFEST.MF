@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: GUERY Registry
+Bundle-SymbolicName: org.modelrefactoring.evolution.guery.registry;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.modelrefactoring.evolution.guery.registry.Activator
+Require-Bundle: org.eclipse.core.runtime,
+ org.modelrefactoring.guery,
+ org.modelrefactoring.guery.graph
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.modelrefactoring.evolution.guery.registry

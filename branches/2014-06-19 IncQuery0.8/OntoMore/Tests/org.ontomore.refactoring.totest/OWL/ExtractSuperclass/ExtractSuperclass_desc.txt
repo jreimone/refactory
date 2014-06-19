@@ -1,0 +1,16 @@
+----------------------------
+## Extract Superclass
+----------------------------
+-- Description
+Create new class, move the selected ObjectProperty or DataProperty
+to that class. Make the new class a superclass of the domain of the
+property and put it as new domain. 
+
+-- Generic Refactoring
+"Extract Loosely X" (OntoMore)
+
+-- Issues
+The Superclass could be put before not after the original class.
+
+-- Problems
+Same problem as with Rename Element with refactoring over an newly opened file.

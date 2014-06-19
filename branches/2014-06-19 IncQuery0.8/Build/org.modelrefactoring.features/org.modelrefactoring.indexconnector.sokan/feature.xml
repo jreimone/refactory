@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.modelrefactoring.indexconnector.sokan"
+      label="Refactory Index Connector for Sokan"
+      version="0.9.2"
+      provider-name="Software Technology Group - TU Dresden">
+
+   <description url="http://modelrefactoring.org">
+      Index Connector for Sokan: Uses the Sokan Workspace Indexer to find cross-references between models.
+   </description>
+
+   <copyright>
+      Copyright (c) 2006-2014 Software Technology Group, Dresden University of Technology, Germany; DevBoost GmbH, Berlin, Amtsgericht Charlottenburg, HRB 140026.
+   </copyright>
+
+   <license>
+      Eclipse Public License v1.0
+
+Copyright (c) 2006-2014
+Software Technology Group, Dresden University of Technology
+DevBoost GmbH, Berlin, Amtsgericht Charlottenburg, HRB 140026.
+
+All rights reserved. This program and the accompanying materials are made available under the terms of the Eclipse Public License v1.0 which accompanies this distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
+
+Contributors:
+  Software Technology Group - TU Dresden, Germany;
+  DevBoost GmbH - Berlin, Germany
+     - initial API and implementation
+   </license>
+
+   <requires>
+      <import feature="org.modelrefactoring.runtime"/>
+      <import plugin="org.emftext.refactoring.indexconnector"/>
+      <import plugin="org.eclipse.emf.common"/>
+      <import plugin="org.eclipse.emf.ecore"/>
+      <import plugin="org.reuseware.sokan.index"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="org.eclipse.core.runtime"/>
+   </requires>
+
+   <plugin
+         id="org.emftext.refactoring.indexconnector.sokan"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>

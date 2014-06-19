@@ -1,0 +1,14 @@
+PROGRAM p1 
+
+CONST
+	MINVALUE = 10 ,
+	MAXVALUE = 100 ; 
+	
+VAR 
+	x , y , z ; 
+
+BEGIN 
+	x :=  MAXVALUE - MINVALUE ; 
+	y :=  x *12; 
+	z :=  y / MINVALUE 
+END.

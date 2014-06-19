@@ -1,0 +1,12 @@
+RoleModel TestAssociation { 
+	optional input ROLE AssociationSource;
+	optional ROLE AssociationTarget;
+	optional ROLE AssociationTransitiveTarget;
+	optional ROLE AssociationReflexiveTarget;
+	
+	//EClass that plays role AssociationSource must have references to EClass playing role AssociationTarget
+	AssociationSource source [1..1] -- AssociationTarget target [1..*]; 
+	transitive : AssociationSource [1..1] -- AssociationTransitiveTarget transTarget [1..2];
+	//EClass that plays role AssociationSource must play role AssociationReflexiveTarget too
+	reflexive : AssociationSource [1..1] -- AssociationReflexiveTarget reflTarget [1..1];
+} 

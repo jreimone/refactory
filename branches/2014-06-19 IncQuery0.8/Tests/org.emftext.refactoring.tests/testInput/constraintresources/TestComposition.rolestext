@@ -1,0 +1,16 @@
+RoleModel TestComposition { 
+	optional input ROLE CompositionOwner;
+	optional ROLE CompositionChild;
+	optional ROLE CompositionTransitiveChild;
+	optional ROLE CompositionReflexiveChild;
+
+	//EClass that plays role CompositionOwner must contain directly an EClass playing role CompositionChild
+	//besides that the multiplicity must fit
+	CompositionOwner owner [1..1] <>- CompositionChild child [0..*];
+	//EClass that plays role CompositionOwner must contain one ore more EClasses that transitively
+	//contains an EClass playing role CompositionChild
+	//besides that the multiplicity must fit
+	transitive : CompositionOwner owner [1..1] <>- CompositionTransitiveChild transitiveChild [1..3];
+	//EClass that plays role CompositionOwner must play role CompositionReflexiveChild too
+	reflexive: CompositionOwner owner [1..1] <>- CompositionReflexiveChild reflChild [1..1];
+} 

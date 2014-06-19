@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.qualitune.tracing.vapoditrace/src" editDirectory="/org.qualitune.tracing.vapoditrace/src"
+    editorDirectory="/org.qualitune.tracing.vapoditrace/src" modelPluginID="org.qualitune.tracing.vapoditrace"
+    modelName="VapodiTrace" importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0"
+    copyrightFields="false" editPluginID="org.qualitune.tracing.vapoditrace" editorPluginID="org.qualitune.tracing.vapoditrace"
+    usedGenPackages="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
+  <foreignModel>VapodiTrace.ecore</foreignModel>
+  <genPackages prefix="vapoditrace" basePackage="org.qualitune.tracing" disposableProviderFactory="true"
+      ecorePackage="VapodiTrace.ecore#_3mjusDiJEeKtS_pQFSztqQ">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="VapodiTrace.ecore#//TraceType">
+      <genEnumLiterals ecoreEnumLiteral="VapodiTrace.ecore#//TraceType/OMITTED_TRACETYPE"/>
+      <genEnumLiterals ecoreEnumLiteral="VapodiTrace.ecore#//TraceType/CREATE"/>
+      <genEnumLiterals ecoreEnumLiteral="VapodiTrace.ecore#//TraceType/READ"/>
+      <genEnumLiterals ecoreEnumLiteral="VapodiTrace.ecore#//TraceType/UPDATE"/>
+      <genEnumLiterals ecoreEnumLiteral="VapodiTrace.ecore#//TraceType/DELETE"/>
+      <genEnumLiterals ecoreEnumLiteral="VapodiTrace.ecore#//TraceType/WRITE"/>
+      <genEnumLiterals ecoreEnumLiteral="VapodiTrace.ecore#//TraceType/EXISTENCE"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="VapodiTrace.ecore#//ConcernType">
+      <genEnumLiterals ecoreEnumLiteral="VapodiTrace.ecore#//ConcernType/OMITTED_CONCERN"/>
+      <genEnumLiterals ecoreEnumLiteral="VapodiTrace.ecore#//ConcernType/OBJECT"/>
+      <genEnumLiterals ecoreEnumLiteral="VapodiTrace.ecore#//ConcernType/ATTRIBUTE"/>
+      <genEnumLiterals ecoreEnumLiteral="VapodiTrace.ecore#//ConcernType/TYPE"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="VapodiTrace.ecore#//UniverseType">
+      <genEnumLiterals ecoreEnumLiteral="VapodiTrace.ecore#//UniverseType/OMITTED_UNIVERSE"/>
+      <genEnumLiterals ecoreEnumLiteral="VapodiTrace.ecore#//UniverseType/LIGHT_UNIVERSE"/>
+      <genEnumLiterals ecoreEnumLiteral="VapodiTrace.ecore#//UniverseType/SHADOW_UNIVERSE"/>
+    </genEnums>
+    <genClasses ecoreClass="VapodiTrace.ecore#_3mjusTiJEeKtS_pQFSztqQ">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference VapodiTrace.ecore#//TraceLink/destination"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference VapodiTrace.ecore#//TraceLink/source"/>
+    </genClasses>
+    <genClasses ecoreClass="VapodiTrace.ecore#_3mmK8DiJEeKtS_pQFSztqQ">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference VapodiTrace.ecore#//TraceCollection/traceLinks"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference VapodiTrace.ecore#//TraceCollection/shadowObjects"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference VapodiTrace.ecore#//TraceCollection/trash"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="VapodiTrace.ecore#//EEntity">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute VapodiTrace.ecore#//EEntity/attributeName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute VapodiTrace.ecore#//EEntity/concern"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="VapodiTrace.ecore#//TraceEntity">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute VapodiTrace.ecore#//TraceEntity/semantics"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute VapodiTrace.ecore#//TraceEntity/universe"/>
+    </genClasses>
+    <genClasses ecoreClass="VapodiTrace.ecore#//DynamicEntity">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference VapodiTrace.ecore#//DynamicEntity/attribute"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference VapodiTrace.ecore#//DynamicEntity/esf"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference VapodiTrace.ecore#//DynamicEntity/object"/>
+    </genClasses>
+    <genClasses ecoreClass="VapodiTrace.ecore#//StaticEntity">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute VapodiTrace.ecore#//StaticEntity/objectName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute VapodiTrace.ecore#//StaticEntity/type"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

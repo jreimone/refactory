@@ -1,0 +1,11 @@
+REFACTORING FOR <ExtractX> 
+
+STEPS { 
+	object containerContainerObject := ContainerContainer from uptree(INPUT); 
+	object origContainerObjects := OrigContainer as trace(INPUT); 
+
+	create new nc:NewContainer in containerContainerObject; 
+	assign nc.newName;
+	move OrigContainer.extracts to nc distinct;  
+	set use of nc in origContainerObjects; 
+} 

@@ -1,0 +1,8 @@
+ROLEMODELMAPPING FOR <http://www.emftext.org/java>
+
+/*
+	Removes a Toast message from the background task (BroadcastReciever, Service).
+*/
+"Remove toast statement from background task" maps <SelectX> { 
+	 Selection := java.statements.ExpressionStatement; 
+}

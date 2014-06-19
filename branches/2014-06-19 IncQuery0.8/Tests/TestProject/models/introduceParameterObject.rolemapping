@@ -1,0 +1,17 @@
+ROLEMODELMAPPING FOR <http://www.eclipse.org/uml2/3.0.0/UML> 
+IMPORTS <platform:/resource/TestProject/models/DefaultName.ecore>
+
+"Introduce Parameter Object" maps <ExtractXfromChildren> {  
+	ContainerContainer := uml.Model {
+		source := packagedElement;
+		target := packagedElement;
+	};
+	
+	OrigContainer := Class {
+		extracts := ownedOperation -> ownedParameter;
+	};
+	
+	NewContainer := Class (newName -> name);
+	
+	Extractee := Parameter ;
+}	

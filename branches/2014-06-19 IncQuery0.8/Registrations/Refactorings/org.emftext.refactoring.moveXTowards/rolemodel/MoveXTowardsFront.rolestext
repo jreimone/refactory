@@ -1,0 +1,8 @@
+/**
+Moves an element one step within its container in descending direction.
+*/ RoleModel MoveXTowardsFront { 
+	input super ROLE Element; 
+	ROLE Container; 
+	
+	Container [1..1] <>- Element element [1..*]; 
+}

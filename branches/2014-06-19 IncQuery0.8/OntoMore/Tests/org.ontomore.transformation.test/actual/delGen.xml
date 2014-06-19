@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="RunTransformationTests" default="DeleteEcoreTarget" basedir=".">
+	<target name="DeleteEcoreTarget">
+		<delete>
+			<fileset dir=".">
+				<include name="*.ecore" />
+				<include name="*.xmi" />
+				<exclude name="*.owl" />
+				<exclude name="*.xml" />
+			</fileset>
+		</delete>
+	</target>
+</project>
+

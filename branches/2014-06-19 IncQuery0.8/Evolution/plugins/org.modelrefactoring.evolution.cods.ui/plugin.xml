@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            category="org.emftext.refactory.ui.view"
+            class="org.modelrefactoring.evolution.cods.ui.InstanceModelView"
+            icon="icons/reltopics_co.gif"
+            id="org.modelrefactoring.evolution.cods.ui.InstanceModelView"
+            name="Instance Models">
+      </view>
+      <view
+            category="org.emftext.refactory.ui.view"
+            class="org.modelrefactoring.evolution.cods.ui.TransformationModelView"
+            icon="icons/trafo.gif"
+            id="org.modelrefactoring.evolution.cods.ui.TransformationModelView"
+            name="Transformation Models"
+            restorable="true">
+      </view>
+   </extension>
+
+</plugin>

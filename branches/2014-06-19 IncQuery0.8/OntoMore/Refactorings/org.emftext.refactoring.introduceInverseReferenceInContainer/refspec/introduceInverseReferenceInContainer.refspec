@@ -1,0 +1,19 @@
+REFACTORING FOR <IntroduceInverseReferenceInContainer> 
+
+STEPS { 
+	object reference := Reference from filter(INPUT);
+	object container := Container as trace(INPUT);
+	object domain := Domain from path(INPUT);
+	object range := Range from path(INPUT);
+	
+	index afterReferencePosition := after(reference);
+	
+	create new inverseReference:InverseReference in container at afterReferencePosition;
+	assign inverseReference.name;
+	
+	set use of domain in inverseReference;
+	set use of range in inverseReference;
+	
+	set use of inverseReference in reference;
+	set use of reference in inverseReference;
+} 

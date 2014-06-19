@@ -1,0 +1,15 @@
+ROLEMODELMAPPING FOR <http://www.eclipse.org/emf/2002/Ecore> 
+
+"Derive Composite Interface" maps <IntroduceReferenceClass> { 
+	 
+	 DerivationContainer := EPackage {
+	 	derivation := eClassifiers;
+	 };
+	 
+	 // TODO jreimann: remove mapping of second attribute
+	 Derivation := EClass(attribute1 -> name, attribute2 -> name) {
+	 	derivees := eSuperTypes;
+	 };
+	 
+	 Derivee := EClass;
+}	

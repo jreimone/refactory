@@ -1,0 +1,12 @@
+ROLEMODELMAPPING FOR <http://emftext.org/office>
+
+"Move Employee Next To" maps <MoveXloosely> { 
+	 Movee := Employee;
+	 
+	 Neighbor := Employee;
+	 
+	 Container := OfficeModel{
+	 	neighbor := elements;
+	 	movedElements := elements;
+	 }; 
+}

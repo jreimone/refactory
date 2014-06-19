@@ -1,0 +1,8 @@
+ROLEMODELMAPPING FOR <http://www.emftext.org/java>
+
+/*
+	Replaces the exact AlarmManager with an inexact.
+*/
+"Replace exact with inexact AlarmManager" maps <SelectX> { 
+	 Selection := java.references.MethodCall; 
+}

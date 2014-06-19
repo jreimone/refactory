@@ -1,0 +1,3 @@
+Selected element := Ontology
+
+uri := http://ontomore.org/test/newName.owl

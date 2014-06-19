@@ -1,0 +1,5 @@
+ROLEMODELMAPPING FOR <http://www.omg.org/spec/BPMN/20100524/MODEL-XMI>  
+
+"Rename Flow Element" maps <RenameX> { 
+	 Nameable := FlowElement(name -> name); 
+}

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+	<!-- role mappings -->
+	<extension
+         point="org.emftext.refactoring.rolemapping">
+      <rolemapping
+            rolemapping_resource="rolemappings/extractCompositeState.rolemapping">
+            <mappingIcon
+                  icon="icons/extract_composite_state.gif"
+                  mapping_name="Extract Composite State">
+            </mappingIcon>
+      </rolemapping>
+      <rolemapping
+            rolemapping_resource="rolemappings/pullUpProperty.rolemapping">
+      </rolemapping>
+      <rolemapping
+            rolemapping_resource="rolemappings/pullUpOperation.rolemapping">
+      </rolemapping>
+      <rolemapping
+            rolemapping_resource="rolemappings/pullUpOperationToInterface.rolemapping">
+      </rolemapping>
+      <rolemapping
+            rolemapping_resource="rolemappings/pullUpOperationToSuperInterface.rolemapping">
+      </rolemapping>
+      <rolemapping
+            rolemapping_resource="rolemappings/renameElement.rolemapping">
+            <mappingIcon
+                  icon="icons/rename_element.gif"
+                  mapping_name="Rename Element">
+            </mappingIcon>
+      </rolemapping>
+      <rolemapping
+            rolemapping_resource="rolemappings/extractSubPackage.rolemapping">
+      </rolemapping>
+      <rolemapping
+            rolemapping_resource="rolemappings/extractSuperClass.rolemapping">
+      </rolemapping>
+      <rolemapping
+            rolemapping_resource="rolemappings/extractInterface.rolemapping">
+      </rolemapping>
+      <rolemapping
+            rolemapping_resource="rolemappings/createSubInterface.rolemapping">
+      </rolemapping>
+      <rolemapping
+            rolemapping_resource="rolemappings/createSubclass.rolemapping">
+      </rolemapping>
+      <rolemapping
+            rolemapping_resource="rolemappings/removeUnusedClass.rolemapping">
+      </rolemapping>
+      <rolemapping
+            rolemapping_resource="rolemappings/removeEmptySuperclass.rolemapping">
+      </rolemapping>
+      <rolemapping
+            rolemapping_resource="rolemappings/introduceParameterObject.rolemapping">
+      </rolemapping>
+  </extension>
+
+	<!-- post processors -->
+	<extension
+         point="org.emftext.refactoring.postprocessor">
+      <postprocessor
+            mapping_name="Extract Composite State"
+            nsUri="http://www.eclipse.org/uml2/4.0.0/UML"
+            postprocessor="org.eclipse.uml2.refactoring.UMLExtractCompositeStatePostProcessor">
+      </postprocessor>
+      <postprocessor
+            mapping_name="Introduce Parameter Object"
+            nsUri="http://www.eclipse.org/uml2/4.0.0/UML"
+            postprocessor="org.eclipse.uml2.refactoring.IntroduceParameterObjectPostProcessor">
+      </postprocessor>
+  </extension>
+</plugin>

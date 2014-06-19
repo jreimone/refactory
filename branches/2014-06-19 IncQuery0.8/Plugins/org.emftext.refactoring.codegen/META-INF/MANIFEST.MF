@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Codegen
+Bundle-SymbolicName: org.emftext.refactoring.codegen;singleton:=true
+Bundle-Version: 0.0.1
+Bundle-Activator: org.emftext.refactoring.codegen.Activator
+Bundle-Vendor: Jan Reimann
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.emftext.language.refactoring.rolemapping,
+ org.eclipse.core.resources,
+ org.eclipse.jdt.core,
+ org.emftext.sdk.codegen,
+ org.emftext.refactoring.util,
+ org.emftext.language.manifest
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy

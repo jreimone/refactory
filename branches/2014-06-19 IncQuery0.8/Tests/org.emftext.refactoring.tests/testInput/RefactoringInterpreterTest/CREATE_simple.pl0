@@ -1,0 +1,8 @@
+PROGRAM CREATEsimple 
+
+VAR 
+	x ; 
+	
+BEGIN 
+	x := + 2 
+	END . 

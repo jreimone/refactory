@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.core.runtime.adapters">
+      <factory
+            adaptableType="org.eclipse.jdt.internal.ui.javaeditor.CompilationUnitEditor"
+            class="org.modelrefactoring.editorconnector.jdt.JDTEditorConnectorAdapterFactory">
+         <adapter
+               type="org.emftext.refactoring.editorconnector.IEditorConnector">
+         </adapter>
+      </factory>
+   </extension>
+
+</plugin>

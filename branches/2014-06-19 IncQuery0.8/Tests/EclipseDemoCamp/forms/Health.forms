@@ -1,0 +1,16 @@
+FORM "Some questions about your health" 
+	
+	GROUP "General questions"
+	ITEM "Name" : FREETEXT
+	ITEM "Date of birth" : DATE
+	ITEM "Status" : CHOICE ( "single", "married", "widowed") 
+	ITEM "City" : FREETEXT
+	ITEM "Street" : FREETEXT
+	ITEM "Country" : FREETEXT
+	
+	GROUP "Drugs" 
+	ITEM "Do you smoke" : DECISION ( "Yes", "No" )
+	ITEM "Do you drink a lot?" : DECISION ( "Yes", "No" )
+	ITEM "Do you consume any other drugs?" : CHOICE (TAKESDRUGS : "Yes" , "No" )
+	ITEM "Which?" ONLY IF TAKESDRUGS : FREETEXT
+ 

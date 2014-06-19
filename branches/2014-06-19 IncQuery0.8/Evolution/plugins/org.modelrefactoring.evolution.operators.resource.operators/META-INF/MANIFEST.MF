@@ -1,0 +1,24 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: EMFText Parser Plugin: operators
+Bundle-SymbolicName: org.modelrefactoring.evolution.operators.resource.operators;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Vendor: Software Technology Group - TU Dresden Germany
+Require-Bundle: org.eclipse.core.runtime;resolution:=optional,
+  org.eclipse.core.resources;resolution:=optional,
+  org.eclipse.emf.ecore,
+  org.eclipse.emf.ecore.change,
+  org.eclipse.emf.validation;resolution:=optional,
+  org.emftext.access;resolution:=optional,
+  org.emftext.commons.antlr3_4_0,
+  org.modelrefactoring.evolution.operators
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.modelrefactoring.evolution.operators.resource.operators,
+  org.modelrefactoring.evolution.operators.resource.operators.analysis,
+  org.modelrefactoring.evolution.operators.resource.operators.mopp,
+  org.modelrefactoring.evolution.operators.resource.operators.debug,
+  org.modelrefactoring.evolution.operators.resource.operators.launch,
+  org.modelrefactoring.evolution.operators.resource.operators.grammar,
+  org.modelrefactoring.evolution.operators.resource.operators.util
+Bundle-Activator: org.modelrefactoring.evolution.operators.resource.operators.mopp.OperatorsPlugin

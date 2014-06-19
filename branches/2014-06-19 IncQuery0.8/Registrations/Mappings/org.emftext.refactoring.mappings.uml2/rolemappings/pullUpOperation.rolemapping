@@ -1,0 +1,16 @@
+ROLEMODELMAPPING FOR <http://www.eclipse.org/uml2/3.0.0/UML>
+
+/**
+ * Pull Up Operation - moves an operation of a class to one of its superclasses.
+ */
+"Pull Up Operation" maps <MoveX> {
+
+	Movee := Operation;
+	SourceContainer := Class {
+		sourceContainment := ownedElement;
+		containerReference := superClass;
+	};
+	TargetContainer := Class {
+		targetContainment := ownedElement;
+	};
+} 

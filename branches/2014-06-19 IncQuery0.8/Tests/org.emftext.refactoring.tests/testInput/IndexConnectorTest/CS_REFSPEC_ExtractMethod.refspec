@@ -1,0 +1,10 @@
+REFACTORING ExtractMethod 
+FOR <platform:/resource/org.emftext.refactoring.tests/testInput/IndexConnectorTest/CS_ROLE_ExtractMethod.rolestext>
+
+STEPS { 
+	create new nc:NewContainer in ContainerContainer;
+	assign nc.newName;
+	move OrigContainer.extracts  to nc;
+	create new mr:MovedReference in OrigContainer;
+	set use of nc in mr;
+} 

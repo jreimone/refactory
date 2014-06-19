@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmi:id="_SYH7YElUEd-Ar4o0zdEoGg" type="EcoreTools" name="Trees" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_TAj0YElUEd-Ar4o0zdEoGg" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_TAmQoElUEd-Ar4o0zdEoGg" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_TAos4ElUEd-Ar4o0zdEoGg" type="5001">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_TAos4UlUEd-Ar4o0zdEoGg"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_TAos4klUEd-Ar4o0zdEoGg"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_TAos40lUEd-Ar4o0zdEoGg"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_TApT8ElUEd-Ar4o0zdEoGg" type="5002">
+      <children xmi:type="notation:Node" xmi:id="_a-J9EElUEd-Ar4o0zdEoGg" type="2002">
+        <element xmi:type="ecore:EOperation" href="Trees.ecore#//Node/next"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_a-J9EUlUEd-Ar4o0zdEoGg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_hexxcElUEd-Ar4o0zdEoGg" type="2002">
+        <element xmi:type="ecore:EOperation" href="Trees.ecore#//Node/hasNext"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_hexxcUlUEd-Ar4o0zdEoGg"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_TApT8UlUEd-Ar4o0zdEoGg"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_TApT8klUEd-Ar4o0zdEoGg"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_TApT80lUEd-Ar4o0zdEoGg"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_TAj0YUlUEd-Ar4o0zdEoGg" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="Trees.ecore#//Node"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_TAj0YklUEd-Ar4o0zdEoGg" x="130" y="135"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_SYH7YUlUEd-Ar4o0zdEoGg"/>
+  <element xmi:type="ecore:EPackage" href="Trees.ecore#/"/>
+  <edges xmi:type="notation:Edge" xmi:id="_WccFYElUEd-Ar4o0zdEoGg" type="3002" source="_TAj0YElUEd-Ar4o0zdEoGg" target="_TAj0YElUEd-Ar4o0zdEoGg">
+    <children xmi:type="notation:Node" xmi:id="_WcfIsElUEd-Ar4o0zdEoGg" type="4011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_WcfIsUlUEd-Ar4o0zdEoGg" x="26" y="-37"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_WcgW0ElUEd-Ar4o0zdEoGg" type="4012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_WcgW0UlUEd-Ar4o0zdEoGg" x="26" y="15"/>
+    </children>
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_WccFYUlUEd-Ar4o0zdEoGg" lineColor="4210752"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_WccFYklUEd-Ar4o0zdEoGg" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
+    <element xmi:type="ecore:EReference" href="Trees.ecore#//Node/children"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_WccFY0lUEd-Ar4o0zdEoGg" points="[62, -13, 23, -3]$[41, 10, 2, 20]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_WeWw8ElUEd-Ar4o0zdEoGg" id="(0.38235294117647056,0.7674418604651163)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_WeWw8UlUEd-Ar4o0zdEoGg" id="(0.7483443708609272,0.9264705882352942)"/>
+  </edges>
+</notation:Diagram>

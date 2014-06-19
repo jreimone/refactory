@@ -1,0 +1,19 @@
+Prefix: : <http://ontomore.org/test/simpleOntology.owl#>
+
+Ontology: <http://ontomore.org/test/simpleOntology.owl>
+	
+Class: Freelancer
+
+Class: ITConsultant
+	SubClassOf:
+		Freelancer
+		
+Class: Address
+	
+DataProperty: hasSalary
+	Domain: ITConsultant
+	Range: xsd:int
+
+ObjectProperty: hasAddress
+	Domain: ITConsultant
+	Range: Address

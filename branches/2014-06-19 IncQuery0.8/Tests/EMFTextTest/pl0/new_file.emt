@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="ASCII"?>
+<de.tuberlin.emt.model:Transformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:de.tuberlin.emt.model="http://tfs.cs.tu-berlin.de/emt" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:pl0="http://www.emftext.org/language/pl0">
+  <rules name="ExtractMethod" description="">
+    <lHS allObjects="//@rules.0/@lHS/@objects.0 //@rules.0/@lHS/@objects.0/@body //@rules.0/@lHS/@objects.0/@body/@statements.0">
+      <objects xsi:type="pl0:Block">
+        <body>
+          <statements xsi:type="pl0:Assignment"/>
+        </body>
+      </objects>
+    </lHS>
+    <rHS allObjects="//@rules.0/@rHS/@objects.0 //@rules.0/@rHS/@objects.0/@body //@rules.0/@rHS/@objects.0/@procedures.0 //@rules.0/@rHS/@objects.0/@procedures.0/@block/@body //@rules.0/@rHS/@objects.0/@procedures.0/@block //@rules.0/@rHS/@objects.0/@procedures.0/@block/@body/@statements.0 //@rules.0/@rHS/@objects.0/@body/@statements.0">
+      <objects xsi:type="pl0:Block">
+        <procedures>
+          <block>
+            <body>
+              <statements xsi:type="pl0:Assignment"/>
+            </body>
+          </block>
+        </procedures>
+        <body>
+          <statements xsi:type="pl0:CallStatement" procedure="//@rules.0/@rHS/@objects.0/@procedures.0"/>
+        </body>
+      </objects>
+    </rHS>
+    <nAC allObjects="//@rules.0/@nAC.0/@objects.0/@procedures.0 //@rules.0/@nAC.0/@objects.0" name="No method with same name">
+      <objects xsi:type="pl0:Block">
+        <procedures/>
+      </objects>
+    </nAC>
+    <mappings origin="//@rules.0/@lHS/@objects.0" image="//@rules.0/@rHS/@objects.0"/>
+    <mappings origin="//@rules.0/@lHS/@objects.0/@body" image="//@rules.0/@rHS/@objects.0/@body"/>
+    <mappings origin="//@rules.0/@lHS/@objects.0" image="//@rules.0/@nAC.0/@objects.0"/>
+    <mappings origin="//@rules.0/@lHS/@objects.0/@body/@statements.0" image="//@rules.0/@rHS/@objects.0/@procedures.0/@block/@body/@statements.0"/>
+    <properties object="//@rules.0/@nAC.0/@objects.0/@procedures.0" expression="procName">
+      <feature xsi:type="ecore:EAttribute" href="http://www.emftext.org/language/pl0#//ProcedureDeclaration/name"/>
+    </properties>
+    <properties object="//@rules.0/@rHS/@objects.0/@procedures.0" expression="procName">
+      <feature xsi:type="ecore:EAttribute" href="http://www.emftext.org/language/pl0#//ProcedureDeclaration/name"/>
+    </properties>
+    <variables name="procName" input="true" description="">
+      <type href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </variables>
+  </rules>
+  <packages href="http://www.emftext.org/language/pl0#/"/>
+  <diagrams xsi:type="de.tuberlin.emt.model:ClassDiagram">
+    <positions value="115,145">
+      <key href="http://www.emftext.org/language/pl0#//Program"/>
+    </positions>
+    <positions value="926,202">
+      <key href="http://www.emftext.org/language/pl0#//Block"/>
+    </positions>
+    <positions value="302,64">
+      <key href="http://www.emftext.org/language/pl0#//VarDeclaration"/>
+    </positions>
+    <positions value="332,68">
+      <key href="http://www.emftext.org/language/pl0#//ConstDeclaration"/>
+    </positions>
+    <positions value="872,24">
+      <key href="http://www.emftext.org/language/pl0#//ProcedureDeclaration"/>
+    </positions>
+    <positions value="223,192">
+      <key href="http://www.emftext.org/language/pl0#//Declaration"/>
+    </positions>
+    <positions value="758,282">
+      <key href="http://www.emftext.org/language/pl0#//Statement"/>
+    </positions>
+    <positions value="216,154">
+      <key href="http://www.emftext.org/language/pl0#//CallStatement"/>
+    </positions>
+    <positions value="71,78">
+      <key href="http://www.emftext.org/language/pl0#//IfStatement"/>
+    </positions>
+    <positions value="160,77">
+      <key href="http://www.emftext.org/language/pl0#//Condition"/>
+    </positions>
+    <positions value="127,93">
+      <key href="http://www.emftext.org/language/pl0#//WhileStatement"/>
+    </positions>
+    <positions value="228,244">
+      <key href="http://www.emftext.org/language/pl0#//Assignment"/>
+    </positions>
+    <positions value="404,16">
+      <key href="http://www.emftext.org/language/pl0#//Expression"/>
+    </positions>
+    <positions value="149,157">
+      <key href="http://www.emftext.org/language/pl0#//OddCondition"/>
+    </positions>
+    <positions value="97,18">
+      <key href="http://www.emftext.org/language/pl0#//RelationalCondition"/>
+    </positions>
+    <positions value="168,50">
+      <key href="http://www.emftext.org/language/pl0#//TermExpression"/>
+    </positions>
+    <positions value="122,34">
+      <key href="http://www.emftext.org/language/pl0#//Term"/>
+    </positions>
+    <positions value="244,108">
+      <key href="http://www.emftext.org/language/pl0#//OptionalTerm"/>
+    </positions>
+    <positions value="271,154">
+      <key href="http://www.emftext.org/language/pl0#//Factor"/>
+    </positions>
+    <positions value="340,91">
+      <key href="http://www.emftext.org/language/pl0#//OptionalFactor"/>
+    </positions>
+    <positions value="41,222">
+      <key href="http://www.emftext.org/language/pl0#//IdentReference"/>
+    </positions>
+    <positions value="29,239">
+      <key href="http://www.emftext.org/language/pl0#//Number"/>
+    </positions>
+    <positions value="208,197">
+      <key href="http://www.emftext.org/language/pl0#//ExpressionFactor"/>
+    </positions>
+    <positions value="181,216">
+      <key href="http://www.emftext.org/language/pl0#//PlusMinusOperator"/>
+    </positions>
+    <positions value="321,19">
+      <key href="http://www.emftext.org/language/pl0#//MulDivOperator"/>
+    </positions>
+    <positions value="409,140">
+      <key href="http://www.emftext.org/language/pl0#//RelationalOperator"/>
+    </positions>
+    <positions value="478,334">
+      <key href="http://www.emftext.org/language/pl0#//Body"/>
+    </positions>
+    <ePackage href="http://www.emftext.org/language/pl0#/"/>
+  </diagrams>
+  <diagrams xsi:type="de.tuberlin.emt.model:ObjectDiagram" objectStructure="//@rules.0/@lHS">
+    <positions key="//@rules.0/@lHS/@objects.0" value="34,54"/>
+    <positions key="//@rules.0/@lHS/@objects.0/@body" value="35,127"/>
+    <positions key="//@rules.0/@lHS/@objects.0/@body/@statements.0" value="15,216"/>
+  </diagrams>
+  <diagrams xsi:type="de.tuberlin.emt.model:ObjectDiagram" objectStructure="//@rules.0/@rHS">
+    <positions key="//@rules.0/@rHS/@objects.0" value="44,23"/>
+    <positions key="//@rules.0/@rHS/@objects.0/@body" value="24,110"/>
+    <positions key="//@rules.0/@rHS/@objects.0/@procedures.0" value="210,59"/>
+    <positions key="//@rules.0/@rHS/@objects.0/@procedures.0/@block/@body" value="275,234"/>
+    <positions key="//@rules.0/@rHS/@objects.0/@procedures.0/@block" value="245,168"/>
+    <positions key="//@rules.0/@rHS/@objects.0/@procedures.0/@block/@body/@statements.0" value="216,317"/>
+    <positions key="//@rules.0/@rHS/@objects.0/@body/@statements.0" value="32,212"/>
+  </diagrams>
+  <diagrams xsi:type="de.tuberlin.emt.model:ObjectDiagram" objectStructure="//@rules.0/@nAC.0">
+    <positions key="//@rules.0/@nAC.0/@objects.0/@procedures.0" value="106,134"/>
+    <positions key="//@rules.0/@nAC.0/@objects.0" value="63,53"/>
+  </diagrams>
+</de.tuberlin.emt.model:Transformation>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.modelrefactoring.evolution.guery.registry">
+      <motifFile
+            motifResource="motifs/inverseReferences.guery">
+      </motifFile>
+      <motifFile
+            motifResource="motifs/mappingDependency.guery">
+      </motifFile>
+   </extension>
+
+</plugin>

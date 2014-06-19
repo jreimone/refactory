@@ -1,0 +1,5 @@
+REFACTORING FOR <RemoveEmptyContainedX> 
+
+STEPS {
+	remove empty RemoveeContainer.removees; 	
+} 

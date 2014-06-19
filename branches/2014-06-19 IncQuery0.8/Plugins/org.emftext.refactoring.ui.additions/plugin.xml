@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            id="org.emftext.refactory.ui.view"
+            name="Refactory">
+      </category>
+      <view
+            allowMultiple="false"
+            category="org.emftext.refactory.ui.view"
+            class="org.emftext.refactoring.ui.views.registry.RefactoringRegistryView"
+            icon="icons/rolemodel.gif"
+            id="org.emftext.refactoring.ui.views.registry.RefactoringRegistryView"
+            name="Refactoring Registry">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            categoryId="org.emftext.refactoring.ui.additions.refactory"
+            description="Registers the selected RoleModel"
+            id="org.emftext.refactoring.ui.additions.registerRoleModel"
+            name="Register RoleModel">
+      </command>
+      <command
+            categoryId="org.emftext.refactoring.ui.additions.refactory"
+            description="Registers the selected RefactoringSpecification"
+            id="org.emftext.refactoring.ui.additions.registerRefSpec"
+            name="Register RefactoringSpecification">
+      </command>
+      <command
+            categoryId="org.emftext.refactoring.ui.additions.refactory"
+            description="Registers the selected RoleMapping"
+            id="org.emftext.refactoring.ui.additions.registerRoleMapping"
+            name="Register RoleMapping">
+      </command>
+      <command
+            categoryId="org.emftext.refactoring.ui.additions.refactory"
+            description="Registers the whole selected RoleMappingModel"
+            id="org.emftext.refactoring.ui.additions.registerRoleMappingModel"
+            name="Register whole RoleMappingModel">
+      </command>
+      <category
+            description="Additional commands for Refactory"
+            id="org.emftext.refactoring.ui.additions.refactory"
+            name="Refactory">
+      </category>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="org.emftext.refactoring.ui.handlers.RegisterRoleModelHandler"
+            commandId="org.emftext.refactoring.ui.additions.registerRoleModel">
+      </handler>
+      <handler
+            class="org.emftext.refactoring.ui.handlers.RegisterRefSpecHandler"
+            commandId="org.emftext.refactoring.ui.additions.registerRefSpec">
+      </handler>
+      <handler
+            class="org.emftext.refactoring.ui.handlers.RegisterRoleMappingHandler"
+            commandId="org.emftext.refactoring.ui.additions.registerRoleMapping">
+      </handler>
+      <handler
+            class="org.emftext.refactoring.ui.handlers.RegisterRoleMappingModelHandler"
+            commandId="org.emftext.refactoring.ui.additions.registerRoleMappingModel">
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:org.eclipse.gmf.runtime.diagram.ui.DiagramEditorContextMenu?after=additions">
+         <menu
+               id="org.emftext.refactoring.ui.additions.refactory.rolesGMF"
+               label="Refactory">
+            <command
+                  commandId="org.emftext.refactoring.ui.additions.registerRoleModel"
+                  label="Register RoleModel"
+                  style="push">
+            </command>
+            <command
+                  commandId="org.emftext.refactoring.ui.additions.unregisterRoleModel"
+                  label="Unregister RoleModel"
+                  style="push">
+            </command>
+         </menu>
+      </menuContribution>
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:org.emftext.language.refactoring.roles.resource.rolestext.EditorContext?after=additions">
+         <menu
+               id="org.emftext.refactoring.ui.additions.refactory.rolestext"
+               label="Refactory">
+            <command
+                  commandId="org.emftext.refactoring.ui.additions.registerRoleModel"
+                  label="Register RoleModel"
+                  style="push">
+            </command>
+            <command
+                  commandId="org.emftext.refactoring.ui.additions.unregisterRoleModel"
+                  label="Unregister RoleModel"
+                  style="push">
+            </command>
+         </menu>
+      </menuContribution>
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:org.emftext.language.refactoring.specification.resource.refspec.EditorContext?after=additions">
+         <menu
+               id="org.emftext.refactoring.ui.additions.refactory.refspec"
+               label="Refactory">
+            <command
+                  commandId="org.emftext.refactoring.ui.additions.registerRefSpec"
+                  label="Register RefactoringSpecification"
+                  style="push">
+            </command>
+            <command
+                  commandId="org.emftext.refactoring.ui.additions.unregisterRefSpec"
+                  label="Unregister RefactoringSpecification"
+                  style="push">
+            </command>            
+         </menu>
+      </menuContribution>
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:org.emftext.language.refactoring.rolemapping.resource.rolemapping.EditorContext?after=additions">
+         <menu
+               id="org.emftext.refactoring.ui.additions.refactory.rolemapping"
+               label="Refactory">
+            <command
+                  commandId="org.emftext.refactoring.ui.additions.registerRoleMapping"
+                  label="Register selected RoleMapping"
+                  style="push">
+            </command>
+            <command
+                  commandId="org.emftext.refactoring.ui.additions.registerRoleMappingModel"
+                  label="Register whole selected RoleMappingModel"
+                  style="push">
+            </command>
+            <command
+                  commandId="org.emftext.refactoring.ui.additions.unregisterRoleMapping"
+                  label="Unregister selected RoleMapping"
+                  style="push">
+            </command>
+            <command
+                  commandId="org.emftext.refactoring.ui.additions.unregisterRoleMappingModel"
+                  label="Unregister whole selected RoleMappingModel"
+                  style="push">
+            </command>                        
+         </menu>
+      </menuContribution>
+   </extension>
+
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            categoryId="org.emftext.refactoring.ui.additions.refactory"
+            description="Unregisters the selected RoleModel"
+            id="org.emftext.refactoring.ui.additions.unregisterRoleModel"
+            name="Unregister RoleModel">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="org.emftext.refactoring.ui.handlers.UnregisterRoleModelHandler"
+            commandId="org.emftext.refactoring.ui.additions.unregisterRoleModel">
+      </handler>   
+   </extension>
+   
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            categoryId="org.emftext.refactoring.ui.additions.refactory"
+            description="Unregisters the selected RefactoringSpecification"
+            id="org.emftext.refactoring.ui.additions.unregisterRefSpec"
+            name="Unregister RefactoringSpecification">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="org.emftext.refactoring.ui.handlers.UnregisterRefSpecHandler"
+            commandId="org.emftext.refactoring.ui.additions.unregisterRefSpec">
+      </handler>   
+   </extension>
+   
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            categoryId="org.emftext.refactoring.ui.additions.refactory"
+            description="Unregisters the selected RoleMapping"
+            id="org.emftext.refactoring.ui.additions.unregisterRoleMapping"
+            name="Unregister selected RoleMapping">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="org.emftext.refactoring.ui.handlers.UnregisterRoleMappingHandler"
+            commandId="org.emftext.refactoring.ui.additions.unregisterRoleMapping">
+      </handler>   
+   </extension>
+   
+    <extension
+         point="org.eclipse.ui.commands">
+      <command
+            categoryId="org.emftext.refactoring.ui.additions.refactory"
+            description="Unregisters the whole selected RoleMappingModel"
+            id="org.emftext.refactoring.ui.additions.unregisterRoleMappingModel"
+            name="Unregister whole RoleMappingModel">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="org.emftext.refactoring.ui.handlers.UnregisterRoleMappingModelHandler"
+            commandId="org.emftext.refactoring.ui.additions.unregisterRoleMappingModel">
+      </handler>   
+   </extension>
+
+</plugin>

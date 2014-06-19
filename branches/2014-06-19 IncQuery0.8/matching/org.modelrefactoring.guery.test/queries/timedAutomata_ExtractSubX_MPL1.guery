@@ -1,0 +1,9 @@
+motif ExtractSubX
+select Extractee, OrigContainer, NewContainer
+where "NewContainer.getEClass().getEAttributes().size() > 0"
+connected by extracts(OrigContainer>Extractee)[1,1] find all
+where "extracts is org.modelrefactoring.guery.graph.ContainmentEdge"
+connected by newParent(OrigContainer>NewContainer)[1,1] find all
+where "newParent is org.modelrefactoring.guery.graph.ContainmentEdge"
+connected by moved(NewContainer>Extractee)[1,1] find all
+where "moved is org.modelrefactoring.guery.graph.ContainmentEdge"

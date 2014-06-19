@@ -1,0 +1,68 @@
+-- @path Families=/Families2Persons/Families.ecore
+-- @path Persons=/Families2Persons/Persons.ecore
+module Families2Persons;
+create OUT : Persons, trace : Trace from IN : Families;
+
+helper context Families!Member def: familyName : String =
+ if not self.familyFather.oclIsUndefined() then
+  self.familyFather.lastName
+ else
+  if not self.familyMother.oclIsUndefined() then
+   self.familyMother.lastName
+  else
+   if not self.familySon.oclIsUndefined() then
+    self.familySon.lastName
+   else
+    self.familyDaughter.lastName
+   endif
+  endif
+ endif;
+
+helper context Families!Member def: isFemale() : Boolean =
+ if not self.familyMother.oclIsUndefined() then
+  true
+ else
+  if not self.familyDaughter.oclIsUndefined() then
+   true
+  else
+   false
+  endif
+ endif;
+
+rule Member2Male {
+ from
+  s : Families!Member
+  (
+   s.isMale()
+  )
+ to
+  t : Persons!Male (
+   fullName <- s.firstName + '$SEP' + s.familyName
+  ),
+  traceLink : Trace!TraceLink (
+   ruleName <- 'Member2Male',
+   targetElements <- Sequence {t}
+  )
+ do {
+  traceLink.refSetValue('sourceElements', Sequence {s});
+ }
+}
+
+rule Member2Female {
+ from
+  s : Families!Member
+  (
+   s.isFemale()
+  )
+ to
+  t : Persons!Female (
+   fullName <- s.firstName + '$SEP' + s.familyName
+  ),
+  traceLink : Trace!TraceLink (
+   ruleName <- 'Member2Female',
+   targetElements <- Sequence {t}
+  )
+ do {
+  traceLink.refSetValue('sourceElements', Sequence {s});
+ }
+}

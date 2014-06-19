@@ -1,0 +1,23 @@
+Hello guys,
+I have a new puzzle for you ;) I attached a modified example and my modified query file. The query file was modified with respect to Ábels solution of my last question. The prefix "PH_" of the roles means "PlaceHolder". In this regard, I can include the subclasses in the result set, too.
+But what I want to know now is, how can I query an arbitrary long path in a pattern? Have a look at my attached example. You might see it better in the ecorediag model. Between the metaclasses "OrigContainer" and "Extract" you'll find an added path via the metaclass "ExtractBetween". The path OrigContainer <>-extractsBetween-> ExtractBetween <>-betweenExtracts-> Extract should be an alternative for the original path OrigContainer <>-extracts-> Extract which has a length of only 1. For this purpose I added the transitive closure operator "+" to the following part of my pattern:
+
+find eAllContainments+(PH_OrigCont,extracts);
+ETypedElement.eType(extracts,PH_Extract);
+
+But I still get only one result which respects only the path of length 1. How can I build up my query to cover this case?
+
+best regards,
+Jan
+
+
+
+How to include a path in the result set and not only a single reference (i.e. transitive closure)?
+
+
+
+
+
+
+	// jede Rolle wird vorerst mit PH_<Rollenname> bezeichnet, damit später auch noch die Unterklassen eingesammelt werden können
+	// PH_ steht für PlaceHolder

@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: CODS Creation Plugin
+Bundle-SymbolicName: org.modelrefactoring.evolution.cods.creation;singleton:=true
+Bundle-Version: 0.0.0.qualifier
+Bundle-Vendor: Jan Reimann
+Require-Bundle: org.eclipse.e4.ui.workbench,
+ org.eclipse.e4.core.di,
+ org.eclipse.e4.core.contexts,
+ org.modelrefactoring.evolution.cods,
+ org.eclipse.core.resources,
+ org.eclipse.equinox.common,
+ javax.inject,
+ org.eclipse.core.runtime,
+ org.modelrefactoring.evolution.registry,
+ org.eclipse.emf.ecore.xmi
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.modelrefactoring.evolution.cods.creation,
+ org.modelrefactoring.evolution.cods.kinds

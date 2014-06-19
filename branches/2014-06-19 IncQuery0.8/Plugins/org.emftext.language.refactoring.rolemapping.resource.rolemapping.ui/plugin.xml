@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+	<extension point="org.emftext.access.syntax.ui">
+		<metaInformationProvider class="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.RolemappingUIMetaInformation" id="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.RolemappingUIMetaInformation">
+		</metaInformationProvider>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors">
+		<editor class="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.RolemappingEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="rolemapping" icon="icons/editor_icon.gif" id="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.RolemappingEditor" name="Rolemapping Text Editor">
+			<contentTypeBinding contentTypeId="org.emftext.language.refactoring.rolemapping.resource.rolemapping">
+			</contentTypeBinding>
+		</editor>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.preferences">
+		<initializer class="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.RolemappingPreferenceInitializer">
+		</initializer>
+	</extension>
+	
+	<extension point="org.eclipse.ui.preferencePages">
+		<page name="Rolemapping Text Editor" id="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.RolemappingPreferencePage" class="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.RolemappingPreferencePage" category="org.emftext.refactoring.ui.preferences">
+		</page>
+		<page name="Syntax Coloring" id="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.RolemappingSyntaxColoringPreferencePage" class="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.RolemappingSyntaxColoringPreferencePage" category="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.RolemappingPreferencePage">
+		</page>
+		<page name="Brackets" id="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.RolemappingBracketPreferencePage" class="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.RolemappingBracketPreferencePage" category="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.RolemappingPreferencePage">
+		</page>
+	</extension>
+	
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard category="org.emftext.refactory.ui" icon="/icons/default_new_icon.gif" class="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.RolemappingNewFileWizard" id="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.RolemappingNewFileWizard" name="EMFText .rolemapping file">
+		</wizard>
+		<category id="org.emftext.runtime.ui.EMFTextProjectCategory" name="EMFText Project">
+		</category>
+		<wizard category="org.emftext.runtime.ui.EMFTextProjectCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.RolemappingNewProjectWizard" id="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.RolemappingNewProjectWizard" name="EMFText rolemapping project" project="true">
+		</wizard>
+	</extension>
+	
+	<extension point="org.eclipse.ui.ide.markerResolution">
+		<markerResolutionGenerator class="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.RolemappingMarkerResolutionGenerator" markerType="org.emftext.language.refactoring.rolemapping.resource.rolemapping.problem">
+		</markerResolutionGenerator>
+	</extension>
+	
+	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory class="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.RolemappingAnnotationModelFactory" extensions="rolemapping">
+		</factory>
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="org.emftext.language.refactoring.rolemapping.resource.rolemapping" name=".rolemapping File" base-type="org.eclipse.core.runtime.text" file-extensions="rolemapping">
+		</content-type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="rolemapping" id="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.provider">
+		</provider>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.annotationTypes">
+		<type name="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.occurences">
+		</type>
+		<type name="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.occurences.declaration" super="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.occurences">
+		</type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+		<specification annotationType="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.occurences" label="Occurrences (in .rolemapping files)" icon="/icons/occurrence_icon.gif" textPreferenceKey="rolemapping.occurrenceIndication" textPreferenceValue="false" highlightPreferenceKey="rolemapping.occurrenceHighlighting" highlightPreferenceValue="true" contributesToHeader="false" overviewRulerPreferenceKey="rolemapping.occurrenceIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="rolemapping.occurrenceIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="rolemapping.occurrenceIndicationColor" colorPreferenceValue="212,212,212" presentationLayer="4" showInNextPrevDropdownToolbarActionKey="rolemapping.showOccurrenceInNextPrevDropdownToolbarAction" showInNextPrevDropdownToolbarAction="true" isGoToNextNavigationTargetKey="rolemapping.isOccurrenceGoToNextNavigationTarget" isGoToNextNavigationTarget="false" isGoToPreviousNavigationTargetKey="rolemapping.isOccurrenceGoToPreviousNavigationTarget" isGoToPreviousNavigationTarget="false" textStylePreferenceKey="rolemapping.occurrenceTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+		<specification annotationType="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.occurences.declaration" label="Declarations (in .rolemapping files)" textPreferenceKey="rolemapping.declarationIndication" textPreferenceValue="false" highlightPreferenceKey="rolemapping.declarationHighlighting" highlightPreferenceValue="true" overviewRulerPreferenceKey="rolemapping.declarationIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="rolemapping.declarationIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="rolemapping.declarationIndicationColor" colorPreferenceValue="240,216,168" presentationLayer="4" textStylePreferenceKey="rolemapping.declarationTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+	</extension>
+	
+	<extension point="org.eclipse.ui.commands">
+		<category description="All commands belonging to Rolemapping" id="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.command.category" name="Rolemapping">
+		</category>
+		<command categoryId="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.command.category" description="Toggle comment of the selected lines" id="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.command.togglecomment" name="Toggle Comment">
+		</command>
+	</extension>
+	
+	<extension point="org.eclipse.ui.handlers">
+		<handler class="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.RolemappingToggleCommentHandler" commandId="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.command.togglecomment">
+		</handler>
+	</extension>
+	
+	<extension point="org.eclipse.ui.contexts">
+		<context name="Editing Rolemapping Files" description="Editing Rolemapping Files Context" parentId="org.eclipse.ui.textEditorScope" id="org.emftext.language.refactoring.rolemapping.resource.rolemapping.EditorScope">
+		</context>
+	</extension>
+	
+	<extension point="org.eclipse.ui.bindings">
+		<key sequence="M1+7" commandId="org.emftext.language.refactoring.rolemapping.resource.rolemapping.ui.command.togglecomment" schemeId="org.eclipse.ui.defaultAcceleratorConfiguration" contextId="org.emftext.language.refactoring.rolemapping.resource.rolemapping.EditorScope">
+		</key>
+	</extension>
+	
+</plugin>

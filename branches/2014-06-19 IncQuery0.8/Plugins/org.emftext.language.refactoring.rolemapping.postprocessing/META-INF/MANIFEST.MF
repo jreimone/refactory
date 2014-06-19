@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Role Mapping Postprocessing
+Bundle-SymbolicName: org.emftext.language.refactoring.rolemapping.postprocessing;singleton:=true
+Bundle-Version: 0.0.1
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-Vendor: Jan Reimann
+Require-Bundle: org.eclipse.emf,
+ org.emftext.language.refactoring.rolemapping,
+ org.emftext.language.refactoring.rolemapping.resource.rolemapping,
+ org.emftext.refactoring.roleconstraintchecker,
+ org.eclipse.core.runtime,
+ org.emftext.refactoring.util

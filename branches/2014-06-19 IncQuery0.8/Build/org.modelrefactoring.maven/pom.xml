@@ -1,0 +1,89 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.modelrefactoring</groupId>
+	<artifactId>org.modelrefactoring.maven</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>Eclipse p2 Update-Site Generation (without categories)</name>
+
+	<properties>
+		<tycho-version>0.20.0</tycho-version>
+		<originalRepository>${JENKINS_HOME}/jobs/Refactory/workspace/build/dist/updatesites/org.modelrefactoring.deploy/</originalRepository>
+		<rootTarget>${WORKSPACE}/updateSite</rootTarget>
+		<targetDirectory>${WORKSPACE}/updateSite/target</targetDirectory>
+		<targetRepository>${targetDirectory}/repository</targetRepository>
+		<updateSiteName>Refactory p2 Trunk Update Site</updateSiteName>
+	</properties>
+
+	<repositories>
+		<repository>
+			<id>eclipse-kepler</id>
+			<url>http://download.eclipse.org/releases/kepler</url>
+			<layout>p2</layout>
+		</repository>
+	</repositories>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho.extras</groupId>
+				<artifactId>tycho-p2-extras-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<executions>
+					<execution>
+						<!-- step 1: mirror old-style update site -->
+						<id>mirror-update-sites</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>mirror</goal>
+						</goals>
+						<configuration>
+							<source>
+								<repository>
+									<url>${originalRepository}</url>
+								</repository>
+							</source>
+							<destination>${rootTarget}</destination>
+							<name>${updateSiteName}</name>
+						</configuration>
+					</execution>
+					<execution>
+						<!-- step 3: generate the full p2 metadata for the mirrored artifacts -->
+						<id>generate-full-metadata</id>
+						<phase>compile</phase>
+						<goals>
+							<goal>publish-features-and-bundles</goal>
+						</goals>
+						<configuration>
+							<sourceLocation>${rootTarget}</sourceLocation>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.7</version>
+				<executions>
+					<execution>
+						<!-- step 2: strip the p2 metadata that contains the "partial IUs" 
+							that which be used for dependency resolution in Tycho -->
+						<id>remove-incomplete-metadata</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<target>
+								<delete file="${rootTarget}/content.jar" />
+								<delete file="${rootTarget}/artifacts.jar" />
+							</target>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

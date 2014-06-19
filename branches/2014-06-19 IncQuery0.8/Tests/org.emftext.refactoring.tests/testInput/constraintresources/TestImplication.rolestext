@@ -1,0 +1,10 @@
+RoleModel TestImplication { 	
+	optional input ROLE Parent;
+	optional ROLE DirectChild;
+	optional ROLE TransitiveChild;
+
+	//EClass with role DirectChild must also play Parent
+	DirectChild -> Parent;
+	//EClass with role TransitiveChild must have superclass that plays Parent
+	transitive : TransitiveChild -> Parent;
+} 

@@ -1,0 +1,23 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Refactoring
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-SymbolicName: org.emftext.refactoring.mappings.ecore;singleton:= true
+Bundle-Version: 1.0.0.qualifier
+Require-Bundle: org.emftext.refactoring.registry.rolemapping,
+ org.eclipse.emf.ecore.change,
+ org.emftext.language.refactoring.roles,
+ org.eclipse.core.runtime,
+ org.emftext.language.refactoring.rolemapping,
+ org.emftext.refactoring.specification.interpreter,
+ org.emftext.language.refactoring.specification
+Export-Package: org.emftext.refactoring.mappings.ecore.facade
+
+
+
+
+
+
+
+
+

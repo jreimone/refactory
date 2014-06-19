@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Test
+Bundle-SymbolicName: org.qualitune.matching.incquery.test
+Bundle-Version: 1.0.0.qualifier
+Export-Package: query
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

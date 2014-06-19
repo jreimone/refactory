@@ -1,0 +1,5 @@
+ROLEMODELMAPPING FOR <http://www.emftext.org/language/sandwich_simple> 
+
+"Rename Ingredient" maps <RenameX> { 
+	 Nameable := Ingredient(name -> name); 	
+}	

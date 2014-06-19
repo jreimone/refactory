@@ -1,0 +1,19 @@
+ROLEMODELMAPPING FOR <http://www.eclipse.org/emf/2002/Ecore>
+
+"Duplicate Class" maps <DuplicateWithReference> { 
+
+	 Container := EPackage {
+		base := eClassifiers;
+		duplicate := eClassifiers;
+	};
+	
+	Base := EClass {
+		baseAppendix := eSuperTypes;
+	};
+	
+	Duplicate := EClass (name -> name) {
+		duplicateAppendix := eSuperTypes;
+	};
+	
+	Appendix := EClass;
+}

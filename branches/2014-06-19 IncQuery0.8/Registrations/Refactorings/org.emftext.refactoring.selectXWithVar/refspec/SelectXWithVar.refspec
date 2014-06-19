@@ -1,0 +1,7 @@
+REFACTORING FOR <SelectXWithVar>
+
+STEPS { 
+	create new n:Nameable;	
+	assign n.name; 	
+} 
+

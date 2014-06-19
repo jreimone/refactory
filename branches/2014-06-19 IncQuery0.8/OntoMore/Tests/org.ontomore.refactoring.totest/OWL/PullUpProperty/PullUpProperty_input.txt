@@ -1,0 +1,2 @@
+Selected element := DataProperty::hasSalary
+Selected element := ObjectProperty::hasAddress

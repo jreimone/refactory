@@ -1,0 +1,12 @@
+Prefix: : <http://ontomore.org/test/testOntology.owl#>
+
+Ontology: <http://ontomore.org/test/testOntology.owl>
+	
+Class: Country
+	EquivalentTo: {Germany, France, UnitedKingdom}
+
+Individual: Germany
+
+Individual: France
+
+Individual: UnitedKingdom

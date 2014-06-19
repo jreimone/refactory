@@ -1,0 +1,28 @@
+<!-- How to configure this ant script:
+	Run as->Ant Build...
+		Set:
+			- Run in same JRE
+-->
+<project name="HOT-Analysis" default="transform">
+	<property name="inputfile" value="../HOT-Analysis/Output.xmi"/>
+	
+	<target name="transform">
+		<echo message="Transforming file ${inputfile}"/>
+
+		<atl.loadModel modelHandler="EMF" name="ATL" metamodel="MOF" path="../Metamodels/ATL/ATL.ecore" />
+		<atl.loadModel modelHandler="EMF" name="Simple" metamodel="MOF" path="../Metamodels/Simple/Simple.ecore" />
+		<atl.loadModel name="input" metamodel="Simple" path="${inputfile}"/>	
+		
+		<atl.launch path="HOT-Synthesis.atl">
+			<inmodel name="IN" model="input"/>
+			<outmodel name="OUT" model="output" metamodel="ATL"/>
+		</atl.launch>
+
+		<atl.saveModel model="output" path="Output.xmi"/>
+		
+		<atl.saveModel model="output" path="Output.atl">
+		 	<extractor name="ATL" />
+		</atl.saveModel>
+	</target>
+
+</project>

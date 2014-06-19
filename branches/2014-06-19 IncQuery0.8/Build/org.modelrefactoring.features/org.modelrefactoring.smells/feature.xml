@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.modelrefactoring.smells"
+      label="Refactory Smells"
+      version="0.9.2"
+      provider-name="Software Technology Group - TU Dresden">
+
+   <description url="http://modelrefactoring.org">
+      Refactory Smells: Support for registering smell definitions and correlate them with refactorings. If a smell is detected and a refactoring is registered to resolve it then a quickfix is provided for the smell.
+   </description>
+
+   <copyright>
+      Copyright (c) 2006-2014 Software Technology Group, Dresden University
+of Technology, Germany; DevBoost GmbH, Berlin, Amtsgericht Charlottenburg,
+HRB 140026.
+   </copyright>
+
+   <license>
+      Eclipse Public License v1.0
+
+Copyright (c) 2006-2014
+Software Technology Group, Dresden University of Technology
+DevBoost GmbH, Berlin, Amtsgericht Charlottenburg, HRB 140026.
+
+All rights reserved. This program and the accompanying materials are made available under the terms of the Eclipse Public License v1.0 which accompanies this distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
+
+Contributors:
+  Software Technology Group - TU Dresden, Germany;
+  DevBoost GmbH - Berlin, Germany
+     - initial API and implementation
+   </license>
+
+   <requires>
+      <import feature="org.eclipse.platform"/>
+      <import feature="org.eclipse.emf"/>
+      <import feature="org.eclipse.emf.workspace"/>
+      <import feature="org.modelrefactoring.sdk"/>
+      <import feature="org.eclipse.sdk"/>
+      <import feature="org.eclipse.incquery.runtime.feature" version="0.7.0.201306302207"/>
+      <import feature="org.eclipse.incquery.sdk.feature" version="0.7.0.201306302207"/>
+      <import feature="org.eclipse.xtext.runtime" version="2.4.2.v201306120542"/>
+      <import feature="org.eclipse.xtext.xbase" version="2.4.2.v201306120542"/>
+   </requires>
+
+   <plugin
+         id="org.emftext.refactoring.smell"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.emftext.refactoring.smell.calculation"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.emftext.refactoring.smell.registry"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.emftext.refactoring.smell.registry.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.emftext.refactoring.smell.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>

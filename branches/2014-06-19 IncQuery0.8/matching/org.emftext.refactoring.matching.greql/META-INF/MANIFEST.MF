@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: GReQLPrototyp
+Bundle-SymbolicName: org.emftext.refactoring.matching.greql
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: greqlprototyp.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ de.uni_koblenz.jgralab,
+ org.eclipse.emf.ecore;bundle-version="2.8.1"
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7

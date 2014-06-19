@@ -1,0 +1,25 @@
+PROGRAM nestedProc
+	
+	VAR 
+	x , squ ; 
+	
+	PROCEDURE normalProc ; 
+
+PROCEDURE innerProc ; 
+CONST 
+	inner = 7 ; 
+BEGIN 
+	
+	END ; 
+
+BEGIN 
+	squ := + x * x 
+	END ; 
+
+BEGIN 
+	x := + 1 ; 
+	WHILE + x <= + 10 DO BEGIN 
+		CALL normalProc ; 
+		x := + x + 1 
+		END 
+	END . 

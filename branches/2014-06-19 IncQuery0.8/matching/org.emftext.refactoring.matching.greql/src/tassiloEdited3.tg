@@ -1,0 +1,53 @@
+from 
+OrigContainer, Extract, NewContainer, ContainerContainer, MovedReference:V{Node},
+extracts : path(OrigContainer, -->{Connection @ thisEdge.connectionType = "AGGREGATION"}*, Extract),
+referer:path(OrigContainer, -->{Connection @ thisEdge.connectionType = "AGGREGATION"}*, MovedReference),
+moved:path(NewContainer, -->{Connection @ thisEdge.connectionType = "AGGREGATION"}*, Extract),
+target:path(ContainerContainer, -->{Connection @ thisEdge.connectionType = "AGGREGATION"}*, NewContainer),
+source:path(ContainerContainer, -->{Connection @ thisEdge.connectionType = "AGGREGATION"}*, OrigContainer),
+containerReference:path(MovedReference, -->{Connection @ thisEdge.connectionType = "ASSOCIATION"}*, NewContainer)
+
+with
+isDefined(extracts)
+and isDefined(referer)
+and isDefined(moved)
+and isDefined(target)
+and isDefined(source)
+and isDefined(containerReference)
+//and ContainerContainer.name="Block"
+//and OrigContainer.name="Body"
+//and NewContainer.name="ProcedureDeclaration"
+//and Extract.name="Assignment"
+//and MovedReference="Block"
+
+reportSet
+  ContainerContainer.name, OrigContainer.name, NewContainer.name, Extract.name, MovedReference.name,
+  source, target, extracts, moved, containerReference, referer
+end
+
+//from containerReference: E{Connection},
+//    //referer:  inIncidences{Connection}(movedReference),
+//    source:  inIncidences{Connection}(origContainer),
+//    target:  outIncidences{Connection}(containerContainer),
+//    extracts: outIncidences{Connection}(origContainer),
+//    moved:    outIncidences{Connection}(newContainer),
+//    origContainer:V{Node},
+//    movedReference:V{Node},
+//    referer: path(origContainer, -->{Connection @ thisEdge.connectionType = "AGGREGATION"}*, movedReference)
+//with containerReference.connectionType = "ASSOCIATION"
+//  and isDefined(referer)
+//  //and referer.connectionType            = "AGGREGATION"
+//  and source.connectionType            = "AGGREGATION"
+//  and target.connectionType            = "AGGREGATION"
+//  and extracts.connectionType          = "AGGREGATION"
+//  and omega(target) = newContainer
+//  and omega(moved)  = extract
+//reportSet
+//  containerContainer.name, origContainer.name, newContainer.name, extract.name, movedReference.name,
+//  source.name, target.name, extracts.name, moved.name, containerReference.name, referer
+//end
+//where //movedReference    := alpha(containerReference),
+//      newContainer      := omega(containerReference),
+//      //origContainer      := alpha(referer),
+//      containerContainer := alpha(source),
+//      extract            := omega(extracts)

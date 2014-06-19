@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="ASCII"?>
+<featuremapping:FeatureMappingModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:featuremapping="http://www.tudresden.de/featuremapping" composerID="org.featuremapper.interpreter.emf.interpreter">
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../solution/StateMachine.uml#_pcuBUh0REd28c4O4qR84fQ"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../problem/ContactManagementApp.feature#GMail"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../solution/StateMachine.uml#_lUIwcB0TEd28c4O4qR84fQ"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../problem/ContactManagementApp.feature#GMail"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../solution/StateMachine.uml#_t6-VUh0REd28c4O4qR84fQ"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../problem/ContactManagementApp.feature#Highrise"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../solution/StateMachine.uml#_rVyJ0B0TEd28c4O4qR84fQ"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../problem/ContactManagementApp.feature#Highrise"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../solution/StateMachine.uml#_6tMqoh0REd28c4O4qR84fQ"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../problem/ContactManagementApp.feature#MobilePhone"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../solution/StateMachine.uml#_wXphMh0TEd28c4O4qR84fQ"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../problem/ContactManagementApp.feature#MobilePhone"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../solution/ClassDiagram.uml#_GYmCEFMwEdykj4A2mwi4Sg"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../problem/ContactManagementApp.feature#Addresses"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../solution/ClassDiagram.uml#_e68SWFM3Edykj4A2mwi4Sg"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../problem/ContactManagementApp.feature#Addresses"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../solution/ClassDiagram.uml#_uwE_CFM3Edykj4A2mwi4Sg"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../problem/ContactManagementApp.feature#Relationships"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../solution/ClassDiagram.uml#_wm1sWFM3Edykj4A2mwi4Sg"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../problem/ContactManagementApp.feature#Relationships"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../solution/ClassDiagram.uml#_JStCyFMwEdykj4A2mwi4Sg"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../problem/ContactManagementApp.feature#Relationships"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../solution/ClassDiagram.uml#_YwgwYlM3Edykj4A2mwi4Sg"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../problem/ContactManagementApp.feature#Relationships"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../solution/ClassDiagram.uml#_oeYx2R0GEd2b2b_4Mrd7cw"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../problem/ContactManagementApp.feature#Groups"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../solution/ClassDiagram.uml#_c5dceB0OEd28c4O4qR84fQ"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../problem/ContactManagementApp.feature#Groups"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../solution/ClassDiagram.uml#_Yqc_AB0GEd2b2b_4Mrd7cw"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../problem/ContactManagementApp.feature#Groups"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:PropertyValueMapping" propertyName="value">
+    <element href="../solution/ClassDiagram.uml#_c5dceh0OEd28c4O4qR84fQ"/>
+    <values xsi:type="featuremapping:PrimitivePropertyValue" value="*">
+      <term xsi:type="featuremapping:FeatureRef">
+        <feature href="../problem/ContactManagementApp.feature#MultipleAssignment"/>
+      </term>
+    </values>
+    <values xsi:type="featuremapping:PrimitivePropertyValue" value="1"/>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../solution/ClassDiagram.uml#_DWrwWR0PEd28c4O4qR84fQ"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../problem/ContactManagementApp.feature#ArbitraryDepth"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../solution/ClassDiagram.uml#_jGklRFM3Edykj4A2mwi4Sg"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../problem/ContactManagementApp.feature#ContactOpportunities"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../solution/ClassDiagram.uml#_hcK4-FM3Edykj4A2mwi4Sg"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../problem/ContactManagementApp.feature#ContactOpportunities"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../solution/ClassDiagram.uml#_ivxO01M3Edykj4A2mwi4Sg"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../problem/ContactManagementApp.feature#ContactOpportunities"/>
+    </term>
+  </mappings>
+  <mappings xsi:type="featuremapping:ElementMapping">
+    <element href="../solution/ClassDiagram.uml#_grvhlFM3Edykj4A2mwi4Sg"/>
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../problem/ContactManagementApp.feature#ContactOpportunities"/>
+    </term>
+  </mappings>
+  <featureModel>
+    <value href="../problem/ContactManagementApp.feature#/"/>
+  </featureModel>
+  <colorMappings color="39219">
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../problem/ContactManagementApp.feature#Relationships"/>
+    </term>
+  </colorMappings>
+  <colorMappings color="10040064">
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../problem/ContactManagementApp.feature#Groups"/>
+    </term>
+  </colorMappings>
+  <colorMappings color="13311">
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../problem/ContactManagementApp.feature#Addresses"/>
+    </term>
+  </colorMappings>
+  <colorMappings color="16724838">
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../problem/ContactManagementApp.feature#ArbitraryDepth"/>
+    </term>
+  </colorMappings>
+  <colorMappings color="39321">
+    <term xsi:type="featuremapping:FeatureRef">
+      <feature href="../problem/ContactManagementApp.feature#ContactOpportunities"/>
+    </term>
+  </colorMappings>
+  <solutionModels>
+    <value href="../solution/ClassDiagram.uml#_qb8akM37EdqwVrslYOdUDA"/>
+  </solutionModels>
+  <solutionModels>
+    <value href="../solution/StateMachine.uml#idModel"/>
+  </solutionModels>
+</featuremapping:FeatureMappingModel>

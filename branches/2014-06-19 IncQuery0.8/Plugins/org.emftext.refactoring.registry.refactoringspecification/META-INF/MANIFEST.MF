@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: RefactoringSpecification Registry
+Bundle-SymbolicName: org.emftext.refactoring.registry.refactoringspecification;singleton:=true
+Bundle-Version: 0.0.1
+Bundle-Activator: org.emftext.refactoring.registry.refactoringspecification.Activator
+Bundle-Vendor: Jan Reimann
+Require-Bundle: org.eclipse.core.runtime,
+ org.emftext.language.refactoring.specification,
+ org.emftext.refactoring.util,
+ org.emftext.refactoring.registry.rolemodel
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Export-Package: org.emftext.refactoring.registry.refactoringspecification,
+ org.emftext.refactoring.registry.refactoringspecification.exceptions,
+ org.emftext.refactoring.registry.refactoringspecification.impl

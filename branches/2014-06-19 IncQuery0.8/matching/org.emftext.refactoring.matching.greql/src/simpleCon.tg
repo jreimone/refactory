@@ -1,0 +1,4 @@
+from caller, callee:V{Node}
+with caller -->{Connection} callee
+report caller.name, callee.name
+end

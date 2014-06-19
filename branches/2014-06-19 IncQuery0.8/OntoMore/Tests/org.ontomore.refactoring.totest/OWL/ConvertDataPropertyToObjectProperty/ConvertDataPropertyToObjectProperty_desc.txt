@@ -1,0 +1,12 @@
+----------------------------
+## Convert DataProperty To ObjectProperty
+----------------------------
+-- Description
+Replaces the selected DataProperty by an ObjectProperty to a new Class.
+The new Class gets the given name.
+
+-- Generic Refactoring
+"Replace Feature" (OntoMore)
+
+-- Problems
+Same problem as with Rename Element with refactoring over an newly opened file. 

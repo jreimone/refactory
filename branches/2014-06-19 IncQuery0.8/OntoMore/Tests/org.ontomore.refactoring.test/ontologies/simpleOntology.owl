@@ -1,0 +1,43 @@
+Prefix: : <http://ontomore.org/test/simpleOntology.owl#>
+
+Ontology: <http://ontomore.org/test/simpleOntology.owl>
+
+Class: Person
+	
+Individual: John
+	Types: Person
+	
+Class: Freelancer
+	SubClassOf:
+		Person
+
+Class: ITConsultant
+	SubClassOf:
+		Freelancer
+	
+Class: Programmer
+	SubClassOf:
+		Freelancer,
+		hasSkill some JavaEESkill
+		
+Class: JavaEESkilledPeople
+	EquivalentTo:
+		hasSkill some JavaEESkill
+		
+
+ObjectProperty: hasSkill
+	Domain: Freelancer
+	
+DataProperty: hasSalary
+	Domain: ITConsultant
+
+Class: Skill
+
+Class: JavaEESkill
+	SubClassOf: Skill
+	
+Class: Man
+	DisjointWith: Woman
+
+Class: Woman
+	DisjointWith: Man

@@ -1,0 +1,3 @@
+Selected element := EClass::Employee
+
+name := Manager

@@ -1,0 +1,14 @@
+ROLEMODELMAPPING FOR <http://www.eclipse.org/emf/2002/Ecore> 
+
+"Pull Up Feature" maps <MoveX> {
+
+	Movee := EStructuralFeature;
+	SourceContainer := EClass {
+		sourceContainment := eStructuralFeatures;
+		//containerReference := eSuperTypes;
+		containerReference := eAllSuperTypes;
+	};
+	TargetContainer := EClass{
+		targetContainment := eStructuralFeatures;
+	};
+} 

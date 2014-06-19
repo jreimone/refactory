@@ -1,0 +1,8 @@
+ROLEMODELMAPPING FOR <http://www.emftext.org/java>
+
+/*
+	Let the class override onLowMemory() method
+*/
+"Let activity class override onLowMemory() method" maps <SelectX> { 
+	 Selection := java.classifiers.Class; 
+}

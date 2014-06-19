@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+	<extension point="org.emftext.access.syntax.ui">
+		<metaInformationProvider class="org.modelrefactoring.guery.resource.guery.ui.GueryUIMetaInformation" id="org.modelrefactoring.guery.resource.guery.ui.GueryUIMetaInformation">
+		</metaInformationProvider>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors">
+		<editor class="org.modelrefactoring.guery.resource.guery.ui.GueryEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="guery" icon="icons/editor_icon.gif" id="org.modelrefactoring.guery.resource.guery.ui.GueryEditor" name="GUERY Motif Editor">
+			<contentTypeBinding contentTypeId="org.modelrefactoring.guery.resource.guery">
+			</contentTypeBinding>
+		</editor>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.preferences">
+		<initializer class="org.modelrefactoring.guery.resource.guery.ui.GueryPreferenceInitializer">
+		</initializer>
+	</extension>
+	
+	<extension point="org.eclipse.ui.preferencePages">
+		<page name="Guery Text Editor" id="org.modelrefactoring.guery.resource.guery.ui.GueryPreferencePage" class="org.modelrefactoring.guery.resource.guery.ui.GueryPreferencePage" category="org.eclipse.ui.preferencePages.GeneralTextEditor">
+		</page>
+		<page name="Syntax Coloring" id="org.modelrefactoring.guery.resource.guery.ui.GuerySyntaxColoringPreferencePage" class="org.modelrefactoring.guery.resource.guery.ui.GuerySyntaxColoringPreferencePage" category="org.modelrefactoring.guery.resource.guery.ui.GueryPreferencePage">
+		</page>
+		<page name="Brackets" id="org.modelrefactoring.guery.resource.guery.ui.GueryBracketPreferencePage" class="org.modelrefactoring.guery.resource.guery.ui.GueryBracketPreferencePage" category="org.modelrefactoring.guery.resource.guery.ui.GueryPreferencePage">
+		</page>
+	</extension>
+	
+	<extension point="org.eclipse.ui.newWizards">
+		<category id="org.emftext.runtime.ui.EMFTextFileCategory" name="EMFText File">
+		</category>
+		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.modelrefactoring.guery.resource.guery.ui.GueryNewFileWizard" id="org.modelrefactoring.guery.resource.guery.ui.GueryNewFileWizard" name="EMFText .guery file">
+		</wizard>
+		<category id="org.emftext.runtime.ui.EMFTextProjectCategory" name="EMFText Project">
+		</category>
+		<wizard category="org.emftext.runtime.ui.EMFTextProjectCategory" icon="/icons/default_new_icon.gif" class="org.modelrefactoring.guery.resource.guery.ui.GueryNewProjectWizard" id="org.modelrefactoring.guery.resource.guery.ui.GueryNewProjectWizard" name="EMFText guery project" project="true">
+		</wizard>
+	</extension>
+	
+	<extension point="org.eclipse.ui.ide.markerResolution">
+		<markerResolutionGenerator class="org.modelrefactoring.guery.resource.guery.ui.GueryMarkerResolutionGenerator" markerType="org.modelrefactoring.guery.resource.guery.problem">
+		</markerResolutionGenerator>
+	</extension>
+	
+	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory class="org.modelrefactoring.guery.resource.guery.ui.GueryAnnotationModelFactory" extensions="guery">
+		</factory>
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="org.modelrefactoring.guery.resource.guery" name=".guery File" base-type="org.eclipse.core.runtime.text" file-extensions="guery">
+		</content-type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="guery" id="org.modelrefactoring.guery.resource.guery.ui.provider">
+		</provider>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.annotationTypes">
+		<type name="org.modelrefactoring.guery.resource.guery.ui.occurences">
+		</type>
+		<type name="org.modelrefactoring.guery.resource.guery.ui.occurences.declaration" super="org.modelrefactoring.guery.resource.guery.ui.occurences">
+		</type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+		<specification annotationType="org.modelrefactoring.guery.resource.guery.ui.occurences" label="Occurrences (in .guery files)" icon="/icons/occurrence_icon.gif" textPreferenceKey="guery.occurrenceIndication" textPreferenceValue="false" highlightPreferenceKey="guery.occurrenceHighlighting" highlightPreferenceValue="true" contributesToHeader="false" overviewRulerPreferenceKey="guery.occurrenceIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="guery.occurrenceIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="guery.occurrenceIndicationColor" colorPreferenceValue="212,212,212" presentationLayer="4" showInNextPrevDropdownToolbarActionKey="guery.showOccurrenceInNextPrevDropdownToolbarAction" showInNextPrevDropdownToolbarAction="true" isGoToNextNavigationTargetKey="guery.isOccurrenceGoToNextNavigationTarget" isGoToNextNavigationTarget="false" isGoToPreviousNavigationTargetKey="guery.isOccurrenceGoToPreviousNavigationTarget" isGoToPreviousNavigationTarget="false" textStylePreferenceKey="guery.occurrenceTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+		<specification annotationType="org.modelrefactoring.guery.resource.guery.ui.occurences.declaration" label="Declarations (in .guery files)" textPreferenceKey="guery.declarationIndication" textPreferenceValue="false" highlightPreferenceKey="guery.declarationHighlighting" highlightPreferenceValue="true" overviewRulerPreferenceKey="guery.declarationIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="guery.declarationIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="guery.declarationIndicationColor" colorPreferenceValue="240,216,168" presentationLayer="4" textStylePreferenceKey="guery.declarationTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+	</extension>
+	
+	<extension point="org.eclipse.ui.commands">
+		<category description="All commands belonging to Guery" id="org.modelrefactoring.guery.resource.guery.ui.command.category" name="Guery">
+		</category>
+		<command categoryId="org.modelrefactoring.guery.resource.guery.ui.command.category" description="Toggle comment of the selected lines" id="org.modelrefactoring.guery.resource.guery.ui.command.togglecomment" name="Toggle Comment">
+		</command>
+	</extension>
+	
+	<extension point="org.eclipse.ui.handlers">
+		<handler class="org.modelrefactoring.guery.resource.guery.ui.GueryToggleCommentHandler" commandId="org.modelrefactoring.guery.resource.guery.ui.command.togglecomment">
+		</handler>
+	</extension>
+	
+	<extension point="org.eclipse.ui.contexts">
+		<context name="Editing Guery Files" description="Editing Guery Files Context" parentId="org.eclipse.ui.textEditorScope" id="org.modelrefactoring.guery.resource.guery.EditorScope">
+		</context>
+	</extension>
+	
+	<extension point="org.eclipse.ui.bindings">
+		<key sequence="M1+7" commandId="org.modelrefactoring.guery.resource.guery.ui.command.togglecomment" schemeId="org.eclipse.ui.defaultAcceleratorConfiguration" contextId="org.modelrefactoring.guery.resource.guery.EditorScope">
+		</key>
+	</extension>
+	
+</plugin>

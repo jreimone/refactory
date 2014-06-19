@@ -1,0 +1,6 @@
+ROLEMODELMAPPING FOR <http://www.emftext.org/language/appflow> 
+
+"Rename Element"  maps <RenameX> {
+
+	Nameable := appflow.commons.Nameable(name -> name);
+} 

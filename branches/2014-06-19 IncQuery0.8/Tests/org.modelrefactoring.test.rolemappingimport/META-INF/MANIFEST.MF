@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Rolemappingimport
+Bundle-SymbolicName: org.modelrefactoring.test.rolemappingimport
+Bundle-Version: 1.0.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.junit,
+ org.emftext.language.refactoring.rolemapping,
+ org.emftext.language.refactoring.rolemapping.resource.rolemapping,
+ org.emftext.language.refactoring.roles.resource.rolestext,
+ org.emftext.commons.antlr3_4_0,
+ org.emftext.refactoring.registry.rolemapping,
+ org.emftext.refactoring.registry.rolemodel,
+ org.emftext.refactoring.util,
+ org.eclipse.core.runtime,
+ org.eclipse.emf.ecore.xmi

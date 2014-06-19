@@ -1,0 +1,20 @@
+Prefix: : <http://www.ontomore.org/test/transformation/properties.owl#>
+
+Ontology: <http://www.ontomore.org/test/transformation/properties.owl>
+
+Class: Employee
+
+Class: Project
+
+ObjectProperty: hasProject
+	Domain: Employee
+	Range: Project
+	InverseOf: hasEmployee
+	
+ObjectProperty: hasEmployee
+	Domain: Project
+	Range: Employee
+	InverseOf: hasProject
+
+DisjointClasses: Employee, Project
+

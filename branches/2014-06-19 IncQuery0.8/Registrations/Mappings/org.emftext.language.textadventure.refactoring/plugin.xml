@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.emftext.refactoring.rolemapping">
+      <rolemapping
+            rolemapping_resource="rolemappings/ExtractRoom.rolemapping">
+      </rolemapping>
+      <rolemapping
+            rolemapping_resource="rolemappings/renameRoom.rolemapping">
+      </rolemapping>
+      <rolemapping
+            rolemapping_resource="rolemappings/renameDoor.rolemapping">
+      </rolemapping>
+   </extension>
+
+</plugin>

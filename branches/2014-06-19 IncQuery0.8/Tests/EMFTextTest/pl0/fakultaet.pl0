@@ -1,0 +1,22 @@
+PROGRAM faculty
+
+CONST c=10;
+
+VAR n,f, importVar;
+
+PROCEDURE faculty;
+	VAR i;
+BEGIN
+	f := 1;
+	i := 2;
+	WHILE i <= n DO
+	BEGIN 
+		f := f*i;
+		i := i+1
+	END 
+END;
+
+BEGIN
+	n := c;
+	CALL faculty
+END.

@@ -1,0 +1,37 @@
+-- @path ATL=/Metamodels/ATL/ATL.ecore
+-- @path ATL2=/Metamodels/ATL/ATL.ecore
+module HOTComposition;
+
+create OUT : ATL from IN : ATL, IN2 : ATL2;
+
+rule moduleRule {
+	from 
+		i : ATL!Module
+	to 
+		o : ATL!Module (
+			name <- 'merge'
+		)
+}
+
+rule helperRule {
+	from 
+		i : ATL!Helper,
+		h : ATL2!Helper (
+				h.definition.feature.name = i.definition.feature.name and 
+					if (not i.definition.context_.oclIsUndefined()) then
+						h.definition.context_ = i.definition.context_
+					else
+						false
+					endif
+		)
+	to
+		r : ATL!Helper (
+			commentsBefore <- '-- duplicated',
+			module <- i.module
+		)
+}
+
+
+
+
+

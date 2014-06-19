@@ -1,0 +1,21 @@
+ROLEMODELMAPPING FOR <http://www.eclipse.org/emf/2002/Ecore> 
+
+"Extract Super Class" maps <ExtractX> {
+
+	Extractee := EStructuralFeature;
+	
+	OrigContainer := EClass {
+		extracts := eStructuralFeatures;
+		reference := eSuperTypes;
+	};
+	
+	NewContainer := EClass(newName -> name)
+	{
+		moved := eStructuralFeatures;
+	};
+	
+	ContainerContainer := EPackage {
+		source := eClassifiers;
+		target := eClassifiers;
+	};
+}

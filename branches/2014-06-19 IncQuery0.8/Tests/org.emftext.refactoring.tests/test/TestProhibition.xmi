@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ASCII"?>
+<roles:RoleModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:roles="http://www.emftext.org/language/roles" name="TestProhibition">
+  <roles name="InputRole" outgoing="//@relations.0 //@relations.1">
+    <modifier>input</modifier>
+    <modifier>optional</modifier>
+  </roles>
+  <roles name="OutputRole" incoming="//@relations.0">
+    <modifier>optional</modifier>
+  </roles>
+  <roles name="TransitiveOutputRoleParent" incoming="//@relations.1">
+    <modifier>optional</modifier>
+  </roles>
+  <relations xsi:type="roles:RoleProhibition" source="//@roles[name='InputRole']" target="//@roles[name='OutputRole']"/>
+  <relations xsi:type="roles:RoleProhibition" source="//@roles[name='InputRole']" target="//@roles[name='TransitiveOutputRoleParent']">
+    <modifier>transitive</modifier>
+  </relations>
+</roles:RoleModel>

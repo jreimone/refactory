@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+  <extension point="org.eclipse.emf.importer.modelImporterDescriptors">
+    <modelImporterDescriptor
+          description="Create the Ecore model based on other Ecore or EMOF models using the generation gap pattern to separate generated and manually created code"
+          extensions="ecore"
+          icon="icons/full/obj16/Icon.gif"
+          id="de.christophseidl.emf.ggimporter"
+          name="Ecore model (Generation Gap Pattern)"
+          types="file"
+          wizard="de.christophseidl.emf.ggimporter.ui.GGImporterWizard"/>
+  </extension>
+
+</plugin>

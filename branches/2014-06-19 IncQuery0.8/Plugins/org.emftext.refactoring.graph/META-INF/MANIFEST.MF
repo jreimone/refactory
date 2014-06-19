@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Graph Utilities
+Bundle-SymbolicName: org.emftext.refactoring.graph
+Bundle-Version: 0.0.1
+Bundle-Vendor: Jan Reimann, TU Dresden
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.eclipse.emf.ecore,
+ org.emftext.refactoring.util
+Export-Package: org.emftext.refactoring.graph,
+ org.emftext.refactoring.graph.util

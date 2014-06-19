@@ -1,0 +1,19 @@
+REFACTORING FOR <IntroduceClassAndReference> 
+
+STEPS {
+
+	object container := Container as trace(INPUT);
+	object sourceObject := Source from filter(INPUT);
+	
+	create new newObject:Target in container;
+	create new ref:Reference in newObject;
+	assign newObject.name;
+	set use of sourceObject in ref;
+	
+	/* throws null pointer exception
+	create new newObject1:Target in container;
+	create new ref1:Reference in newObject1;
+	assign newObject1.name;
+	set use of sourceObject in ref1;
+	*/
+}

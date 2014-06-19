@@ -1,0 +1,24 @@
+<associateSites>
+	<associateSite label="Kepler" 
+		url="http://download.eclipse.org/releases/kepler"/>
+	<associateSite label="The Eclipse Project Updates" 
+		url="http://download.eclipse.org/eclipse/updates/4.3"/>
+	<!-- needed for EMFText Access Plugin 1.4.2 -->
+	<associateSite label="EMFText Trunk"
+		url="http://www.emftext.org/update_trunk/"/>	
+	<!-- needed for Reuseware Sokan Index -->	
+	<associateSite label="Reuseware"
+		url="http://www.reuseware.org/update_trunk/"/>
+	<associateSite label="Dresden OCL"
+		url="http://www.dresden-ocl.org/update/"/>
+	<associateSite label="EMF-IncQuery"
+		url="http://download.eclipse.org/incquery/updates/release"/>
+	<associateSite label="Eclipse Orbit R20140114142710"
+		url="http://download.eclipse.org/tools/orbit/downloads/drops/R20140114142710/repository/"/>	
+	<!-- 
+	<associateSite label="EMF-IncQuery Milestones"
+		url="http://download.eclipse.org/incquery/updates/milestone"/>
+	 -->
+	<associateSite label="EMF Compare"
+		url="http://download.eclipse.org/modeling/emf/compare/updates/releases"/>	
+</associateSites>

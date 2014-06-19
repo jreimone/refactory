@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.modelrefactoring.evolution.cods/src-gen" editDirectory="/org.modelrefactoring.evolution.cods.edit/src-gen"
+    editorDirectory="/org.modelrefactoring.evolution.cods.editor/src-gen" modelPluginID="org.modelrefactoring.evolution.cods"
+    modelName="Cods" editPluginClass="org.modelrefactoring.evolution.cods.provider.CodsEditPlugin"
+    editorPluginClass="org.modelrefactoring.evolution.cods.presentation.CodsEditorPlugin"
+    testsDirectory="/org.modelrefactoring.evolution.cods.tests/src-gen" testSuiteClass="org.modelrefactoring.evolution.cods.tests.CodsAllTests"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0" copyrightFields="false"
+    editPluginID="org.modelrefactoring.evolution.cods.edit" editorPluginID="org.modelrefactoring.evolution.cods.editor"
+    usedGenPackages="../../org.modelrefactoring.evolution.coed/metamodel/coed.genmodel#//coed platform:/plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
+  <foreignModel>cods.ecore</foreignModel>
+  <genPackages prefix="Megamodel" basePackage="org.modelrefactoring.evolution" disposableProviderFactory="true"
+      ecorePackage="cods.ecore#/">
+    <genDataTypes ecoreDataType="cods.ecore#//Dummy"/>
+    <nestedGenPackages prefix="Cods" basePackage="org.modelrefactoring.evolution.megamodel"
+        disposableProviderFactory="true" ecorePackage="cods.ecore#//cods">
+      <genClasses ecoreClass="cods.ecore#//cods/CODS">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cods.ecore#//cods/CODS/DSES"/>
+      </genClasses>
+      <genClasses ecoreClass="cods.ecore#//cods/DomainSpecificEvolutionSpecification">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference cods.ecore#//cods/DomainSpecificEvolutionSpecification/metamodel"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cods.ecore#//cods/DomainSpecificEvolutionSpecification/ED"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cods.ecore#//cods/DomainSpecificEvolutionSpecification/coEvolutionDefinition"/>
+      </genClasses>
+      <genClasses ecoreClass="cods.ecore#//cods/EvolutionDefinition"/>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Architecture" basePackage="org.modelrefactoring.evolution.megamodel"
+        disposableProviderFactory="true" ecorePackage="cods.ecore#//architecture">
+      <genClasses image="false" ecoreClass="cods.ecore#//architecture/Model">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference cods.ecore#//architecture/Model/conformsTo"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="cods.ecore#//architecture/ReferenceModel">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference cods.ecore#//architecture/ReferenceModel/package"/>
+      </genClasses>
+      <genClasses ecoreClass="cods.ecore#//architecture/TerminalModel"/>
+      <genClasses ecoreClass="cods.ecore#//architecture/TransformationModel">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference cods.ecore#//architecture/TransformationModel/transformation"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="cods.ecore#//architecture/MegaModel">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cods.ecore#//architecture/MegaModel/models"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference cods.ecore#//architecture/MegaModel/instanceModels"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference cods.ecore#//architecture/MegaModel/referenceModels"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference cods.ecore#//architecture/MegaModel/terminalModels"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference cods.ecore#//architecture/MegaModel/metaMetaModel"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference cods.ecore#//architecture/MegaModel/metaModels"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference cods.ecore#//architecture/MegaModel/transformationModels"/>
+        <genOperations ecoreOperation="cods.ecore#//architecture/MegaModel/getReferenceModelByEPackage">
+          <genParameters ecoreParameter="cods.ecore#//architecture/MegaModel/getReferenceModelByEPackage/epackage"/>
+        </genOperations>
+        <genOperations ecoreOperation="cods.ecore#//architecture/MegaModel/getTerminalModelByEObject">
+          <genParameters ecoreParameter="cods.ecore#//architecture/MegaModel/getTerminalModelByEObject/model"/>
+        </genOperations>
+      </genClasses>
+      <genClasses ecoreClass="cods.ecore#//architecture/MetaMetaModel"/>
+      <genClasses ecoreClass="cods.ecore#//architecture/MetaModel"/>
+      <genClasses ecoreClass="cods.ecore#//architecture/InstanceModel">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference cods.ecore#//architecture/InstanceModel/model"/>
+      </genClasses>
+    </nestedGenPackages>
+  </genPackages>
+</genmodel:GenModel>

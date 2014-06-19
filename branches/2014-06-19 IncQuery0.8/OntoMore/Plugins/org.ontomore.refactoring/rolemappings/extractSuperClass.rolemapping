@@ -1,0 +1,29 @@
+ROLEMODELMAPPING FOR <http://org.emftext/owl.ecore>
+
+"Extract Superclass" maps <ExtracLooselyX> { 
+
+	ContainerContainer := Ontology {
+		origContainer := frames;
+		newContainer := frames;
+		extractee := frames;
+	};
+	
+	OrigContainer := Class {
+		newContainer := superClassesDescriptions:Disjunction -> conjunctions:Conjunction -> primaries:ClassAtomic -> clazz;
+	};
+	
+	NewContainer := Class (name -> iri);
+	
+	Extractee := Feature {
+		origReference := domain:Disjunction;
+		newReference := domain:Disjunction;
+	};
+	
+	OrigReference := Disjunction {
+		origContainer := conjunctions:Conjunction -> primaries:ClassAtomic -> clazz;
+	};
+	
+	NewReference := Disjunction {
+		newContainer := conjunctions:Conjunction -> primaries:ClassAtomic -> clazz;
+	};
+}

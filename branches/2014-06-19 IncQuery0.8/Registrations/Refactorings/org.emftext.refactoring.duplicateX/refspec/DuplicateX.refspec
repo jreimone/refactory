@@ -1,0 +1,14 @@
+REFACTORING FOR <DuplicateX> 
+
+STEPS { 
+	/** 
+		Only collect the objects here. Real refactoring is in the post processor. 
+		Make sure to register the class DuplicateXPostProcessor as post processor
+		for your concrete refactoring.
+	*/
+	object origContainerObjects := Container as trace(INPUT); 
+	object element := Element from filter(INPUT);
+	
+	/** Dummy. Needed*/
+	object dummy := CopiedElement from filter(INPUT);
+} 

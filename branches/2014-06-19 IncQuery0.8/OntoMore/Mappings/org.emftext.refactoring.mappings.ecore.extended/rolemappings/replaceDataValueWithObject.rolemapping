@@ -1,0 +1,22 @@
+ROLEMODELMAPPING FOR <http://www.eclipse.org/emf/2002/Ecore>
+
+"Replace Data Value with Object" maps <ReplaceFeatureInContainer> { 
+
+	Container := EPackage {
+		featureContainer := eClassifiers;
+		range := eClassifiers;
+	};
+	
+	FeatureContainer := EClass {
+		origFeature := eStructuralFeatures;
+		newFeature := eStructuralFeatures;
+	};
+	
+	OrigFeature := EAttribute (name -> name);
+	
+	NewFeature := EReference (name -> name) {
+		range := eType;
+	};
+	
+	Range := EClass (name -> name);
+}

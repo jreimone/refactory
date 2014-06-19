@@ -1,0 +1,14 @@
+officemodel myOffice(
+	office A10
+	office B12
+	office B13
+	employee John
+		works in B12
+		works with James, Leila
+	employee James
+		works in A10
+		works with John
+	employee Leila
+		works in B13
+		works with John
+)

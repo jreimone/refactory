@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.commands">
+      <!--
+      <category
+            id="org.qualitune.category"
+            name="QualiTune">
+      </category>
+      -->
+      <command
+            categoryId="org.emftext.refactoring.commands"
+            id="org.modelrefactoring.evolution.ui.prologgeneration.command"
+            name="Generate Prolog theory">
+      </command>
+      <command
+            categoryId="org.emftext.refactoring.commands"
+            id="org.modelrefactoring.evolution.ui.implicitdependencies.command"
+            name="Get all implicit dependencies">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="org.modelrefactoring.evolution.ui.commands.GenerateKnowledgeHandler"
+            commandId="org.modelrefactoring.evolution.ui.prologgeneration.command">
+         <enabledWhen>
+            <iterate>
+               <or>
+                  <adapt
+                        type="org.eclipse.ui.IWorkingSet">
+                  </adapt>
+                  <adapt
+                        type="org.eclipse.core.resources.IResource">
+                  </adapt>
+               </or>
+            </iterate>
+         </enabledWhen>
+      </handler>
+      <handler
+            class="org.modelrefactoring.evolution.ui.commands.GetImplicitDependenciesHandler"
+            commandId="org.modelrefactoring.evolution.ui.implicitdependencies.command">
+            <enabledWhen>
+            <iterate>
+               <or>
+                  <adapt
+                        type="org.eclipse.core.resources.IFile">
+                  </adapt>
+               </or>
+            </iterate>
+         </enabledWhen>
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:org.eclipse.ui.popup.any?before=additions">
+         <command
+               commandId="org.modelrefactoring.evolution.ui.prologgeneration.command"
+               label="Generate facts for model"
+               style="push">
+         </command>
+      </menuContribution>
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:org.eclipse.ui.popup.any?before=additions">
+         <command
+               commandId="org.modelrefactoring.evolution.ui.implicitdependencies.command"
+               label="Get implicit dependencies for model"
+               style="push">
+         </command>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            allowMultiple="false"
+            category="org.emftext.refactory.ui.view"
+            class="org.modelrefactoring.evolution.ui.views.ImplicitDependencyView"
+            icon="icons/implicitDependency.png"
+            id="org.modelrefactoring.evolution.ui.views.ImplicitDependencyView"
+            name="Implicit Dependencies">
+      </view>
+      <!--
+      <category
+            id="org.qualitune.view.category"
+            name="QualiTune">
+      </category>
+      -->
+   </extension>
+
+</plugin>

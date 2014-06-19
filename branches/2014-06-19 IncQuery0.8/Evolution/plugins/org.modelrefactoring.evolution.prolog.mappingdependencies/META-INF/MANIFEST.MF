@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Implicit mapping dependencies as Prolog rules
+Bundle-SymbolicName: org.modelrefactoring.evolution.prolog.mappingdependencies;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.modelrefactoring.evolution.prolog.mappingdependencies.Activator
+Bundle-Vendor: www.modelrefactoring.org
+Require-Bundle: org.eclipse.core.runtime,
+ org.modelrefactoring.evolution.prolog.registry
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy

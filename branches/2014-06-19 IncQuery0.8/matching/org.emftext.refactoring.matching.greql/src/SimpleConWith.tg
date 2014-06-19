@@ -1,0 +1,44 @@
+//from
+//caller, callee:V{Node}, connection:E{Connection}
+from containerContainer, origContainer, newContainer, extract:V{Node},//, movedReference:V{Node},
+source, target, extracts, moved:E{Connection}//, referer, containerReference:E{Connection}
+
+with
+//caller -->{Connection} callee and
+//connection.target=callee.name and connection.source=caller.name
+
+containerContainer -->{Connection @thisEdge=source} origContainer and
+source.target=origContainer.name and
+source.source=containerContainer.name and
+source.connectionType="AGGREGATION" and
+
+containerContainer -->{Connection@thisEdge=target} newContainer and
+target.target=newContainer.name and
+target.source=containerContainer.name and
+target.connectionType="AGGREGATION" and
+
+origContainer -->{Connection@thisEdge=extracts} extract and
+extracts.target=extract.name and
+extracts.source=origContainer.name and
+extracts.connectionType="AGGREGATION" and
+
+newContainer -->{Connection@thisEdge=moved} extract and
+moved.target=extract.name and
+moved.source=newContainer.name and
+moved.connectionType="AGGREGATION" //and
+
+//origContainer -->{Connection@thisEdge=referer} movedReference and
+//referer.target=movedReference.name and
+//referer.source=origContainer.name and
+//referer.connectionType="AGGREGATION" and
+
+//movedReference -->{Connection@thisEdge=containerReference} newContainer and
+//containerReference.target=newContainer.name and
+//containerReference.source=movedReference.name and
+//containerReference.connectionType="ASSOCIATION"
+
+report
+//caller.name, connection.name, callee.name
+containerContainer.name, origContainer.name, newContainer.name, extract.name, //movedReference.name,
+source.name, target.name, extracts.name, moved.name//, referer.name, containerReference.name
+end

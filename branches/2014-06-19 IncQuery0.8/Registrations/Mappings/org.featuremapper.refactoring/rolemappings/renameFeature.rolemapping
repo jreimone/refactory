@@ -1,0 +1,5 @@
+ROLEMODELMAPPING FOR <http://www.tudresden.de/feature> 
+
+RenameFeature maps <RenameX> { 
+	 Nameable := Feature(name -> name); 
+}

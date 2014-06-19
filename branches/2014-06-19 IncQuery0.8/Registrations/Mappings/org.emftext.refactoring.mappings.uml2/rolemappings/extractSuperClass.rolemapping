@@ -1,0 +1,20 @@
+ROLEMODELMAPPING FOR <http://www.eclipse.org/uml2/3.0.0/UML> 
+
+"Extract Super Class" maps <ExtractX> {
+
+	Extractee := Property;
+	
+	OrigContainer := Class {
+		extracts := ownedAttribute;
+		reference := superClass;
+	};
+	
+	NewContainer := Class(newName -> name){
+		moved := ownedAttribute;
+	};
+	
+	ContainerContainer := Package {
+		source := packagedElement;
+		target := packagedElement;
+	};
+}

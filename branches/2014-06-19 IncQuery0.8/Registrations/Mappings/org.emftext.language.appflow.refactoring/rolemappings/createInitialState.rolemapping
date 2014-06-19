@@ -1,0 +1,14 @@
+ROLEMODELMAPPING FOR <http://www.emftext.org/language/appflow>
+
+"Create Initial State" maps <IntroduceSimpleReferenceClass> { 
+	
+	DerivationContainer := appflow.statemodel.StateModel{
+		derivation := transitions;
+	};
+	
+	Derivation := appflow.statemodel.Transition{
+		derivees := target;
+	};
+	
+	Derivee := appflow.statemodel.State;
+}

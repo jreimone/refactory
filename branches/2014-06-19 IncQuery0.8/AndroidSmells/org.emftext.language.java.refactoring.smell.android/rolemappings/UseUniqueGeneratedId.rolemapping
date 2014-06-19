@@ -1,0 +1,8 @@
+ROLEMODELMAPPING FOR <http://www.emftext.org/java>
+
+/*
+	Uses a unique generated id for tracking the hardware id, instead of IMEI, ....
+*/
+"Use unique generated id for tracking hardware id" maps <SelectX> {
+	 Selection := java.references.IdentifierReference;
+}

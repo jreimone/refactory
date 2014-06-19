@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.emftext.language.refactoring.roles.resource.rolestext.default_load_options">
+      <provider
+            class="org.emftext.language.refactoring.roles.postprocessing.RolesOptionProvider"
+            id="org.emftext.language.refactoring.roles.postprocessing.provider3">
+      </provider>
+   </extension>
+
+</plugin>

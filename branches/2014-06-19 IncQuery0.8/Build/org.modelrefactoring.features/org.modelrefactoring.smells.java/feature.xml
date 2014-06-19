@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.modelrefactoring.smells.java"
+      label="Refactory Smells for Java"
+      version="0.9.2"
+      provider-name="Software Technology Group - TU Dresden">
+
+   <description url="http://modelrefactoring.org">
+      Refactory Smells for Javas: registers smells for Java.
+   </description>
+
+   <copyright>
+      Copyright (c) 2006-2014 Software Technology Group, Dresden University
+of Technology, Germany; DevBoost GmbH, Berlin, Amtsgericht Charlottenburg,
+HRB 140026.
+   </copyright>
+
+   <license>
+      Eclipse Public License v1.0
+
+Copyright (c) 2006-2014
+Software Technology Group, Dresden University of Technology
+DevBoost GmbH, Berlin, Amtsgericht Charlottenburg, HRB 140026.
+
+All rights reserved. This program and the accompanying materials are made available under the terms of the Eclipse Public License v1.0 which accompanies this distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
+
+Contributors:
+  Software Technology Group - TU Dresden, Germany;
+  DevBoost GmbH - Berlin, Germany
+     - initial API and implementation
+   </license>
+
+   <requires>
+      <import feature="org.modelrefactoring.smells"/>
+      <import plugin="org.eclipse.pde.core"/>
+      <import plugin="org.eclipse.emf.ecore"/>
+      <import plugin="org.eclipse.emf.transaction"/>
+      <import plugin="org.eclipse.xtext.xbase.lib"/>
+      <import plugin="org.emftext.language.java"/>
+      <import plugin="org.eclipse.uml2.uml"/>
+      <import plugin="org.emftext.refactoring.smell.calculation"/>
+      <import plugin="org.eclipse.incquery.runtime"/>
+      <import plugin="org.emftext.refactoring.smell.registry.ui"/>
+      <import plugin="org.emftext.language.java.resource"/>
+      <import plugin="org.emftext.language.java.edit"/>
+      <import plugin="org.emftext.language.java.resource.bcel"/>
+      <import plugin="org.emftext.language.java.resource.java"/>
+      <import plugin="org.emftext.language.java.resource.java.ui"/>
+      <import plugin="org.emftext.language.java.resource.jdt"/>
+   </requires>
+
+   <plugin
+         id="org.emftext.refactoring.smell.java.energy"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>

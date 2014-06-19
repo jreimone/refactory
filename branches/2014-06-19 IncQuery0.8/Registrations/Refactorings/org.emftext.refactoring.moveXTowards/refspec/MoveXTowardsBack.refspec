@@ -1,0 +1,11 @@
+REFACTORING FOR <MoveXTowardsBack> 
+
+STEPS { 
+	/** 
+		Only collect the objects here. Real refactoring is in the post processor. 
+		Make sure to register the class MoveXTowardsBackPostProcessor as post processor
+		for your concrete refactoring.
+	*/
+	object origContainerObjects := Container as trace(INPUT); 
+	object element := Element from filter(INPUT);
+} 

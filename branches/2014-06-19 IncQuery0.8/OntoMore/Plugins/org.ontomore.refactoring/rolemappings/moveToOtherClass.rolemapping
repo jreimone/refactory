@@ -1,0 +1,16 @@
+ROLEMODELMAPPING FOR <http://org.emftext/owl.ecore>
+
+"Pull up Axiom" maps <MoveX> {
+
+	 SourceContainer := Class {
+	 	sourceContainment := superClassesDescriptions;
+	 	containerReference := superClassesDescriptions:Disjunction -> conjunctions:Conjunction -> primaries:ClassAtomic -> clazz;
+	 };
+	 
+	 TargetContainer := Class {
+	 	// there might be several superclasses!
+	 	targetContainment := superClassesDescriptions;
+	 };
+	 
+	 Movee := Description;
+}

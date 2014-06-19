@@ -1,0 +1,26 @@
+Prefix: : <http://ontomore.org/test/testOntology.owl#>
+
+Ontology: <http://ontomore.org/test/testOntology.owl>
+	
+Class: Person
+
+Class: Employee
+	SubClassOf: Person
+	
+Class: Address
+
+ObjectProperty: hasAddress
+	Domain: Person
+	Range: Address
+	
+ObjectProperty: hasNeighbour
+	Domain: Person
+	Range: Person
+	
+DataProperty: hasSalary
+	Domain: Person
+
+DisjointClasses: Person, Address
+
+Individual: John
+	Types: Person

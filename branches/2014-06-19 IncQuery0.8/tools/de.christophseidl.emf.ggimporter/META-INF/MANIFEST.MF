@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: EMF Genmodel Generation Gap Importer
+Bundle-SymbolicName: de.christophseidl.emf.ggimporter;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Require-Bundle: org.eclipse.core.resources;visibility:=reexport,
+ org.eclipse.core.runtime;visibility:=reexport,
+ org.eclipse.ui;visibility:=reexport,
+ org.eclipse.emf.importer;visibility:=reexport,
+ org.eclipse.emf.importer.ecore;visibility:=reexport,
+ org.eclipse.emf.common;visibility:=reexport
+Bundle-ActivationPolicy: lazy
+Bundle-Activator: de.christophseidl.emf.ggimporter.GGImporterPlugin$Implementation
+Export-Package: de.christophseidl.emf.ggimporter,
+ de.christophseidl.emf.ggimporter.ui

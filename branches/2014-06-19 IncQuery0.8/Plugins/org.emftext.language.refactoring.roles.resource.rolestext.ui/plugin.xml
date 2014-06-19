@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+	<extension point="org.emftext.access.syntax.ui">
+		<metaInformationProvider class="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextUIMetaInformation" id="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextUIMetaInformation">
+		</metaInformationProvider>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors">
+		<editor class="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="rolestext" icon="icons/editor_icon.gif" id="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextEditor" name="Role Model Text Editor">
+			<contentTypeBinding contentTypeId="org.emftext.language.refactoring.roles.resource.rolestext">
+			</contentTypeBinding>
+		</editor>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.preferences">
+		<initializer class="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextPreferenceInitializer">
+		</initializer>
+	</extension>
+	
+	<extension point="org.eclipse.ui.preferencePages">
+		<page name="Role Model Text Editor" id="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextPreferencePage" class="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextPreferencePage" category="org.emftext.refactoring.ui.preferences">
+		</page>
+		<page name="Syntax Coloring" id="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextSyntaxColoringPreferencePage" class="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextSyntaxColoringPreferencePage" category="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextPreferencePage">
+		</page>
+		<page name="Brackets" id="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextBracketPreferencePage" class="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextBracketPreferencePage" category="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextPreferencePage">
+		</page>
+	</extension>
+	
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard category="org.emftext.refactory.ui" icon="/icons/default_new_icon.gif" class="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextNewFileWizard" id="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextNewFileWizard" name="EMFText .rolestext file">
+		</wizard>
+		<category id="org.emftext.runtime.ui.EMFTextProjectCategory" name="EMFText Project">
+		</category>
+		<wizard category="org.emftext.runtime.ui.EMFTextProjectCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextNewProjectWizard" id="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextNewProjectWizard" name="EMFText rolestext project" project="true">
+		</wizard>
+	</extension>
+	
+	<extension point="org.eclipse.ui.ide.markerResolution">
+		<markerResolutionGenerator class="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextMarkerResolutionGenerator" markerType="org.emftext.language.refactoring.roles.resource.rolestext.problem">
+		</markerResolutionGenerator>
+	</extension>
+	
+	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory class="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextAnnotationModelFactory" extensions="rolestext">
+		</factory>
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="org.emftext.language.refactoring.roles.resource.rolestext" name=".rolestext File" base-type="org.eclipse.core.runtime.text" file-extensions="rolestext">
+		</content-type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="rolestext" id="org.emftext.language.refactoring.roles.resource.rolestext.ui.provider">
+		</provider>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.annotationTypes">
+		<type name="org.emftext.language.refactoring.roles.resource.rolestext.ui.occurences">
+		</type>
+		<type name="org.emftext.language.refactoring.roles.resource.rolestext.ui.occurences.declaration" super="org.emftext.language.refactoring.roles.resource.rolestext.ui.occurences">
+		</type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+		<specification annotationType="org.emftext.language.refactoring.roles.resource.rolestext.ui.occurences" label="Occurrences (in .rolestext files)" icon="/icons/occurrence_icon.gif" textPreferenceKey="rolestext.occurrenceIndication" textPreferenceValue="false" highlightPreferenceKey="rolestext.occurrenceHighlighting" highlightPreferenceValue="true" contributesToHeader="false" overviewRulerPreferenceKey="rolestext.occurrenceIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="rolestext.occurrenceIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="rolestext.occurrenceIndicationColor" colorPreferenceValue="212,212,212" presentationLayer="4" showInNextPrevDropdownToolbarActionKey="rolestext.showOccurrenceInNextPrevDropdownToolbarAction" showInNextPrevDropdownToolbarAction="true" isGoToNextNavigationTargetKey="rolestext.isOccurrenceGoToNextNavigationTarget" isGoToNextNavigationTarget="false" isGoToPreviousNavigationTargetKey="rolestext.isOccurrenceGoToPreviousNavigationTarget" isGoToPreviousNavigationTarget="false" textStylePreferenceKey="rolestext.occurrenceTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+		<specification annotationType="org.emftext.language.refactoring.roles.resource.rolestext.ui.occurences.declaration" label="Declarations (in .rolestext files)" textPreferenceKey="rolestext.declarationIndication" textPreferenceValue="false" highlightPreferenceKey="rolestext.declarationHighlighting" highlightPreferenceValue="true" overviewRulerPreferenceKey="rolestext.declarationIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="rolestext.declarationIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="rolestext.declarationIndicationColor" colorPreferenceValue="240,216,168" presentationLayer="4" textStylePreferenceKey="rolestext.declarationTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+	</extension>
+	
+	<extension point="org.eclipse.ui.commands">
+		<category description="All commands belonging to Rolestext" id="org.emftext.language.refactoring.roles.resource.rolestext.ui.command.category" name="Rolestext">
+		</category>
+		<command categoryId="org.emftext.language.refactoring.roles.resource.rolestext.ui.command.category" description="Toggle comment of the selected lines" id="org.emftext.language.refactoring.roles.resource.rolestext.ui.command.togglecomment" name="Toggle Comment">
+		</command>
+	</extension>
+	
+	<extension point="org.eclipse.ui.handlers">
+		<handler class="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextToggleCommentHandler" commandId="org.emftext.language.refactoring.roles.resource.rolestext.ui.command.togglecomment">
+		</handler>
+	</extension>
+	
+	<extension point="org.eclipse.ui.contexts">
+		<context name="Editing Rolestext Files" description="Editing Rolestext Files Context" parentId="org.eclipse.ui.textEditorScope" id="org.emftext.language.refactoring.roles.resource.rolestext.EditorScope">
+		</context>
+	</extension>
+	
+	<extension point="org.eclipse.ui.bindings">
+		<key sequence="M1+7" commandId="org.emftext.language.refactoring.roles.resource.rolestext.ui.command.togglecomment" schemeId="org.eclipse.ui.defaultAcceleratorConfiguration" contextId="org.emftext.language.refactoring.roles.resource.rolestext.EditorScope">
+		</key>
+	</extension>
+	
+</plugin>

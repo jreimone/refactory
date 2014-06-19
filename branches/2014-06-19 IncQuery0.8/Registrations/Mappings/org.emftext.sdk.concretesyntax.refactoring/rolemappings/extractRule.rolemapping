@@ -1,0 +1,19 @@
+ROLEMODELMAPPING FOR <http://www.emftext.org/sdk/concretesyntax> 
+
+"Extract Rule" maps <ExtractXwithReferenceClass> { 
+	Extract := SyntaxElement ;
+	OrigContainer := SyntaxElement {
+		extracts := children;
+		referer := children : Containment;
+	};
+	NewContainer := Rule {
+		moved := children;
+	};
+	ContainerContainer := ConcreteSyntax {
+		source := rules;
+		target := rules;
+	};
+	MovedReference := Containment {
+		containerRef := feature; // feature does not exist yet
+	};
+}

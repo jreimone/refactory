@@ -1,0 +1,18 @@
+ROLEMODELMAPPING FOR <http://www.eclipse.org/emf/2002/Ecore> 
+
+"Extract Interface From Operations" maps <ExtractX> {
+
+	Extractee := EOperation;
+	OrigContainer := EClass {
+		extracts := eOperations;
+		reference := eSuperTypes;
+	};
+	NewContainer := EClass (newName -> name){
+		moved := eOperations;
+		// TODO set new EClass to abstract=true and interface=true in postprocessor
+	};
+	ContainerContainer := EPackage {
+		source := eClassifiers;
+		target := eClassifiers;
+	};
+} 

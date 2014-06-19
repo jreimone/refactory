@@ -1,0 +1,21 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Oclrefactoring
+Bundle-SymbolicName: org.dresdenocl.refactoring;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.dresdenocl.refactoring.Activator
+Bundle-Vendor: Michael Muck
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.emftext.refactoring.registry.rolemapping,
+ org.eclipse.emf.ecore.change,
+ org.emftext.language.refactoring.roles,
+ org.emftext.access,
+ org.emftext.refactoring.util,
+ org.dresdenocl.language.ocl,
+ org.dresdenocl.pivotmodel,
+ org.eclipse.emf.compare,
+ org.emftext.language.refactoring.specification
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.dresdenocl.refactoring

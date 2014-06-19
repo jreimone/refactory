@@ -1,0 +1,36 @@
+package org.emftext.refactoring.smell.java.energy
+
+import "http://www.emftext.org/java/commons"
+import "http://www.emftext.org/java/classifiers"
+import "http://www.emftext.org/java/members"
+import "http://www.emftext.org/java/types"
+import "http://www.emftext.org/java/references"
+import "http://www.emftext.org/java/statements"
+
+// inspired by the GReQL query for "early resource binding" from the following paper:
+// Marion Gottschalk, Mirco Joseﬁok, Jan Jelschen, Andreas Winter (2012) 
+// "Removing Energy Code Smells with Reengineering Services"
+pattern earlyResourceBinding(bindingStatement:ExpressionStatement){
+	// find the class extending 'Activity'
+	Class.^extends(actualClass, superClassRef);
+	NamespaceClassifierReference.classifierReferences(superClassRef, classifierReference);
+	ClassifierReference.target(classifierReference, superClass);
+	Class.name(superClass, "Activity");
+	// find the overriding method 'onCreate(..)'
+	Class.members(actualClass, onCreateMethod);
+	ClassMethod.name(onCreateMethod, "onCreate");
+	// find the binding statement calling 'requestLocationUpdates(..)' too early
+	ExpressionStatement.expression(bindingStatement, earlyBindingMethodCallReference);
+	IdentifierReference.next(earlyBindingMethodCallReference, earlyBindingMethodCall);
+	MethodCall.target(earlyBindingMethodCall, requestLocationUpdatesMethod);
+	ClassMethod.name(requestLocationUpdatesMethod, "requestLocationUpdates");
+	find parentContainsBindingExpression+(onCreateMethod, bindingStatement);
+}
+
+private pattern parentContainsBindingExpression(parent, child){
+	StatementListContainer.statements(parent, child);
+} or {
+	ExpressionStatement.expression(parent, child);
+} or {
+	StatementContainer.statement(parent, child);
+}

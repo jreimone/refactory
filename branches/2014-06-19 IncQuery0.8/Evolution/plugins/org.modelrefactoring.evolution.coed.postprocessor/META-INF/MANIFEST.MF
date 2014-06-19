@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Postprocessor
+Bundle-SymbolicName: org.modelrefactoring.evolution.coed.postprocessor;singleton:=true
+Bundle-Version: 0.0.1.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.modelrefactoring.evolution.coed,
+ org.modelrefactoring.evolution.coed.resource.coed,
+ org.emftext.language.refactoring.rolemapping,
+ org.modelrefactoring.mvel

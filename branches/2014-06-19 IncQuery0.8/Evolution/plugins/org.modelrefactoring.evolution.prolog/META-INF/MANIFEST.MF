@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Generator for Prolog fact base
+Bundle-SymbolicName: org.modelrefactoring.evolution.prolog;singleton:=true
+Bundle-Version: 0.0.1.qualifier
+Bundle-Activator: org.modelrefactoring.evolution.prolog.PrologGeneratorPlugin
+Bundle-Vendor: modelrefactoring.org
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore,
+ org.modelrefactoring.tuprolog,
+ org.modelrefactoring.evolution.prolog.registry,
+ org.modelrefactoring.evolution.registry
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Export-Package: org.modelrefactoring.evolution.prolog

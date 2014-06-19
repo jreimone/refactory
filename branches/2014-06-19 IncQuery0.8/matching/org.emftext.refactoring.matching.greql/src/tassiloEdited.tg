@@ -1,0 +1,40 @@
+from containerReference: E{Connection},
+    //referer:  outIncidences{Connection}(origContainer),
+    //source:  outIncidences{Connection}(containerContainer),
+    referer:  inIncidences{Connection}(movedReference),
+    source:  inIncidences{Connection}(origContainer),
+    target:  outIncidences{Connection}(containerContainer),
+    extracts: outIncidences{Connection}(origContainer),
+    moved:    outIncidences{Connection}(newContainer),
+    //betweenContRef:,
+    betweenRefCon: inIncidences{Connection}(betweenRefNode)
+    //betweenSource:,
+    //betweenTarget:,
+    //betweenExtracts:,
+    //betweenMoved:,
+with  containerReference.connectionType = "ASSOCIATION"
+  and referer.connectionType            = "AGGREGATION"
+  and source.connectionType            = "AGGREGATION"
+  and target.connectionType            = "AGGREGATION"
+  and extracts.connectionType          = "AGGREGATION"
+  and moved.connectionType				="AGGREGATION"
+  and betweenRefCon.connectionType ="AGGREGATION"
+  and omega(target) = newContainer
+  and omega(moved)  = extract
+  and omega(betweenRefCon) = betweenRefNode
+  //and omega(containerReference) = newContainer
+  //and omega(extracts) = extract
+  //and omega(source) = origContainer
+  //and omega(referer) = movedReference
+reportSet
+  containerContainer.name, origContainer.name, newContainer.name, extract.name, movedReference.name,
+  source.name, target.name, extracts.name, moved.name, referer.name, containerReference.name,
+  betweenRefNode.name, betweenRefCon.name
+end
+where movedReference    := alpha(containerReference),
+      newContainer      := omega(containerReference),
+      //origContainer      := alpha(referer),
+      origContainer      := alpha(betweenRefCon),
+      betweenRefNode :=omega(betweenRefCon),
+      containerContainer := alpha(source),
+      extract            := omega(extracts)

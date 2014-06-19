@@ -1,0 +1,121 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Schema file written by PDE -->
+<schema targetNamespace="org.emftext.refactoring.registry.rolemapping" xmlns="http://www.w3.org/2001/XMLSchema">
+<annotation>
+      <appinfo>
+         <meta.schema plugin="org.emftext.refactoring.registry.rolemapping" id="org.emftext.refactoring.submenu" name="refactoringSubmenu"/>
+      </appinfo>
+      <documentation>
+         Register submenus which will be displayed as children under the &apos;Refactor&apos; menu. Group together registered refatorings (rolemappings).
+      </documentation>
+   </annotation>
+
+   <element name="extension">
+      <annotation>
+         <appinfo>
+            <meta.element />
+         </appinfo>
+      </annotation>
+      <complexType>
+         <sequence minOccurs="1" maxOccurs="unbounded">
+            <element ref="refactoringSubMenu"/>
+         </sequence>
+         <attribute name="point" type="string" use="required">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="id" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="name" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+               <appinfo>
+                  <meta.attribute translatable="true"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="refactoringSubMenu">
+      <annotation>
+         <documentation>
+            With this extension point one can register and name a submenu which will bi displayed in the root &apos;Refactor&apos; menu where all registered rolemappings (concrete refactorings) are displayed. Use a submenu to group together registered rolemappings in the context menu of a selection of elements to be refactored.
+         </documentation>
+      </annotation>
+      <complexType>
+         <attribute name="submenuID" type="string" use="required">
+            <annotation>
+               <documentation>
+                  The submenu ID must be set to reference a submenu while registering a rolemapping. If that&apos;s the case the rolemapping occurs as entry in the submenu.
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="displayString" type="string" use="required">
+            <annotation>
+               <documentation>
+                  This string is displayed in the &apos;Refactor&apos; context menu.
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="specialises" type="string">
+            <annotation>
+               <documentation>
+                  Use this attribute to specify another registered refactoring submenu as parent menu. In this way it is possible to compose several submenus.
+               </documentation>
+               <appinfo>
+                  <meta.attribute kind="identifier" basedOn="org.emftext.refactoring.submenu/refactoringSubMenu/@submenuID"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="since"/>
+      </appinfo>
+      <documentation>
+         [Enter the first release in which this extension point appears.]
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="examples"/>
+      </appinfo>
+      <documentation>
+         [Enter extension point usage example here.]
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="apiinfo"/>
+      </appinfo>
+      <documentation>
+         [Enter API information here.]
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="implementation"/>
+      </appinfo>
+      <documentation>
+         [Enter information about supplied implementation of this extension point.]
+      </documentation>
+   </annotation>
+
+
+</schema>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+	<extension point="org.emftext.access.syntax.ui">
+		<metaInformationProvider class="org.modelrefactoring.evolution.coed.resource.coed.ui.CoedUIMetaInformation" id="org.modelrefactoring.evolution.coed.resource.coed.ui.CoedUIMetaInformation">
+		</metaInformationProvider>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors">
+		<editor class="org.modelrefactoring.evolution.coed.resource.coed.ui.CoedEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="coed" icon="icons/editor_icon.gif" id="org.modelrefactoring.evolution.coed.resource.coed.ui.CoedEditor" name="CoED Editor">
+			<contentTypeBinding contentTypeId="org.modelrefactoring.evolution.coed.resource.coed">
+			</contentTypeBinding>
+		</editor>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.preferences">
+		<initializer class="org.modelrefactoring.evolution.coed.resource.coed.ui.CoedPreferenceInitializer">
+		</initializer>
+	</extension>
+	
+	<extension point="org.eclipse.ui.preferencePages">
+		<page name="CoED Editor" id="org.modelrefactoring.evolution.coed.resource.coed.ui.CoedPreferencePage" class="org.modelrefactoring.evolution.coed.resource.coed.ui.CoedPreferencePage" category="org.emftext.refactoring.ui.preferences">
+		</page>
+		<page name="Syntax Coloring" id="org.modelrefactoring.evolution.coed.resource.coed.ui.CoedSyntaxColoringPreferencePage" class="org.modelrefactoring.evolution.coed.resource.coed.ui.CoedSyntaxColoringPreferencePage" category="org.modelrefactoring.evolution.coed.resource.coed.ui.CoedPreferencePage">
+		</page>
+		<page name="Brackets" id="org.modelrefactoring.evolution.coed.resource.coed.ui.CoedBracketPreferencePage" class="org.modelrefactoring.evolution.coed.resource.coed.ui.CoedBracketPreferencePage" category="org.modelrefactoring.evolution.coed.resource.coed.ui.CoedPreferencePage">
+		</page>
+	</extension>
+	
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard category="org.emftext.refactory.ui" icon="/icons/default_new_icon.gif" class="org.modelrefactoring.evolution.coed.resource.coed.ui.CoedNewFileWizard" id="org.modelrefactoring.evolution.coed.resource.coed.ui.CoedNewFileWizard" name="EMFText .coed file">
+		</wizard>
+		<category id="org.emftext.runtime.ui.EMFTextProjectCategory" name="EMFText Project">
+		</category>
+		<wizard category="org.emftext.runtime.ui.EMFTextProjectCategory" icon="/icons/default_new_icon.gif" class="org.modelrefactoring.evolution.coed.resource.coed.ui.CoedNewProjectWizard" id="org.modelrefactoring.evolution.coed.resource.coed.ui.CoedNewProjectWizard" name="EMFText coed project" project="true">
+		</wizard>
+	</extension>
+	
+	<extension point="org.eclipse.ui.ide.markerResolution">
+		<markerResolutionGenerator class="org.modelrefactoring.evolution.coed.resource.coed.ui.CoedMarkerResolutionGenerator" markerType="org.modelrefactoring.evolution.coed.resource.coed.problem">
+		</markerResolutionGenerator>
+	</extension>
+	
+	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory class="org.modelrefactoring.evolution.coed.resource.coed.ui.CoedAnnotationModelFactory" extensions="coed">
+		</factory>
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="org.modelrefactoring.evolution.coed.resource.coed" name=".coed File" base-type="org.eclipse.core.runtime.text" file-extensions="coed">
+		</content-type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="coed" id="org.modelrefactoring.evolution.coed.resource.coed.ui.provider">
+		</provider>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.annotationTypes">
+		<type name="org.modelrefactoring.evolution.coed.resource.coed.ui.occurences">
+		</type>
+		<type name="org.modelrefactoring.evolution.coed.resource.coed.ui.occurences.declaration" super="org.modelrefactoring.evolution.coed.resource.coed.ui.occurences">
+		</type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+		<specification annotationType="org.modelrefactoring.evolution.coed.resource.coed.ui.occurences" label="Occurrences (in .coed files)" icon="/icons/occurrence_icon.gif" textPreferenceKey="coed.occurrenceIndication" textPreferenceValue="false" highlightPreferenceKey="coed.occurrenceHighlighting" highlightPreferenceValue="true" contributesToHeader="false" overviewRulerPreferenceKey="coed.occurrenceIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="coed.occurrenceIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="coed.occurrenceIndicationColor" colorPreferenceValue="212,212,212" presentationLayer="4" showInNextPrevDropdownToolbarActionKey="coed.showOccurrenceInNextPrevDropdownToolbarAction" showInNextPrevDropdownToolbarAction="true" isGoToNextNavigationTargetKey="coed.isOccurrenceGoToNextNavigationTarget" isGoToNextNavigationTarget="false" isGoToPreviousNavigationTargetKey="coed.isOccurrenceGoToPreviousNavigationTarget" isGoToPreviousNavigationTarget="false" textStylePreferenceKey="coed.occurrenceTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+		<specification annotationType="org.modelrefactoring.evolution.coed.resource.coed.ui.occurences.declaration" label="Declarations (in .coed files)" textPreferenceKey="coed.declarationIndication" textPreferenceValue="false" highlightPreferenceKey="coed.declarationHighlighting" highlightPreferenceValue="true" overviewRulerPreferenceKey="coed.declarationIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="coed.declarationIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="coed.declarationIndicationColor" colorPreferenceValue="240,216,168" presentationLayer="4" textStylePreferenceKey="coed.declarationTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+	</extension>
+	
+	<extension point="org.eclipse.ui.commands">
+		<category description="All commands belonging to Coed" id="org.modelrefactoring.evolution.coed.resource.coed.ui.command.category" name="Coed">
+		</category>
+		<command categoryId="org.modelrefactoring.evolution.coed.resource.coed.ui.command.category" description="Toggle comment of the selected lines" id="org.modelrefactoring.evolution.coed.resource.coed.ui.command.togglecomment" name="Toggle Comment">
+		</command>
+	</extension>
+	
+	<extension point="org.eclipse.ui.handlers">
+		<handler class="org.modelrefactoring.evolution.coed.resource.coed.ui.CoedToggleCommentHandler" commandId="org.modelrefactoring.evolution.coed.resource.coed.ui.command.togglecomment">
+		</handler>
+	</extension>
+	
+	<extension point="org.eclipse.ui.contexts">
+		<context name="Editing Coed Files" description="Editing Coed Files Context" parentId="org.eclipse.ui.textEditorScope" id="org.modelrefactoring.evolution.coed.resource.coed.EditorScope">
+		</context>
+	</extension>
+	
+	<extension point="org.eclipse.ui.bindings">
+		<key sequence="M1+7" commandId="org.modelrefactoring.evolution.coed.resource.coed.ui.command.togglecomment" schemeId="org.eclipse.ui.defaultAcceleratorConfiguration" contextId="org.modelrefactoring.evolution.coed.resource.coed.EditorScope">
+		</key>
+	</extension>
+	
+</plugin>

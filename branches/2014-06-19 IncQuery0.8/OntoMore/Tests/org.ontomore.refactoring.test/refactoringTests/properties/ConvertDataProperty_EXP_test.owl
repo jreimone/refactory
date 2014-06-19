@@ -1,0 +1,7 @@
+Prefix: : <http://ontomore.org/test/simpleOntology.owl#>
+
+Ontology: <http://ontomore.org/test/simpleOntology.owl>
+	
+Class: Freelancer
+
+ObjectProperty: hasSalary

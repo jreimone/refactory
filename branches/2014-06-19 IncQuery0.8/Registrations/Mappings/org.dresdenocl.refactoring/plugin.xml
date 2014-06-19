@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.emftext.refactoring.rolemapping">
+      <rolemapping
+            rolemapping_resource="rolemappings/renamings.rolemapping">
+      </rolemapping>
+      <rolemapping
+            rolemapping_resource="rolemappings/removals.rolemapping">
+      </rolemapping>
+      <rolemapping
+            rolemapping_resource="rolemappings/extractions.rolemapping">
+      </rolemapping>
+      <rolemapping
+            rolemapping_resource="rolemappings/separations.rolemapping">
+      </rolemapping>
+   </extension>
+   <extension
+         point="org.emftext.refactoring.postprocessor">
+      <postprocessor
+            mapping_name="Rename"
+            nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
+            postprocessor="org.dresdenocl.refactoring.OCLPostProcessor">
+      </postprocessor>
+      <postprocessor
+            mapping_name="Extract Variable"
+            nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
+            postprocessor="org.dresdenocl.refactoring.ExLetExpPostProcessor">
+      </postprocessor>
+      <postprocessor
+            mapping_name="Inline Variable"
+            nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
+            postprocessor="org.dresdenocl.refactoring.InlineVariablePP">
+      </postprocessor>
+      <postprocessor
+            mapping_name="Remove Redundant Brackets"
+            nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
+            postprocessor="org.dresdenocl.refactoring.RemoveRedundantBrackets">
+      </postprocessor>
+      <postprocessor
+            mapping_name="Remove All Redundant Brackets"
+            nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
+            postprocessor="org.dresdenocl.refactoring.RemoveAllRedundantBrackets">
+      </postprocessor>
+      <postprocessor
+            mapping_name="Remove Unused Variable Declarations"
+            nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
+            postprocessor="org.dresdenocl.refactoring.RemoveUnusedVariableDeclarationsPP">
+      </postprocessor>
+      <postprocessor
+            mapping_name="RenameNamedLiteralExpCS"
+            nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
+            postprocessor="org.dresdenocl.refactoring.RenameNamedLiteralExpPostProcessor">
+      </postprocessor>
+      <postprocessor
+            mapping_name="Split Expression"
+            nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
+            postprocessor="org.dresdenocl.refactoring.SplitExpressionPP">
+      </postprocessor>
+      <postprocessor
+            mapping_name="Split Expression Atomic"
+            nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
+            postprocessor="org.dresdenocl.refactoring.SplitExpressionAtomicPP">
+      </postprocessor>
+      <postprocessor
+            mapping_name="Merge Atomic Expressions"
+            nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
+            postprocessor="org.dresdenocl.refactoring.MergeAtomicExpressionsPP">
+      </postprocessor>
+      <postprocessor
+            mapping_name="Merge Expressions"
+            nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
+            postprocessor="org.dresdenocl.refactoring.MergeExpressionsPP">
+      </postprocessor>
+      <postprocessor
+            mapping_name="Rename Variable"
+            nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
+            postprocessor="org.dresdenocl.refactoring.RenameVariablePP">
+      </postprocessor>
+      <postprocessor
+            mapping_name="Inline Variable Here"
+            nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
+            postprocessor="org.dresdenocl.refactoring.InlineVariablePP">
+      </postprocessor>
+      <postprocessor
+            mapping_name="Separate Context Classifiers"
+            nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
+            postprocessor="org.dresdenocl.refactoring.SeparateContextClassifiersPP">
+      </postprocessor>
+      <postprocessor
+            mapping_name="Merge Chained Let Expressions"
+            nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
+            postprocessor="org.dresdenocl.refactoring.MergeLetExpPP">
+      </postprocessor>
+      <postprocessor
+            mapping_name="Remove Deprecated Null Check"
+            nsUri="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
+            postprocessor="org.dresdenocl.refactoring.RemoveDeprecatedNullCheckPostProcessor">
+      </postprocessor>
+   </extension>
+  
+</plugin>

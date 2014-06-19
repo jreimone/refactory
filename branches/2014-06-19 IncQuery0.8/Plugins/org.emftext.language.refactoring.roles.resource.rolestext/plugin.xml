@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+	<extension point="org.emftext.access.syntax">
+		<metaInformationProvider class="org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextMetaInformation" id="org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextMetaInformation">
+		</metaInformationProvider>
+	</extension>
+	
+	<extension id="org.emftext.language.refactoring.roles.resource.rolestext.problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="org.eclipse.core.resources.problemmarker">
+		</super>
+		<super type="org.eclipse.core.resources.textmarker">
+		</super>
+		<super type="org.eclipse.emf.ecore.diagnostic">
+		</super>
+	</extension>
+	
+	<extension id="org.emftext.language.refactoring.roles.resource.rolestext.problem.syntax_error" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="org.emftext.language.refactoring.roles.resource.rolestext.problem">
+		</super>
+	</extension>
+	
+	<extension id="org.emftext.language.refactoring.roles.resource.rolestext.problem.print_problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="org.emftext.language.refactoring.roles.resource.rolestext.problem">
+		</super>
+	</extension>
+	
+	<extension id="org.emftext.language.refactoring.roles.resource.rolestext.problem.unresolved_reference" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="org.emftext.language.refactoring.roles.resource.rolestext.problem">
+		</super>
+	</extension>
+	
+	<extension id="org.emftext.language.refactoring.roles.resource.rolestext.problem.analysis_problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="org.emftext.language.refactoring.roles.resource.rolestext.problem">
+		</super>
+	</extension>
+	
+	<extension id="org.emftext.language.refactoring.roles.resource.rolestext.problem.batch_constraint_problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="org.emftext.language.refactoring.roles.resource.rolestext.problem">
+		</super>
+	</extension>
+	
+	<extension id="org.emftext.language.refactoring.roles.resource.rolestext.problem.live_constraint_problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="org.emftext.language.refactoring.roles.resource.rolestext.problem">
+		</super>
+	</extension>
+	
+	<extension id="org.emftext.language.refactoring.roles.resource.rolestext.problem.builder_error" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="org.emftext.language.refactoring.roles.resource.rolestext.problem">
+		</super>
+	</extension>
+	
+	<extension id="org.emftext.language.refactoring.roles.resource.rolestext.nature" name="rolestext nature" point="org.eclipse.core.resources.natures">
+		<runtime>
+			<run class="org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextNature">
+			</run>
+		</runtime>
+		<builder id="org.emftext.language.refactoring.roles.resource.rolestext.builder">
+		</builder>
+	</extension>
+	
+	<extension point="org.eclipse.core.resources.builders" id="org.emftext.language.refactoring.roles.resource.rolestext.builder" name="rolestext Builder">
+		<builder hasNature="true">
+			<run class="org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextBuilderAdapter">
+			</run>
+		</builder>
+	</extension>
+	
+	<extension-point id="org.emftext.language.refactoring.roles.resource.rolestext.default_load_options" name="Default Load Options" schema="schema/default_load_options.exsd">
+	</extension-point>
+	
+	<extension point="org.eclipse.emf.ecore.extension_parser">
+		<parser class="org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextResourceFactoryDelegator" type="rolestext">
+		</parser>
+	</extension>
+	
+	<extension-point id="org.emftext.language.refactoring.roles.resource.rolestext.additional_extension_parser" name="Additional Extension Parser" schema="schema/additional_extension_parser.exsd">
+	</extension-point>
+	
+</plugin>

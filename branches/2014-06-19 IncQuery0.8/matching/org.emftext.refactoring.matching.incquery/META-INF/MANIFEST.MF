@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Incquery
+Bundle-SymbolicName: org.emftext.refactoring.matching.incquery;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore,
+ org.emftext.language.refactoring.roles,
+ org.emftext.language.refactoring.roles.resource.rolestext,
+ org.emftext.language.pl0,
+ org.apache.log4j,
+ org.junit,
+ org.eclipse.incquery.patternlanguage,
+ org.eclipse.xtext.common.types,
+ org.eclipse.emf.ecore.xmi,
+ org.eclipse.incquery.patternlanguage.emf
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7

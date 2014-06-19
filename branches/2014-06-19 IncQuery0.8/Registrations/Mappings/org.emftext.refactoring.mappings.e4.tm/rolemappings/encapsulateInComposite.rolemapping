@@ -1,0 +1,15 @@
+ROLEMODELMAPPING FOR <http://www.eclipse.org/e4/tm/widgets.ecore> 
+
+"Encapsulate In Composite" maps <ExtractSubX> {
+
+	Extractee := Control;
+	
+	OrigContainer := Composite {
+		extracts := controls;
+	};
+	
+	// TODO can we make the attribute 'name' optional?
+	NewContainer := Composite {
+		moved := controls;
+	};
+} 

@@ -1,0 +1,15 @@
+ROLEMODELMAPPING FOR <http://www.eclipse.org/uml2/3.0.0/UML> 
+
+"Extract Sub Package" maps <ExtractSubX> {
+
+	Extractee := PackageableElement;
+	
+	OrigContainer := Package {
+		extracts := ownedElement;
+		newParent := nestedPackage;
+	};
+	
+	NewContainer := Package(name -> name) {
+		moved := ownedElement;
+	};
+}

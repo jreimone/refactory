@@ -1,0 +1,12 @@
+Prefix: : <http://www.ontomore.org/test/transformation/properties.owl#>
+
+Ontology: <http://www.ontomore.org/test/transformation/properties.owl>
+
+Class: Person
+	SubClassOf: hasPet some Pet
+
+Class: Pet
+
+ObjectProperty: hasPet
+	
+DisjointClasses: Person, Pet

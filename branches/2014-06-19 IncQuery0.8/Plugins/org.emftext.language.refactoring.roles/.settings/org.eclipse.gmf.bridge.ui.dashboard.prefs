@@ -1,0 +1,8 @@
+#Wed Feb 10 00:03:03 CET 2010
+eclipse.preferences.version=1
+gmf_dashboard/domainGenerationModel=platform\:/resource/org.emftext.language.refactoring.roles/metamodel/roles.genmodel
+gmf_dashboard/domainModel=platform\:/resource/org.emftext.language.refactoring.roles/metamodel/roles.ecore
+gmf_dashboard/generationModel=platform\:/resource/org.emftext.language.refactoring.roles/metamodel/roles.gmfgen
+gmf_dashboard/graphicalDefinitionModel=platform\:/resource/org.emftext.language.refactoring.roles/metamodel/roles.gmfgraph
+gmf_dashboard/mappingModel=platform\:/resource/org.emftext.language.refactoring.roles/metamodel/roles.gmfmap
+gmf_dashboard/toolingDefinitionModel=platform\:/resource/org.emftext.language.refactoring.roles/metamodel/roles.gmftool

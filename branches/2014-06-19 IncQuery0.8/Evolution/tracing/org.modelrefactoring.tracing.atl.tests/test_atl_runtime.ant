@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<project name="Test suite for VAPODI ATL runtime" default="evaluate_testrun" basedir=".">
+	<property name="atlBaseStubPath" value="../../org.qualitune.tracing/atl_lib/atl_base_stub.atl" />
+
+	<property name="python" location="/usr/bin/python" />
+	
+	<target name="generate_test_suite">
+		<!-- setting attribute to readonly=true unfortunately does not prevent Eclipse from opening it in an editor if desired -->
+		<attrib file="test_suite.atl" readonly="false"/>
+		<exec executable="${python}" failonerror="true">
+		    <arg value="generate_test_suite.py"/>
+		</exec>
+		
+		<waitfor maxwait="30" maxwaitunit="second">
+		    <available file="test_suite.asm"/>
+		</waitfor>
+		<eclipse.refreshLocal resource="org.qualitune.tracing.atl.tests/" depth="infinite" />
+		<!-- setting attribute to readonly=true unfortunately does not prevent Eclipse from opening it in an editor if desired -->
+		<attrib file="test_suite.atl" readonly="true"/>
+	</target>
+
+	<target name="run_testrunner" depends="generate_test_suite">
+		<script language="javascript">
+			var logger = project.getBuildListeners( ).firstElement( );
+			logger.setMessageOutputLevel( 0 );
+		</script>
+		
+		<atl.loadModel name="Families" metamodel="MOF" nsUri="Families" />
+		<atl.loadModel name="IN" metamodel="Families"  path="a_family.xmi" />
+
+		<atl.loadModel name="Persons" metamodel="MOF" nsUri="Persons" />
+
+		<atl.loadModel name="VAPODI_TRACE_METAMODEL" metamodel="MOF" nsUri="http://smt.inf.tu-dresden.de/fab/vapoditrace" />
+		
+		<record name="${basedir}/testrun.log" action="start"/>
+		
+		<atl.launch path="test_suite.atl" refining="false">
+			<option name="allowInterModelReferences" value="true"/>
+			<inmodel model="IN" name="IN" />
+			<outmodel name="OUT" model="OUT" metamodel="Persons"/>
+			<outmodel name="VAPODI_TRACE" model="VAPODI_TRACE" metamodel="VAPODI_TRACE_METAMODEL"/>
+		</atl.launch>
+
+		<record name="${basedir}/testrun.log" action="stop"/>
+		
+		<script language="javascript">
+			var logger = project.getBuildListeners( ).firstElement( );
+			logger.setMessageOutputLevel( 2 );
+		</script>
+	</target>
+			
+	<target name="evaluate_testrun" depends="run_testrunner">
+		<exec executable="${python}" failonerror="true">
+		    <arg value="eval_testrun.py"/>
+		</exec>
+	</target>
+</project>

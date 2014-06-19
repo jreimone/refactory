@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ActivationPolicy: lazy
+Bundle-Activator: org.emftext.language.refactoring.roles.refactoring.Activator
+Bundle-ManifestVersion: 2
+Bundle-Name: RoleModels
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-SymbolicName: org.emftext.language.refactoring.roles.refactoring;singleton:= true
+Bundle-Vendor: Reimann
+Bundle-Version: 1.0.0.qualifier
+Export-Package: org.emftext.language.refactoring.roles.refactoring,
+ org.emftext.language.refactoring.roles.refactoring.facade
+Require-Bundle: org.eclipse.core.runtime,
+ org.emftext.refactoring.specification.interpreter,
+ org.emftext.refactoring.registry.rolemapping,
+ org.emftext.language.refactoring.rolemapping
+

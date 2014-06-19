@@ -1,0 +1,38 @@
+----------------------------
+## Create Enumerated Class
+----------------------------
+-- Description
+Takes a set of strings. Creates for each string an individual with the string as the
+individual's name. Creates a new class with a given name and an
+IndividualsAtomic-Property pointing to the created individuals.
+
+-- Generic Refactoring
+OntoMore: "Create Referenced Elements"
+
+-- Problems
+Refactory doesn't support creation of several elements.
+Input data for assign-command is only asked for once.
+
+
+-- Manchester OWL Syntax
+
+Given the String: "Country", "Germany", "France", "UnitedKingdom" create:
+
+Class: Country
+	EquivalentTo: {Germany, France, UnitedKingdom}
+
+Individual: Germany
+Individual: France
+Individual: UnitedKingdom
+
+
+-- Metamodel-Transformation:
+
+Class
+	Disjunction
+		Conjunction
+			IndividualsAtomic
+			
+Individual
+Individual
+Individual
