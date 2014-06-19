@@ -1,22 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<plugin>
-
-   <extension
-         point="org.emftext.refactoring.smell.registry.ui.calculation">
-      <structureCalculation
-            smellMessage="File is transmitted without compression."
-            description="Searches for data transmission implemented with the Apache HttpClient library and searches for file transmission without compression."
-            patternResource="queries/org/emftext/refactoring/smell/java/energy/dataTransmissionWithoutCompressionOptimised.eiq"
-            patternName="dataTransmissionWithoutCompressionOptimised">
-      </structureCalculation>
-      <structureCalculation
-            smellMessage="Physical GPS component is requested too early."
-            description="Searches for classes being subclasses of android.app.Activity and requesting the GPS component in the onCreate() method already. This means, the physical GPS resource is requested too early since the user cannot even interact with the app while the onCreate() method is executed."
-            patternResource="queries/org/emftext/refactoring/smell/java/energy/earlyBinding.eiq"
-            patternName="earlyResourceBinding">
-      </structureCalculation>
-   </extension>
-   <!--
+<?xml version="1.0" encoding="UTF-8"?><plugin>
+  <extension point="org.emftext.refactoring.smell.registry.ui.calculation">
+    <structureCalculation description="Searches for data transmission implemented with the Apache HttpClient library and searches for file transmission without compression." patternName="dataTransmissionWithoutCompressionOptimised" patternResource="queries/org/emftext/refactoring/smell/java/energy/dataTransmissionWithoutCompressionOptimised.eiq" smellMessage="File is transmitted without compression."/>
+    <structureCalculation description="Searches for classes being subclasses of android.app.Activity and requesting the GPS component in the onCreate() method already. This means, the physical GPS resource is requested too early since the user cannot even interact with the app while the onCreate() method is executed." patternName="earlyResourceBinding" patternResource="queries/org/emftext/refactoring/smell/java/energy/earlyBinding.eiq" smellMessage="Physical GPS component is requested too early."/>
+  </extension>
+  <!--
    <extension
          id="org.emftext.refactoring.smell.java.energy.dataTransmissionWithoutCompressionOptimised"
          point="org.eclipse.incquery.runtime.queryspecification">
