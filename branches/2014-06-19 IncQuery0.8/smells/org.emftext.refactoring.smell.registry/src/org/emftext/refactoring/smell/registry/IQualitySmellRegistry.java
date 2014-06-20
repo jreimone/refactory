@@ -15,15 +15,23 @@ public interface IQualitySmellRegistry {
 	
 	public static IQualitySmellRegistry INSTANCE = new BasicQualitySmellRegistry();
 	
+//	/**
+//	 * Initializes the registry with the given models. If this method is not invoked
+//	 * the default returned {@value #INSTANCE} {@link #INSTANCE} is initialized by trying
+//	 * to look if the particular models were registered as OSGi services.
+//	 * 
+//	 * @param smellModel
+//	 * @param calculationModel
+//	 */
+//	public void initialize(QualitySmellModel smellModel, CalculationModel calculationModel);
+
 	/**
-	 * Initializes the registry with the given models. If this method is not invoked
-	 * the default returned {@value #INSTANCE} {@link #INSTANCE} is initialized by trying
-	 * to look if the particular models were registered as OSGi services.
+	 * Sets the <code>initializer</code> which is invoked when the registry is accessed but
+	 * smell model and/or calculation model are null.
 	 * 
-	 * @param smellModel
-	 * @param calculationModel
+	 * @param initializer
 	 */
-	public void initialize(QualitySmellModel smellModel, CalculationModel calculationModel);
+	public void setInitializer(IQualitySmellModelInitializer initializer);
 	
 	/**
 	 * Returns the constructed smell model.
