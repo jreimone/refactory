@@ -11,6 +11,7 @@ import org.emftext.refactoring.smell.Quality;
 import org.emftext.refactoring.smell.QualitySmellModel;
 import org.emftext.refactoring.smell.SmellFactory;
 import org.emftext.refactoring.smell.SmellPackage.Literals;
+import org.emftext.refactoring.smell.registry.IQualitySmellRegistry;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
 import org.osgi.util.tracker.ServiceTracker;
@@ -22,7 +23,7 @@ public class GenericQualityPreferencePage extends AbstractPreferencePage {
 	
 	@Override
 	public EObject getModel() {
-		if(smellModel == null){
+//		if(smellModel == null){
 			// e4 dependency injection
 //			Bundle bundle = FrameworkUtil.getBundle(getClass());
 //			BundleContext bundleContext = bundle.getBundleContext();
@@ -33,21 +34,23 @@ public class GenericQualityPreferencePage extends AbstractPreferencePage {
 //			ContextInjectionFactory.inject(object, context)
 
 			// OSGi service
-			BundleContext bundleContext = FrameworkUtil.getBundle(getClass()).getBundleContext();
-			ServiceTracker<QualitySmellModel,QualitySmellModel> tracker = new ServiceTracker<QualitySmellModel,QualitySmellModel>(bundleContext, QualitySmellModel.class, null);
-			tracker.open();
-			smellModel = tracker.getService();
-		}
+//			BundleContext bundleContext = FrameworkUtil.getBundle(getClass()).getBundleContext();
+//			ServiceTracker<QualitySmellModel,QualitySmellModel> tracker = new ServiceTracker<QualitySmellModel,QualitySmellModel>(bundleContext, QualitySmellModel.class, null);
+//			tracker.open();
+//			smellModel = tracker.getService();
+//			smellModel = IQualitySmellRegistry.INSTANCE.getQualitySmellModel();
+//		}
 		return smellModel;
 	}
 		
 	@Override
 	public void init(IWorkbench workbench) {
 		super.init(workbench);
-		BundleContext bundleContext = FrameworkUtil.getBundle(getClass()).getBundleContext();
-		ServiceTracker<QualitySmellModel,QualitySmellModel> tracker = new ServiceTracker<QualitySmellModel,QualitySmellModel>(bundleContext, QualitySmellModel.class, null);
-		tracker.open();
-		smellModel = tracker.getService();
+//		BundleContext bundleContext = FrameworkUtil.getBundle(getClass()).getBundleContext();
+//		ServiceTracker<QualitySmellModel,QualitySmellModel> tracker = new ServiceTracker<QualitySmellModel,QualitySmellModel>(bundleContext, QualitySmellModel.class, null);
+//		tracker.open();
+//		smellModel = tracker.getService();
+		smellModel = IQualitySmellRegistry.INSTANCE.getQualitySmellModel();
 	}
 
 	@Override
