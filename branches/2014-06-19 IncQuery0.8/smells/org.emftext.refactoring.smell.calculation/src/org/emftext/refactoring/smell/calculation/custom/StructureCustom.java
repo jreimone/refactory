@@ -8,6 +8,7 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.incquery.patternlanguage.emf.specification.SpecificationBuilder;
 import org.eclipse.incquery.patternlanguage.patternLanguage.Pattern;
 import org.eclipse.incquery.runtime.api.AdvancedIncQueryEngine;
 import org.eclipse.incquery.runtime.api.IPatternMatch;
@@ -43,8 +44,9 @@ public class StructureCustom extends StructureImpl {
 			if(resourceSet != null){
 				try {
 					//					result = unmanagedEngineQuery(pattern, resource, resourceSet);
-//					result = managedEngineQuery(pattern, resourceSet);
-					result = unmanagedEngineQueryOld(pattern, resourceSet);
+					//					result = managedEngineQuery(pattern, resourceSet);
+//					result = unmanagedEngineQueryOld(pattern, resourceSet);
+					result = unmanagedEngineQueryNew(pattern, resourceSet);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -53,85 +55,109 @@ public class StructureCustom extends StructureImpl {
 		return result;
 	}
 
-	private CalculationResult unmanagedEngineQueryOld(Pattern pattern, ResourceSet resourceSet) throws IncQueryException {
-		// IncQuery version 0.7
-		IQuerySpecification<?> querySpecification = QuerySpecificationRegistry.getOrCreateQuerySpecification(pattern);
+//	private CalculationResult unmanagedEngineQueryOld(Pattern pattern, ResourceSet resourceSet) throws IncQueryException {
+//		// IncQuery version 0.7
+//		IQuerySpecification<?> querySpecification = QuerySpecificationRegistry.getOrCreateQuerySpecification(pattern);
+//		CalculationResult result = null;
+//		if(querySpecification != null){
+//			// TODO try passing only the resource
+//			IncQueryEngine engine = IncQueryEngine.on(resourceSet);
+//			// TODO try the following one day for better handling of the engine when the editor is closed and opened again
+//			// attention: then engine.wipe() and engine.dispose() must be called if use finished
+//			//						IncQueryEngine engine = AdvancedIncQueryEngine.createUnmanagedEngine(resource);
+//			IncQueryMatcher<? extends IPatternMatch> matcher = querySpecification.getMatcher(engine);
+//			if (matcher!=null) {
+//				Collection<? extends IPatternMatch> matches = matcher.getAllMatches();
+//				result = getResultFromMatches(matches);
+//			}
+//		}
+//		return result;
+//	}
+
+	private CalculationResult unmanagedEngineQueryNew(Pattern pattern, ResourceSet resourceSet) throws IncQueryException {
+		// IncQuery version 0.8
+
+		// get all matches of the pattern
+		// create an *unmanaged* engine to ensure that noone else is going
+		// to use our engine
+		AdvancedIncQueryEngine engine = AdvancedIncQueryEngine.createUnmanagedEngine(resourceSet);
+		// A specification builder is used to translate patterns to query specifications
+		SpecificationBuilder builder = new SpecificationBuilder();
+		// attempt to retrieve a registered query specification		    
+		IQuerySpecification<? extends IncQueryMatcher<? extends IPatternMatch>> querySpecification = builder.getOrCreateSpecification(pattern);
+		IncQueryMatcher<? extends IPatternMatch> matcher = engine.getMatcher(querySpecification);
+
 		CalculationResult result = null;
-		if(querySpecification != null){
-			// TODO try passing only the resource
-			IncQueryEngine engine = IncQueryEngine.on(resourceSet);
-			// TODO try the following one day for better handling of the engine when the editor is closed and opened again
-			// attention: then engine.wipe() and engine.dispose() must be called if use finished
-			//						IncQueryEngine engine = AdvancedIncQueryEngine.createUnmanagedEngine(resource);
-			IncQueryMatcher<? extends IPatternMatch> matcher = querySpecification.getMatcher(engine);
-			if (matcher!=null) {
-				Collection<? extends IPatternMatch> matches = matcher.getAllMatches();
-				result = getResultFromMatches(matches);
-			}
+		// TODO try the following one day for better handling of the engine when the editor is closed and opened again
+		// attention: then engine.wipe() and engine.dispose() must be called if use finished
+		//						IncQueryEngine engine = AdvancedIncQueryEngine.createUnmanagedEngine(resource);
+		if (matcher!=null) {
+			Collection<? extends IPatternMatch> matches = matcher.getAllMatches();
+			result = getResultFromMatches(matches);
 		}
 		return result;
 	}
 
-//	protected CalculationResult unmanagedEngineQuery(Pattern pattern, Resource resource, ResourceSet resourceSet)
-//			throws IncQueryException {
-//		// TODO try the following one day for better handling of the engine when the editor is closed and opened again
-//		// attention: then engine.wipe() and engine.dispose() must be called if use finished
-//		// more information here: https://wiki.eclipse.org/EMFIncQuery/UserDocumentation/API/Advanced#The_IncQuery_Generic_API
-//		//					IncQueryEngine engine = AdvancedIncQueryEngine.createUnmanagedEngine(resource);
-//		URI uri = resource.getURI();
-//		String resourceUriString = uri.toString();
-//		AdvancedIncQueryEngine engine = resourceUriEngineMap.get(resourceUriString);
-//		if(engine == null){
-//			List<Resource> resources = resourceSet.getResources();
-//			for (Resource containingResource : resources) {
-//				uri = containingResource.getURI();
-//				String containingResourceUriString = uri.toString();
-//				engine = resourceUriEngineMap.get(containingResourceUriString);
-//				if(engine != null){
-//					resourceUriEngineMap.put(resourceUriString, engine);
-//					break;
-//				}
-//			}
-//			if(engine == null){
-//				engine = AdvancedIncQueryEngine.createUnmanagedEngine(resourceSet);
-//				resourceUriEngineMap.put(resourceUriString, engine);
-//				for (Resource containingResource : resources) {
-//					uri = containingResource.getURI();
-//					String containingResourceUriString = uri.toString();
-//					resourceUriEngineMap.put(containingResourceUriString, engine);
-//				}
-//			}
-//		}
-//		// A specification builder is used to translate patterns to query specifications
-//		SpecificationBuilder builder = new SpecificationBuilder();
-//		// attempt to retrieve a registered query specification		    
-//		IQuerySpecification<? extends IncQueryMatcher<? extends IPatternMatch>> querySpecification = builder.getOrCreateSpecification(pattern);
-//		IncQueryMatcher<? extends IPatternMatch> matcher = engine.getMatcher(querySpecification);
-//		CalculationResult result = null;
-//		if (matcher!=null) {
-//			Collection<? extends IPatternMatch> matches = matcher.getAllMatches();
-//			result = getResultFromMatches(matches);
-//		}
-//		//					engine.wipe();
-//		return result;
-//	}
+	//	protected CalculationResult unmanagedEngineQuery(Pattern pattern, Resource resource, ResourceSet resourceSet)
+	//			throws IncQueryException {
+	//		// TODO try the following one day for better handling of the engine when the editor is closed and opened again
+	//		// attention: then engine.wipe() and engine.dispose() must be called if use finished
+	//		// more information here: https://wiki.eclipse.org/EMFIncQuery/UserDocumentation/API/Advanced#The_IncQuery_Generic_API
+	//		//					IncQueryEngine engine = AdvancedIncQueryEngine.createUnmanagedEngine(resource);
+	//		URI uri = resource.getURI();
+	//		String resourceUriString = uri.toString();
+	//		AdvancedIncQueryEngine engine = resourceUriEngineMap.get(resourceUriString);
+	//		if(engine == null){
+	//			List<Resource> resources = resourceSet.getResources();
+	//			for (Resource containingResource : resources) {
+	//				uri = containingResource.getURI();
+	//				String containingResourceUriString = uri.toString();
+	//				engine = resourceUriEngineMap.get(containingResourceUriString);
+	//				if(engine != null){
+	//					resourceUriEngineMap.put(resourceUriString, engine);
+	//					break;
+	//				}
+	//			}
+	//			if(engine == null){
+	//				engine = AdvancedIncQueryEngine.createUnmanagedEngine(resourceSet);
+	//				resourceUriEngineMap.put(resourceUriString, engine);
+	//				for (Resource containingResource : resources) {
+	//					uri = containingResource.getURI();
+	//					String containingResourceUriString = uri.toString();
+	//					resourceUriEngineMap.put(containingResourceUriString, engine);
+	//				}
+	//			}
+	//		}
+	//		// A specification builder is used to translate patterns to query specifications
+	//		SpecificationBuilder builder = new SpecificationBuilder();
+	//		// attempt to retrieve a registered query specification		    
+	//		IQuerySpecification<? extends IncQueryMatcher<? extends IPatternMatch>> querySpecification = builder.getOrCreateSpecification(pattern);
+	//		IncQueryMatcher<? extends IPatternMatch> matcher = engine.getMatcher(querySpecification);
+	//		CalculationResult result = null;
+	//		if (matcher!=null) {
+	//			Collection<? extends IPatternMatch> matches = matcher.getAllMatches();
+	//			result = getResultFromMatches(matches);
+	//		}
+	//		//					engine.wipe();
+	//		return result;
+	//	}
 
-//	private CalculationResult managedEngineQuery(Pattern pattern, ResourceSet resourceSet) throws IncQueryException {
-//		// TODO try passing only the resource
-//		//					IncQueryEngine engine = IncQueryEngine.on(resource);
-//		IncQueryEngine engine = IncQueryEngine.on(resourceSet);
-//		// A specification builder is used to translate patterns to query specifications
-//		SpecificationBuilder builder = new SpecificationBuilder();
-//		// attempt to retrieve a registered query specification		    
-//		IQuerySpecification<? extends IncQueryMatcher<? extends IPatternMatch>> querySpecification = builder.getOrCreateSpecification(pattern);
-//		IncQueryMatcher<? extends IPatternMatch> matcher = engine.getMatcher(querySpecification);
-//		CalculationResult result = null;
-//		if (matcher!=null) {
-//			Collection<? extends IPatternMatch> matches = matcher.getAllMatches();
-//			result = getResultFromMatches(matches);
-//		}
-//		return result;
-//	}
+	//	private CalculationResult managedEngineQuery(Pattern pattern, ResourceSet resourceSet) throws IncQueryException {
+	//		// TODO try passing only the resource
+	//		//					IncQueryEngine engine = IncQueryEngine.on(resource);
+	//		IncQueryEngine engine = IncQueryEngine.on(resourceSet);
+	//		// A specification builder is used to translate patterns to query specifications
+	//		SpecificationBuilder builder = new SpecificationBuilder();
+	//		// attempt to retrieve a registered query specification		    
+	//		IQuerySpecification<? extends IncQueryMatcher<? extends IPatternMatch>> querySpecification = builder.getOrCreateSpecification(pattern);
+	//		IncQueryMatcher<? extends IPatternMatch> matcher = engine.getMatcher(querySpecification);
+	//		CalculationResult result = null;
+	//		if (matcher!=null) {
+	//			Collection<? extends IPatternMatch> matches = matcher.getAllMatches();
+	//			result = getResultFromMatches(matches);
+	//		}
+	//		return result;
+	//	}
 
 	private CalculationResult getResultFromMatches(Collection<? extends IPatternMatch> matches) {
 		CalculationResult result = CalculationFactory.eINSTANCE.createCalculationResult();
