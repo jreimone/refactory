@@ -25,6 +25,8 @@
 		</page>
 		<page name="Brackets" id="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextBracketPreferencePage" class="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextBracketPreferencePage" category="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextPreferencePage">
 		</page>
+		<page name="Content Assist" id="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextContentAssistPreferencePage" class="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextContentAssistPreferencePage" category="org.emftext.language.refactoring.roles.resource.rolestext.ui.RolestextPreferencePage">
+		</page>
 	</extension>
 	
 	<extension point="org.eclipse.ui.newWizards">
