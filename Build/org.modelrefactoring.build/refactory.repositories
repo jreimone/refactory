@@ -44,8 +44,21 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/compare/do
 
 // IncQuery
 get:https://hudson.eclipse.org/incquery/job/incquery-master/lastSuccessfulBuild/artifact/update-site/plugins/org.eclipse.incquery.patternlanguage.emf_0.8.0.201406250831.jar 
-//get:https://hudson.eclipse.org/incquery/job/incquery-master/lastSuccessfulBuild/artifact/update-site/plugins/org.eclipse.incquery.patternlanguage_0.8.0.201406250831.jar
+get:https://hudson.eclipse.org/incquery/job/incquery-master/lastSuccessfulBuild/artifact/update-site/plugins/org.eclipse.incquery.patternlanguage_0.8.0.201406250831.jar
 get:https://hudson.eclipse.org/incquery/job/incquery-master/lastSuccessfulBuild/artifact/update-site/plugins/org.eclipse.incquery.runtime_0.8.0.201406250831.jar
+get:https://hudson.eclipse.org/incquery/job/incquery-master/lastSuccessfulBuild/artifact/update-site/plugins/org.eclipse.incquery.runtime.rete_0.8.0.201406250831.jar
+get:https://hudson.eclipse.org/incquery/job/incquery-master/lastSuccessfulBuild/artifact/update-site/plugins/org.eclipse.incquery.runtime.rete.recipes_0.8.0.201406250831.jar
+get:https://hudson.eclipse.org/incquery/job/incquery-master/lastSuccessfulBuild/artifact/update-site/plugins/org.eclipse.incquery.runtime.base_0.8.0.201406250831.jar
+get:https://hudson.eclipse.org/incquery/job/incquery-master/lastSuccessfulBuild/artifact/update-site/plugins/org.eclipse.incquery.runtime.base.itc_0.8.0.201406250831.jar
+get:https://hudson.eclipse.org/incquery/job/incquery-master/lastSuccessfulBuild/artifact/update-site/plugins/org.eclipse.incquery.runtime.evm_0.8.0.201406250831.jar
+get:https://hudson.eclipse.org/incquery/job/incquery-master/lastSuccessfulBuild/artifact/update-site/plugins/org.eclipse.incquery.runtime.matchers_0.8.0.201406250831.jar
+get:https://hudson.eclipse.org/incquery/job/incquery-master/lastSuccessfulBuild/artifact/update-site/plugins/org.eclipse.incquery.tooling.core_0.8.0.201406250831.jar
+get:https://hudson.eclipse.org/incquery/job/incquery-master/lastSuccessfulBuild/artifact/update-site/plugins/org.eclipse.incquery.tooling.ui_0.8.0.201406250831.jar
+get:https://hudson.eclipse.org/incquery/job/incquery-master/lastSuccessfulBuild/artifact/update-site/plugins/org.eclipse.incquery.patternlanguage.ui_0.8.0.201406250831.jar
+get:https://hudson.eclipse.org/incquery/job/incquery-master/lastSuccessfulBuild/artifact/update-site/plugins/org.eclipse.incquery.patternlanguage.emf.ui_0.8.0.201406250831.jar
+get:https://hudson.eclipse.org/incquery/job/incquery-master/lastSuccessfulBuild/artifact/update-site/plugins/org.eclipse.incquery.tooling.generator.sampleui_0.8.0.201406250831.jar
+get:https://hudson.eclipse.org/incquery/job/incquery-master/lastSuccessfulBuild/artifact/update-site/plugins/org.eclipse.incquery.tooling.generator.model_0.8.0.201406250831.jar
+get:https://hudson.eclipse.org/incquery/job/incquery-master/lastSuccessfulBuild/artifact/update-site/plugins/org.eclipse.incquery.tooling.generator.model.ui_0.8.0.201406250831.jar
 get:https://hudson.eclipse.org/incquery/job/incquery-master/lastSuccessfulBuild/artifact/update-site/features/org.eclipse.incquery.runtime.feature_0.8.0.201406250831.jar
 get:https://hudson.eclipse.org/incquery/job/incquery-master/lastSuccessfulBuild/artifact/update-site/features/org.eclipse.incquery.sdk.feature_0.8.0.201406250831.jar
 // and ANTLR is needed
@@ -69,9 +82,9 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/bpmn2/down
 // Xtext
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.6.0/R201405210727/tmf-xtext-runtime-2.6.0.zip
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.6.0/R201405210727/tmf-xtext-SDK-2.6.0.zip
-//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/kepler/201309270900/plugins/org.eclipse.xtend_1.4.0.v201306110406.jar
-//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/kepler/201309270900/plugins/org.eclipse.xpand_1.4.0.v201306110406.jar
-//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/kepler/201309270900/plugins/org.eclipse.xtend.typesystem.emf_1.4.0.v201306110406.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/kepler/201402280900/plugins/org.eclipse.xtend_1.4.0.v201306110406.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/kepler/201402280900/plugins/org.eclipse.xpand_1.4.0.v201306110406.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/kepler/201402280900/plugins/org.eclipse.xtend.typesystem.emf_1.4.0.v201306110406.jar
 //get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/kepler/201309270900/plugins/javax.inject.source_1.0.0.v20091030.jar
 //get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.4.2/R201306120542/tmf-xtext-runtime-2.4.2.zip
 //get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.4.2/R201306120542/tmf-xtext-SDK-2.4.2.zip
@@ -97,6 +110,7 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/gmp/gmf-toolin
 
 // MDT OCL (needed from GMF???)
 //get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/ocl/downloads/drops/4.1.1/R201309161423/mdt-ocl-runtime-core-4.1.1.zip
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/ocl/downloads/drops/4.1.2/R201402101137/mdt-ocl-Update-tools-4.1.2.zip
 //get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/ocl/downloads/drops/4.1.1/R201309161423/mdt-ocl-Update-tools-4.1.1.zip!plugins/org.eclipse.ocl.common.ui_1.1.0.v20130530-0730.jar
 
 // GEF
