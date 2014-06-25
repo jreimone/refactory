@@ -17,7 +17,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMLResource;
-import org.eclipse.incquery.patternlanguage.emf.EMFPatternLanguageStandaloneSetup;
 import org.eclipse.incquery.patternlanguage.emf.eMFPatternLanguage.PatternModel;
 import org.eclipse.incquery.patternlanguage.patternLanguage.Pattern;
 import org.emftext.refactoring.smell.QualitySmellModel;
@@ -41,7 +40,7 @@ public class ExtensionRegistryQualitySmellModelInitializer implements IQualitySm
 	
 	private CalculationModel calculationModel;
 	private QualitySmellModel smellModel;
-	private boolean alreadyRegistered;
+//	private boolean alreadyRegistered;
 	
 	protected ExtensionRegistryQualitySmellModelInitializer(IEclipseContext context, IWorkspace workspace, IExtensionRegistry registry) {
 		this.context = context;
@@ -81,7 +80,7 @@ public class ExtensionRegistryQualitySmellModelInitializer implements IQualitySm
 							System.err.println("No public constructor for class " + element.getAttribute(ICalculationExtensionPoint.CALCULATION_CLASS));
 						}
 					} else if(element.getName().equals(ICalculationExtensionPoint.STRUCTURE_CALCULATION)){
-						registerIncQuery();
+//						registerIncQuery();
 						String patternResource = element.getAttribute(ICalculationExtensionPoint.PATTERN_RESOURCE);
 						Bundle bundle = Platform.getBundle(element.getContributor().getName());
 						URI uri = URI.createPlatformPluginURI(bundle.getSymbolicName() + "/" + patternResource, true);
@@ -132,20 +131,12 @@ public class ExtensionRegistryQualitySmellModelInitializer implements IQualitySm
 	}
 
 
-	private void registerIncQuery() {
-		//////////// needed because Guice Injector exceptions are thrown otherwise
-		if(!alreadyRegistered){
-			new EMFPatternLanguageStandaloneSetup().createInjectorAndDoEMFRegistration();
-//			EPackage.Registry.INSTANCE.put(XbasePackage.eNS_URI, XbasePackage.eINSTANCE);
-//			EPackage.Registry.INSTANCE.put(PatternLanguagePackage.eNS_URI, PatternLanguagePackage.eINSTANCE);
-//			EPackage.Registry.INSTANCE.put(EMFPatternLanguagePackage.eNS_URI, EMFPatternLanguagePackage.eINSTANCE);
-//			Injector injector = Guice.createInjector(new EMFPatternLanguageRuntimeModule());
-//			IResourceFactory resourceFactory = injector.getInstance(IResourceFactory.class);
-//			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("eiq", resourceFactory);
-			alreadyRegistered = true;
-		}
-		/////////////////////////////////////////////////////////////////////////////
-	}
+//	private void registerIncQuery() {
+//		if(!alreadyRegistered){
+//			new EMFPatternLanguageStandaloneSetup().createInjectorAndDoEMFRegistration();
+//			alreadyRegistered = true;
+//		}
+//	}
 
 	private QualitySmellModel registerQualitySmellModel(IEclipseContext context, IWorkspace workspace) {
 		QualitySmellModel smellModel = initQualitySmellModel(workspace);
