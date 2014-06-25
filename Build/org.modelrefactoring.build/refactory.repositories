@@ -88,6 +88,8 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/kepler/2014022
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/kepler/201402280900/plugins/org.eclipse.xtend.typesystem.emf_1.4.0.v201306110406.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/kepler/201402280900/plugins/org.eclipse.emf.mwe.utils_1.3.1.v201309030422.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/kepler/201402280900/plugins/org.eclipse.emf.mwe.core_1.2.1.v201309030422.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/kepler/201402280900/plugins/org.eclipse.emf.mwe2.runtime_2.4.1.v201309030422.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/kepler/201402280900/plugins/org.apache.commons.cli_1.2.0.v201105210650.jar
 //get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/releases/kepler/201309270900/plugins/javax.inject.source_1.0.0.v20091030.jar
 //get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.4.2/R201306120542/tmf-xtext-runtime-2.4.2.zip
 //get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/tmf/xtext/downloads/drops/2.4.2/R201306120542/tmf-xtext-SDK-2.4.2.zip
