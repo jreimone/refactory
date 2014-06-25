@@ -6,10 +6,10 @@ git:https://github.com/DevBoost/BuildBoost.git!Extensions/UpdateSite/
 git:https://github.com/DevBoost/BuildBoost.git!Extensions/JUnit/
 
 // Eclipse Platform
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.3.1-201309111000/eclipse-SDK-4.3.1-win32-x86_64.zip
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.3.1-201309111000/eclipse-platform-4.3.1-win32-x86_64.zip
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.3.1-201309111000/eclipse-4.3.1-delta-pack.zip
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.3.1-201309111000/org.eclipse.pde-4.3.1.zip
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.3.2-201402211700/eclipse-SDK-4.3.2-win32-x86_64.zip
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.3.2-201402211700/eclipse-platform-4.3.2-win32-x86_64.zip
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.3.2-201402211700/eclipse-4.3.2-delta-pack.zip
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.3.2-201402211700/org.eclipse.pde-4.3.2.zip
 
 // JUnit4 needed
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.3.2-201402211700/eclipse-SDK-4.3.2-win32-x86_64.zip!eclipse/plugins/org.junit_4.11.0.v201303080030/META-INF/MANIFEST.MF
