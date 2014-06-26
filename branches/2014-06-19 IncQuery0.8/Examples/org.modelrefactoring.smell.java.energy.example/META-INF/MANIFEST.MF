@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Plugin containing example Java code for Quality Smells regarding Energy Efficiency
+Bundle-SymbolicName: org.modelrefactoring.smell.java.energy.example
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: www.modelrefactoring.org
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-ClassPath: libs/apache/httpclient-4.2.2.jar,
+ libs/apache/httpcore-4.2.2.jar,
+ libs/apache/httpmime-4.2.2.jar,
+ .
