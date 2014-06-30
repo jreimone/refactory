@@ -9,9 +9,11 @@ package org.emftext.refactoring.tests.properties.resource.testproperties.mopp;
 import org.eclipse.emf.common.util.URI;
 
 /**
+ * <p>
  * A basic implementation of the
  * org.emftext.refactoring.tests.properties.resource.testproperties.ITestproperties
  * URIMapping interface that can map identifiers to URIs.
+ * </p>
  * 
  * @param <ReferenceType> unused type parameter which is needed to implement
  * org.emftext.refactoring.tests.properties.resource.testproperties.ITestproperties

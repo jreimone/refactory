@@ -8,6 +8,10 @@ package org.emftext.refactoring.tests.properties.resource.testproperties.mopp;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
@@ -37,7 +41,7 @@ public class TestpropertiesTaskItemBuilder {
 			subMonitor.done();
 			return;
 		}
-		java.util.List<org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesTaskItem> taskItems = new java.util.ArrayList<org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesTaskItem>();
+		List<org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesTaskItem> taskItems = new ArrayList<org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesTaskItem>();
 		org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesTaskItemDetector taskItemDetector = new org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesTaskItemDetector();
 		InputStream inputStream = null;
 		try {
@@ -69,7 +73,7 @@ public class TestpropertiesTaskItemBuilder {
 		subMonitor.worked(1);
 		
 		for (org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesTaskItem taskItem : taskItems) {
-			java.util.Map<String, Object> markerAttributes = new java.util.LinkedHashMap<String, Object>();
+			Map<String, Object> markerAttributes = new LinkedHashMap<String, Object>();
 			markerAttributes.put(IMarker.USER_EDITABLE, false);
 			markerAttributes.put(IMarker.DONE, false);
 			markerAttributes.put(IMarker.LINE_NUMBER, taskItem.getLine());

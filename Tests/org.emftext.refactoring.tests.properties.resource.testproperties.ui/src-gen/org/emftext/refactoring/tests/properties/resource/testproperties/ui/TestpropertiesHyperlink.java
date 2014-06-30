@@ -40,7 +40,9 @@ public class TestpropertiesHyperlink implements IHyperlink {
 	private IRegion region;
 	
 	/**
+	 * <p>
 	 * Creates the hyperlink.
+	 * </p>
 	 * 
 	 * @param region the region of the hyperlink to highlight
 	 * @param linkTarget the link target where this hyperlink should go to

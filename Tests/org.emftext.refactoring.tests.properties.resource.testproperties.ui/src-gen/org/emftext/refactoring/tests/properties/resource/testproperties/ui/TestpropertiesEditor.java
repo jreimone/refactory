@@ -78,20 +78,34 @@ import org.eclipse.ui.views.properties.IPropertySheetPage;
 import org.eclipse.ui.views.properties.IPropertySource;
 
 /**
+ * <p>
  * A text editor for 'testproperties' models.
+ * </p>
+ * <p>
+ * <p>
+ * </p>
  * <p>
  * This editor has id
  * <code>org.emftext.refactoring.tests.properties.resource.testproperties.ui.Testpr
  * opertiesEditor</code>
+ * </p>
+ * <p>
  * The editor's context menu has id
  * <code>org.emftext.refactoring.tests.properties.resource.testproperties.EditorCon
  * text</code>.
+ * </p>
+ * <p>
  * The editor's ruler context menu has id
  * <code>org.emftext.refactoring.tests.properties.resource.testproperties.EditorRul
  * er</code>.
+ * </p>
+ * <p>
  * The editor's editing context has id
  * <code>org.emftext.refactoring.tests.properties.resource.testproperties.EditorSco
  * pe</code>.
+ * </p>
+ * <p>
+ * </p>
  * </p>
  */
 public class TestpropertiesEditor extends TextEditor implements IEditingDomainProvider, ISelectionProvider, ISelectionChangedListener, IViewerProvider, org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesResourceProvider, org.emftext.refactoring.tests.properties.resource.testproperties.ui.ITestpropertiesBracketHandlerProvider, org.emftext.refactoring.tests.properties.resource.testproperties.ui.ITestpropertiesAnnotationModelProvider {
@@ -132,11 +146,15 @@ public class TestpropertiesEditor extends TextEditor implements IEditingDomainPr
 	}
 	
 	/**
+	 * <p>
 	 * Reacts to changes of the text resource displayed in the editor and resources
 	 * cross-referenced by it. Cross-referenced resources are unloaded, the displayed
 	 * resource is reloaded. An attempt to resolve all proxies in the displayed
 	 * resource is made after each change.
+	 * </p>
+	 * <p>
 	 * The code pretty much corresponds to what EMF generates for a tree editor.
+	 * </p>
 	 */
 	private class ModelResourceChangeListener implements IResourceChangeListener {
 		public void resourceChanged(IResourceChangeEvent event) {
@@ -416,7 +434,9 @@ public class TestpropertiesEditor extends TextEditor implements IEditingDomainPr
 	}
 	
 	/**
+	 * <p>
 	 * Sets the caret to the offset of the given element.
+	 * </p>
 	 * 
 	 * @param element has to be contained in the resource of this editor.
 	 */

@@ -113,7 +113,9 @@ public class TestpropertiesTextHover implements ITextHover, ITextHoverExtension,
 		private final org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesBrowserInformationControl infoControl;
 		
 		/**
+		 * <p>
 		 * Creates the action to jump to the declaration.
+		 * </p>
 		 * 
 		 * @param infoControl the info control holds the hover information and the target
 		 * element
@@ -290,7 +292,9 @@ public class TestpropertiesTextHover implements ITextHover, ITextHoverExtension,
 	}
 	
 	/**
+	 * <p>
 	 * Computes the hover info.
+	 * </p>
 	 * 
 	 * @param elements the resolved elements
 	 * @param constantValue a constant value iff result contains exactly 1 constant
@@ -332,7 +336,9 @@ public class TestpropertiesTextHover implements ITextHover, ITextHoverExtension,
 	}
 	
 	/**
+	 * <p>
 	 * Sets the style sheet font.
+	 * </p>
 	 * 
 	 * @return the hover style sheet
 	 */
@@ -350,7 +356,9 @@ public class TestpropertiesTextHover implements ITextHover, ITextHoverExtension,
 	}
 	
 	/**
+	 * <p>
 	 * Loads and returns the hover style sheet.
+	 * </p>
 	 * 
 	 * @return the style sheet, or <code>null</code> if unable to load
 	 */

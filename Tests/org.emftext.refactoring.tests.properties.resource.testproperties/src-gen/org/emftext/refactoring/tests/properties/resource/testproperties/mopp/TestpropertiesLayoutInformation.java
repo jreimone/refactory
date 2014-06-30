@@ -10,14 +10,18 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 /**
+ * <p>
  * TestpropertiesLayoutInformation objects are used to store layout information
  * that is found while parsing text files. Layout information does include all
  * unused tokens. Usually, these are whitespace characters, line breaks and
  * comments, but depending on the concrete syntax definition it can also include
  * other tokens.
+ * </p>
+ * <p>
  * TestpropertiesLayoutInformations are aggregated in LayoutInformationAdapters.
  * One TestpropertiesLayoutInformation contains the layout that was found before a
  * keyword, attribute or reference.
+ * </p>
  */
 public class TestpropertiesLayoutInformation {
 	

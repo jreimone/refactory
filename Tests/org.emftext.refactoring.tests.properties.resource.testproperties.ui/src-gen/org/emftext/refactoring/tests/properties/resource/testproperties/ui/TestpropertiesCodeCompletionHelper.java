@@ -46,9 +46,11 @@ public class TestpropertiesCodeCompletionHelper {
 	private org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesMetaInformation metaInformation = new org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesMetaInformation();
 	
 	/**
+	 * <p>
 	 * Computes a set of proposals for the given document assuming the cursor is at
 	 * 'cursorOffset'. The proposals are derived using the meta information, i.e., the
 	 * generated language plug-in.
+	 * </p>
 	 * 
 	 * @param originalResource the resource to compute completions for
 	 * @param content the documents content
@@ -208,7 +210,7 @@ public class TestpropertiesCodeCompletionHelper {
 	 * Removes all proposals for keywords that end before the given index.
 	 */
 	protected void removeKeywordsEndingBeforeIndex(Collection<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal> proposals, int index) {
-		java.util.List<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal> toRemove = new java.util.ArrayList<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal>();
+		List<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal> toRemove = new ArrayList<org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal>();
 		for (org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesCompletionProposal proposal : proposals) {
 			org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesExpectedTerminal expectedTerminal = proposal.getExpectedTerminal();
 			org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesExpectedElement terminal = expectedTerminal.getTerminal();

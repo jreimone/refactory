@@ -7,6 +7,7 @@
 package org.emftext.refactoring.tests.properties.resource.testproperties.ui;
 
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.DefaultIndentLineAutoEditStrategy;
 import org.eclipse.jface.text.DocumentCommand;
 import org.eclipse.jface.text.IDocument;
@@ -49,17 +50,55 @@ public class TestpropertiesAutoEditStrategy extends DefaultIndentLineAutoEditStr
 		if (textAfter.length() < textBefore.length()) {
 			return;
 		}
+		
+		consumeAddedClosingBracket(document, command);
 		addClosingBracketAfterEnterIfRequired(document, command, text, textBefore, textAfter);
-		addClosingBracket(command);
+		addClosingBracket(document, command);
 	}
 	
-	protected void addClosingBracket(DocumentCommand command) {
+	protected void consumeAddedClosingBracket(IDocument document, DocumentCommand command) {
+		// When typing the closing bracket manually and the next character is an auto
+		// generated closing bracket, then do not insert the new closing bracket (i.e.,
+		// make it feel like it was overridden).
 		String insertedText = command.text;
-		boolean closeInstantly = bracketSet.isCloseInstantly(insertedText);
-		if (!closeInstantly) {
+		
+		if (!bracketSet.isClosingBracket(insertedText) || insertedText.length() != 1) {
 			return;
 		}
-		String closingBracket = bracketSet.getCounterpart(insertedText);
+		
+		try {
+			char insertedBracket = insertedText.charAt(0);
+			
+			int offset = command.offset;
+			char nextCharacter = document.getChar(offset);
+			
+			// NOTE: To be entirely accurate, one would have to check whether the next
+			// character truly _functions_ as a closing bracket (e.g., is the second of a pair
+			// of quotes, not the first).
+			boolean nextCharacterIsClosingBracket = bracketSet.isClosingBracket(Character.toString(nextCharacter));
+			
+			boolean nextCharacterWasAddedAutomatically = true;
+			
+			if (insertedBracket == nextCharacter && nextCharacterIsClosingBracket && nextCharacterWasAddedAutomatically) {
+				// Do not add the character again but forward the caret. Effectively gives the
+				// illusion of overriding the previously automatically added closing bracket.
+				command.text = "";
+				command.caretOffset = offset + 1;
+				command.shiftsCaret = true;
+			}
+		} catch(BadLocationException e) {
+		}
+	}
+	
+	protected void addClosingBracket(IDocument document, DocumentCommand command) {
+		String openingBracket = command.text;
+		
+		if (!bracketSet.isOpeningBracket(openingBracket) || !bracketSet.isCloseInstantly(openingBracket)) {
+			return;
+		}
+		
+		String closingBracket = bracketSet.getCounterpart(openingBracket);
+		
 		command.text = command.text + closingBracket;
 		command.shiftsCaret = false;
 		command.caretOffset = command.offset + 1;
@@ -115,7 +154,7 @@ public class TestpropertiesAutoEditStrategy extends DefaultIndentLineAutoEditStr
 			if (bracketSet.isCloseAfterEnter(stringAtI)) {
 				return stringAtI;
 			}
-			if (charAtI == ' ' || charAtI == '	') {
+			if (charAtI == ' ' || charAtI == '\t') {
 				continue;
 			}
 			break;

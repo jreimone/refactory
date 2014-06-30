@@ -6,6 +6,7 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties.mopp;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
@@ -24,7 +25,7 @@ public class TestpropertiesBuilderAdapter extends IncrementalProjectBuilder {
 	
 	private static class ResourceCollector implements IResourceDeltaVisitor, IResourceVisitor {
 		
-		private java.util.Map<IResource, Boolean> resourceMap = new java.util.LinkedHashMap<IResource, Boolean>();
+		private Map<IResource, Boolean> resourceMap = new LinkedHashMap<IResource, Boolean>();
 		
 		public boolean visit(IResourceDelta delta) throws CoreException {
 			IResource resource = delta.getResource();

@@ -8,7 +8,9 @@ package org.emftext.refactoring.tests.properties.resource.testproperties;
 
 
 /**
+ * <p>
  * A mapping from an identifier to an EObject.
+ * </p>
  * 
  * @param <ReferenceType> the type of the reference this mapping points to.
  */

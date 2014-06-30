@@ -10,9 +10,11 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 
 /**
+ * <p>
  * An interface for factories to create instances of
  * org.emftext.refactoring.tests.properties.resource.testproperties.ITestproperties
  * ContextDependentURIFragment.
+ * </p>
  * 
  * @param <ContainerType> the type of the class containing the reference to be
  * resolved
@@ -21,9 +23,11 @@ import org.eclipse.emf.ecore.EReference;
 public interface ITestpropertiesContextDependentURIFragmentFactory<ContainerType extends EObject, ReferenceType extends EObject> {
 	
 	/**
+	 * <p>
 	 * Create a new instance of the
 	 * org.emftext.refactoring.tests.properties.resource.testproperties.ITestproperties
 	 * ContextDependentURIFragment interface.
+	 * </p>
 	 * 
 	 * @param identifier the identifier that references an Object
 	 * @param container the object that contains the reference

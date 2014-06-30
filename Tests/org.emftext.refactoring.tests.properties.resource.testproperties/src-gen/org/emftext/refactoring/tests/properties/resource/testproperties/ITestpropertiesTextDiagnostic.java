@@ -41,7 +41,9 @@ public interface ITestpropertiesTextDiagnostic extends Resource.Diagnostic {
 	public org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesProblem getProblem();
 	
 	/**
+	 * <p>
 	 * Checks whether the problem was caused by the given element.
+	 * </p>
 	 * 
 	 * @return true if the problem was caused by <code>element</code>
 	 */

@@ -16,8 +16,10 @@ import org.eclipse.emf.ecore.EReference;
 public interface ITestpropertiesReferenceResolverSwitch extends org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesConfigurable {
 	
 	/**
+	 * <p>
 	 * Attempts to resolve a reference string fuzzy (returning objects that do not
 	 * match exactly). This is need during code completion.
+	 * </p>
 	 * 
 	 * @param identifier The identifier for the reference.
 	 * @param container The object that contains the reference.

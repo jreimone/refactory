@@ -26,7 +26,9 @@ public class TestpropertiesHyperlinkDetector implements IHyperlinkDetector {
 	private org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextResource textResource;
 	
 	/**
+	 * <p>
 	 * Creates a hyperlink detector.
+	 * </p>
 	 * 
 	 * @param resource the resource to use for calculating the locations.
 	 */

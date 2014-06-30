@@ -19,6 +19,7 @@ public class TestpropertiesPreferenceInitializer extends AbstractPreferenceIniti
 		
 		initializeDefaultSyntaxHighlighting();
 		initializeDefaultBrackets();
+		initializeDefaultsContentAssist();
 		
 		IPreferenceStore store = org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesUIPlugin.getDefault().getPreferenceStore();
 		// Set default value for matching brackets
@@ -66,6 +67,13 @@ public class TestpropertiesPreferenceInitializer extends AbstractPreferenceIniti
 				setProperties(store, languageId, tokenName, "0,0,0", false, false, false, false, false);
 			}
 		}
+	}
+	
+	private void initializeDefaultsContentAssist() {
+		IPreferenceStore store = org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesUIPlugin.getDefault().getPreferenceStore();
+		store.setDefault(org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesPreferenceConstants.EDITOR_CONTENT_ASSIST_ENABLED, org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesPreferenceConstants.EDITOR_CONTENT_ASSIST_ENABLED_DEFAULT);
+		store.setDefault(org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesPreferenceConstants.EDITOR_CONTENT_ASSIST_DELAY, org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesPreferenceConstants.EDITOR_CONTENT_ASSIST_DELAY_DEFAULT);
+		store.setDefault(org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesPreferenceConstants.EDITOR_CONTENT_ASSIST_TRIGGERS, org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesPreferenceConstants.EDITOR_CONTENT_ASSIST_TRIGGERS_DEFAULT);
 	}
 	
 	protected void setProperties(IPreferenceStore store, String languageID, String tokenName, String color, boolean bold, boolean enable, boolean italic, boolean strikethrough, boolean underline) {

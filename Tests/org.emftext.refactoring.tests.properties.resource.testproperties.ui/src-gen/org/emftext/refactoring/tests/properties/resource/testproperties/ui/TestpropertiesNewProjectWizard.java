@@ -26,10 +26,14 @@ import org.eclipse.ui.wizards.newresource.BasicNewProjectResourceWizard;
 import org.osgi.framework.Bundle;
 
 /**
+ * <p>
  * This class is based on:
  * <i>org.eclipse.gef.examples.ui.pde.internal.wizards.ProjectUnzipperNewWizard</i>
  * .
+ * </p>
+ * <p>
  * It is responsible for offering an example project via the new dialog of Eclipse.
+ * </p>
  */
 public class TestpropertiesNewProjectWizard extends Wizard implements INewWizard, IExecutableExtension {
 	
@@ -43,32 +47,32 @@ public class TestpropertiesNewProjectWizard extends Wizard implements INewWizard
 	 * The single page provided by this base implementation. It provides all the
 	 * functionality required to capture the name and location of the target project.
 	 */
-	private WizardNewProjectCreationPage wizardNewProjectCreationPage;
+	protected WizardNewProjectCreationPage wizardNewProjectCreationPage;
 	
 	/**
 	 * The name of the project creation page
 	 */
-	private String pageName = org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesUIResourceBundle.NEW_PROJECT_WIZARD_PAGE_NAME;
+	protected String pageName = org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesUIResourceBundle.NEW_PROJECT_WIZARD_PAGE_NAME;
 	
 	/**
 	 * The title of the project creation page
 	 */
-	private String pageTitle = pageName;
+	protected String pageTitle = pageName;
 	
 	/**
 	 * The description of the project creation page
 	 */
-	private String pageDescription = org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesUIResourceBundle.NEW_PROJECT_WIZARD_PAGE_DESCRIPTION;
+	protected String pageDescription = org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesUIResourceBundle.NEW_PROJECT_WIZARD_PAGE_DESCRIPTION;
 	
 	/**
 	 * The name of the project in the project creation page
 	 */
-	private String pageProjectName = org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesUIResourceBundle.NEW_PROJECT_WIZARD_PROJECT_NAME;
+	protected String pageProjectName = org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesUIResourceBundle.NEW_PROJECT_WIZARD_PROJECT_NAME;
 	
 	/**
 	 * The configuration element associated with this new project wizard
 	 */
-	private IConfigurationElement config;
+	protected IConfigurationElement config;
 	
 	/**
 	 * Creates the example project by delegating the work to
@@ -82,7 +86,7 @@ public class TestpropertiesNewProjectWizard extends Wizard implements INewWizard
 				
 				public void execute(IProgressMonitor monitor) throws InterruptedException {
 					try {
-						new org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesNewProjectWizardLogic().createExampleProject(monitor, wizardNewProjectCreationPage.getLocationPath(), wizardNewProjectCreationPage.getProjectName(), org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesUIPlugin.PLUGIN_ID, NEW_PROJECT_ZIP_FILE_NAME);
+						doPerformFinish(monitor);
 					} catch (Exception e) {
 						throw new RuntimeException(e);
 					}
@@ -101,9 +105,15 @@ public class TestpropertiesNewProjectWizard extends Wizard implements INewWizard
 		return true;
 	}
 	
+	protected void doPerformFinish(IProgressMonitor monitor) throws Exception {
+		new org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesNewProjectWizardLogic().createExampleProject(monitor, wizardNewProjectCreationPage.getLocationPath(), wizardNewProjectCreationPage.getProjectName(), org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesUIPlugin.PLUGIN_ID, NEW_PROJECT_ZIP_FILE_NAME);
+	}
+	
 	/**
+	 * <p>
 	 * Creates the sole wizard page contributed by this base implementation; the
 	 * standard Eclipse WizardNewProjectCreationPage.
+	 * </p>
 	 * 
 	 * @see WizardNewProjectCreationPage#WizardNewProjectCreationPage(String)
 	 */

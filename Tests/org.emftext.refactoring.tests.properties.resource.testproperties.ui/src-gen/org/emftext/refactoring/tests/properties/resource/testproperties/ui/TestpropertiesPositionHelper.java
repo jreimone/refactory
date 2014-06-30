@@ -18,7 +18,9 @@ import org.eclipse.jface.text.Position;
 public class TestpropertiesPositionHelper {
 	
 	/**
+	 * <p>
 	 * Adds a position with the given offset and length into a document.
+	 * </p>
 	 * 
 	 * @param document the document to add a position into
 	 * @param category the category of this position
@@ -40,7 +42,9 @@ public class TestpropertiesPositionHelper {
 	}
 	
 	/**
+	 * <p>
 	 * Returns the positions of a specific category of the given document.
+	 * </p>
 	 * 
 	 * @param document the document to get the positions from
 	 * @param category the position's category
@@ -57,7 +61,9 @@ public class TestpropertiesPositionHelper {
 	}
 	
 	/**
+	 * <p>
 	 * Returns the first position of a specific category of the given document.
+	 * </p>
 	 * 
 	 * @param document the document to get the positions from
 	 * @param category the category of the position
@@ -76,8 +82,10 @@ public class TestpropertiesPositionHelper {
 	}
 	
 	/**
+	 * <p>
 	 * Deletes the position category from the document. All positions in this category
 	 * are thus deleted as well.
+	 * </p>
 	 * 
 	 * @param document the document contains the category
 	 * @param category the category to be removed

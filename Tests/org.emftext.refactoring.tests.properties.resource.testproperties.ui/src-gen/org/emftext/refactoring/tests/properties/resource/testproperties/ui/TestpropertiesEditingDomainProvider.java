@@ -30,6 +30,9 @@ public class TestpropertiesEditingDomainProvider {
 		
 		BasicCommandStack commandStack = new BasicCommandStack();
 		
+		// Register resource factories (esp. for additional extensions).
+		new org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesMetaInformation().registerResourceFactory();
+		
 		return new AdapterFactoryEditingDomain(adapterFactory, commandStack, new LinkedHashMap<Resource, Boolean>());
 	}
 	
