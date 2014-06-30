@@ -1,8 +1,8 @@
 How to install the BPMN modeler including its metamodel in Kepler:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 * Help -> Install New Software...
-* use "http://download.eclipse.org/bpmn2-modeler/updates/kepler/1.0.1"
-* install "BPMN2 Diagram Editor"
+* use Luna Main Update Site
+* install "BPMN2 Diagram Editor" (SOA category)
 * restart Eclipse
 
 Maybe this will remove exceptions during start-up because of EValidator errors?:
