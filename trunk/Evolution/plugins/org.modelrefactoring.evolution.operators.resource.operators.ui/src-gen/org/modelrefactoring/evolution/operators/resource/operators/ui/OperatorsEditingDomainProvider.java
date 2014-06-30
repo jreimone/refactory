@@ -30,6 +30,9 @@ public class OperatorsEditingDomainProvider {
 		
 		BasicCommandStack commandStack = new BasicCommandStack();
 		
+		// Register resource factories (esp. for additional extensions).
+		new org.modelrefactoring.evolution.operators.resource.operators.mopp.OperatorsMetaInformation().registerResourceFactory();
+		
 		return new AdapterFactoryEditingDomain(adapterFactory, commandStack, new LinkedHashMap<Resource, Boolean>());
 	}
 	

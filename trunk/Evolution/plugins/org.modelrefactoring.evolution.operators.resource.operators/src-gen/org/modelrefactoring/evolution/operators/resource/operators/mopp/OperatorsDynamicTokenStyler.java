@@ -15,7 +15,9 @@ public class OperatorsDynamicTokenStyler {
 	private int offset;
 	
 	/**
+	 * <p>
 	 * This method is called to dynamically style tokens.
+	 * </p>
 	 * 
 	 * @param resource the TextResource that contains the token
 	 * @param token the token to obtain a style for

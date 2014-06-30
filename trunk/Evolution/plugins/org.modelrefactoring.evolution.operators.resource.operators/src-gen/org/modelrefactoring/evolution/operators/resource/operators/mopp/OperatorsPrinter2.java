@@ -861,13 +861,18 @@ public class OperatorsPrinter2 implements org.modelrefactoring.evolution.operato
 	}
 	
 	/**
+	 * <p>
 	 * Prints the current tokenOutputStream to the given writer.
+	 * </p>
 	 * 
+	 * <p>
 	 * This methods implements smart whitespace printing. It does so by writing output
 	 * to a token stream instead of printing the raw token text to a PrintWriter.
 	 * Tokens in this stream hold both the text and the type of the token (i.e., its
 	 * name).
+	 * </p>
 	 * 
+	 * <p>
 	 * To decide where whitespace is needed, sequences of successive tokens are
 	 * searched that can be printed without separating whitespace. To determine such
 	 * groups we start with two successive non-whitespace tokens, concatenate their
@@ -876,6 +881,7 @@ public class OperatorsPrinter2 implements org.modelrefactoring.evolution.operato
 	 * to be printed, no whitespace is needed. The tokens in the sequence are checked
 	 * both regarding their type and their text. If two tokens successfully form a
 	 * group a third one is added and so on.
+	 * </p>
 	 */
 	public void printSmart(PrintWriter writer) throws IOException {
 		// stores the text of the current group of tokens. this text is given to the lexer

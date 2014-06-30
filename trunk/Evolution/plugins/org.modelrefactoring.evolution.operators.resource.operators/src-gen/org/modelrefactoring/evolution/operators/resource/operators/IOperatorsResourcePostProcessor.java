@@ -15,8 +15,10 @@ package org.modelrefactoring.evolution.operators.resource.operators;
 public interface IOperatorsResourcePostProcessor {
 	
 	/**
+	 * <p>
 	 * Processes the resource after it was parsed. This method is automatically called
 	 * for registered post processors.
+	 * </p>
 	 * 
 	 * @param resource the resource to validate of modify
 	 */

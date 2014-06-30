@@ -10,9 +10,11 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 
 /**
+ * <p>
  * An interface for factories to create instances of
  * org.modelrefactoring.evolution.operators.resource.operators.IOperatorsContextDep
  * endentURIFragment.
+ * </p>
  * 
  * @param <ContainerType> the type of the class containing the reference to be
  * resolved
@@ -21,9 +23,11 @@ import org.eclipse.emf.ecore.EReference;
 public interface IOperatorsContextDependentURIFragmentFactory<ContainerType extends EObject, ReferenceType extends EObject> {
 	
 	/**
+	 * <p>
 	 * Create a new instance of the
 	 * org.modelrefactoring.evolution.operators.resource.operators.IOperatorsContextDep
 	 * endentURIFragment interface.
+	 * </p>
 	 * 
 	 * @param identifier the identifier that references an Object
 	 * @param container the object that contains the reference

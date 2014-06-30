@@ -174,8 +174,10 @@ public class OperatorsNewFileWizard extends Wizard implements INewWizard {
 	}
 	
 	/**
+	 * <p>
 	 * We will accept the selection in the workbench to see if we can initialize from
 	 * it.
+	 * </p>
 	 * 
 	 * @see IWorkbenchWizard#init(IWorkbench, IStructuredSelection)
 	 */

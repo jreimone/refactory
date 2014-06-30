@@ -41,7 +41,9 @@ public interface IOperatorsTextDiagnostic extends Resource.Diagnostic {
 	public org.modelrefactoring.evolution.operators.resource.operators.IOperatorsProblem getProblem();
 	
 	/**
+	 * <p>
 	 * Checks whether the problem was caused by the given element.
+	 * </p>
 	 * 
 	 * @return true if the problem was caused by <code>element</code>
 	 */

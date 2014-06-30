@@ -9,9 +9,11 @@ package org.modelrefactoring.evolution.operators.resource.operators.mopp;
 import org.eclipse.emf.common.util.URI;
 
 /**
+ * <p>
  * A basic implementation of the
  * org.modelrefactoring.evolution.operators.resource.operators.IOperatorsURIMapping
  * interface that can map identifiers to URIs.
+ * </p>
  * 
  * @param <ReferenceType> unused type parameter which is needed to implement
  * org.modelrefactoring.evolution.operators.resource.operators.IOperatorsURIMapping

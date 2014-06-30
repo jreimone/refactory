@@ -167,7 +167,9 @@ public class OperatorsOutlinePage extends Page implements ISelectionProvider, IS
 	}
 	
 	/**
+	 * <p>
 	 * Returns this page's tree viewer.
+	 * </p>
 	 * 
 	 * @return this page's tree viewer, or <code>null</code> if
 	 * <code>createControl</code> has not been called yet

@@ -9,7 +9,9 @@ package org.modelrefactoring.evolution.operators.resource.operators.mopp;
 import org.antlr.runtime3_4_0.RecognitionException;
 
 /**
+ * <p>
  * An Excpetion to represent invalid content types for parser instances.
+ * </p>
  * 
  * @see
  * org.modelrefactoring.evolution.operators.resource.operators.IOperatorsOptions.RE

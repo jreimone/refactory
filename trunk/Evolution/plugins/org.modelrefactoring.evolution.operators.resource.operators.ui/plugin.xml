@@ -25,6 +25,8 @@
 		</page>
 		<page name="Brackets" id="org.modelrefactoring.evolution.operators.resource.operators.ui.OperatorsBracketPreferencePage" class="org.modelrefactoring.evolution.operators.resource.operators.ui.OperatorsBracketPreferencePage" category="org.modelrefactoring.evolution.operators.resource.operators.ui.OperatorsPreferencePage">
 		</page>
+		<page name="Content Assist" id="org.modelrefactoring.evolution.operators.resource.operators.ui.OperatorsContentAssistPreferencePage" class="org.modelrefactoring.evolution.operators.resource.operators.ui.OperatorsContentAssistPreferencePage" category="org.modelrefactoring.evolution.operators.resource.operators.ui.OperatorsPreferencePage">
+		</page>
 	</extension>
 	
 	<extension point="org.eclipse.ui.newWizards">

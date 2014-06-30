@@ -36,7 +36,9 @@ public class OperatorsTokenScanner implements org.modelrefactoring.evolution.ope
 	private org.modelrefactoring.evolution.operators.resource.operators.IOperatorsTextResource resource;
 	
 	/**
+	 * <p>
 	 * Creates a new OperatorsTokenScanner.
+	 * </p>
 	 * 
 	 * @param resource The resource to scan
 	 * @param colorManager A manager to obtain color objects
@@ -187,7 +189,7 @@ public class OperatorsTokenScanner implements org.modelrefactoring.evolution.ope
 		// this is the offset for the next token to be added
 		int offset = charStart;
 		int itemBeginRelative;
-		java.util.List<org.modelrefactoring.evolution.operators.resource.operators.IOperatorsTextToken> newItems = new java.util.ArrayList<org.modelrefactoring.evolution.operators.resource.operators.IOperatorsTextToken>();
+		List<org.modelrefactoring.evolution.operators.resource.operators.IOperatorsTextToken> newItems = new ArrayList<org.modelrefactoring.evolution.operators.resource.operators.IOperatorsTextToken>();
 		for (org.modelrefactoring.evolution.operators.resource.operators.mopp.OperatorsTaskItem taskItem : taskItems) {
 			int itemBegin = taskItem.getCharStart();
 			int itemLine = taskItem.getLine();

@@ -46,9 +46,11 @@ public class OperatorsCodeCompletionHelper {
 	private org.modelrefactoring.evolution.operators.resource.operators.IOperatorsMetaInformation metaInformation = new org.modelrefactoring.evolution.operators.resource.operators.mopp.OperatorsMetaInformation();
 	
 	/**
+	 * <p>
 	 * Computes a set of proposals for the given document assuming the cursor is at
 	 * 'cursorOffset'. The proposals are derived using the meta information, i.e., the
 	 * generated language plug-in.
+	 * </p>
 	 * 
 	 * @param originalResource the resource to compute completions for
 	 * @param content the documents content
@@ -208,7 +210,7 @@ public class OperatorsCodeCompletionHelper {
 	 * Removes all proposals for keywords that end before the given index.
 	 */
 	protected void removeKeywordsEndingBeforeIndex(Collection<org.modelrefactoring.evolution.operators.resource.operators.ui.OperatorsCompletionProposal> proposals, int index) {
-		java.util.List<org.modelrefactoring.evolution.operators.resource.operators.ui.OperatorsCompletionProposal> toRemove = new java.util.ArrayList<org.modelrefactoring.evolution.operators.resource.operators.ui.OperatorsCompletionProposal>();
+		List<org.modelrefactoring.evolution.operators.resource.operators.ui.OperatorsCompletionProposal> toRemove = new ArrayList<org.modelrefactoring.evolution.operators.resource.operators.ui.OperatorsCompletionProposal>();
 		for (org.modelrefactoring.evolution.operators.resource.operators.ui.OperatorsCompletionProposal proposal : proposals) {
 			org.modelrefactoring.evolution.operators.resource.operators.mopp.OperatorsExpectedTerminal expectedTerminal = proposal.getExpectedTerminal();
 			org.modelrefactoring.evolution.operators.resource.operators.IOperatorsExpectedElement terminal = expectedTerminal.getTerminal();
