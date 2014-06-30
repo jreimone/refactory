@@ -17,8 +17,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.emftext.language.java.containers.CompilationUnit;
-import org.emftext.language.java.expressions.ConditionalExpression;
-import org.emftext.language.java.expressions.ExpressionsPackage;
 import org.emftext.language.java.imports.ClassifierImport;
 import org.emftext.language.java.imports.ImportsPackage;
 import org.emftext.language.java.references.IdentifierReference;

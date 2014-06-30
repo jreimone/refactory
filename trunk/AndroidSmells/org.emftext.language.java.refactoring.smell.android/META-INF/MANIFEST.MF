@@ -3,13 +3,11 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Android Quality Smells Refactoring
 Bundle-SymbolicName: org.emftext.language.java.refactoring.smell.android;singleton:=true
 Bundle-Version: 1.0.0
-Bundle-ClassPath: rolemappings/,
- .
+Bundle-ClassPath: .
 Require-Bundle: org.emftext.refactoring.smell.calculation,
  org.eclipse.pde.core,
  org.eclipse.emf.transaction,
  org.eclipse.uml2.uml,
- org.eclipse.incquery.runtime,
  org.emftext.refactoring.smell.registry.ui,
  org.emftext.language.java,
  org.emftext.refactoring.registry.rolemapping,
@@ -25,5 +23,5 @@ Require-Bundle: org.emftext.refactoring.smell.calculation,
  org.emftext.language.refactoring.specification,
  org.emftext.refactoring.util,
  org.emftext.language.java.resource.java
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy

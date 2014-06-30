@@ -5,6 +5,5 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="queries"/>
 	<classpathentry kind="src" path="src-gen"/>
-	<classpathentry exported="true" kind="lib" path="rolemappings" sourcepath="rolemappings"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
