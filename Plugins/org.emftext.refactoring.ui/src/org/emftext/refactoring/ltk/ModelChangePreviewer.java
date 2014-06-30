@@ -24,6 +24,7 @@ import org.eclipse.emf.compare.Comparison;
 import org.eclipse.emf.compare.EMFCompare;
 import org.eclipse.emf.compare.domain.ICompareEditingDomain;
 import org.eclipse.emf.compare.domain.impl.EMFCompareEditingDomain;
+import org.eclipse.emf.compare.scope.DefaultComparisonScope;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.ltk.ui.refactoring.ChangePreviewViewerInput;
@@ -53,7 +54,8 @@ public class ModelChangePreviewer implements IChangePreviewViewer {
 		EObject fakeRefactoredModel = change.getRefactorer().getFakeRefactoredModel();
 	    
 		EMFCompare comparator = EMFCompare.builder().build();
-	    Comparison comparison = comparator.compare(EMFCompare.createDefaultScope(originalModel, fakeRefactoredModel));
+		DefaultComparisonScope scope = new DefaultComparisonScope(originalModel, fakeRefactoredModel, null);
+	    Comparison comparison = comparator.compare(scope);
 		
 		ICompareEditingDomain editingDomain = EMFCompareEditingDomain.create(originalModel, fakeRefactoredModel, null);
 		AdapterFactory adapterFactory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);

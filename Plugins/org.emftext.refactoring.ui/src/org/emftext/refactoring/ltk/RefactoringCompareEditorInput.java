@@ -19,19 +19,20 @@ import org.eclipse.compare.CompareConfiguration;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.compare.Comparison;
 import org.eclipse.emf.compare.domain.ICompareEditingDomain;
+import org.eclipse.emf.compare.ide.ui.internal.configuration.EMFCompareConfiguration;
 import org.eclipse.emf.compare.ide.ui.internal.editor.ComparisonEditorInput;
 
 @SuppressWarnings("restriction")
 public class RefactoringCompareEditorInput extends ComparisonEditorInput {
 
-	private static CompareConfiguration config = new CompareConfiguration();
+	private static EMFCompareConfiguration configuration = new EMFCompareConfiguration(new CompareConfiguration());
 
 	static{
-		config.setLeftEditable(false);
-		config.setRightEditable(false);
+		configuration.setLeftEditable(false);
+		configuration.setRightEditable(false);
 	}
 
 	public RefactoringCompareEditorInput(Comparison comparison, ICompareEditingDomain editingDomain, AdapterFactory adapterFactory) {
-		super(config, comparison, editingDomain, adapterFactory);
+		super(configuration, comparison, editingDomain, adapterFactory);
 	}
 }
