@@ -47,7 +47,9 @@ public class OperatorsSourceViewerConfiguration extends TextSourceViewerConfigur
 	private org.modelrefactoring.evolution.operators.resource.operators.ui.IOperatorsTokenScanner tokenScanner;
 	
 	/**
+	 * <p>
 	 * Creates a new editor configuration.
+	 * </p>
 	 * 
 	 * @param resourceProvider the provider for the resource (usually this is the
 	 * editor)

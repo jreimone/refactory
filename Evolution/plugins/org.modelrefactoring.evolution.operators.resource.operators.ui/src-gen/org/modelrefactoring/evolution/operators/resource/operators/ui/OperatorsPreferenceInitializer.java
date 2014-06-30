@@ -19,6 +19,7 @@ public class OperatorsPreferenceInitializer extends AbstractPreferenceInitialize
 		
 		initializeDefaultSyntaxHighlighting();
 		initializeDefaultBrackets();
+		initializeDefaultsContentAssist();
 		
 		IPreferenceStore store = org.modelrefactoring.evolution.operators.resource.operators.ui.OperatorsUIPlugin.getDefault().getPreferenceStore();
 		// Set default value for matching brackets
@@ -66,6 +67,13 @@ public class OperatorsPreferenceInitializer extends AbstractPreferenceInitialize
 				setProperties(store, languageId, tokenName, "0,0,0", false, false, false, false, false);
 			}
 		}
+	}
+	
+	private void initializeDefaultsContentAssist() {
+		IPreferenceStore store = org.modelrefactoring.evolution.operators.resource.operators.ui.OperatorsUIPlugin.getDefault().getPreferenceStore();
+		store.setDefault(org.modelrefactoring.evolution.operators.resource.operators.ui.OperatorsPreferenceConstants.EDITOR_CONTENT_ASSIST_ENABLED, org.modelrefactoring.evolution.operators.resource.operators.ui.OperatorsPreferenceConstants.EDITOR_CONTENT_ASSIST_ENABLED_DEFAULT);
+		store.setDefault(org.modelrefactoring.evolution.operators.resource.operators.ui.OperatorsPreferenceConstants.EDITOR_CONTENT_ASSIST_DELAY, org.modelrefactoring.evolution.operators.resource.operators.ui.OperatorsPreferenceConstants.EDITOR_CONTENT_ASSIST_DELAY_DEFAULT);
+		store.setDefault(org.modelrefactoring.evolution.operators.resource.operators.ui.OperatorsPreferenceConstants.EDITOR_CONTENT_ASSIST_TRIGGERS, org.modelrefactoring.evolution.operators.resource.operators.ui.OperatorsPreferenceConstants.EDITOR_CONTENT_ASSIST_TRIGGERS_DEFAULT);
 	}
 	
 	protected void setProperties(IPreferenceStore store, String languageID, String tokenName, String color, boolean bold, boolean enable, boolean italic, boolean strikethrough, boolean underline) {

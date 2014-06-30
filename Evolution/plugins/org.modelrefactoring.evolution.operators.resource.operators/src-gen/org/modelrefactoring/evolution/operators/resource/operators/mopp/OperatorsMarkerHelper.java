@@ -108,10 +108,12 @@ public class OperatorsMarkerHelper {
 	}
 	
 	/**
+	 * <p>
 	 * Creates a marker from the given diagnostics object and attaches the marker to
 	 * the resource. Markers are created and removed asynchronously. Thus, they may
 	 * not appear when calls to this method return. But, the order of marker additions
 	 * and removals is preserved.
+	 * </p>
 	 * 
 	 * @param resource The resource that is the file to mark.
 	 * @param diagnostic The diagnostic with information for the marker.
@@ -175,10 +177,12 @@ public class OperatorsMarkerHelper {
 	}
 	
 	/**
+	 * <p>
 	 * Removes all markers from the given resource regardless of their type. Markers
 	 * are created and removed asynchronously. Thus, they may not appear when calls to
 	 * this method return. But, the order of marker additions and removals is
 	 * preserved.
+	 * </p>
 	 * 
 	 * @param resource The resource where to delete markers from
 	 */
@@ -189,10 +193,12 @@ public class OperatorsMarkerHelper {
 	}
 	
 	/**
+	 * <p>
 	 * Removes all markers of the given type from the given resource. Markers are
 	 * created and removed asynchronously. Thus, they may not appear when calls to
 	 * this method return. But, the order of marker additions and removals is
 	 * preserved.
+	 * </p>
 	 * 
 	 * @param resource The resource where to delete markers from
 	 * @param problemType The type of problem to remove
@@ -216,10 +222,12 @@ public class OperatorsMarkerHelper {
 	}
 	
 	/**
+	 * <p>
 	 * Removes all markers that were caused by the given object from the resource.
 	 * Markers are created and removed asynchronously. Thus, they may not appear when
 	 * calls to this method return. But, the order of marker additions and removals is
 	 * preserved.
+	 * </p>
 	 * 
 	 * @param resource The resource where to delete markers from
 	 * @param causingObject The cause of the problems to remove
@@ -309,10 +317,12 @@ public class OperatorsMarkerHelper {
 	}
 	
 	/**
+	 * <p>
 	 * Removes all markers of the given type from the given resource. Markers are
 	 * created and removed asynchronously. Thus, they may not appear when calls to
 	 * this method return. But, the order of marker additions and removals is
 	 * preserved.
+	 * </p>
 	 * 
 	 * @param resource The resource where to delete markers from
 	 * @param markerId The id of the marker type to remove

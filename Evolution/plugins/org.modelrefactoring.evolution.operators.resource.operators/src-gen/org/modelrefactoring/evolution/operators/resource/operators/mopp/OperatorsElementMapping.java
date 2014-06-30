@@ -8,9 +8,11 @@ package org.modelrefactoring.evolution.operators.resource.operators.mopp;
 
 
 /**
+ * <p>
  * A basic implementation of the
  * org.modelrefactoring.evolution.operators.resource.operators.IOperatorsElementMap
  * ping interface.
+ * </p>
  * 
  * @param <ReferenceType> the type of the reference that can be mapped to
  */

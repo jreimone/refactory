@@ -6,6 +6,7 @@
  */
 package org.modelrefactoring.evolution.operators.resource.operators.ui;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.jface.action.IAction;
 
@@ -15,7 +16,7 @@ public class OperatorsOutlinePageActionProvider {
 		// To add custom actions to the outline view, set the
 		// 'overrideOutlinePageActionProvider' option to <code>false</code> and modify
 		// this method.
-		java.util.List<IAction> defaultActions = new java.util.ArrayList<IAction>();
+		List<IAction> defaultActions = new ArrayList<IAction>();
 		defaultActions.add(new org.modelrefactoring.evolution.operators.resource.operators.ui.OperatorsOutlinePageLinkWithEditorAction(treeViewer));
 		defaultActions.add(new org.modelrefactoring.evolution.operators.resource.operators.ui.OperatorsOutlinePageCollapseAllAction(treeViewer));
 		defaultActions.add(new org.modelrefactoring.evolution.operators.resource.operators.ui.OperatorsOutlinePageExpandAllAction(treeViewer));

@@ -31,7 +31,9 @@ public class OperatorsColorManager {
 	}
 	
 	/**
+	 * <p>
 	 * Constructs and caches the given color.
+	 * </p>
 	 * 
 	 * @param rgb The color as RGB
 	 * 

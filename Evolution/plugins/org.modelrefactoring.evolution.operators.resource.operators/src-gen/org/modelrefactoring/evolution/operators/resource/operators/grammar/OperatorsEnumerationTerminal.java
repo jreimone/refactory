@@ -6,6 +6,7 @@
  */
 package org.modelrefactoring.evolution.operators.resource.operators.grammar;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -15,7 +16,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
  */
 public class OperatorsEnumerationTerminal extends org.modelrefactoring.evolution.operators.resource.operators.grammar.OperatorsTerminal {
 	
-	private java.util.Map<String, String> mapping = new java.util.LinkedHashMap<String, String>();
+	private Map<String, String> mapping = new LinkedHashMap<String, String>();
 	
 	public OperatorsEnumerationTerminal(EStructuralFeature attribute, String[] literalMappings, org.modelrefactoring.evolution.operators.resource.operators.grammar.OperatorsCardinality cardinality, int mandatoryOccurrencesAfter) {
 		super(attribute, cardinality, mandatoryOccurrencesAfter);

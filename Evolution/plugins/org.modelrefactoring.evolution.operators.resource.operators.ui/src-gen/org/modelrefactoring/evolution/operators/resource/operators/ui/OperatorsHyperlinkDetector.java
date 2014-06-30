@@ -26,7 +26,9 @@ public class OperatorsHyperlinkDetector implements IHyperlinkDetector {
 	private org.modelrefactoring.evolution.operators.resource.operators.IOperatorsTextResource textResource;
 	
 	/**
+	 * <p>
 	 * Creates a hyperlink detector.
+	 * </p>
 	 * 
 	 * @param resource the resource to use for calculating the locations.
 	 */

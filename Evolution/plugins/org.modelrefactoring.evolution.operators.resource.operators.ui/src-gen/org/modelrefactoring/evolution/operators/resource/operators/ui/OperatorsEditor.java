@@ -78,20 +78,34 @@ import org.eclipse.ui.views.properties.IPropertySheetPage;
 import org.eclipse.ui.views.properties.IPropertySource;
 
 /**
+ * <p>
  * A text editor for 'operators' models.
+ * </p>
+ * <p>
+ * <p>
+ * </p>
  * <p>
  * This editor has id
  * <code>org.modelrefactoring.evolution.operators.resource.operators.ui.OperatorsEd
  * itor</code>
+ * </p>
+ * <p>
  * The editor's context menu has id
  * <code>org.modelrefactoring.evolution.operators.resource.operators.EditorContext<
  * /code>.
+ * </p>
+ * <p>
  * The editor's ruler context menu has id
  * <code>org.modelrefactoring.evolution.operators.resource.operators.EditorRuler</c
  * ode>.
+ * </p>
+ * <p>
  * The editor's editing context has id
  * <code>org.modelrefactoring.evolution.operators.resource.operators.EditorScope</c
  * ode>.
+ * </p>
+ * <p>
+ * </p>
  * </p>
  */
 public class OperatorsEditor extends TextEditor implements IEditingDomainProvider, ISelectionProvider, ISelectionChangedListener, IViewerProvider, org.modelrefactoring.evolution.operators.resource.operators.IOperatorsResourceProvider, org.modelrefactoring.evolution.operators.resource.operators.ui.IOperatorsBracketHandlerProvider, org.modelrefactoring.evolution.operators.resource.operators.ui.IOperatorsAnnotationModelProvider {
@@ -132,11 +146,15 @@ public class OperatorsEditor extends TextEditor implements IEditingDomainProvide
 	}
 	
 	/**
+	 * <p>
 	 * Reacts to changes of the text resource displayed in the editor and resources
 	 * cross-referenced by it. Cross-referenced resources are unloaded, the displayed
 	 * resource is reloaded. An attempt to resolve all proxies in the displayed
 	 * resource is made after each change.
+	 * </p>
+	 * <p>
 	 * The code pretty much corresponds to what EMF generates for a tree editor.
+	 * </p>
 	 */
 	private class ModelResourceChangeListener implements IResourceChangeListener {
 		public void resourceChanged(IResourceChangeEvent event) {
@@ -416,7 +434,9 @@ public class OperatorsEditor extends TextEditor implements IEditingDomainProvide
 	}
 	
 	/**
+	 * <p>
 	 * Sets the caret to the offset of the given element.
+	 * </p>
 	 * 
 	 * @param element has to be contained in the resource of this editor.
 	 */

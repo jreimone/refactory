@@ -64,7 +64,9 @@ public class OperatorsOccurrence {
 	private Region tokenRegion;
 	
 	/**
+	 * <p>
 	 * Creates a OperatorsOccurrence object to find positions to highlight.
+	 * </p>
 	 * 
 	 * @param textResource the text resource for location
 	 * @param projectionViewer the viewer for the text
@@ -82,7 +84,9 @@ public class OperatorsOccurrence {
 	}
 	
 	/**
+	 * <p>
 	 * Tries to resolve the first proxy object in the given list.
+	 * </p>
 	 * 
 	 * @param objects the <code>EObject</code>s located at the caret position
 	 * 
@@ -131,8 +135,10 @@ public class OperatorsOccurrence {
 	}
 	
 	/**
+	 * <p>
 	 * Returns the text of the token that was found at the caret position at the time
 	 * occurrence we computed last.
+	 * </p>
 	 * 
 	 * @return the token text
 	 */
@@ -396,6 +402,11 @@ public class OperatorsOccurrence {
 	
 	protected int getCaretOffset() {
 		StyledText textWidget = getSourceViewer().getTextWidget();
+		
+		if (textWidget == null) {
+			return -1;
+		}
+		
 		int widgetOffset = textWidget.getCaretOffset();
 		return getTextViewerExtension5().widgetOffset2ModelOffset(widgetOffset);
 	}

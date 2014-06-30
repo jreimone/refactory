@@ -9,6 +9,7 @@ package org.modelrefactoring.evolution.operators.resource.operators.mopp;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +20,7 @@ import org.antlr.runtime3_4_0.Token;
 import org.antlr.runtime3_4_0.TokenStream;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EMap;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -35,7 +37,7 @@ public abstract class OperatorsANTLRParserBase extends Parser implements org.mod
 	/**
 	 * A collection to store all anonymous tokens.
 	 */
-	protected java.util.List<CommonToken> anonymousTokens = new java.util.ArrayList<CommonToken>();
+	protected List<CommonToken> anonymousTokens = new ArrayList<CommonToken>();
 	
 	/**
 	 * A collection that is filled with commands to be executed after parsing. This
@@ -167,7 +169,7 @@ public abstract class OperatorsANTLRParserBase extends Parser implements org.mod
 	protected <ContainerType extends EObject, ReferenceType extends EObject> void registerContextDependentProxy(final org.modelrefactoring.evolution.operators.resource.operators.mopp.OperatorsContextDependentURIFragmentFactory<ContainerType, ReferenceType> factory, final ContainerType container, final EReference reference, final String id, final EObject proxy) {
 		final int position;
 		if (reference.isMany()) {
-			position = ((java.util.List<?>) container.eGet(reference)).size();
+			position = ((List<?>) container.eGet(reference)).size();
 		} else {
 			position = -1;
 		}
@@ -252,15 +254,17 @@ public abstract class OperatorsANTLRParserBase extends Parser implements org.mod
 	}
 	
 	@SuppressWarnings("unchecked")
-	
 	public boolean addObjectToList(EObject container, int featureID, Object object) {
-		return ((java.util.List<Object>) container.eGet(container.eClass().getEStructuralFeature(featureID))).add(object);
+		EClass eClass = container.eClass();
+		EStructuralFeature eStructuralFeature = eClass.getEStructuralFeature(featureID);
+		Object value = container.eGet(eStructuralFeature);
+		return ((List<Object>) value).add(object);
 	}
 	
 	@SuppressWarnings("unchecked")
-	
 	public boolean addObjectToList(EObject container, EStructuralFeature feature, Object object) {
-		return ((java.util.List<Object>) container.eGet(feature)).add(object);
+		Object value = container.eGet(feature);
+		return ((List<Object>) value).add(object);
 	}
 	
 	protected EObject apply(EObject target, List<EObject> dummyEObjects) {

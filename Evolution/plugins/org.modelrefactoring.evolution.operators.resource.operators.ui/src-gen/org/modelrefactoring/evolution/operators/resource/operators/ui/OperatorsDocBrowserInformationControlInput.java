@@ -24,7 +24,9 @@ public class OperatorsDocBrowserInformationControlInput {
 	private final Resource resource;
 	
 	/**
+	 * <p>
 	 * Creates a new browser information control input.
+	 * </p>
 	 * 
 	 * @param previous previous input, or <code>null</code> if none available
 	 * @param element the element, or <code>null</code> if none available
@@ -43,7 +45,9 @@ public class OperatorsDocBrowserInformationControlInput {
 	}
 	
 	/**
+	 * <p>
 	 * Returns the previous input or <code>null</code> if this is the first.
+	 * </p>
 	 * 
 	 * @return the previous input or <code>null</code>
 	 */
@@ -52,7 +56,9 @@ public class OperatorsDocBrowserInformationControlInput {
 	}
 	
 	/**
+	 * <p>
 	 * Returns the next input or <code>null</code> if this is the last.
+	 * </p>
 	 * 
 	 * @return the next input or <code>null</code>
 	 */

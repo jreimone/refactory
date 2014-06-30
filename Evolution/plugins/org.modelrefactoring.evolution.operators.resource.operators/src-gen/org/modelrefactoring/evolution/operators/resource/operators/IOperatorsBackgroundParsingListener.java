@@ -15,8 +15,10 @@ import org.eclipse.emf.ecore.resource.Resource;
 public interface IOperatorsBackgroundParsingListener {
 	
 	/**
+	 * <p>
 	 * Signals that the given resource has been changed and the background parsing is
 	 * completed.
+	 * </p>
 	 * 
 	 * @param resource the resource that has changed
 	 */
