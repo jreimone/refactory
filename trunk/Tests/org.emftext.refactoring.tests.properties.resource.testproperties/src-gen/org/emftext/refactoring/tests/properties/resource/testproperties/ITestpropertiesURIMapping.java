@@ -9,8 +9,10 @@ package org.emftext.refactoring.tests.properties.resource.testproperties;
 import org.eclipse.emf.common.util.URI;
 
 /**
+ * <p>
  * Implementors of this interface map identifiers to URIs. This is sometimes
  * necessary when resolving references depends on the resolution of others.
+ * </p>
  * 
  * @param <ReferenceType> unused type parameter which is needed to implement
  * org.emftext.refactoring.tests.properties.resource.testproperties.ITestproperties

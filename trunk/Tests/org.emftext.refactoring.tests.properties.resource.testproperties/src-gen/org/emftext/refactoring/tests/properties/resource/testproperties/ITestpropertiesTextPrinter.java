@@ -15,8 +15,10 @@ import org.eclipse.emf.ecore.EObject;
 public interface ITestpropertiesTextPrinter extends org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesConfigurable {
 	
 	/**
+	 * <p>
 	 * Prints the given <code>EObject</code> and its content to the underlying output
 	 * stream that was passed to this printer upon creation.
+	 * </p>
 	 * 
 	 * @param element The element to print.
 	 * 

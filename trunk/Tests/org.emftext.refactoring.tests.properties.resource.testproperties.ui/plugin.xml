@@ -25,6 +25,8 @@
 		</page>
 		<page name="Brackets" id="org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesBracketPreferencePage" class="org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesBracketPreferencePage" category="org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesPreferencePage">
 		</page>
+		<page name="Content Assist" id="org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesContentAssistPreferencePage" class="org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesContentAssistPreferencePage" category="org.emftext.refactoring.tests.properties.resource.testproperties.ui.TestpropertiesPreferencePage">
+		</page>
 	</extension>
 	
 	<extension point="org.eclipse.ui.newWizards">

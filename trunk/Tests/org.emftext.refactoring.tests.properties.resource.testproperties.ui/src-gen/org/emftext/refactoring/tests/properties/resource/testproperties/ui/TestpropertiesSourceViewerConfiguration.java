@@ -47,7 +47,9 @@ public class TestpropertiesSourceViewerConfiguration extends TextSourceViewerCon
 	private org.emftext.refactoring.tests.properties.resource.testproperties.ui.ITestpropertiesTokenScanner tokenScanner;
 	
 	/**
+	 * <p>
 	 * Creates a new editor configuration.
+	 * </p>
 	 * 
 	 * @param resourceProvider the provider for the resource (usually this is the
 	 * editor)

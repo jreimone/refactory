@@ -36,7 +36,9 @@ public class TestpropertiesTokenScanner implements org.emftext.refactoring.tests
 	private org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextResource resource;
 	
 	/**
+	 * <p>
 	 * Creates a new TestpropertiesTokenScanner.
+	 * </p>
 	 * 
 	 * @param resource The resource to scan
 	 * @param colorManager A manager to obtain color objects
@@ -187,7 +189,7 @@ public class TestpropertiesTokenScanner implements org.emftext.refactoring.tests
 		// this is the offset for the next token to be added
 		int offset = charStart;
 		int itemBeginRelative;
-		java.util.List<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextToken> newItems = new java.util.ArrayList<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextToken>();
+		List<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextToken> newItems = new ArrayList<org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextToken>();
 		for (org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesTaskItem taskItem : taskItems) {
 			int itemBegin = taskItem.getCharStart();
 			int itemLine = taskItem.getLine();

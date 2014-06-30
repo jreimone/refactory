@@ -8,9 +8,11 @@ package org.emftext.refactoring.tests.properties.resource.testproperties.mopp;
 
 
 /**
+ * <p>
  * A basic implementation of the
  * org.emftext.refactoring.tests.properties.resource.testproperties.ITestproperties
  * ElementMapping interface.
+ * </p>
  * 
  * @param <ReferenceType> the type of the reference that can be mapped to
  */

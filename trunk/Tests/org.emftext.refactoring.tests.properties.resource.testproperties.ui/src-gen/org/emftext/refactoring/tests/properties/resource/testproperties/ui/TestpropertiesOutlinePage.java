@@ -167,7 +167,9 @@ public class TestpropertiesOutlinePage extends Page implements ISelectionProvide
 	}
 	
 	/**
+	 * <p>
 	 * Returns this page's tree viewer.
+	 * </p>
 	 * 
 	 * @return this page's tree viewer, or <code>null</code> if
 	 * <code>createControl</code> has not been called yet

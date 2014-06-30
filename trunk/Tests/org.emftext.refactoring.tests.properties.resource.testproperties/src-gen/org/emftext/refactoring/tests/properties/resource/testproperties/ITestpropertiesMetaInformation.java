@@ -20,32 +20,40 @@ public interface ITestpropertiesMetaInformation {
 	public String getURI();
 	
 	/**
+	 * <p>
 	 * Returns the name of the concrete syntax. This name is used as file extension.
+	 * </p>
 	 * 
 	 * @return the file extension
 	 */
 	public String getSyntaxName();
 	
 	/**
+	 * <p>
 	 * Returns the relative path to the .cs file within the plug-in.
+	 * </p>
 	 * 
 	 * @return relative path to the .cs specification
 	 */
 	public String getPathToCSDefinition();
 	
 	/**
+	 * <p>
 	 * Returns a lexer capable to split the underlying text file into tokens.
+	 * </p>
 	 * 
 	 * @return a new instance of the lexer class.
 	 */
 	public org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextScanner createLexer();
 	
 	/**
+	 * <p>
 	 * Returns an instance of the parser. This factory method is needed, because we
 	 * can not create ANTLR parsers using the default constructor without arguments,
 	 * because this constructor does expect the input stream or rather a token stream
 	 * as arguments. Furthermore, the parser implementation can be exchanged by
 	 * returning other parsers in this factory method.
+	 * </p>
 	 * 
 	 * @param inputStream the stream to read from
 	 * @param encoding the encoding of the input stream, pass null to use platform
@@ -56,7 +64,9 @@ public interface ITestpropertiesMetaInformation {
 	public org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesTextParser createParser(InputStream inputStream, String encoding);
 	
 	/**
+	 * <p>
 	 * Returns a new instance of the printer.
+	 * </p>
 	 * 
 	 * @param outputStream the stream to print to
 	 * @param resource that contains the elements that will be printed
@@ -87,8 +97,10 @@ public interface ITestpropertiesMetaInformation {
 	public String[] getTokenNames();
 	
 	/**
+	 * <p>
 	 * Returns the default style that should be used to present tokens of the given
 	 * type.
+	 * </p>
 	 * 
 	 * @param tokenName the name of the token type
 	 * 

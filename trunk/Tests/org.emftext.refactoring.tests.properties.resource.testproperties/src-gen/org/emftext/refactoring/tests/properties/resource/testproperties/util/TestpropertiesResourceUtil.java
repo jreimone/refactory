@@ -13,10 +13,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -31,7 +33,9 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 public class TestpropertiesResourceUtil {
 	
 	/**
+	 * <p>
 	 * Searches for all unresolved proxy objects in the given resource set.
+	 * </p>
 	 * 
 	 * @param resourceSet
 	 * 
@@ -42,7 +46,9 @@ public class TestpropertiesResourceUtil {
 	}
 	
 	/**
+	 * <p>
 	 * Searches for all unresolved proxy objects in the given resource.
+	 * </p>
 	 * 
 	 * @param resource
 	 * 
@@ -53,9 +59,11 @@ public class TestpropertiesResourceUtil {
 	}
 	
 	/**
+	 * <p>
 	 * Tries to resolve all unresolved proxy objects in the given resource. If all
 	 * proxies were resolved true is returned. If some could not be resolved, false is
 	 * returned.
+	 * </p>
 	 * 
 	 * @param resource the resource containing the proxy object
 	 * 
@@ -142,6 +150,13 @@ public class TestpropertiesResourceUtil {
 	 * Returns the resource after parsing the given bytes.
 	 */
 	public static Resource getResource(byte[] content, ResourceSet resourceSet) {
+		return getResource(content, resourceSet, null);
+	}
+	
+	/**
+	 * Returns the resource after parsing the given bytes using the given load options.
+	 */
+	public static Resource getResource(byte[] content, ResourceSet resourceSet, Map<?, ?> loadOptions) {
 		org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesMetaInformation metaInformation = new org.emftext.refactoring.tests.properties.resource.testproperties.mopp.TestpropertiesMetaInformation();
 		metaInformation.registerResourceFactory();
 		URI uri = URI.createURI("temp." + metaInformation.getSyntaxName());
@@ -151,7 +166,7 @@ public class TestpropertiesResourceUtil {
 		}
 		ByteArrayInputStream inputStream = new ByteArrayInputStream(content);
 		try {
-			resource.load(inputStream, null);
+			resource.load(inputStream, loadOptions);
 		} catch (IOException ioe) {
 			return null;
 		}
@@ -185,7 +200,22 @@ public class TestpropertiesResourceUtil {
 	 * Returns the root element after parsing the given text.
 	 */
 	public static org.emftext.refactoring.tests.properties.PropertyModel getResourceContent(String text) {
-		Resource resource = getResource(text);
+		return (org.emftext.refactoring.tests.properties.PropertyModel) getResourceContent(text, null);
+	}
+	
+	/**
+	 * Returns the root element after parsing the given text assuming the specified
+	 * EClass as start rule.
+	 */
+	public static EObject getResourceContent(String text, EClass startEClass) {
+		Map<Object, Object> loadOptions = new LinkedHashMap<Object, Object>();
+		
+		if (startEClass != null) {
+			loadOptions.put(org.emftext.refactoring.tests.properties.resource.testproperties.ITestpropertiesOptions.RESOURCE_CONTENT_TYPE, startEClass);
+		}
+		
+		Resource resource = getResource(text.getBytes(), new ResourceSetImpl(), loadOptions);
+		
 		if (resource == null) {
 			return null;
 		}

@@ -10,12 +10,17 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 
 /**
+ * <p>
  * An <code>IContextDependentURIFragment</code> points at an element referenced
  * from another element through an <code>identifier</code>. In contrast to a
  * normal EMF URI fragment (<code>URI.fragment</code>), which is a String that can
  * be resolved to an element within a <code>Resource</code>, the
  * <code>identifier</code> of a <code>IContextDependentURIFragment</code> does not
  * have to be globally unique.
+ * </p>
+ * <p>
+ * <p>
+ * </p>
  * <p>
  * An <code>IContextDependentURIFragment</code> is registered a
  * <code>ITextResource</code> for a proxy for which it defines the URI
@@ -23,6 +28,7 @@ import org.eclipse.emf.ecore.EReference;
  * the<code>IContextDependentURIFragment.resolve()</code> instead of the
  * normal<code>URI.fragment</code>-based resolving when
  * an<code>IContextDependentURIFragment.resolve()</code> is available.
+ * </p>
  * 
  * @param <ReferenceType> the type of the reference that can be resolved by this
  * fragment
@@ -68,7 +74,9 @@ public interface ITestpropertiesContextDependentURIFragment<ReferenceType extend
 	public int getPositionInReference();
 	
 	/**
+	 * <p>
 	 * Resolves the proxy to the real element(s) using context information.
+	 * </p>
 	 * 
 	 * @return result of resolving process
 	 */

@@ -6,6 +6,7 @@
  */
 package org.emftext.refactoring.tests.properties.resource.testproperties.grammar;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -15,7 +16,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
  */
 public class TestpropertiesEnumerationTerminal extends org.emftext.refactoring.tests.properties.resource.testproperties.grammar.TestpropertiesTerminal {
 	
-	private java.util.Map<String, String> mapping = new java.util.LinkedHashMap<String, String>();
+	private Map<String, String> mapping = new LinkedHashMap<String, String>();
 	
 	public TestpropertiesEnumerationTerminal(EStructuralFeature attribute, String[] literalMappings, org.emftext.refactoring.tests.properties.resource.testproperties.grammar.TestpropertiesCardinality cardinality, int mandatoryOccurrencesAfter) {
 		super(attribute, cardinality, mandatoryOccurrencesAfter);
