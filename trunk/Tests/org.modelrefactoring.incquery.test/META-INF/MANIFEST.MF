@@ -15,5 +15,10 @@ Require-Bundle: org.junit,
  org.emftext.language.java,
  org.emftext.language.java.resource,
  org.emftext.language.java.resource.java,
- org.eclipse.incquery.tooling.core
+ org.eclipse.xtext.xbase,
+ org.eclipse.emf.codegen.ecore,
+ org.emftext.commons.antlr3_4_0,
+ org.emftext.language.java.resource.bcel,
+ org.objectweb.asm
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Import-Package: org.apache.log4j
