@@ -1,6 +1,9 @@
 package org.emftext.refactoring.smell.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -26,15 +29,10 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.incquery.patternlanguage.emf.EMFPatternLanguageStandaloneSetup;
-import org.eclipse.incquery.patternlanguage.emf.EMFPatternLanguageStandaloneSetupGenerated;
-import org.eclipse.incquery.patternlanguage.emf.eMFPatternLanguage.EMFPatternLanguagePackage;
 import org.eclipse.incquery.patternlanguage.emf.eMFPatternLanguage.PackageImport;
 import org.eclipse.incquery.patternlanguage.emf.eMFPatternLanguage.PatternModel;
 import org.eclipse.incquery.patternlanguage.patternLanguage.Pattern;
-import org.eclipse.incquery.patternlanguage.patternLanguage.PatternLanguagePackage;
 import org.eclipse.uml2.uml.UMLPackage;
-import org.eclipse.xtext.resource.IResourceFactory;
-import org.eclipse.xtext.xbase.XbasePackage;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.resource.JaMoPPUtil;
 import org.emftext.language.refactoring.rolemapping.RolemappingPackage;
@@ -53,6 +51,7 @@ import org.emftext.refactoring.smell.calculation.CalculationModel;
 import org.emftext.refactoring.smell.calculation.CalculationPackage;
 import org.emftext.refactoring.smell.calculation.CalculationResult;
 import org.emftext.refactoring.smell.ecoresmells.EcoresmellsPackage;
+import org.emftext.refactoring.smell.registry.IQualitySmellModelInitializer;
 import org.emftext.refactoring.smell.registry.IQualitySmellRegistry;
 import org.emftext.refactoring.smell.registry.util.Pair;
 import org.emftext.refactoring.smell.registry.util.Triple;
@@ -62,7 +61,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.google.common.io.Files;
-import com.google.inject.Injector;
 
 @SuppressWarnings("restriction")
 public class FindSmellsTest {
@@ -71,8 +69,8 @@ public class FindSmellsTest {
 	private static final String CALC_MODEL_PATH		= "../../runtime-Evolution_WS/.metadata/.plugins/org.emftext.refactoring.smell.registry.ui/registered.calculation";
 	private static final String SMELLING_RESOURCES	= "config/smellingResources.config";
 
-	private static CalculationModel calculationModel;
-	private static QualitySmellModel smellModel;
+//	private static CalculationModel calculationModel;
+//	private static QualitySmellModel smellModel;
 	private static IQualitySmellRegistry registry;
 	private static List<Resource> smellingResources;
 	private static ResourceSetImpl resourceSet;
@@ -155,7 +153,6 @@ public class FindSmellsTest {
 		registerCalculationExtensionLanguages();
 		registerSmellingLanguages();
 		registerTestingRootAsPlatformRoot();
-		loadSmellModels();
 		initRegistry();
 		initSmellingResources();
 	}
@@ -233,34 +230,50 @@ public class FindSmellsTest {
 		}
 	}
 
-	private static void loadSmellModels() {
-		resourceSet = new ResourceSetImpl();
-		try {
-			File file = new File(CALC_MODEL_PATH).getCanonicalFile();
-			URI uri = URI.createFileURI(file.getAbsolutePath());
-			Resource resource = resourceSet.getResource(uri, true);
-			assertNotNull("Calculation Resource mustn't be null", resource);
-			calculationModel = (CalculationModel) resource.getContents().get(0);
-			assertNotNull("Calculation Model mustn't be null", calculationModel);
-			file = new File(SMELL_MODEL_PATH).getCanonicalFile();
-			uri = URI.createFileURI(file.getAbsolutePath());
-			resource = resourceSet.getResource(uri, true);
-			assertNotNull("Smell Resource mustn't be null", resource);
-			smellModel = (QualitySmellModel) resource.getContents().get(0);
-			assertNotNull("Smell Model mustn't be null", smellModel);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
 	private static void initRegistry() {
+		resourceSet = new ResourceSetImpl();
 		registry = IQualitySmellRegistry.INSTANCE;
+		IQualitySmellModelInitializer initializer = new IQualitySmellModelInitializer() {
+			
+			private CalculationModel calculationModel;
+			private QualitySmellModel smellModel;
+
+			@Override
+			public void initialize() {
+				try {
+					File file = new File(CALC_MODEL_PATH).getCanonicalFile();
+					URI uri = URI.createFileURI(file.getAbsolutePath());
+					Resource resource = resourceSet.getResource(uri, true);
+					assertNotNull("Calculation Resource mustn't be null", resource);
+					calculationModel = (CalculationModel) resource.getContents().get(0);
+					assertNotNull("Calculation Model mustn't be null", calculationModel);
+					file = new File(SMELL_MODEL_PATH).getCanonicalFile();
+					uri = URI.createFileURI(file.getAbsolutePath());
+					resource = resourceSet.getResource(uri, true);
+					assertNotNull("Smell Resource mustn't be null", resource);
+					smellModel = (QualitySmellModel) resource.getContents().get(0);
+					assertNotNull("Smell Model mustn't be null", smellModel);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			@Override
+			public QualitySmellModel getQualitySmellModel() {
+				return smellModel;
+			}
+			
+			@Override
+			public CalculationModel getCalculationModel() {
+				return calculationModel;
+			}
+		};
+		registry.setInitializer(initializer);
 		// to test all qualities they must be activated
-		List<Quality> qualities = smellModel.getQualities();
+		List<Quality> qualities = registry.getQualitySmellModel().getQualities();
 		for (Quality quality : qualities) {
 			quality.setActive(true);
 		}
-		registry.initialize(smellModel, calculationModel);
 	}
 
 	private static void initSmellingResources() {
