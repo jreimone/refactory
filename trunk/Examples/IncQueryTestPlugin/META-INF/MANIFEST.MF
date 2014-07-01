@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: IncQueryTestPlugin
+Bundle-SymbolicName: IncQueryTestPlugin;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: incquerytestplugin.Activator
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.ui,
+ org.eclipse.emf.ecore,
+ org.emftext.language.java,
+ org.eclipse.incquery.patternlanguage.emf;bundle-version="0.8.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
