@@ -7,9 +7,11 @@
    <extension
          id="id1"
          point="org.eclipse.e4.workbench.model">
+      <!--
       <fragment
             uri="fragment.e4xmi">
       </fragment>
+      -->
       <processor
             beforefragment="true"
             class="org.emftext.refactoring.smell.registry.ModelRegistration">

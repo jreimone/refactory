@@ -11,6 +11,8 @@ import org.eclipse.core.databinding.observable.Realm;
 import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.core.databinding.observable.map.IObservableMap;
 import org.eclipse.core.databinding.property.Properties;
+import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -46,6 +48,7 @@ import org.eclipse.ui.IWorkbenchPreferencePage;
 import org.emftext.refactoring.smell.ConcreteQualitySmell;
 import org.emftext.refactoring.smell.QualitySmellModel;
 import org.emftext.refactoring.smell.SmellPackage;
+import org.emftext.refactoring.smell.registry.IQualitySmellRegistry;
 import org.emftext.refactoring.smell.wizard.CalculationsWithRolemappingPage;
 import org.emftext.refactoring.smell.wizard.NewConcreteSmellWizard;
 import org.osgi.framework.BundleContext;
@@ -203,11 +206,13 @@ public class ConcreteSmellPreferencePage extends PreferencePage implements IWork
 	 */
 	@Override
 	public void init(IWorkbench workbench) {
-		BundleContext bundleContext = FrameworkUtil.getBundle(getClass()).getBundleContext();
-		ServiceTracker<QualitySmellModel,QualitySmellModel> tracker = new ServiceTracker<QualitySmellModel,QualitySmellModel>(bundleContext, QualitySmellModel.class, null);
-		tracker.open();
-		smellModel = tracker.getService();
+//		BundleContext bundleContext = FrameworkUtil.getBundle(getClass()).getBundleContext();
+//		ServiceTracker<QualitySmellModel,QualitySmellModel> tracker = new ServiceTracker<QualitySmellModel,QualitySmellModel>(bundleContext, QualitySmellModel.class, null);
+//		tracker.open();
+//		smellModel = tracker.getService();
+		smellModel = IQualitySmellRegistry.INSTANCE.getQualitySmellModel();
 	}
+	
 	protected DataBindingContext initDataBindings() {
 		DataBindingContext bindingContext = new DataBindingContext();
 		//
