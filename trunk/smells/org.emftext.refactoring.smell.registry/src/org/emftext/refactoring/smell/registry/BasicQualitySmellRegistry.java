@@ -17,9 +17,6 @@ import org.emftext.refactoring.smell.calculation.CalculationResult;
 import org.emftext.refactoring.smell.calculation.Monotonicity;
 import org.emftext.refactoring.smell.registry.util.Pair;
 import org.emftext.refactoring.smell.registry.util.Triple;
-import org.osgi.framework.BundleContext;
-import org.osgi.framework.FrameworkUtil;
-import org.osgi.util.tracker.ServiceTracker;
 
 import com.google.common.collect.Lists;
 
@@ -27,27 +24,32 @@ public class BasicQualitySmellRegistry implements IQualitySmellRegistry {
 
 	private QualitySmellModel smellModel;
 	private CalculationModel calculationModel;
+	private IQualitySmellModelInitializer initializer;
 
 	protected BasicQualitySmellRegistry(){ }
 
-	private void initQualitySmellModel() {
-		BundleContext bundleContext = FrameworkUtil.getBundle(getClass()).getBundleContext();
-		ServiceTracker<QualitySmellModel,QualitySmellModel> tracker = new ServiceTracker<QualitySmellModel,QualitySmellModel>(bundleContext, QualitySmellModel.class, null);
-		tracker.open();
-		smellModel = tracker.getService();
-	}
-
-	private void initCalculationModel() {
-		BundleContext bundleContext = FrameworkUtil.getBundle(getClass()).getBundleContext();
-		ServiceTracker<CalculationModel,CalculationModel> tracker = new ServiceTracker<CalculationModel,CalculationModel>(bundleContext, CalculationModel.class, null);
-		tracker.open();
-		calculationModel = tracker.getService();
-	}
+//	private void initQualitySmellModelOSGi() {
+//		BundleContext bundleContext = FrameworkUtil.getBundle(getClass()).getBundleContext();
+//		ServiceTracker<QualitySmellModel,QualitySmellModel> tracker = new ServiceTracker<QualitySmellModel,QualitySmellModel>(bundleContext, QualitySmellModel.class, null);
+//		tracker.open();
+//		smellModel = tracker.getService();
+//	}
+//
+//	private void initCalculationModelOSGi() {
+//		BundleContext bundleContext = FrameworkUtil.getBundle(getClass()).getBundleContext();
+//		ServiceTracker<CalculationModel,CalculationModel> tracker = new ServiceTracker<CalculationModel,CalculationModel>(bundleContext, CalculationModel.class, null);
+//		tracker.open();
+//		calculationModel = tracker.getService();
+//	}
 
 	@Override
 	public QualitySmellModel getQualitySmellModel() {
 		if(smellModel == null){
-			initQualitySmellModel();
+//			initQualitySmellModelOSGi();
+			if(initializer != null){
+				initializer.initialize();
+				smellModel = initializer.getQualitySmellModel();
+			}
 		}
 		return smellModel;
 	}
@@ -55,7 +57,11 @@ public class BasicQualitySmellRegistry implements IQualitySmellRegistry {
 	@Override
 	public CalculationModel getCalculationModel() {
 		if(calculationModel == null){
-			initCalculationModel();
+//			initCalculationModelOSGi();
+			if(initializer != null){
+				initializer.initialize();
+				calculationModel = initializer.getCalculationModel();
+			}
 		}
 		return calculationModel;
 	}
@@ -138,15 +144,20 @@ public class BasicQualitySmellRegistry implements IQualitySmellRegistry {
 		return calculations;
 	}
 
-	@Override
-	public void initialize(QualitySmellModel smellModel, CalculationModel calculationModel) {
-		if(smellModel != null){
-			this.smellModel = smellModel;
-		}
-		if(calculationModel != null){
-			this.calculationModel = calculationModel;
-		}
+//	@Override
+//	public void initialize(QualitySmellModel smellModel, CalculationModel calculationModel) {
+//		if(smellModel != null){
+//			this.smellModel = smellModel;
+//		}
+//		if(calculationModel != null){
+//			this.calculationModel = calculationModel;
+//		}
+//
+//	}
 
+	@Override
+	public void setInitializer(IQualitySmellModelInitializer initializer) {
+		this.initializer = initializer;
 	}
 
 }

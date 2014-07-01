@@ -5,8 +5,6 @@ Bundle-SymbolicName: org.emftext.refactoring.smell.registry
 Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.emftext.refactoring.smell,
- org.emftext.refactoring.smell.calculation,
- org.eclipse.osgi,
- com.google.guava
+ org.emftext.refactoring.smell.calculation
 Export-Package: org.emftext.refactoring.smell.registry,
  org.emftext.refactoring.smell.registry.util

@@ -84,10 +84,11 @@ public class QualitiesView extends ViewPart {
 	}
 
 	private void init() {
-		BundleContext bundleContext = FrameworkUtil.getBundle(getClass()).getBundleContext();
-		ServiceTracker<QualitySmellModel,QualitySmellModel> tracker = new ServiceTracker<QualitySmellModel,QualitySmellModel>(bundleContext, QualitySmellModel.class, null);
-		tracker.open();
-		smellModel = tracker.getService();
+//		BundleContext bundleContext = FrameworkUtil.getBundle(getClass()).getBundleContext();
+//		ServiceTracker<QualitySmellModel,QualitySmellModel> tracker = new ServiceTracker<QualitySmellModel,QualitySmellModel>(bundleContext, QualitySmellModel.class, null);
+//		tracker.open();
+//		smellModel = tracker.getService();
+		smellModel = IQualitySmellRegistry.INSTANCE.getQualitySmellModel();
 		
 		smellingMetamodels = new HashSet<EPackage>();
 		concreteSmellsForSelectedQualityAndMetamodel = new ArrayList<ConcreteQualitySmell>();
