@@ -28,6 +28,13 @@ public interface IRefactoringSpecificationRegistry {
 	public static final IRefactoringSpecificationRegistry INSTANCE = new BasicRefactoringSpecificationRegistry();
 	
 	/**
+	 * Sets the initializer for preparing the registry initially.
+	 * 
+	 * @param initializer
+	 */
+	public void setInitializer(IRefactoringSpecificationRegistryInitializer initializer);
+	
+	/**
 	 * Returns the {@link RefactoringSpecification refspec} for the given {@link RoleModel}
 	 * @param roleModel
 	 * @return
