@@ -18,16 +18,16 @@ package org.emftext.refactoring.registry.refactoringspecification.impl;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
 import org.emftext.language.refactoring.roles.RoleModel;
-import org.emftext.refactoring.registry.refactoringspecification.IRefactoringSpecificationExtensionPoint;
 import org.emftext.refactoring.registry.refactoringspecification.IRefactoringSpecificationRegistry;
+import org.emftext.refactoring.registry.refactoringspecification.IRefactoringSpecificationRegistryInitializer;
 import org.emftext.refactoring.registry.refactoringspecification.IRefactoringSpecificationRegistryListener;
 import org.emftext.refactoring.registry.refactoringspecification.exceptions.RefSpecAlreadyRegisteredException;
 import org.emftext.refactoring.registry.rolemodel.IRoleModelRegistry;
@@ -37,11 +37,15 @@ public class BasicRefactoringSpecificationRegistry implements IRefactoringSpecif
 
 	private Map<RoleModel, RefactoringSpecification> refSpecMap;
 	private Set<IRefactoringSpecificationRegistryListener> listeners;
+	private IRefactoringSpecificationRegistryInitializer initializer;
 
 	public BasicRefactoringSpecificationRegistry() {
-		refSpecMap = new HashMap<RoleModel, RefactoringSpecification>();
 		listeners = new HashSet<IRefactoringSpecificationRegistryListener>();
-		collectRegisteredRefSpecs();
+	}
+
+	@Override
+	public void setInitializer(IRefactoringSpecificationRegistryInitializer initializer) {
+		this.initializer = initializer;
 	}
 
 	public Collection<RefactoringSpecification> getAllRefSpecs() {
@@ -59,7 +63,24 @@ public class BasicRefactoringSpecificationRegistry implements IRefactoringSpecif
 	}
 
 	private Map<RoleModel, RefactoringSpecification> getRefSpecMap() {
+		if(refSpecMap == null){
+			refSpecMap = new HashMap<RoleModel, RefactoringSpecification>();
+			if(initializer != null){
+				List<RefactoringSpecification> refSpecs = initializer.initialize();
+				registerInitializedRefSpecs(refSpecs);
+			}
+		}
 		return refSpecMap;
+	}
+
+	private void registerInitializedRefSpecs(List<RefactoringSpecification> refSpecs) {
+		for (RefactoringSpecification refSpec : refSpecs) {
+			try {
+				registerRefSpec(refSpec);
+			} catch (RefSpecAlreadyRegisteredException e) {
+				RegistryUtil.log(e.getMessage(), IStatus.ERROR);
+			}
+		}
 	}
 
 	public RoleModel registerRefSpec(RefactoringSpecification refSpec) throws RefSpecAlreadyRegisteredException {
@@ -79,21 +100,6 @@ public class BasicRefactoringSpecificationRegistry implements IRefactoringSpecif
 			return roleModel;
 		}
 		return null;
-	}
-
-	private void collectRegisteredRefSpecs() {
-		Map<RefactoringSpecification, IConfigurationElement> models = RegistryUtil
-				.collectRegisteredResources(
-						IRefactoringSpecificationExtensionPoint.ID,
-						IRefactoringSpecificationExtensionPoint.RESOURCE_ATTRIBUTE,
-						RefactoringSpecification.class);
-		for (RefactoringSpecification refSpec : models.keySet()) {
-			try {
-				registerRefSpec(refSpec);
-			} catch (RefSpecAlreadyRegisteredException e) {
-				RegistryUtil.log(e.getMessage(), IStatus.ERROR);
-			}
-		}
 	}
 
 	public RefactoringSpecification unregisterRefSpec(RefactoringSpecification refSpec) {

@@ -30,6 +30,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.e4.core.di.annotations.Execute;
 import org.emftext.language.refactoring.rolemapping.RoleMapping;
+import org.emftext.refactoring.initialization.RefactoringSpecificationRegistryInitializer;
 import org.emftext.refactoring.initialization.RoleModelRegistryInitializer;
 import org.emftext.refactoring.ltk.ModelRefactoringDescriptor;
 import org.emftext.refactoring.registry.refactoringspecification.IRefactoringSpecificationRegistry;
@@ -61,6 +62,7 @@ public class StartUpRegistrations {
 		roleModelRegistry.setInitializer(new RoleModelRegistryInitializer());
 		RegistryUtil.log("Initialized Role Model registry on startup", IStatus.OK);
 		IRefactoringSpecificationRegistry refspecRegistry = IRefactoringSpecificationRegistry.INSTANCE;
+		refspecRegistry.setInitializer(new RefactoringSpecificationRegistryInitializer());
 		RegistryUtil.log("Initialized Refactoring Specification registry on startup", IStatus.OK);
 		IRoleMappingRegistry registry = IRoleMappingRegistry.INSTANCE;
 		RegistryUtil.log("Initialized Role Mapping registry on startup", IStatus.OK);
