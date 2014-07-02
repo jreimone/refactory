@@ -1,8 +1,8 @@
 <associateSites>
-	<associateSite label="Kepler" 
-		url="http://download.eclipse.org/releases/kepler"/>
+	<associateSite label="Eclipse Luna" 
+		url="http://download.eclipse.org/releases/luna/"/>
 	<associateSite label="The Eclipse Project Updates" 
-		url="http://download.eclipse.org/eclipse/updates/4.3"/>
+		url="http://download.eclipse.org/eclipse/updates/4.4"/>
 	<!-- needed for EMFText Access Plugin 1.4.2 -->
 	<associateSite label="EMFText Trunk"
 		url="http://www.emftext.org/update_trunk/"/>	
@@ -11,10 +11,10 @@
 		url="http://www.reuseware.org/update_trunk/"/>
 	<associateSite label="Dresden OCL"
 		url="http://www.dresden-ocl.org/update/"/>
-	<associateSite label="EMF-IncQuery CI build"
-		url="https://hudson.eclipse.org/incquery/job/incquery-master/lastSuccessfulBuild/artifact/update-site/"/>
 	<associateSite label="Eclipse Orbit R20140114142710"
 		url="http://download.eclipse.org/tools/orbit/downloads/drops/R20140525021250/repository/"/>	
+	<associateSite label="EMF-IncQuery CI build"
+		url="https://hudson.eclipse.org/incquery/job/incquery-master/lastSuccessfulBuild/artifact/update-site/"/>
 	<!-- 
 	<associateSite label="EMF-IncQuery Milestones"
 		url="http://download.eclipse.org/incquery/updates/milestone"/>
