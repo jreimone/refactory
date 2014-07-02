@@ -18,41 +18,60 @@ package org.emftext.refactoring.registry.rolemodel.impl;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IStatus;
 import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.refactoring.registry.rolemodel.Activator;
-import org.emftext.refactoring.registry.rolemodel.IRoleModelExtensionPoint;
 import org.emftext.refactoring.registry.rolemodel.IRoleModelRegistry;
+import org.emftext.refactoring.registry.rolemodel.IRoleModelRegistryInitializer;
 import org.emftext.refactoring.registry.rolemodel.IRoleModelRegistryListener;
 import org.emftext.refactoring.registry.rolemodel.exceptions.RoleModelAlreadyRegisteredException;
-import org.emftext.refactoring.util.RegistryUtil;
 
 public class BasicRoleModelRegistry implements IRoleModelRegistry {
 
 	private Map<String, RoleModel> roleModelNameMap;
 	private Set<IRoleModelRegistryListener> listeners;
+	private IRoleModelRegistryInitializer initializer;
 
 	public BasicRoleModelRegistry(){
-		roleModelNameMap = new HashMap<String, RoleModel>();
 		listeners = new HashSet<IRoleModelRegistryListener>();
-		collectRegisteredRoleModels();
+	}
+
+	@Override
+	public void setInitializer(IRoleModelRegistryInitializer initializer) {
+		this.initializer = initializer;
 	}
 
 	public Collection<RoleModel> getAllRegisteredRoleModels() {
-		return roleModelNameMap.values();
+		return getRoleModelNameMap().values();
 	}
 
 	public RoleModel getRoleModelByName(String name) {
 		return getRoleModelNameMap().get(name);
 	}
 
-
 	public Map<String, RoleModel> getRoleModelNameMap() {
+		if(roleModelNameMap == null){
+			roleModelNameMap = new HashMap<String, RoleModel>();
+			if(initializer != null){
+				List<RoleModel> roleModels = initializer.initialize();
+				registerInitializedRoleModels(roleModels);
+			}
+		}
 		return roleModelNameMap;
+	}
+
+	private void registerInitializedRoleModels(List<RoleModel> roleModels) {
+		for (RoleModel roleModel : roleModels) {
+			try {
+				registerRoleModel(roleModel);
+			} catch (RoleModelAlreadyRegisteredException e) {
+				Activator.getDefault().log(e.getMessage(), IStatus.ERROR);
+			}
+		}
 	}
 
 	public void registerRoleModel(RoleModel roleModel) throws RoleModelAlreadyRegisteredException {
@@ -64,19 +83,6 @@ public class BasicRoleModelRegistry implements IRoleModelRegistry {
 		getRoleModelNameMap().put(name, roleModel);
 		for (IRoleModelRegistryListener listener : listeners) {
 			listener.roleModelAdded(roleModel);
-		}
-	}
-
-	private void collectRegisteredRoleModels(){
-		Map<RoleModel, IConfigurationElement> models = RegistryUtil.collectRegisteredResources(IRoleModelExtensionPoint.ID
-				, IRoleModelExtensionPoint.RESOURCE_ATTRIBUTE
-				, RoleModel.class);
-		for (RoleModel roleModel : models.keySet()) {
-			try {
-				registerRoleModel(roleModel);
-			} catch (RoleModelAlreadyRegisteredException e) {
-				Activator.getDefault().log(e.getMessage(), IStatus.ERROR);
-			}
 		}
 	}
 
