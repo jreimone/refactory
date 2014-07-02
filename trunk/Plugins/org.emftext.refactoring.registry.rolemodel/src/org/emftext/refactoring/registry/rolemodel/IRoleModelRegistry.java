@@ -32,13 +32,12 @@ public interface IRoleModelRegistry {
 
 	public static IRoleModelRegistry INSTANCE = new BasicRoleModelRegistry();
 	
-	
-//	/**
-//	 * Returns the map containing the namespace URI of a {@link RoleModel} as key and the {@link RoleModel} itself as value.
-//	 * 
-//	 * @return
-//	 */
-//	public Map<String, RoleModel> getRoleModelUriMap();
+	/**
+	 * Sets the initializer for preparing the registry initially.
+	 * 
+	 * @param initializer
+	 */
+	public void setInitializer(IRoleModelRegistryInitializer initializer);
 	
 	/**
 	 * Returns a list of all registered {@link RoleModel}s.
