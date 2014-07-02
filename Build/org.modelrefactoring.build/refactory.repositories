@@ -43,25 +43,25 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/compare/do
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/compare/downloads/drops/1.3.2/R20120918-1125/emf-compare-update-1.3.2.zip!plugins/org.eclipse.emf.compare.match_1.3.2.v20120918-1125.jar
 
 // IncQuery
-get:https://hudson.eclipse.org/incquery/job/incquery-master/lastSuccessfulBuild/artifact/update-site/plugins/org.eclipse.incquery.patternlanguage.emf_0.8.0.201406250831.jar 
-get:https://hudson.eclipse.org/incquery/job/incquery-master/lastSuccessfulBuild/artifact/update-site/plugins/org.eclipse.incquery.patternlanguage_0.8.0.201406250831.jar
-get:https://hudson.eclipse.org/incquery/job/incquery-master/lastSuccessfulBuild/artifact/update-site/plugins/org.eclipse.incquery.runtime_0.8.0.201406250831.jar
-get:https://hudson.eclipse.org/incquery/job/incquery-master/lastSuccessfulBuild/artifact/update-site/plugins/org.eclipse.incquery.runtime.rete_0.8.0.201406250831.jar
-get:https://hudson.eclipse.org/incquery/job/incquery-master/lastSuccessfulBuild/artifact/update-site/plugins/org.eclipse.incquery.runtime.rete.recipes_0.8.0.201406250831.jar
-get:https://hudson.eclipse.org/incquery/job/incquery-master/lastSuccessfulBuild/artifact/update-site/plugins/org.eclipse.incquery.runtime.base_0.8.0.201406250831.jar
-get:https://hudson.eclipse.org/incquery/job/incquery-master/lastSuccessfulBuild/artifact/update-site/plugins/org.eclipse.incquery.runtime.base.itc_0.8.0.201406250831.jar
-get:https://hudson.eclipse.org/incquery/job/incquery-master/lastSuccessfulBuild/artifact/update-site/plugins/org.eclipse.incquery.runtime.evm_0.8.0.201406250831.jar
-get:https://hudson.eclipse.org/incquery/job/incquery-master/lastSuccessfulBuild/artifact/update-site/plugins/org.eclipse.incquery.runtime.matchers_0.8.0.201406250831.jar
-get:https://hudson.eclipse.org/incquery/job/incquery-master/lastSuccessfulBuild/artifact/update-site/plugins/org.eclipse.incquery.tooling.core_0.8.0.201406250831.jar
-get:https://hudson.eclipse.org/incquery/job/incquery-master/lastSuccessfulBuild/artifact/update-site/plugins/org.eclipse.incquery.tooling.ui_0.8.0.201406250831.jar
-get:https://hudson.eclipse.org/incquery/job/incquery-master/lastSuccessfulBuild/artifact/update-site/plugins/org.eclipse.incquery.patternlanguage.ui_0.8.0.201406250831.jar
-get:https://hudson.eclipse.org/incquery/job/incquery-master/lastSuccessfulBuild/artifact/update-site/plugins/org.eclipse.incquery.patternlanguage.emf.ui_0.8.0.201406250831.jar
-get:https://hudson.eclipse.org/incquery/job/incquery-master/lastSuccessfulBuild/artifact/update-site/plugins/org.eclipse.incquery.tooling.generator.sampleui_0.8.0.201406250831.jar
-get:https://hudson.eclipse.org/incquery/job/incquery-master/lastSuccessfulBuild/artifact/update-site/plugins/org.eclipse.incquery.tooling.generator.model_0.8.0.201406250831.jar
-get:https://hudson.eclipse.org/incquery/job/incquery-master/lastSuccessfulBuild/artifact/update-site/plugins/org.eclipse.incquery.tooling.generator.model.ui_0.8.0.201406250831.jar
-get:https://hudson.eclipse.org/incquery/job/incquery-master/lastSuccessfulBuild/artifact/update-site/plugins/org.eclipse.incquery.databinding.runtime_0.8.0.201406250831.jar
-get:https://hudson.eclipse.org/incquery/job/incquery-master/lastSuccessfulBuild/artifact/update-site/features/org.eclipse.incquery.runtime.feature_0.8.0.201406250831.jar
-get:https://hudson.eclipse.org/incquery/job/incquery-master/lastSuccessfulBuild/artifact/update-site/features/org.eclipse.incquery.sdk.feature_0.8.0.201406250831.jar
+get:https://hudson.eclipse.org/incquery/job/incquery-master/629/artifact/update-site/plugins/org.eclipse.incquery.patternlanguage.emf_0.8.0.201407012001.jar 
+get:https://hudson.eclipse.org/incquery/job/incquery-master/629/artifact/update-site/plugins/org.eclipse.incquery.patternlanguage_0.8.0.201407012001.jar
+get:https://hudson.eclipse.org/incquery/job/incquery-master/629/artifact/update-site/plugins/org.eclipse.incquery.runtime_0.8.0.201407012001.jar
+get:https://hudson.eclipse.org/incquery/job/incquery-master/629/artifact/update-site/plugins/org.eclipse.incquery.runtime.rete_0.8.0.201407012001.jar
+get:https://hudson.eclipse.org/incquery/job/incquery-master/629/artifact/update-site/plugins/org.eclipse.incquery.runtime.rete.recipes_0.8.0.201407012001.jar
+get:https://hudson.eclipse.org/incquery/job/incquery-master/629/artifact/update-site/plugins/org.eclipse.incquery.runtime.base_0.8.0.201407012001.jar
+get:https://hudson.eclipse.org/incquery/job/incquery-master/629/artifact/update-site/plugins/org.eclipse.incquery.runtime.base.itc_0.8.0.201407012001.jar
+get:https://hudson.eclipse.org/incquery/job/incquery-master/629/artifact/update-site/plugins/org.eclipse.incquery.runtime.evm_0.8.0.201407012001.jar
+get:https://hudson.eclipse.org/incquery/job/incquery-master/629/artifact/update-site/plugins/org.eclipse.incquery.runtime.matchers_0.8.0.201407012001.jar
+get:https://hudson.eclipse.org/incquery/job/incquery-master/629/artifact/update-site/plugins/org.eclipse.incquery.tooling.core_0.8.0.201407012001.jar
+get:https://hudson.eclipse.org/incquery/job/incquery-master/629/artifact/update-site/plugins/org.eclipse.incquery.tooling.ui_0.8.0.201407012001.jar
+get:https://hudson.eclipse.org/incquery/job/incquery-master/629/artifact/update-site/plugins/org.eclipse.incquery.patternlanguage.ui_0.8.0.201407012001.jar
+get:https://hudson.eclipse.org/incquery/job/incquery-master/629/artifact/update-site/plugins/org.eclipse.incquery.patternlanguage.emf.ui_0.8.0.201407012001.jar
+get:https://hudson.eclipse.org/incquery/job/incquery-master/629/artifact/update-site/plugins/org.eclipse.incquery.tooling.generator.sampleui_0.8.0.201407012001.jar
+get:https://hudson.eclipse.org/incquery/job/incquery-master/629/artifact/update-site/plugins/org.eclipse.incquery.tooling.generator.model_0.8.0.201407012001.jar
+get:https://hudson.eclipse.org/incquery/job/incquery-master/629/artifact/update-site/plugins/org.eclipse.incquery.tooling.generator.model.ui_0.8.0.201407012001.jar
+get:https://hudson.eclipse.org/incquery/job/incquery-master/629/artifact/update-site/plugins/org.eclipse.incquery.databinding.runtime_0.8.0.201407012001.jar
+get:https://hudson.eclipse.org/incquery/job/incquery-master/629/artifact/update-site/features/org.eclipse.incquery.runtime.feature_0.8.0.201407012001.jar
+get:https://hudson.eclipse.org/incquery/job/incquery-master/629/artifact/update-site/features/org.eclipse.incquery.sdk.feature_0.8.0.201407012001.jar
 // and ANTLR is needed
 //get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20140525021250/repository/plugins/org.antlr.runtime_3.2.0.v201101311130.jar
 
