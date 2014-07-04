@@ -29,6 +29,8 @@ import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.e4.core.di.annotations.Execute;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.ui.PlatformUI;
 import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.refactoring.initialization.RefactoringSpecificationRegistryInitializer;
 import org.emftext.refactoring.initialization.RoleModelRegistryInitializer;
@@ -46,18 +48,33 @@ public class StartUpRegistrations {
 	private static final String REFACTORING_ID_PLACEHOLDER	= "REFACTORING_ID_PLACEHOLDER";
 	private static final String CONTRIBUTION	=
 			"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + 
-			"<?eclipse version=\"3.4\"?>\n" +
-			"<plugin>\n" + 
-			"\t<extension point=\"org.eclipse.ltk.core.refactoring.refactoringContributions\">\n" +
-			"\t\t	<contribution\n" +
-			"\t\t\t		class=\"org.emftext.refactoring.ltk.GenericRefactoringContribution\"\n"+ 
-			"\t\t\t		id=\"" + REFACTORING_ID_PLACEHOLDER + "\">\n" +
-			"\t\t	</contribution>\n" +
-			"\t</extension>\n" + 
-			"</plugin>";
-	
+					"<?eclipse version=\"3.4\"?>\n" +
+					"<plugin>\n" + 
+					"\t<extension point=\"org.eclipse.ltk.core.refactoring.refactoringContributions\">\n" +
+					"\t\t	<contribution\n" +
+					"\t\t\t		class=\"org.emftext.refactoring.ltk.GenericRefactoringContribution\"\n"+ 
+					"\t\t\t		id=\"" + REFACTORING_ID_PLACEHOLDER + "\">\n" +
+					"\t\t	</contribution>\n" +
+					"\t</extension>\n" + 
+					"</plugin>";
+
 	@Execute
 	public void earlyStartup() {
+		//		IWorkspace workspace = ResourcesPlugin.getWorkspace();
+		Display.getDefault().asyncExec(new Runnable(){
+			public void run() {
+				if (PlatformUI.isWorkbenchRunning()) {
+					// do what needs to be done
+					register();
+				} else {
+					// wait 0.5 seconds and then check again
+					Display.getDefault().timerExec(500, this);
+				}
+			}
+		});
+	}
+
+	private void register(){
 		IRoleModelRegistry roleModelRegistry = IRoleModelRegistry.INSTANCE;
 		roleModelRegistry.setInitializer(new RoleModelRegistryInitializer());
 		RegistryUtil.log("Initialized Role Model registry on startup", IStatus.OK);
@@ -66,7 +83,7 @@ public class StartUpRegistrations {
 		RegistryUtil.log("Initialized Refactoring Specification registry on startup", IStatus.OK);
 		IRoleMappingRegistry registry = IRoleMappingRegistry.INSTANCE;
 		RegistryUtil.log("Initialized Role Mapping registry on startup", IStatus.OK);
-		
+
 		// register a refactoring contribution for each role mapping so that each model refactoring appears in 
 		// the refactoring history and can be reexecuted after restarting Eclipse
 		registerRefactoringContributionForRoleMappings();
@@ -92,7 +109,7 @@ public class StartUpRegistrations {
 			}
 		}
 	}
-	
+
 	private Set<RoleMapping> getRoleMappings(){
 		Set<RoleMapping> roleMappings = new HashSet<RoleMapping>();
 		Map<String, Map<String, RoleMapping>> roleMappingsMap = IRoleMappingRegistry.INSTANCE.getRoleMappingsMap();
