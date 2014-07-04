@@ -392,7 +392,7 @@ public class CalculationPackageImpl extends EPackageImpl implements CalculationP
 	 * @generated
 	 */
 	protected void createDeAnnotations() {
-		String source = "de.devboost.emfcustomize.EcoreModelRefactorer";				
+		String source = "de.devboost.emfcustomize.EcoreModelRefactorer";	
 		addAnnotation
 		  (structureEClass.getEOperations().get(0), 
 		   source, 
