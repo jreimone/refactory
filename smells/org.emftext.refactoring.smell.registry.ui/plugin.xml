@@ -85,7 +85,7 @@
             textPreferenceKey="smell.occurrenceIndication"
             textPreferenceValue="true"
             textStylePreferenceKey="smell.occurrenceTextStyle"
-            textStylePreferenceValue="SQUIGGLES"
+            textStylePreferenceValue="DASHED_BOX"
             verticalRulerPreferenceKey="smell.occurrenceIndicationInVerticalRuler"
             verticalRulerPreferenceValue="true">
 	  </specification>
