@@ -1,5 +1,5 @@
 site/vendor = Software Technology Group TU Dresden / DevBoost GmbH
-site/uploadPath = www.modelrefactoring.org:/srv/www_modelrefactoring.org/update_fix_IncQuery
+site/uploadPath = www.modelrefactoring.org:/srv/www_modelrefactoring.org/update_trunk
 site/usernameProperty = DROPSBOX_UPLOAD_USER
 site/passwordProperty = DROPSBOX_UPLOAD_PASS
 site/version = 0.9.3
