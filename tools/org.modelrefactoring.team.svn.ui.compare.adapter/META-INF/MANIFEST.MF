@@ -9,3 +9,4 @@ Require-Bundle: org.eclipse.equinox.registry,
  org.eclipse.team.core,
  org.eclipse.core.resources,
  org.eclipse.team.svn.core
+Export-Package: org.modelrefactoring.team.svn.ui.compare.adapter
