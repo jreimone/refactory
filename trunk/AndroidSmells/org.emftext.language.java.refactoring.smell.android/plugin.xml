@@ -21,6 +21,6 @@
     <postprocessor mapping_name="Remove toast statement from background task" nsUri="http://www.emftext.org/java" postprocessor="org.emftext.refactoring.languages.java.smell.android.refactorings.RemoveInterrupFromBackground"/>
     <postprocessor mapping_name="Replace exact with inexact AlarmManager" nsUri="http://www.emftext.org/java" postprocessor="org.emftext.refactoring.languages.java.smell.android.refactorings.SetInexactAlarmManager"/>
     <postprocessor mapping_name="Use unique generated id for tracking hardware id" nsUri="http://www.emftext.org/java" postprocessor="org.emftext.refactoring.languages.java.smell.android.refactorings.UseUUID"/>
-    <postprocessor mapping_name="org.emftext.language.java.refactoring.smell.android.postprocessor1" nsUri="http://www.emftext.org/java" postprocessor="org.emftext.language.java.refactoring.smell.android.RefactoringPostProcessor1"/>
+    <postprocessor mapping_name="Transform acquire statement to use timeout" nsUri="http://www.emftext.org/java" postprocessor="org.emftext.refactoring.languages.java.smell.android.refactorings.AcquireWakeLockWithTimeout"/>
   </extension>
 </plugin>
