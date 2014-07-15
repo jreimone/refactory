@@ -1,0 +1,10 @@
+ROLEMODELMAPPING FOR <http://www.emftext.org/java>
+
+/*
+	Replaces a for-loop iterating over a complete collection 
+	with an extended for-loop due to performance reasons.
+	See: http://www.modelrefactoring.org/smell_catalog/smells/slow_loop.html
+*/
+"Replace slow for loop with extended for loop" maps <SelectX> { 
+	 Selection := java.statements.ForLoop; 
+}
