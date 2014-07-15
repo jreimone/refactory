@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?><?eclipse version="3.4"?><plugin>
+  <extension point="org.eclipse.ui.commands">
+    <command id="org.modelrefactoring.incquery.withImport.command" name="Load Pattern with Java import"/>
+    <command
+          id="org.modelrefactoring.incquery.withoutImport.command"
+          name="Load Pattern without Java import">
+    </command>
+  </extension>
+  <extension point="org.eclipse.ui.handlers">
+    <handler class="org.modelrefactoring.incquery.fail.PatternWithJavaImportHandler" commandId="org.modelrefactoring.incquery.withImport.command"/>
+    <handler
+          class="org.modelrefactoring.incquery.fail.PatternWithoutJavaImportHandler"
+          commandId="org.modelrefactoring.incquery.withoutImport.command">
+    </handler>
+  </extension>
+  <extension
+        point="org.eclipse.ui.menus">
+     <!--
+     <menuContribution
+           allPopups="false"
+           locationURI="toolbar:org.eclipse.ui.main.toolbar">
+        <command
+              commandId="org.modelrefactoring.incquery.fail.loadPattern.command"
+              icon="icon/test.png"
+              label="Load Pattern with Java import"
+              style="push">
+        </command>
+     </menuContribution>
+     -->
+     <menuContribution
+           allPopups="false"
+           locationURI="menu:org.eclipse.ui.main.menu">
+        <command
+              commandId="org.modelrefactoring.incquery.withImport.command"
+              icon="icon/test.png"
+              label="Load Pattern with Java import"
+              style="push">
+        </command>
+     </menuContribution>
+     <menuContribution
+           allPopups="false"
+           locationURI="menu:org.eclipse.ui.main.menu">
+        <command
+              commandId="org.modelrefactoring.incquery.withoutImport.command"
+              icon="icon/test.png"
+              label="Load Pattern without Java import"
+              style="push">
+        </command>
+     </menuContribution>
+  </extension>
+</plugin>

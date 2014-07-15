@@ -1,0 +1,16 @@
+package org.modelrefactoring.incquery
+
+import "http://www.emftext.org/java/variables";
+import "http://www.emftext.org/java/statements";
+import "http://www.emftext.org/java/instantiations";
+import "http://www.emftext.org/java/literals";
+
+//import java ^java.math.BigInteger;
+
+pattern withoutJavaImport(loop : ForLoop) {
+	ForLoop.init(loop, localVariable);
+	LocalVariable.initialValue(localVariable, initValue);
+	// check that initial value is 0
+	DecimalIntegerLiteral.decimalValue(initValue, _value);
+//	check(new BigInteger("0").equals(value));
+}
