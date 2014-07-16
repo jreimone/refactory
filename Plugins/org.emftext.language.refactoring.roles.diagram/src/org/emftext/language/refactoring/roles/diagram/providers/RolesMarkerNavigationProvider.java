@@ -46,19 +46,25 @@ public class RolesMarkerNavigationProvider extends
 	 * @generated
 	 */
 	protected void doGotoMarker(IMarker marker) {
-		String elementId = marker.getAttribute(org.eclipse.gmf.runtime.common.core.resources.IMarker.ELEMENT_ID, null);
+		String elementId = marker
+				.getAttribute(
+						org.eclipse.gmf.runtime.common.core.resources.IMarker.ELEMENT_ID,
+						null);
 		if (elementId == null || !(getEditor() instanceof DiagramEditor)) {
 			return;
 		}
 		DiagramEditor editor = (DiagramEditor) getEditor();
-		Map editPartRegistry = editor.getDiagramGraphicalViewer().getEditPartRegistry();
-		EObject targetView = editor.getDiagram().eResource().getEObject(elementId);
+		Map editPartRegistry = editor.getDiagramGraphicalViewer()
+				.getEditPartRegistry();
+		EObject targetView = editor.getDiagram().eResource()
+				.getEObject(elementId);
 		if (targetView == null) {
 			return;
 		}
 		EditPart targetEditPart = (EditPart) editPartRegistry.get(targetView);
 		if (targetEditPart != null) {
-			RolesDiagramEditorUtil.selectElementsInDiagram(editor, Arrays.asList(new EditPart[] { targetEditPart }));
+			RolesDiagramEditorUtil.selectElementsInDiagram(editor,
+					Arrays.asList(new EditPart[] { targetEditPart }));
 		}
 	}
 
@@ -69,20 +75,24 @@ public class RolesMarkerNavigationProvider extends
 		try {
 			resource.deleteMarkers(MARKER_TYPE, true, IResource.DEPTH_ZERO);
 		} catch (CoreException e) {
-			RolesDiagramEditorPlugin.getInstance().logError("Failed to delete validation markers", e); //$NON-NLS-1$
+			RolesDiagramEditorPlugin.getInstance().logError(
+					"Failed to delete validation markers", e); //$NON-NLS-1$
 		}
 	}
 
 	/**
 	 * @generated
 	 */
-	public static IMarker addMarker(IFile file, String elementId, String location, String message, int statusSeverity) {
+	public static IMarker addMarker(IFile file, String elementId,
+			String location, String message, int statusSeverity) {
 		IMarker marker = null;
 		try {
 			marker = file.createMarker(MARKER_TYPE);
 			marker.setAttribute(IMarker.MESSAGE, message);
 			marker.setAttribute(IMarker.LOCATION, location);
-			marker.setAttribute(org.eclipse.gmf.runtime.common.ui.resources.IMarker.ELEMENT_ID, elementId);
+			marker.setAttribute(
+					org.eclipse.gmf.runtime.common.ui.resources.IMarker.ELEMENT_ID,
+					elementId);
 			int markerSeverity = IMarker.SEVERITY_INFO;
 			if (statusSeverity == IStatus.WARNING) {
 				markerSeverity = IMarker.SEVERITY_WARNING;
@@ -92,7 +102,8 @@ public class RolesMarkerNavigationProvider extends
 			}
 			marker.setAttribute(IMarker.SEVERITY, markerSeverity);
 		} catch (CoreException e) {
-			RolesDiagramEditorPlugin.getInstance().logError("Failed to create validation marker", e); //$NON-NLS-1$
+			RolesDiagramEditorPlugin.getInstance().logError(
+					"Failed to create validation marker", e); //$NON-NLS-1$
 		}
 		return marker;
 	}

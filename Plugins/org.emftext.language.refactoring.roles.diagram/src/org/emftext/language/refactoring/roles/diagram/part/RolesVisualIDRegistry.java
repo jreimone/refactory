@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.View;
+import org.eclipse.gmf.tooling.runtime.structure.DiagramStructure;
 import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.language.refactoring.roles.RolesPackage;
 import org.emftext.language.refactoring.roles.diagram.edit.parts.RoleAssociationEditPart;
@@ -62,7 +63,8 @@ public class RolesVisualIDRegistry {
 				return -1;
 			}
 		}
-		return org.emftext.language.refactoring.roles.diagram.part.RolesVisualIDRegistry.getVisualID(view.getType());
+		return org.emftext.language.refactoring.roles.diagram.part.RolesVisualIDRegistry
+				.getVisualID(view.getType());
 	}
 
 	/**
@@ -87,9 +89,11 @@ public class RolesVisualIDRegistry {
 		try {
 			return Integer.parseInt(type);
 		} catch (NumberFormatException e) {
-			if (Boolean.TRUE.toString().equalsIgnoreCase(Platform.getDebugOption(DEBUG_KEY))) {
-				RolesDiagramEditorPlugin.getInstance().logError("Unable to parse view type as a visualID number: "
-						+ type);
+			if (Boolean.TRUE.toString().equalsIgnoreCase(
+					Platform.getDebugOption(DEBUG_KEY))) {
+				RolesDiagramEditorPlugin.getInstance().logError(
+						"Unable to parse view type as a visualID number: "
+								+ type);
 			}
 		}
 		return -1;
@@ -109,7 +113,8 @@ public class RolesVisualIDRegistry {
 		if (domainElement == null) {
 			return -1;
 		}
-		if (RolesPackage.eINSTANCE.getRoleModel().isSuperTypeOf(domainElement.eClass())
+		if (RolesPackage.eINSTANCE.getRoleModel().isSuperTypeOf(
+				domainElement.eClass())
 				&& isDiagram((RoleModel) domainElement)) {
 			return RoleModelEditPart.VISUAL_ID;
 		}
@@ -123,13 +128,15 @@ public class RolesVisualIDRegistry {
 		if (domainElement == null) {
 			return -1;
 		}
-		String containerModelID = org.emftext.language.refactoring.roles.diagram.part.RolesVisualIDRegistry.getModelID(containerView);
+		String containerModelID = org.emftext.language.refactoring.roles.diagram.part.RolesVisualIDRegistry
+				.getModelID(containerView);
 		if (!RoleModelEditPart.MODEL_ID.equals(containerModelID)) {
 			return -1;
 		}
 		int containerVisualID;
 		if (RoleModelEditPart.MODEL_ID.equals(containerModelID)) {
-			containerVisualID = org.emftext.language.refactoring.roles.diagram.part.RolesVisualIDRegistry.getVisualID(containerView);
+			containerVisualID = org.emftext.language.refactoring.roles.diagram.part.RolesVisualIDRegistry
+					.getVisualID(containerView);
 		} else {
 			if (containerView instanceof Diagram) {
 				containerVisualID = RoleModelEditPart.VISUAL_ID;
@@ -139,12 +146,14 @@ public class RolesVisualIDRegistry {
 		}
 		switch (containerVisualID) {
 		case RoleModelEditPart.VISUAL_ID:
-			if (RolesPackage.eINSTANCE.getRole().isSuperTypeOf(domainElement.eClass())) {
+			if (RolesPackage.eINSTANCE.getRole().isSuperTypeOf(
+					domainElement.eClass())) {
 				return RoleEditPart.VISUAL_ID;
 			}
 			break;
 		case RoleRoleAttributeCompartmentEditPart.VISUAL_ID:
-			if (RolesPackage.eINSTANCE.getRoleAttribute().isSuperTypeOf(domainElement.eClass())) {
+			if (RolesPackage.eINSTANCE.getRoleAttribute().isSuperTypeOf(
+					domainElement.eClass())) {
 				return RoleAttributeEditPart.VISUAL_ID;
 			}
 			break;
@@ -156,13 +165,15 @@ public class RolesVisualIDRegistry {
 	 * @generated
 	 */
 	public static boolean canCreateNode(View containerView, int nodeVisualID) {
-		String containerModelID = org.emftext.language.refactoring.roles.diagram.part.RolesVisualIDRegistry.getModelID(containerView);
+		String containerModelID = org.emftext.language.refactoring.roles.diagram.part.RolesVisualIDRegistry
+				.getModelID(containerView);
 		if (!RoleModelEditPart.MODEL_ID.equals(containerModelID)) {
 			return false;
 		}
 		int containerVisualID;
 		if (RoleModelEditPart.MODEL_ID.equals(containerModelID)) {
-			containerVisualID = org.emftext.language.refactoring.roles.diagram.part.RolesVisualIDRegistry.getVisualID(containerView);
+			containerVisualID = org.emftext.language.refactoring.roles.diagram.part.RolesVisualIDRegistry
+					.getVisualID(containerView);
 		} else {
 			if (containerView instanceof Diagram) {
 				containerVisualID = RoleModelEditPart.VISUAL_ID;
@@ -221,16 +232,20 @@ public class RolesVisualIDRegistry {
 		if (domainElement == null) {
 			return -1;
 		}
-		if (RolesPackage.eINSTANCE.getRoleImplication().isSuperTypeOf(domainElement.eClass())) {
+		if (RolesPackage.eINSTANCE.getRoleImplication().isSuperTypeOf(
+				domainElement.eClass())) {
 			return RoleImplicationEditPart.VISUAL_ID;
 		}
-		if (RolesPackage.eINSTANCE.getRoleProhibition().isSuperTypeOf(domainElement.eClass())) {
+		if (RolesPackage.eINSTANCE.getRoleProhibition().isSuperTypeOf(
+				domainElement.eClass())) {
 			return RoleProhibitionEditPart.VISUAL_ID;
 		}
-		if (RolesPackage.eINSTANCE.getRoleAssociation().isSuperTypeOf(domainElement.eClass())) {
+		if (RolesPackage.eINSTANCE.getRoleAssociation().isSuperTypeOf(
+				domainElement.eClass())) {
 			return RoleAssociationEditPart.VISUAL_ID;
 		}
-		if (RolesPackage.eINSTANCE.getRoleComposition().isSuperTypeOf(domainElement.eClass())) {
+		if (RolesPackage.eINSTANCE.getRoleComposition().isSuperTypeOf(
+				domainElement.eClass())) {
 			return RoleCompositionEditPart.VISUAL_ID;
 		}
 		return -1;
@@ -245,5 +260,106 @@ public class RolesVisualIDRegistry {
 	private static boolean isDiagram(RoleModel element) {
 		return true;
 	}
+
+	/**
+	 * @generated
+	 */
+	public static boolean checkNodeVisualID(View containerView,
+			EObject domainElement, int candidate) {
+		if (candidate == -1) {
+			//unrecognized id is always bad
+			return false;
+		}
+		int basic = getNodeVisualID(containerView, domainElement);
+		return basic == candidate;
+	}
+
+	/**
+	 * @generated
+	 */
+	public static boolean isCompartmentVisualID(int visualID) {
+		switch (visualID) {
+		case RoleRoleAttributeCompartmentEditPart.VISUAL_ID:
+			return true;
+		default:
+			break;
+		}
+		return false;
+	}
+
+	/**
+	 * @generated
+	 */
+	public static boolean isSemanticLeafVisualID(int visualID) {
+		switch (visualID) {
+		case RoleModelEditPart.VISUAL_ID:
+			return false;
+		case RoleAttributeEditPart.VISUAL_ID:
+			return true;
+		default:
+			break;
+		}
+		return false;
+	}
+
+	/**
+	 * @generated
+	 */
+	public static final DiagramStructure TYPED_INSTANCE = new DiagramStructure() {
+		/**
+		 * @generated
+		 */
+
+		public int getVisualID(View view) {
+			return org.emftext.language.refactoring.roles.diagram.part.RolesVisualIDRegistry
+					.getVisualID(view);
+		}
+
+		/**
+		 * @generated
+		 */
+
+		public String getModelID(View view) {
+			return org.emftext.language.refactoring.roles.diagram.part.RolesVisualIDRegistry
+					.getModelID(view);
+		}
+
+		/**
+		 * @generated
+		 */
+
+		public int getNodeVisualID(View containerView, EObject domainElement) {
+			return org.emftext.language.refactoring.roles.diagram.part.RolesVisualIDRegistry
+					.getNodeVisualID(containerView, domainElement);
+		}
+
+		/**
+		 * @generated
+		 */
+
+		public boolean checkNodeVisualID(View containerView,
+				EObject domainElement, int candidate) {
+			return org.emftext.language.refactoring.roles.diagram.part.RolesVisualIDRegistry
+					.checkNodeVisualID(containerView, domainElement, candidate);
+		}
+
+		/**
+		 * @generated
+		 */
+
+		public boolean isCompartmentVisualID(int visualID) {
+			return org.emftext.language.refactoring.roles.diagram.part.RolesVisualIDRegistry
+					.isCompartmentVisualID(visualID);
+		}
+
+		/**
+		 * @generated
+		 */
+
+		public boolean isSemanticLeafVisualID(int visualID) {
+			return org.emftext.language.refactoring.roles.diagram.part.RolesVisualIDRegistry
+					.isSemanticLeafVisualID(visualID);
+		}
+	};
 
 }

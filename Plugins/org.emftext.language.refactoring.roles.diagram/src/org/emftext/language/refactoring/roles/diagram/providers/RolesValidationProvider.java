@@ -41,7 +41,8 @@ public class RolesValidationProvider {
 	/**
 	 * @generated
 	 */
-	public static void runWithConstraints(TransactionalEditingDomain editingDomain, Runnable operation) {
+	public static void runWithConstraints(
+			TransactionalEditingDomain editingDomain, Runnable operation) {
 		final Runnable op = operation;
 		Runnable task = new Runnable() {
 			public void run() {
@@ -57,7 +58,8 @@ public class RolesValidationProvider {
 			try {
 				editingDomain.runExclusive(task);
 			} catch (Exception e) {
-				RolesDiagramEditorPlugin.getInstance().logError("Validation failed", e); //$NON-NLS-1$
+				RolesDiagramEditorPlugin.getInstance().logError(
+						"Validation failed", e); //$NON-NLS-1$
 			}
 		} else {
 			task.run();
@@ -73,7 +75,8 @@ public class RolesValidationProvider {
 		}
 		if (object instanceof View) {
 			return constraintsActive
-					&& RoleModelEditPart.MODEL_ID.equals(RolesVisualIDRegistry.getModelID((View) object));
+					&& RoleModelEditPart.MODEL_ID.equals(RolesVisualIDRegistry
+							.getModelID((View) object));
 		}
 		return true;
 	}

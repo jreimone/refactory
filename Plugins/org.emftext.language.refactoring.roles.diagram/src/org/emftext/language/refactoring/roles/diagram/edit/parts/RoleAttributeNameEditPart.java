@@ -44,6 +44,8 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ITextAwareEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.LabelDirectEditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.l10n.DiagramColorRegistry;
+import org.eclipse.gmf.runtime.diagram.ui.label.ILabelDelegate;
+import org.eclipse.gmf.runtime.diagram.ui.label.WrappingLabelDelegate;
 import org.eclipse.gmf.runtime.diagram.ui.requests.RequestConstants;
 import org.eclipse.gmf.runtime.diagram.ui.tools.TextDirectEditManager;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
@@ -52,6 +54,9 @@ import org.eclipse.gmf.runtime.emf.ui.services.parser.ISemanticParser;
 import org.eclipse.gmf.runtime.notation.FontStyle;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
+import org.eclipse.gmf.tooling.runtime.draw2d.labels.SimpleLabelDelegate;
+import org.eclipse.gmf.tooling.runtime.edit.policies.DefaultNodeLabelDragPolicy;
+import org.eclipse.gmf.tooling.runtime.edit.policies.labels.IRefreshableFeedbackEditPolicy;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.viewers.ICellEditorValidator;
 import org.eclipse.swt.SWT;
@@ -98,6 +103,11 @@ public class RoleAttributeNameEditPart extends CompartmentEditPart implements
 	/**
 	 * @generated
 	 */
+	private ILabelDelegate labelDelegate;
+
+	/**
+	 * @generated
+	 */
 	public RoleAttributeNameEditPart(View view) {
 		super(view);
 	}
@@ -107,9 +117,12 @@ public class RoleAttributeNameEditPart extends CompartmentEditPart implements
 	 */
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
-		installEditPolicy(EditPolicy.SELECTION_FEEDBACK_ROLE, new RolesTextSelectionEditPolicy());
-		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE, new LabelDirectEditPolicy());
-		installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE, new RoleModelEditPart.NodeLabelDragPolicy());
+		installEditPolicy(EditPolicy.SELECTION_FEEDBACK_ROLE,
+				new RolesTextSelectionEditPolicy());
+		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE,
+				new LabelDirectEditPolicy());
+		installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE,
+				new DefaultNodeLabelDragPolicy());
 	}
 
 	/**
@@ -118,8 +131,10 @@ public class RoleAttributeNameEditPart extends CompartmentEditPart implements
 	protected String getLabelTextHelper(IFigure figure) {
 		if (figure instanceof WrappingLabel) {
 			return ((WrappingLabel) figure).getText();
-		} else {
+		} else if (figure instanceof Label) {
 			return ((Label) figure).getText();
+		} else {
+			return getLabelDelegate().getText();
 		}
 	}
 
@@ -129,8 +144,10 @@ public class RoleAttributeNameEditPart extends CompartmentEditPart implements
 	protected void setLabelTextHelper(IFigure figure, String text) {
 		if (figure instanceof WrappingLabel) {
 			((WrappingLabel) figure).setText(text);
-		} else {
+		} else if (figure instanceof Label) {
 			((Label) figure).setText(text);
+		} else {
+			getLabelDelegate().setText(text);
 		}
 	}
 
@@ -140,8 +157,10 @@ public class RoleAttributeNameEditPart extends CompartmentEditPart implements
 	protected Image getLabelIconHelper(IFigure figure) {
 		if (figure instanceof WrappingLabel) {
 			return ((WrappingLabel) figure).getIcon();
-		} else {
+		} else if (figure instanceof Label) {
 			return ((Label) figure).getIcon();
+		} else {
+			return getLabelDelegate().getIcon(0);
 		}
 	}
 
@@ -151,8 +170,12 @@ public class RoleAttributeNameEditPart extends CompartmentEditPart implements
 	protected void setLabelIconHelper(IFigure figure, Image icon) {
 		if (figure instanceof WrappingLabel) {
 			((WrappingLabel) figure).setIcon(icon);
-		} else {
+			return;
+		} else if (figure instanceof Label) {
 			((Label) figure).setIcon(icon);
+			return;
+		} else {
+			getLabelDelegate().setIcon(icon, 0);
 		}
 	}
 
@@ -207,7 +230,9 @@ public class RoleAttributeNameEditPart extends CompartmentEditPart implements
 		String text = null;
 		EObject parserElement = getParserElement();
 		if (parserElement != null && getParser() != null) {
-			text = getParser().getPrintString(new EObjectAdapter(parserElement), getParserOptions().intValue());
+			text = getParser().getPrintString(
+					new EObjectAdapter(parserElement),
+					getParserOptions().intValue());
 		}
 		if (text == null || text.length() == 0) {
 			text = defaultText;
@@ -220,14 +245,7 @@ public class RoleAttributeNameEditPart extends CompartmentEditPart implements
 	 */
 	public void setLabelText(String text) {
 		setLabelTextHelper(getFigure(), text);
-		Object pdEditPolicy = getEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE);
-		if (pdEditPolicy instanceof RolesTextSelectionEditPolicy) {
-			((RolesTextSelectionEditPolicy) pdEditPolicy).refreshFeedback();
-		}
-		Object sfEditPolicy = getEditPolicy(EditPolicy.SELECTION_FEEDBACK_ROLE);
-		if (sfEditPolicy instanceof RolesTextSelectionEditPolicy) {
-			((RolesTextSelectionEditPolicy) sfEditPolicy).refreshFeedback();
-		}
+		refreshSelectionFeedback();
 	}
 
 	/**
@@ -237,7 +255,9 @@ public class RoleAttributeNameEditPart extends CompartmentEditPart implements
 		if (getParserElement() == null || getParser() == null) {
 			return ""; //$NON-NLS-1$
 		}
-		return getParser().getEditString(new EObjectAdapter(getParserElement()), getParserOptions().intValue());
+		return getParser().getEditString(
+				new EObjectAdapter(getParserElement()),
+				getParserOptions().intValue());
 	}
 
 	/**
@@ -258,12 +278,18 @@ public class RoleAttributeNameEditPart extends CompartmentEditPart implements
 					final EObject element = getParserElement();
 					final IParser parser = getParser();
 					try {
-						IParserEditStatus valid = (IParserEditStatus) getEditingDomain().runExclusive(new RunnableWithResult.Impl<IParserEditStatus>() {
+						IParserEditStatus valid = (IParserEditStatus) getEditingDomain()
+								.runExclusive(
+										new RunnableWithResult.Impl<IParserEditStatus>() {
 
-							public void run() {
-								setResult(parser.isValidEditString(new EObjectAdapter(element), (String) value));
-							}
-						});
+											public void run() {
+												setResult(parser
+														.isValidEditString(
+																new EObjectAdapter(
+																		element),
+																(String) value));
+											}
+										});
 						return valid.getCode() == ParserEditStatus.EDITABLE ? null
 								: valid.getMessage();
 					} catch (InterruptedException ie) {
@@ -284,7 +310,8 @@ public class RoleAttributeNameEditPart extends CompartmentEditPart implements
 		if (getParserElement() == null || getParser() == null) {
 			return null;
 		}
-		return getParser().getCompletionProcessor(new EObjectAdapter(getParserElement()));
+		return getParser().getCompletionProcessor(
+				new EObjectAdapter(getParserElement()));
 	}
 
 	/**
@@ -299,7 +326,12 @@ public class RoleAttributeNameEditPart extends CompartmentEditPart implements
 	 */
 	public IParser getParser() {
 		if (parser == null) {
-			parser = RolesParserProvider.getParser(RolesElementTypes.RoleAttribute_3001, getParserElement(), RolesVisualIDRegistry.getType(org.emftext.language.refactoring.roles.diagram.edit.parts.RoleAttributeNameEditPart.VISUAL_ID));
+			parser = RolesParserProvider
+					.getParser(
+							RolesElementTypes.RoleAttribute_3001,
+							getParserElement(),
+							RolesVisualIDRegistry
+									.getType(org.emftext.language.refactoring.roles.diagram.edit.parts.RoleAttributeNameEditPart.VISUAL_ID));
 		}
 		return parser;
 	}
@@ -309,7 +341,8 @@ public class RoleAttributeNameEditPart extends CompartmentEditPart implements
 	 */
 	protected DirectEditManager getManager() {
 		if (manager == null) {
-			setManager(new TextDirectEditManager(this, TextDirectEditManager.getTextCellEditorClass(this), RolesEditPartFactory.getTextCellEditorLocator(this)));
+			setManager(new TextDirectEditManager(this, null,
+					RolesEditPartFactory.getTextCellEditorLocator(this)));
 		}
 		return manager;
 	}
@@ -333,7 +366,8 @@ public class RoleAttributeNameEditPart extends CompartmentEditPart implements
 	 */
 	protected void performDirectEdit(Point eventLocation) {
 		if (getManager().getClass() == TextDirectEditManager.class) {
-			((TextDirectEditManager) getManager()).show(eventLocation.getSWTPoint());
+			((TextDirectEditManager) getManager()).show(eventLocation
+					.getSWTPoint());
 		}
 	}
 
@@ -343,7 +377,8 @@ public class RoleAttributeNameEditPart extends CompartmentEditPart implements
 	private void performDirectEdit(char initialCharacter) {
 		if (getManager() instanceof TextDirectEditManager) {
 			((TextDirectEditManager) getManager()).show(initialCharacter);
-		} else {
+		} else //
+		{
 			performDirectEdit();
 		}
 	}
@@ -358,8 +393,12 @@ public class RoleAttributeNameEditPart extends CompartmentEditPart implements
 
 				public void run() {
 					if (isActive() && isEditable()) {
-						if (theRequest.getExtendedData().get(RequestConstants.REQ_DIRECTEDIT_EXTENDEDDATA_INITIAL_CHAR) instanceof Character) {
-							Character initialChar = (Character) theRequest.getExtendedData().get(RequestConstants.REQ_DIRECTEDIT_EXTENDEDDATA_INITIAL_CHAR);
+						if (theRequest
+								.getExtendedData()
+								.get(RequestConstants.REQ_DIRECTEDIT_EXTENDEDDATA_INITIAL_CHAR) instanceof Character) {
+							Character initialChar = (Character) theRequest
+									.getExtendedData()
+									.get(RequestConstants.REQ_DIRECTEDIT_EXTENDEDDATA_INITIAL_CHAR);
 							performDirectEdit(initialChar.charValue());
 						} else if ((theRequest instanceof DirectEditRequest)
 								&& (getEditText().equals(getLabelText()))) {
@@ -394,21 +433,15 @@ public class RoleAttributeNameEditPart extends CompartmentEditPart implements
 	protected void refreshLabel() {
 		setLabelTextHelper(getFigure(), getLabelText());
 		setLabelIconHelper(getFigure(), getLabelIcon());
-		Object pdEditPolicy = getEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE);
-		if (pdEditPolicy instanceof RolesTextSelectionEditPolicy) {
-			((RolesTextSelectionEditPolicy) pdEditPolicy).refreshFeedback();
-		}
-		Object sfEditPolicy = getEditPolicy(EditPolicy.SELECTION_FEEDBACK_ROLE);
-		if (sfEditPolicy instanceof RolesTextSelectionEditPolicy) {
-			((RolesTextSelectionEditPolicy) sfEditPolicy).refreshFeedback();
-		}
+		refreshSelectionFeedback();
 	}
 
 	/**
 	 * @generated
 	 */
 	protected void refreshUnderline() {
-		FontStyle style = (FontStyle) getFontStyleOwnerView().getStyle(NotationPackage.eINSTANCE.getFontStyle());
+		FontStyle style = (FontStyle) getFontStyleOwnerView().getStyle(
+				NotationPackage.eINSTANCE.getFontStyle());
 		if (style != null && getFigure() instanceof WrappingLabel) {
 			((WrappingLabel) getFigure()).setTextUnderline(style.isUnderline());
 		}
@@ -418,9 +451,11 @@ public class RoleAttributeNameEditPart extends CompartmentEditPart implements
 	 * @generated
 	 */
 	protected void refreshStrikeThrough() {
-		FontStyle style = (FontStyle) getFontStyleOwnerView().getStyle(NotationPackage.eINSTANCE.getFontStyle());
+		FontStyle style = (FontStyle) getFontStyleOwnerView().getStyle(
+				NotationPackage.eINSTANCE.getFontStyle());
 		if (style != null && getFigure() instanceof WrappingLabel) {
-			((WrappingLabel) getFigure()).setTextStrikeThrough(style.isStrikeThrough());
+			((WrappingLabel) getFigure()).setTextStrikeThrough(style
+					.isStrikeThrough());
 		}
 	}
 
@@ -428,12 +463,32 @@ public class RoleAttributeNameEditPart extends CompartmentEditPart implements
 	 * @generated
 	 */
 	protected void refreshFont() {
-		FontStyle style = (FontStyle) getFontStyleOwnerView().getStyle(NotationPackage.eINSTANCE.getFontStyle());
+		FontStyle style = (FontStyle) getFontStyleOwnerView().getStyle(
+				NotationPackage.eINSTANCE.getFontStyle());
 		if (style != null) {
-			FontData fontData = new FontData(style.getFontName(), style.getFontHeight(), (style.isBold() ? SWT.BOLD
-					: SWT.NORMAL)
-					| (style.isItalic() ? SWT.ITALIC : SWT.NORMAL));
+			FontData fontData = new FontData(style.getFontName(),
+					style.getFontHeight(), (style.isBold() ? SWT.BOLD
+							: SWT.NORMAL)
+							| (style.isItalic() ? SWT.ITALIC : SWT.NORMAL));
 			setFont(fontData);
+		}
+	}
+
+	/**
+	 * @generated
+	 */
+	private void refreshSelectionFeedback() {
+		requestEditPolicyFeedbackRefresh(EditPolicy.PRIMARY_DRAG_ROLE);
+		requestEditPolicyFeedbackRefresh(EditPolicy.SELECTION_FEEDBACK_ROLE);
+	}
+
+	/**
+	 * @generated
+	 */
+	private void requestEditPolicyFeedbackRefresh(String editPolicyKey) {
+		Object editPolicy = getEditPolicy(editPolicyKey);
+		if (editPolicy instanceof IRefreshableFeedbackEditPolicy) {
+			((IRefreshableFeedbackEditPolicy) editPolicy).refreshFeedback();
 		}
 	}
 
@@ -450,9 +505,11 @@ public class RoleAttributeNameEditPart extends CompartmentEditPart implements
 	protected void addSemanticListeners() {
 		if (getParser() instanceof ISemanticParser) {
 			EObject element = resolveSemanticElement();
-			parserElements = ((ISemanticParser) getParser()).getSemanticElementsBeingParsed(element);
+			parserElements = ((ISemanticParser) getParser())
+					.getSemanticElementsBeingParsed(element);
 			for (int i = 0; i < parserElements.size(); i++) {
-				addListenerFilter("SemanticModel" + i, this, (EObject) parserElements.get(i)); //$NON-NLS-1$
+				addListenerFilter(
+						"SemanticModel" + i, this, (EObject) parserElements.get(i)); //$NON-NLS-1$
 			}
 		} else {
 			super.addSemanticListeners();
@@ -497,6 +554,32 @@ public class RoleAttributeNameEditPart extends CompartmentEditPart implements
 	/**
 	 * @generated
 	 */
+	private ILabelDelegate getLabelDelegate() {
+		if (labelDelegate == null) {
+			IFigure label = getFigure();
+			if (label instanceof WrappingLabel) {
+				labelDelegate = new WrappingLabelDelegate((WrappingLabel) label);
+			} else {
+				labelDelegate = new SimpleLabelDelegate((Label) label);
+			}
+		}
+		return labelDelegate;
+	}
+
+	/**
+	 * @generated
+	 */
+	@Override
+	public Object getAdapter(Class key) {
+		if (ILabelDelegate.class.equals(key)) {
+			return getLabelDelegate();
+		}
+		return super.getAdapter(key);
+	}
+
+	/**
+	 * @generated
+	 */
 	protected void addNotationalListeners() {
 		super.addNotationalListeners();
 		addListenerFilter("PrimaryView", this, getPrimaryView()); //$NON-NLS-1$
@@ -518,18 +601,25 @@ public class RoleAttributeNameEditPart extends CompartmentEditPart implements
 		if (NotationPackage.eINSTANCE.getFontStyle_FontColor().equals(feature)) {
 			Integer c = (Integer) event.getNewValue();
 			setFontColor(DiagramColorRegistry.getInstance().getColor(c));
-		} else if (NotationPackage.eINSTANCE.getFontStyle_Underline().equals(feature)) {
+		} else if (NotationPackage.eINSTANCE.getFontStyle_Underline().equals(
+				feature)) {
 			refreshUnderline();
-		} else if (NotationPackage.eINSTANCE.getFontStyle_StrikeThrough().equals(feature)) {
+		} else if (NotationPackage.eINSTANCE.getFontStyle_StrikeThrough()
+				.equals(feature)) {
 			refreshStrikeThrough();
-		} else if (NotationPackage.eINSTANCE.getFontStyle_FontHeight().equals(feature)
-				|| NotationPackage.eINSTANCE.getFontStyle_FontName().equals(feature)
-				|| NotationPackage.eINSTANCE.getFontStyle_Bold().equals(feature)
-				|| NotationPackage.eINSTANCE.getFontStyle_Italic().equals(feature)) {
+		} else if (NotationPackage.eINSTANCE.getFontStyle_FontHeight().equals(
+				feature)
+				|| NotationPackage.eINSTANCE.getFontStyle_FontName().equals(
+						feature)
+				|| NotationPackage.eINSTANCE.getFontStyle_Bold()
+						.equals(feature)
+				|| NotationPackage.eINSTANCE.getFontStyle_Italic().equals(
+						feature)) {
 			refreshFont();
 		} else {
 			if (getParser() != null
-					&& getParser().isAffectingEvent(event, getParserOptions().intValue())) {
+					&& getParser().isAffectingEvent(event,
+							getParserOptions().intValue())) {
 				refreshLabel();
 			}
 			if (getParser() instanceof ISemanticParser) {

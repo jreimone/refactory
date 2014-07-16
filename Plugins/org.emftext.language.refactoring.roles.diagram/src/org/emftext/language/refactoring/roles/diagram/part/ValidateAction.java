@@ -78,14 +78,19 @@ public class ValidateAction extends Action {
 		if (workbenchPart instanceof IDiagramWorkbenchPart) {
 			final IDiagramWorkbenchPart part = (IDiagramWorkbenchPart) workbenchPart;
 			try {
-				new WorkspaceModifyDelegatingOperation(new IRunnableWithProgress() {
+				new WorkspaceModifyDelegatingOperation(
+						new IRunnableWithProgress() {
 
-					public void run(IProgressMonitor monitor) throws InterruptedException, InvocationTargetException {
-						runValidation(part.getDiagramEditPart(), part.getDiagram());
-					}
-				}).run(new NullProgressMonitor());
+							public void run(IProgressMonitor monitor)
+									throws InterruptedException,
+									InvocationTargetException {
+								runValidation(part.getDiagramEditPart(),
+										part.getDiagram());
+							}
+						}).run(new NullProgressMonitor());
 			} catch (Exception e) {
-				RolesDiagramEditorPlugin.getInstance().logError("Validation action failed", e); //$NON-NLS-1$
+				RolesDiagramEditorPlugin.getInstance().logError(
+						"Validation action failed", e); //$NON-NLS-1$
 			}
 		}
 	}
@@ -96,15 +101,21 @@ public class ValidateAction extends Action {
 	public static void runValidation(View view) {
 		try {
 			if (RolesDiagramEditorUtil.openDiagram(view.eResource())) {
-				IEditorPart editorPart = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
+				IEditorPart editorPart = PlatformUI.getWorkbench()
+						.getActiveWorkbenchWindow().getActivePage()
+						.getActiveEditor();
 				if (editorPart instanceof IDiagramWorkbenchPart) {
-					runValidation(((IDiagramWorkbenchPart) editorPart).getDiagramEditPart(), view);
+					runValidation(
+							((IDiagramWorkbenchPart) editorPart)
+									.getDiagramEditPart(),
+							view);
 				} else {
 					runNonUIValidation(view);
 				}
 			}
 		} catch (Exception e) {
-			RolesDiagramEditorPlugin.getInstance().logError("Validation action failed", e); //$NON-NLS-1$
+			RolesDiagramEditorPlugin.getInstance().logError(
+					"Validation action failed", e); //$NON-NLS-1$
 		}
 	}
 
@@ -112,7 +123,8 @@ public class ValidateAction extends Action {
 	 * @generated
 	 */
 	public static void runNonUIValidation(View view) {
-		DiagramEditPart diagramEditPart = OffscreenEditPartFactory.getInstance().createDiagramEditPart(view.getDiagram());
+		DiagramEditPart diagramEditPart = OffscreenEditPartFactory
+				.getInstance().createDiagramEditPart(view.getDiagram());
 		runValidation(diagramEditPart, view);
 	}
 
@@ -122,7 +134,8 @@ public class ValidateAction extends Action {
 	public static void runValidation(DiagramEditPart diagramEditPart, View view) {
 		final DiagramEditPart fpart = diagramEditPart;
 		final View fview = view;
-		TransactionalEditingDomain txDomain = TransactionUtil.getEditingDomain(view);
+		TransactionalEditingDomain txDomain = TransactionUtil
+				.getEditingDomain(view);
 		RolesValidationProvider.runWithConstraints(txDomain, new Runnable() {
 
 			public void run() {
@@ -150,14 +163,15 @@ public class ValidateAction extends Action {
 	 * @generated
 	 */
 	private static void validate(DiagramEditPart diagramEditPart, View view) {
-		IFile target = view.eResource() != null ? WorkspaceSynchronizer.getFile(view.eResource())
-				: null;
+		IFile target = view.eResource() != null ? WorkspaceSynchronizer
+				.getFile(view.eResource()) : null;
 		if (target != null) {
 			RolesMarkerNavigationProvider.deleteMarkers(target);
 		}
 		Diagnostic diagnostic = runEMFValidator(view);
 		createMarkers(target, diagnostic, diagramEditPart);
-		IBatchValidator validator = (IBatchValidator) ModelValidationService.getInstance().newValidator(EvaluationMode.BATCH);
+		IBatchValidator validator = (IBatchValidator) ModelValidationService
+				.getInstance().newValidator(EvaluationMode.BATCH);
 		validator.setIncludeLiveConstraints(true);
 		if (view.isSetElement() && view.getElement() != null) {
 			IStatus status = validator.validate(view.getElement());
@@ -168,38 +182,56 @@ public class ValidateAction extends Action {
 	/**
 	 * @generated
 	 */
-	private static void createMarkers(IFile target, IStatus validationStatus, DiagramEditPart diagramEditPart) {
+	private static void createMarkers(IFile target, IStatus validationStatus,
+			DiagramEditPart diagramEditPart) {
 		if (validationStatus.isOK()) {
 			return;
 		}
 		final IStatus rootStatus = validationStatus;
 		List allStatuses = new ArrayList();
-		RolesDiagramEditorUtil.LazyElement2ViewMap element2ViewMap = new RolesDiagramEditorUtil.LazyElement2ViewMap(diagramEditPart.getDiagramView(), collectTargetElements(rootStatus, new HashSet<EObject>(), allStatuses));
+		RolesDiagramEditorUtil.LazyElement2ViewMap element2ViewMap = new RolesDiagramEditorUtil.LazyElement2ViewMap(
+				diagramEditPart.getDiagramView(), collectTargetElements(
+						rootStatus, new HashSet<EObject>(), allStatuses));
 		for (Iterator it = allStatuses.iterator(); it.hasNext();) {
 			IConstraintStatus nextStatus = (IConstraintStatus) it.next();
-			View view = RolesDiagramEditorUtil.findView(diagramEditPart, nextStatus.getTarget(), element2ViewMap);
-			addMarker(diagramEditPart.getViewer(), target, view.eResource().getURIFragment(view), EMFCoreUtil.getQualifiedName(nextStatus.getTarget(), true), nextStatus.getMessage(), nextStatus.getSeverity());
+			View view = RolesDiagramEditorUtil.findView(diagramEditPart,
+					nextStatus.getTarget(), element2ViewMap);
+			addMarker(diagramEditPart.getViewer(), target, view.eResource()
+					.getURIFragment(view), EMFCoreUtil.getQualifiedName(
+					nextStatus.getTarget(), true), nextStatus.getMessage(),
+					nextStatus.getSeverity());
 		}
 	}
 
 	/**
 	 * @generated
 	 */
-	private static void createMarkers(IFile target, Diagnostic emfValidationStatus, DiagramEditPart diagramEditPart) {
+	private static void createMarkers(IFile target,
+			Diagnostic emfValidationStatus, DiagramEditPart diagramEditPart) {
 		if (emfValidationStatus.getSeverity() == Diagnostic.OK) {
 			return;
 		}
 		final Diagnostic rootStatus = emfValidationStatus;
 		List allDiagnostics = new ArrayList();
-		RolesDiagramEditorUtil.LazyElement2ViewMap element2ViewMap = new RolesDiagramEditorUtil.LazyElement2ViewMap(diagramEditPart.getDiagramView(), collectTargetElements(rootStatus, new HashSet<EObject>(), allDiagnostics));
-		for (Iterator it = emfValidationStatus.getChildren().iterator(); it.hasNext();) {
+		RolesDiagramEditorUtil.LazyElement2ViewMap element2ViewMap = new RolesDiagramEditorUtil.LazyElement2ViewMap(
+				diagramEditPart.getDiagramView(), collectTargetElements(
+						rootStatus, new HashSet<EObject>(), allDiagnostics));
+		for (Iterator it = emfValidationStatus.getChildren().iterator(); it
+				.hasNext();) {
 			Diagnostic nextDiagnostic = (Diagnostic) it.next();
 			List data = nextDiagnostic.getData();
 			if (data != null && !data.isEmpty()
 					&& data.get(0) instanceof EObject) {
 				EObject element = (EObject) data.get(0);
-				View view = RolesDiagramEditorUtil.findView(diagramEditPart, element, element2ViewMap);
-				addMarker(diagramEditPart.getViewer(), target, view.eResource().getURIFragment(view), EMFCoreUtil.getQualifiedName(element, true), nextDiagnostic.getMessage(), diagnosticToStatusSeverity(nextDiagnostic.getSeverity()));
+				View view = RolesDiagramEditorUtil.findView(diagramEditPart,
+						element, element2ViewMap);
+				addMarker(
+						diagramEditPart.getViewer(),
+						target,
+						view.eResource().getURIFragment(view),
+						EMFCoreUtil.getQualifiedName(element, true),
+						nextDiagnostic.getMessage(),
+						diagnosticToStatusSeverity(nextDiagnostic.getSeverity()));
 			}
 		}
 	}
@@ -207,11 +239,14 @@ public class ValidateAction extends Action {
 	/**
 	 * @generated
 	 */
-	private static void addMarker(EditPartViewer viewer, IFile target, String elementId, String location, String message, int statusSeverity) {
+	private static void addMarker(EditPartViewer viewer, IFile target,
+			String elementId, String location, String message,
+			int statusSeverity) {
 		if (target == null) {
 			return;
 		}
-		RolesMarkerNavigationProvider.addMarker(target, elementId, location, message, statusSeverity);
+		RolesMarkerNavigationProvider.addMarker(target, elementId, location,
+				message, statusSeverity);
 	}
 
 	/**
@@ -234,15 +269,18 @@ public class ValidateAction extends Action {
 	/**
 	 * @generated
 	 */
-	private static Set<EObject> collectTargetElements(IStatus status, Set<EObject> targetElementCollector, List allConstraintStatuses) {
+	private static Set<EObject> collectTargetElements(IStatus status,
+			Set<EObject> targetElementCollector, List allConstraintStatuses) {
 		if (status instanceof IConstraintStatus) {
-			targetElementCollector.add(((IConstraintStatus) status).getTarget());
+			targetElementCollector
+					.add(((IConstraintStatus) status).getTarget());
 			allConstraintStatuses.add(status);
 		}
 		if (status.isMultiStatus()) {
 			IStatus[] children = status.getChildren();
 			for (int i = 0; i < children.length; i++) {
-				collectTargetElements(children[i], targetElementCollector, allConstraintStatuses);
+				collectTargetElements(children[i], targetElementCollector,
+						allConstraintStatuses);
 			}
 		}
 		return targetElementCollector;
@@ -251,7 +289,8 @@ public class ValidateAction extends Action {
 	/**
 	 * @generated
 	 */
-	private static Set<EObject> collectTargetElements(Diagnostic diagnostic, Set<EObject> targetElementCollector, List allDiagnostics) {
+	private static Set<EObject> collectTargetElements(Diagnostic diagnostic,
+			Set<EObject> targetElementCollector, List allDiagnostics) {
 		List data = diagnostic.getData();
 		EObject target = null;
 		if (data != null && !data.isEmpty() && data.get(0) instanceof EObject) {
@@ -261,8 +300,10 @@ public class ValidateAction extends Action {
 		}
 		if (diagnostic.getChildren() != null
 				&& !diagnostic.getChildren().isEmpty()) {
-			for (Iterator it = diagnostic.getChildren().iterator(); it.hasNext();) {
-				collectTargetElements((Diagnostic) it.next(), targetElementCollector, allDiagnostics);
+			for (Iterator it = diagnostic.getChildren().iterator(); it
+					.hasNext();) {
+				collectTargetElements((Diagnostic) it.next(),
+						targetElementCollector, allDiagnostics);
 			}
 		}
 		return targetElementCollector;
