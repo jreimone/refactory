@@ -350,7 +350,7 @@ public class Refactorer implements IRefactorer {
 	public void setInput(List<? extends EObject> selectedElements) {
 		List<Role> inputRoles = RoleUtil.getAllInputRoles(roleMapping);
 		if(inputRoles == null || inputRoles.size() > 1){
-			throw new NullPointerException("The rolemapping used for this refactorer contains more than 1 input role.");
+			throw new RuntimeException("The rolemapping used for this refactorer contains more than 1 input role.");
 		}
 		List<EObject> elements = new ArrayList<EObject>();
 		for (EObject element : selectedElements) {

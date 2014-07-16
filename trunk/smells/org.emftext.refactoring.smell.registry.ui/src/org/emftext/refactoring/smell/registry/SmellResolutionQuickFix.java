@@ -44,7 +44,7 @@ public class SmellResolutionQuickFix implements IMarkerResolution, IMarkerResolu
 		init();
 	}
 
-	public void init() {
+	private void init() {
 		refactorer = RefactorerFactory.eINSTANCE.getRefactorer(resource, roleMapping);
 		refactorer.setInput(Lists.newArrayList(element));
 		imageDescriptor = IRoleMappingRegistry.INSTANCE.getImageForMapping(roleMapping);
