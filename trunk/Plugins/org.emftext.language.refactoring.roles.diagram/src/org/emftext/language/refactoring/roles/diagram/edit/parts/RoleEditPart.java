@@ -44,6 +44,7 @@ import org.eclipse.gmf.runtime.emf.type.core.IElementType;
 import org.eclipse.gmf.runtime.gef.ui.figures.DefaultSizeNodeFigure;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.View;
+import org.eclipse.gmf.tooling.runtime.edit.policies.reparent.CreationEditPolicyWithCustomReparent;
 import org.eclipse.swt.graphics.Color;
 import org.emftext.language.refactoring.roles.diagram.edit.policies.RoleItemSemanticEditPolicy;
 import org.emftext.language.refactoring.roles.diagram.edit.policies.RolesTextSelectionEditPolicy;
@@ -81,9 +82,12 @@ public class RoleEditPart extends ShapeNodeEditPart {
 	 * @generated
 	 */
 	protected void createDefaultEditPolicies() {
-		installEditPolicy(EditPolicyRoles.CREATION_ROLE, new CreationEditPolicy());
+		installEditPolicy(EditPolicyRoles.CREATION_ROLE,
+				new CreationEditPolicyWithCustomReparent(
+						RolesVisualIDRegistry.TYPED_INSTANCE));
 		super.createDefaultEditPolicies();
-		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE, new RoleItemSemanticEditPolicy());
+		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE,
+				new RoleItemSemanticEditPolicy());
 		installEditPolicy(EditPolicy.LAYOUT_ROLE, createLayoutEditPolicy());
 		// XXX need an SCR to runtime to have another abstract superclass that would let children add reasonable editpolicies
 		// removeEditPolicy(org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles.CONNECTION_HANDLES_ROLE);
@@ -127,7 +131,8 @@ public class RoleEditPart extends ShapeNodeEditPart {
 	 */
 	protected boolean addFixedChild(EditPart childEditPart) {
 		if (childEditPart instanceof RoleNameEditPart) {
-			((RoleNameEditPart) childEditPart).setLabel(getPrimaryShape().getFigureRoleNameFigure());
+			((RoleNameEditPart) childEditPart).setLabel(getPrimaryShape()
+					.getFigureRoleNameFigure());
 			return true;
 		}
 		return false;
@@ -260,85 +265,8 @@ public class RoleEditPart extends ShapeNodeEditPart {
 	 * @generated
 	 */
 	public EditPart getPrimaryChildEditPart() {
-		return getChildBySemanticHint(RolesVisualIDRegistry.getType(RoleNameEditPart.VISUAL_ID));
-	}
-
-	/**
-	 * @generated
-	 */
-	public List<IElementType> getMARelTypesOnSource() {
-		ArrayList<IElementType> types = new ArrayList<IElementType>(4);
-		types.add(RolesElementTypes.RoleImplication_4001);
-		types.add(RolesElementTypes.RoleProhibition_4002);
-		types.add(RolesElementTypes.RoleAssociation_4003);
-		types.add(RolesElementTypes.RoleComposition_4004);
-		return types;
-	}
-
-	/**
-	 * @generated
-	 */
-	public List<IElementType> getMARelTypesOnSourceAndTarget(IGraphicalEditPart targetEditPart) {
-		LinkedList<IElementType> types = new LinkedList<IElementType>();
-		if (targetEditPart instanceof org.emftext.language.refactoring.roles.diagram.edit.parts.RoleEditPart) {
-			types.add(RolesElementTypes.RoleImplication_4001);
-		}
-		if (targetEditPart instanceof org.emftext.language.refactoring.roles.diagram.edit.parts.RoleEditPart) {
-			types.add(RolesElementTypes.RoleProhibition_4002);
-		}
-		if (targetEditPart instanceof org.emftext.language.refactoring.roles.diagram.edit.parts.RoleEditPart) {
-			types.add(RolesElementTypes.RoleAssociation_4003);
-		}
-		if (targetEditPart instanceof org.emftext.language.refactoring.roles.diagram.edit.parts.RoleEditPart) {
-			types.add(RolesElementTypes.RoleComposition_4004);
-		}
-		return types;
-	}
-
-	/**
-	 * @generated
-	 */
-	public List<IElementType> getMATypesForTarget(IElementType relationshipType) {
-		LinkedList<IElementType> types = new LinkedList<IElementType>();
-		if (relationshipType == RolesElementTypes.RoleImplication_4001) {
-			types.add(RolesElementTypes.Role_2001);
-		} else if (relationshipType == RolesElementTypes.RoleProhibition_4002) {
-			types.add(RolesElementTypes.Role_2001);
-		} else if (relationshipType == RolesElementTypes.RoleAssociation_4003) {
-			types.add(RolesElementTypes.Role_2001);
-		} else if (relationshipType == RolesElementTypes.RoleComposition_4004) {
-			types.add(RolesElementTypes.Role_2001);
-		}
-		return types;
-	}
-
-	/**
-	 * @generated
-	 */
-	public List<IElementType> getMARelTypesOnTarget() {
-		ArrayList<IElementType> types = new ArrayList<IElementType>(4);
-		types.add(RolesElementTypes.RoleImplication_4001);
-		types.add(RolesElementTypes.RoleProhibition_4002);
-		types.add(RolesElementTypes.RoleAssociation_4003);
-		types.add(RolesElementTypes.RoleComposition_4004);
-		return types;
-	}
-
-	/**
-	 * @generated
-	 */
-	public List<IElementType> getMATypesForSource(IElementType relationshipType) {
-		LinkedList<IElementType> types = new LinkedList<IElementType>();
-		if (relationshipType == RolesElementTypes.RoleImplication_4001) {
-			types.add(RolesElementTypes.Role_2001);
-		} else if (relationshipType == RolesElementTypes.RoleProhibition_4002) {
-			types.add(RolesElementTypes.Role_2001);
-		} else if (relationshipType == RolesElementTypes.RoleAssociation_4003) {
-			types.add(RolesElementTypes.Role_2001);
-		} else if (relationshipType == RolesElementTypes.RoleComposition_4004) {
-			types.add(RolesElementTypes.Role_2001);
-		}
-		return types;
+		return getChildBySemanticHint(RolesVisualIDRegistry
+				.getType(RoleNameEditPart.VISUAL_ID));
 	}
 
 	/**
@@ -346,10 +274,14 @@ public class RoleEditPart extends ShapeNodeEditPart {
 	 */
 	public EditPart getTargetEditPart(Request request) {
 		if (request instanceof CreateViewAndElementRequest) {
-			CreateElementRequestAdapter adapter = ((CreateViewAndElementRequest) request).getViewAndElementDescriptor().getCreateElementRequestAdapter();
-			IElementType type = (IElementType) adapter.getAdapter(IElementType.class);
+			CreateElementRequestAdapter adapter = ((CreateViewAndElementRequest) request)
+					.getViewAndElementDescriptor()
+					.getCreateElementRequestAdapter();
+			IElementType type = (IElementType) adapter
+					.getAdapter(IElementType.class);
 			if (type == RolesElementTypes.RoleAttribute_3001) {
-				return getChildBySemanticHint(RolesVisualIDRegistry.getType(RoleRoleAttributeCompartmentEditPart.VISUAL_ID));
+				return getChildBySemanticHint(RolesVisualIDRegistry
+						.getType(RoleRoleAttributeCompartmentEditPart.VISUAL_ID));
 			}
 		}
 		return super.getTargetEditPart(request);
@@ -379,7 +311,8 @@ public class RoleEditPart extends ShapeNodeEditPart {
 
 			this.setLayoutManager(layoutThis);
 
-			this.setCornerDimensions(new Dimension(getMapMode().DPtoLP(20), getMapMode().DPtoLP(20)));
+			this.setCornerDimensions(new Dimension(getMapMode().DPtoLP(20),
+					getMapMode().DPtoLP(20)));
 			this.setLineWidth(2);
 			this.setForegroundColor(ColorConstants.gray);
 			createContents();

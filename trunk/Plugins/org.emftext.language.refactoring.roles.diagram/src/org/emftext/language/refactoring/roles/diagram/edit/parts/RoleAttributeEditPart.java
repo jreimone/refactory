@@ -70,7 +70,8 @@ public class RoleAttributeEditPart extends ShapeNodeEditPart {
 	 */
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
-		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE, new RoleAttributeItemSemanticEditPolicy());
+		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE,
+				new RoleAttributeItemSemanticEditPolicy());
 		installEditPolicy(EditPolicy.LAYOUT_ROLE, createLayoutEditPolicy());
 		// XXX need an SCR to runtime to have another abstract superclass that would let children add reasonable editpolicies
 		// removeEditPolicy(org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles.CONNECTION_HANDLES_ROLE);
@@ -83,7 +84,8 @@ public class RoleAttributeEditPart extends ShapeNodeEditPart {
 		org.eclipse.gmf.runtime.diagram.ui.editpolicies.LayoutEditPolicy lep = new org.eclipse.gmf.runtime.diagram.ui.editpolicies.LayoutEditPolicy() {
 
 			protected EditPolicy createChildEditPolicy(EditPart child) {
-				EditPolicy result = child.getEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE);
+				EditPolicy result = child
+						.getEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE);
 				if (result == null) {
 					result = new NonResizableEditPolicy();
 				}
@@ -120,7 +122,8 @@ public class RoleAttributeEditPart extends ShapeNodeEditPart {
 	 */
 	protected boolean addFixedChild(EditPart childEditPart) {
 		if (childEditPart instanceof RoleAttributeNameEditPart) {
-			((RoleAttributeNameEditPart) childEditPart).setLabel(getPrimaryShape().getFigureAttributeNameFigure());
+			((RoleAttributeNameEditPart) childEditPart)
+					.setLabel(getPrimaryShape().getFigureAttributeNameFigure());
 			return true;
 		}
 		return false;
@@ -253,7 +256,8 @@ public class RoleAttributeEditPart extends ShapeNodeEditPart {
 	 * @generated
 	 */
 	public EditPart getPrimaryChildEditPart() {
-		return getChildBySemanticHint(RolesVisualIDRegistry.getType(RoleAttributeNameEditPart.VISUAL_ID));
+		return getChildBySemanticHint(RolesVisualIDRegistry
+				.getType(RoleAttributeNameEditPart.VISUAL_ID));
 	}
 
 	/**

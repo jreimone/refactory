@@ -27,6 +27,7 @@ public class DiagramPrintingPreferencePage extends PrintingPreferencePage {
 	 * @generated
 	 */
 	public DiagramPrintingPreferencePage() {
-		setPreferenceStore(RolesDiagramEditorPlugin.getInstance().getPreferenceStore());
+		setPreferenceStore(RolesDiagramEditorPlugin.getInstance()
+				.getPreferenceStore());
 	}
 }

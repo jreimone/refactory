@@ -42,7 +42,8 @@ public class RolesMatchingStrategy implements IEditorMatchingStrategy {
 		}
 		if (editorInput instanceof URIEditorInput
 				&& input instanceof URIEditorInput) {
-			return ((URIEditorInput) editorInput).getURI().equals(((URIEditorInput) input).getURI());
+			return ((URIEditorInput) editorInput).getURI().equals(
+					((URIEditorInput) input).getURI());
 		}
 		return false;
 	}

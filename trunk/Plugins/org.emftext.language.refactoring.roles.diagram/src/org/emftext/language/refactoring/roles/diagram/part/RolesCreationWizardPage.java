@@ -78,7 +78,8 @@ public class RolesCreationWizardPage extends WizardNewFileCreationPage {
 	 */
 	public void createControl(Composite parent) {
 		super.createControl(parent);
-		setFileName(RolesDiagramEditorUtil.getUniqueFileName(getContainerFullPath(), getFileName(), getExtension()));
+		setFileName(RolesDiagramEditorUtil.getUniqueFileName(
+				getContainerFullPath(), getFileName(), getExtension()));
 		setPageComplete(validatePage());
 	}
 
@@ -92,7 +93,8 @@ public class RolesCreationWizardPage extends WizardNewFileCreationPage {
 		String extension = getExtension();
 		if (extension != null
 				&& !getFilePath().toString().endsWith("." + extension)) {
-			setErrorMessage(NLS.bind(Messages.RolesCreationWizardPageExtensionError, extension));
+			setErrorMessage(NLS.bind(
+					Messages.RolesCreationWizardPageExtensionError, extension));
 			return false;
 		}
 		return true;
