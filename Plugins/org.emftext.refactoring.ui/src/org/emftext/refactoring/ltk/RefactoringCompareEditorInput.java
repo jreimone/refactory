@@ -25,14 +25,16 @@ import org.eclipse.emf.compare.ide.ui.internal.editor.ComparisonEditorInput;
 @SuppressWarnings("restriction")
 public class RefactoringCompareEditorInput extends ComparisonEditorInput {
 
-	private static EMFCompareConfiguration configuration = new EMFCompareConfiguration(new CompareConfiguration());
-
-	static{
-		configuration.setLeftEditable(false);
-		configuration.setRightEditable(false);
-	}
+	private EMFCompareConfiguration configuration;
 
 	public RefactoringCompareEditorInput(Comparison comparison, ICompareEditingDomain editingDomain, AdapterFactory adapterFactory) {
-		super(configuration, comparison, editingDomain, adapterFactory);
+		super(new EMFCompareConfiguration(new CompareConfiguration()), comparison, editingDomain, adapterFactory);
+		initCompareConfiguration();
+	}
+
+	private void initCompareConfiguration() {
+		configuration = getCompareConfiguration();
+		configuration.setLeftEditable(false);
+		configuration.setRightEditable(false);
 	}
 }

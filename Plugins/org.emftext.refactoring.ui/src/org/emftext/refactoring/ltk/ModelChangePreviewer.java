@@ -20,6 +20,7 @@ import java.lang.reflect.InvocationTargetException;
 import org.eclipse.compare.CompareEditorInput;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.notify.AdapterFactory;
+import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.compare.Comparison;
 import org.eclipse.emf.compare.EMFCompare;
 import org.eclipse.emf.compare.domain.ICompareEditingDomain;
@@ -56,6 +57,8 @@ public class ModelChangePreviewer implements IChangePreviewViewer {
 		EMFCompare comparator = EMFCompare.builder().build();
 		DefaultComparisonScope scope = new DefaultComparisonScope(originalModel, fakeRefactoredModel, null);
 	    Comparison comparison = comparator.compare(scope);
+	    // the following is needed to avoid NPE at EMFCompareStructureMergeViewer.updateProblemIndication(EMFCompareStructureMergeViewer.java:1000)
+	    comparison.setDiagnostic(Diagnostic.OK_INSTANCE);
 		
 		ICompareEditingDomain editingDomain = EMFCompareEditingDomain.create(originalModel, fakeRefactoredModel, null);
 		AdapterFactory adapterFactory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
