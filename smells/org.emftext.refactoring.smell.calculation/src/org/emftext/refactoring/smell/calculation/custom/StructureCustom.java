@@ -12,6 +12,8 @@ import org.eclipse.incquery.runtime.api.IPatternMatch;
 import org.eclipse.incquery.runtime.api.IQuerySpecification;
 import org.eclipse.incquery.runtime.api.IncQueryEngine;
 import org.eclipse.incquery.runtime.api.IncQueryMatcher;
+import org.eclipse.incquery.runtime.base.api.BaseIndexOptions;
+import org.eclipse.incquery.runtime.base.api.filters.IBaseIndexResourceFilter;
 import org.eclipse.incquery.runtime.exception.IncQueryException;
 import org.emftext.refactoring.smell.calculation.CalculationFactory;
 import org.emftext.refactoring.smell.calculation.CalculationResult;
@@ -76,6 +78,15 @@ public class StructureCustom extends StructureImpl {
 		// create an *unmanaged* engine to ensure that noone else is going to use our engine
 //		AdvancedIncQueryEngine engine = AdvancedIncQueryEngine.createUnmanagedEngine(resourceSet);
 		// managed engine with better performance
+		BaseIndexOptions options = new BaseIndexOptions();
+		options.setResourceFilterConfiguration(new IBaseIndexResourceFilter() {
+		 
+		  @Override
+		  public boolean isResourceFiltered(Resource resource) {
+		    // PathMap URI scheme is used to refer to JDK classes
+		    return "pathmap".equals(resource.getURI().scheme());
+		  }
+		});
 		IncQueryEngine engine = IncQueryEngine.on(resourceSet);
 		// A specification builder is used to translate patterns to query specifications
 		SpecificationBuilder builder = new SpecificationBuilder();
