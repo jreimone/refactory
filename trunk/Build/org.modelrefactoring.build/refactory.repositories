@@ -104,21 +104,31 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/d
 // needs Log4J
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/tools/orbit/downloads/drops/R20140525021250/repository/plugins/org.apache.log4j_1.2.15.v201012070815.jar
 
-// GMF 
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/gmp/gmf-runtime/updates/releases/R201406111639/plugins/org.eclipse.gmf.runtime.emf.core_1.7.0.201406111639.jar
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/gmp/gmf-runtime/updates/releases/R201406111639/plugins/org.eclipse.gmf.runtime.emf.commands.core_1.7.0.201406111639.jar
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/gmp/gmf-runtime/updates/releases/R201406111639/plugins/org.eclipse.gmf.runtime.emf.ui.properties_1.7.0.201406111639.jar
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/gmp/gmf-runtime/updates/releases/R201406111639/plugins/org.eclipse.gmf.runtime.diagram.ui_1.8.0.201406111639.jar
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/gmp/gmf-runtime/updates/releases/R201406111639/plugins/org.eclipse.gmf.runtime.diagram.ui.properties_1.7.0.201406111639.jar
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/gmp/gmf-runtime/updates/releases/R201406111639/plugins/org.eclipse.gmf.runtime.diagram.ui.providers_1.7.0.201406111639.jar
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/gmp/gmf-runtime/updates/releases/R201406111639/plugins/org.eclipse.gmf.runtime.diagram.ui.providers.ide_1.7.0.201406111639.jar
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/gmp/gmf-runtime/updates/releases/R201406111639/plugins/org.eclipse.gmf.runtime.diagram.ui.render_1.7.0.201406111639.jar
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/gmp/gmf-runtime/updates/releases/R201406111639/plugins/org.eclipse.gmf.runtime.diagram.ui.resources.editor_1.7.0.201406111639.jar
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/gmp/gmf-runtime/updates/releases/R201406111639/plugins/org.eclipse.gmf.runtime.diagram.ui.resources.editor.ide_1.7.0.201406111639.jar
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/gmp/gmf-runtime/updates/releases/R201406111639/plugins/org.eclipse.gmf.runtime.draw2d.ui_1.8.0.201406111639.jar
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/gmp/gmf-runtime/updates/releases/R201406111639/plugins/org.eclipse.gmf.runtime.diagram.ui.printing_1.7.0.201406111639.jar
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/gmp/gmf-runtime/updates/releases/R201406111639/plugins/org.eclipse.gmf.runtime.diagram.ui.printing.render_1.8.0.201406111639.jar
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/gmp/gmf-tooling/updates/releases/plugins/org.eclipse.gmf.tooling.runtime_3.2.0.201406111907.jar
+// GMF
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/gmp/gmf-runtime/downloads/drops/1.8.0/R201406111639/gmf-runtime-1.8.0.zip
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/gmp/gmf-notation/downloads/drops/1.8.0/R201405281433/gmf-notation-1.8.0.zip 
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/gmp/gmf-tooling/downloads/drops/3.2.0/R201406241500/gmf-tooling-runtime-3.2.0.v201406241500.zip
+//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/gmp/gmf-runtime/updates/releases/R201406111639/plugins/org.eclipse.gmf.runtime.emf.core_1.7.0.201406111639.jar
+//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/gmp/gmf-runtime/updates/releases/R201406111639/plugins/org.eclipse.gmf.runtime.emf.commands.core_1.7.0.201406111639.jar
+//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/gmp/gmf-runtime/updates/releases/R201406111639/plugins/org.eclipse.gmf.runtime.emf.ui.properties_1.7.0.201406111639.jar
+//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/gmp/gmf-runtime/updates/releases/R201406111639/plugins/org.eclipse.gmf.runtime.diagram.ui_1.8.0.201406111639.jar
+//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/gmp/gmf-runtime/updates/releases/R201406111639/plugins/org.eclipse.gmf.runtime.diagram.ui.properties_1.7.0.201406111639.jar
+//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/gmp/gmf-runtime/updates/releases/R201406111639/plugins/org.eclipse.gmf.runtime.diagram.ui.providers_1.7.0.201406111639.jar
+//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/gmp/gmf-runtime/updates/releases/R201406111639/plugins/org.eclipse.gmf.runtime.diagram.ui.providers.ide_1.7.0.201406111639.jar
+//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/gmp/gmf-runtime/updates/releases/R201406111639/plugins/org.eclipse.gmf.runtime.diagram.ui.render_1.7.0.201406111639.jar
+//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/gmp/gmf-runtime/updates/releases/R201406111639/plugins/org.eclipse.gmf.runtime.diagram.ui.resources.editor_1.7.0.201406111639.jar
+//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/gmp/gmf-runtime/updates/releases/R201406111639/plugins/org.eclipse.gmf.runtime.diagram.ui.resources.editor.ide_1.7.0.201406111639.jar
+//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/gmp/gmf-runtime/updates/releases/R201406111639/plugins/org.eclipse.gmf.runtime.draw2d.ui_1.8.0.201406111639.jar
+//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/gmp/gmf-runtime/updates/releases/R201406111639/plugins/org.eclipse.gmf.runtime.diagram.ui.printing_1.7.0.201406111639.jar
+//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/gmp/gmf-runtime/updates/releases/R201406111639/plugins/org.eclipse.gmf.runtime.diagram.ui.printing.render_1.8.0.201406111639.jar
+//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/gmp/gmf-runtime/updates/releases/R201406111639/plugins/org.eclipse.gmf.runtime.common.ui_1.7.0.201406111639.jar
+//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/gmp/gmf-runtime/updates/releases/R201406111639/plugins/org.eclipse.gmf.runtime.common.ui.action.ide_1.7.0.201406111639.jar
+//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/gmp/gmf-runtime/updates/releases/R201406111639/plugins/org.eclipse.gmf.runtime.common.ui.services.properties_1.7.0.201406111639.jar
+//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/gmp/gmf-runtime/updates/releases/R201406111639/plugins/org.eclipse.gmf.runtime.emf.ui_1.7.0.201406111639.jar
+//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/gmp/gmf-runtime/updates/releases/R201406111639/plugins/org.eclipse.gmf.runtime.gef.ui_1.7.0.201406111639.jar
+//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/gmp/gmf-runtime/updates/releases/R201406111639/plugins/org.eclipse.gmf.runtime.diagram.core_1.7.0.201406111639.jar
+//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/gmp/gmf-notation/updates/releases/R201405281433/plugins/org.eclipse.gmf.runtime.notation_1.8.0.201405281433.jar
+//get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/gmp/gmf-tooling/updates/releases/plugins/org.eclipse.gmf.tooling.runtime_3.2.0.201406111907.jar
 
 // MDT OCL (needed from GMF???)
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/ocl/downloads/drops/4.1.2/R201402101137/mdt-ocl-Update-tools-4.1.2.zip
