@@ -66,6 +66,8 @@ public class CalculationFactoryImpl extends EFactoryImpl implements CalculationF
 			case CalculationPackage.CALCULATION_RESULT: return createCalculationResult();
 			case CalculationPackage.STRUCTURE: return createStructure();
 			case CalculationPackage.METRIC: return createMetric();
+			case CalculationPackage.CAUSING_OBJECTS_GROUP: return createCausingObjectsGroup();
+			case CalculationPackage.NAMED_CAUSING_OBJECT: return createNamedCausingObject();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -146,6 +148,26 @@ public class CalculationFactoryImpl extends EFactoryImpl implements CalculationF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public CausingObjectsGroup createCausingObjectsGroup() {
+		CausingObjectsGroupImpl causingObjectsGroup = new CausingObjectsGroupImpl();
+		return causingObjectsGroup;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NamedCausingObject createNamedCausingObject() {
+		NamedCausingObjectImpl namedCausingObject = new NamedCausingObjectImpl();
+		return namedCausingObject;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Monotonicity createMonotonicityFromString(EDataType eDataType, String initialValue) {
 		Monotonicity result = Monotonicity.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
@@ -158,7 +180,7 @@ public class CalculationFactoryImpl extends EFactoryImpl implements CalculationF
 	 * @generated
 	 */
 	public String convertMonotonicityToString(EDataType eDataType, Object instanceValue) {
-		return instanceValue == null ? null : instanceValue.toString();
+		return instanceValue == null ? null :instanceValue.toString();
 	}
 
 	/**

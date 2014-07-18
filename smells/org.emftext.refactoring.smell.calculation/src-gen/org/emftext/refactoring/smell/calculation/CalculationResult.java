@@ -14,8 +14,8 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.emftext.refactoring.smell.calculation.CalculationResult#getCausingObjects <em>Causing Objects</em>}</li>
  *   <li>{@link org.emftext.refactoring.smell.calculation.CalculationResult#getResultingValue <em>Resulting Value</em>}</li>
+ *   <li>{@link org.emftext.refactoring.smell.calculation.CalculationResult#getCausingObjectsGroups <em>Causing Objects Groups</em>}</li>
  * </ul>
  * </p>
  *
@@ -24,22 +24,6 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface CalculationResult extends EObject {
-	/**
-	 * Returns the value of the '<em><b>Causing Objects</b></em>' reference list.
-	 * The list contents are of type {@link org.eclipse.emf.ecore.EObject}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Causing Objects</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Causing Objects</em>' reference list.
-	 * @see org.emftext.refactoring.smell.calculation.CalculationPackage#getCalculationResult_CausingObjects()
-	 * @model
-	 * @generated
-	 */
-	EList<EObject> getCausingObjects();
-
 	/**
 	 * Returns the value of the '<em><b>Resulting Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -65,5 +49,21 @@ public interface CalculationResult extends EObject {
 	 * @generated
 	 */
 	void setResultingValue(float value);
+
+	/**
+	 * Returns the value of the '<em><b>Causing Objects Groups</b></em>' containment reference list.
+	 * The list contents are of type {@link org.emftext.refactoring.smell.calculation.CausingObjectsGroup}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Causing Objects Groups</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Causing Objects Groups</em>' containment reference list.
+	 * @see org.emftext.refactoring.smell.calculation.CalculationPackage#getCalculationResult_CausingObjectsGroups()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<CausingObjectsGroup> getCausingObjectsGroups();
 
 } // CalculationResult

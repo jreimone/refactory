@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.notify.Notifier;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -50,6 +51,8 @@ import org.emftext.refactoring.smell.calculation.Calculation;
 import org.emftext.refactoring.smell.calculation.CalculationModel;
 import org.emftext.refactoring.smell.calculation.CalculationPackage;
 import org.emftext.refactoring.smell.calculation.CalculationResult;
+import org.emftext.refactoring.smell.calculation.CausingObjectsGroup;
+import org.emftext.refactoring.smell.calculation.NamedCausingObject;
 import org.emftext.refactoring.smell.ecoresmells.EcoresmellsPackage;
 import org.emftext.refactoring.smell.registry.IQualitySmellModelInitializer;
 import org.emftext.refactoring.smell.registry.IQualitySmellRegistry;
@@ -138,9 +141,14 @@ public class FindSmellsTest {
 				System.out.println("generic smell: " + genericName);
 				System.out.println("concrete smell: " + concreteName);
 				System.out.println("quality: " + qualityName);
-				List<EObject> causingObjects = result.getCausingObjects();
-				for (EObject element : causingObjects) {
-					System.out.println("smelling element: " + EcoreUtil.getURI(element).toString());
+				List<CausingObjectsGroup> causingObjectsGroups = result.getCausingObjectsGroups();
+				for (CausingObjectsGroup causingObjectsGroup : causingObjectsGroups) {
+					System.out.println("= new smell containing several named elements =");
+					List<NamedCausingObject> namedCausingObjects = causingObjectsGroup.getNamedCausingObjects();
+					for (NamedCausingObject namedCausingObject : namedCausingObjects) {
+						String name = namedCausingObject.getName();
+						System.out.println("\tsmelling element" + (name != null?" (" + name + ")":"") + ": " + EcoreUtil.getURI(namedCausingObject.getCausingObject()).toString());
+					}
 				}
 			}
 		}

@@ -17,7 +17,9 @@ import org.eclipse.incquery.runtime.base.api.filters.IBaseIndexResourceFilter;
 import org.eclipse.incquery.runtime.exception.IncQueryException;
 import org.emftext.refactoring.smell.calculation.CalculationFactory;
 import org.emftext.refactoring.smell.calculation.CalculationResult;
+import org.emftext.refactoring.smell.calculation.CausingObjectsGroup;
 import org.emftext.refactoring.smell.calculation.Monotonicity;
+import org.emftext.refactoring.smell.calculation.NamedCausingObject;
 import org.emftext.refactoring.smell.calculation.impl.StructureImpl;
 
 
@@ -169,14 +171,19 @@ public class StructureCustom extends StructureImpl {
 	private CalculationResult getResultFromMatches(Collection<? extends IPatternMatch> matches) {
 		CalculationResult result = CalculationFactory.eINSTANCE.createCalculationResult();
 		for (IPatternMatch match : matches) {
+			CausingObjectsGroup causingObjectsGroup = CalculationFactory.eINSTANCE.createCausingObjectsGroup();
 			List<String> parameterNames = match.parameterNames();
-			for (String name : parameterNames) {
-				Object object = match.get(name);
-				if(object instanceof EObject){
-					EObject element = (EObject) object;
-					result.getCausingObjects().add(element);
+			for (String parameterName : parameterNames) {
+				Object matchObject = match.get(parameterName);
+				if(matchObject != null && matchObject instanceof EObject){
+					EObject parameterBinding = (EObject) matchObject;
+					NamedCausingObject namedCausingObject = CalculationFactory.eINSTANCE.createNamedCausingObject();
+					namedCausingObject.setName(parameterName);
+					namedCausingObject.setCausingObject(parameterBinding);
+					causingObjectsGroup.getNamedCausingObjects().add(namedCausingObject);
 				}
 			}
+			result.getCausingObjectsGroups().add(causingObjectsGroup);
 			result.setResultingValue(result.getResultingValue() + 1);
 		}
 		return result;

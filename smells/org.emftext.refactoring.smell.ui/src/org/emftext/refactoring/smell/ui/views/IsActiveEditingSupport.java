@@ -39,42 +39,8 @@ public class IsActiveEditingSupport extends EditingSupport {
 		if(element instanceof Quality && value instanceof Boolean){
 			Quality quality = (Quality) element;
 			boolean newValue = (Boolean) value;
-			boolean oldValue = quality.isActive();
 			quality.setActive(newValue);
 			viewer.update(element, null);
-//			if(!oldValue && newValue){
-//				updateMarkedAndOpenFiles();
-//			}
 		}
 	}
-
-//	private void updateMarkedAndOpenFiles() {
-//		Set<IFile> alreadyHandledFiles = new HashSet<IFile>();
-//		try {
-//			// open files
-//			IEditorReference[] editorReferences = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getEditorReferences();
-//			for (IEditorReference editorReference : editorReferences) {
-//				IEditorInput editorInput = editorReference.getEditorInput();
-//				if(editorInput instanceof IFileEditorInput){
-//					IFile openFile = ((IFileEditorInput) editorInput).getFile();
-//					if(alreadyHandledFiles.add(openFile)){
-//						SmellChecker.removeAllMarkers(openFile);
-//						openFile.touch(new NullProgressMonitor());
-//					}
-//				}
-//			}
-//			// marked files
-//			IMarker[] markers = ResourcesPlugin.getWorkspace().getRoot().findMarkers(IQualitySmellMarker.ID, true, IResource.DEPTH_INFINITE);
-//			for (IMarker marker : markers) {
-//				IFile file = (IFile) marker.getResource();
-//				if(alreadyHandledFiles.add(file)){
-//					SmellChecker.removeAllMarkers(file);
-//					file.touch(new NullProgressMonitor());
-//				}
-//			}
-//		} catch (CoreException e) {
-//			e.printStackTrace();
-//		}
-//	}
-
 }
