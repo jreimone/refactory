@@ -1,5 +1,9 @@
 package org.emftext.refactoring.smell.registry;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.WordUtils;
 import org.eclipse.core.commands.Command;
@@ -23,6 +27,7 @@ import org.emftext.refactoring.editorconnector.IEditorConnectorRegistry;
 import org.emftext.refactoring.interpreter.IRefactorer;
 import org.emftext.refactoring.interpreter.RefactorerFactory;
 import org.emftext.refactoring.registry.rolemapping.IRoleMappingRegistry;
+import org.emftext.refactoring.smell.registry.SmellResolutionQuickFixer.MarkerDeserialization;
 import org.emftext.refactoring.ui.RefactoringMenuContributor;
 
 import com.google.common.base.CaseFormat;
@@ -31,23 +36,32 @@ import com.google.common.collect.Lists;
 public class SmellResolutionQuickFix implements IMarkerResolution, IMarkerResolution2 {
 
 	private Resource resource;
-	private EObject element;
 	private RoleMapping roleMapping;
 	private IRefactorer refactorer;
 	private ImageDescriptor imageDescriptor;
 	private Image image;
 
-	public SmellResolutionQuickFix(RoleMapping roleMapping, EObject element, Resource resource) {
-		this.roleMapping = roleMapping;
-		this.element = element;
-		this.resource = resource;
-		init();
+	public SmellResolutionQuickFix(MarkerDeserialization deserialization) {
+		init(deserialization);
 	}
 
-	private void init() {
+	private void init(MarkerDeserialization deserialization) {
+		roleMapping = deserialization.getRoleMapping();
+		resource = deserialization.getResource();
 		refactorer = RefactorerFactory.eINSTANCE.getRefactorer(resource, roleMapping);
-		refactorer.setInput(Lists.newArrayList(element));
 		imageDescriptor = IRoleMappingRegistry.INSTANCE.getImageForMapping(roleMapping);
+		List<EObject> elements = deserialization.getElements();
+		if(elements != null && elements.size() > 0){
+			refactorer.setInput(elements);
+		}
+		Map<String, EObject> bindings = deserialization.getBindings();
+		if(bindings != null && bindings.size() > 0){
+			Map<String, List<EObject>> initialRoleBindings = new HashMap<String, List<EObject>>();
+			for (String roleName : bindings.keySet()) {
+				initialRoleBindings.put(roleName, Lists.newArrayList(bindings.get(roleName)));
+			}
+			refactorer.setInputRoleBindings(initialRoleBindings);
+		}
 	}
 
 	@Override

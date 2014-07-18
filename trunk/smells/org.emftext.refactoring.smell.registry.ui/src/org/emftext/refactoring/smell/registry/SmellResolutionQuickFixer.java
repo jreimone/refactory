@@ -1,5 +1,8 @@
 package org.emftext.refactoring.smell.registry;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
@@ -21,13 +24,9 @@ public class SmellResolutionQuickFixer implements IMarkerResolutionGenerator, IM
 
 	@Override
 	public IMarkerResolution[] getResolutions(IMarker marker) {
-//		System.out.println("SmellResolutionQuickFixer.getResolutions()");
-		Triple triple = initTripleFromMarker(marker);
-		EObject element = triple.getElement();
-		Resource resource = triple.getResource();
-		RoleMapping roleMapping = triple.getRoleMapping();
-		if(roleMapping != null && element != null && resource != null){
-			IMarkerResolution quickFix = new SmellResolutionQuickFix(roleMapping, element, resource);
+		MarkerDeserialization deserialization = deserializeMarker(marker);
+		if(deserialization != null){
+			IMarkerResolution quickFix = new SmellResolutionQuickFix(deserialization);
 			return new IMarkerResolution[]{quickFix};
 		}
 		return new IMarkerResolution[]{};
@@ -35,51 +34,80 @@ public class SmellResolutionQuickFixer implements IMarkerResolutionGenerator, IM
 
 	@Override
 	public boolean hasResolutions(IMarker marker) {
-//		System.out.println("SmellResolutionQuickFixer.hasResolutions()");
-		Triple triple = initTripleFromMarker(marker);
-		EObject element = triple.getElement();
-		Resource resource = triple.getResource();
-		RoleMapping roleMapping = triple.getRoleMapping();
-		if(element != null && roleMapping != null && resource != null){
+		MarkerDeserialization deserialization = deserializeMarker(marker);
+		List<EObject> elements = new ArrayList<EObject>();
+		elements.addAll(deserialization.getElements());
+		elements.addAll(deserialization.getBindings().values());
+		Resource resource = deserialization.getResource();
+		RoleMapping roleMapping = deserialization.getRoleMapping();
+		if(elements.size() > 0 && roleMapping != null && resource != null){
 			return true;
 		}
 		return false;
 	}
 
-	private Triple initTripleFromMarker(IMarker marker){
-		Triple triple = new Triple();
+	private MarkerDeserialization deserializeMarker(IMarker marker){
+		MarkerDeserialization deserialization = new MarkerDeserialization();
 		try {
 			String roleMappingUri = (String) marker.getAttribute(IQualitySmellMarker.ROLEMAPPING);
 			String elementUri = (String) marker.getAttribute(IMarker.LOCATION);
+			String bindingsString = (String) marker.getAttribute(IQualitySmellMarker.BINDINGS);
 			IResource iresource = marker.getResource();
 			IFile file = (IFile) iresource.getAdapter(IFile.class);
-			if(file != null && roleMappingUri != null && elementUri != null){
+			if(file != null && roleMappingUri != null && elementUri != null && bindingsString != null){
 				ResourceSet rs = new ResourceSetImpl();
 				URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
 				Resource resource = rs.getResource(uri, true);
-				triple.setResource(resource);
+				deserialization.setResource(resource);
 				if(resource != null){
-					uri = URI.createURI(elementUri);
-					EObject element = rs.getEObject(uri, true);
-					triple.setElement(element);
+					determineBindings(deserialization, bindingsString, rs);
 					uri = URI.createURI(roleMappingUri);
 					Map<String, Map<String, RoleMapping>> roleMappingsMap = IRoleMappingRegistry.INSTANCE.getRoleMappingsMap();
 					Map<String, RoleMapping> map = roleMappingsMap.values().iterator().next();
 					RoleMapping firstRoleMapping = map.values().iterator().next();
 					ResourceSet registryResourceSet = firstRoleMapping.eResource().getResourceSet();
 					RoleMapping roleMapping = (RoleMapping) registryResourceSet.getEObject(uri, true);
-					triple.setRoleMapping(roleMapping);
+					deserialization.setRoleMapping(roleMapping);
 				}
 			}
 		} catch (CoreException e) {
 			e.printStackTrace();
 		}
-		return triple;
+		return deserialization;
 	}
 
-	private class Triple{
+	private void determineBindings(MarkerDeserialization deserialization, String bindingsString, ResourceSet rs) {
+		// found here: http://stackoverflow.com/questions/13948751/string-parse-error
+		// 3rd answer
+		String[] bindings = bindingsString.split("[" + IQualitySmellMarker.BINDINGS_SPLIT_STRING + "]");
+		for (String binding : bindings) {
+			if(binding != null && !"".equals(binding)){
+				String[] parts = binding.split(IQualitySmellMarker.BINDINGS_NAME_SPLIT_STRING);
+				String name = null;
+				String bindingUri = null;
+				if(parts.length == 2){
+					name = parts[0];
+					bindingUri = parts[1];
+				} else {
+					bindingUri = parts[0];
+				}
+				name = name.trim();
+				bindingUri = bindingUri.trim();
+				URI uri = URI.createURI(bindingUri);
+				EObject element = rs.getEObject(uri, true);
+				if(name == null){
+					deserialization.getElements().add(element);
+				} else {
+					deserialization.getBindings().put(name, element);
+				}
+			}
+		}
+	}
+
+	protected class MarkerDeserialization{
 		private Resource resource;
-		private EObject element;
+		private List<EObject> elements = new ArrayList<EObject>();
+		private Map<String, EObject> bindings = new HashMap<String, EObject>();
 		private RoleMapping roleMapping;
 		public Resource getResource() {
 			return resource;
@@ -87,17 +115,17 @@ public class SmellResolutionQuickFixer implements IMarkerResolutionGenerator, IM
 		public void setResource(Resource resource) {
 			this.resource = resource;
 		}
-		public EObject getElement() {
-			return element;
-		}
-		public void setElement(EObject element) {
-			this.element = element;
+		public List<EObject> getElements() {
+			return elements;
 		}
 		public RoleMapping getRoleMapping() {
 			return roleMapping;
 		}
 		public void setRoleMapping(RoleMapping roleMapping) {
 			this.roleMapping = roleMapping;
+		}
+		public Map<String, EObject> getBindings() {
+			return bindings;
 		}
 	}
 }

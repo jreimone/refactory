@@ -18,8 +18,10 @@ import org.emftext.refactoring.smell.calculation.CalculationFactory;
 import org.emftext.refactoring.smell.calculation.CalculationModel;
 import org.emftext.refactoring.smell.calculation.CalculationPackage;
 import org.emftext.refactoring.smell.calculation.CalculationResult;
+import org.emftext.refactoring.smell.calculation.CausingObjectsGroup;
 import org.emftext.refactoring.smell.calculation.Metric;
 import org.emftext.refactoring.smell.calculation.Monotonicity;
+import org.emftext.refactoring.smell.calculation.NamedCausingObject;
 import org.emftext.refactoring.smell.calculation.Structure;
 
 /**
@@ -63,6 +65,20 @@ public class CalculationPackageImpl extends EPackageImpl implements CalculationP
 	 * @generated
 	 */
 	private EClass metricEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass causingObjectsGroupEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass namedCausingObjectEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -212,8 +228,8 @@ public class CalculationPackageImpl extends EPackageImpl implements CalculationP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getCalculationResult_CausingObjects() {
-		return (EReference)calculationResultEClass.getEStructuralFeatures().get(0);
+	public EAttribute getCalculationResult_ResultingValue() {
+		return (EAttribute)calculationResultEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -221,8 +237,8 @@ public class CalculationPackageImpl extends EPackageImpl implements CalculationP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getCalculationResult_ResultingValue() {
-		return (EAttribute)calculationResultEClass.getEStructuralFeatures().get(1);
+	public EReference getCalculationResult_CausingObjectsGroups() {
+		return (EReference)calculationResultEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -250,6 +266,51 @@ public class CalculationPackageImpl extends EPackageImpl implements CalculationP
 	 */
 	public EClass getMetric() {
 		return metricEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getCausingObjectsGroup() {
+		return causingObjectsGroupEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCausingObjectsGroup_NamedCausingObjects() {
+		return (EReference)causingObjectsGroupEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getNamedCausingObject() {
+		return namedCausingObjectEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getNamedCausingObject_Name() {
+		return (EAttribute)namedCausingObjectEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getNamedCausingObject_CausingObject() {
+		return (EReference)namedCausingObjectEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -299,13 +360,20 @@ public class CalculationPackageImpl extends EPackageImpl implements CalculationP
 		createEAttribute(calculationEClass, CALCULATION__SMELL_MESSAGE);
 
 		calculationResultEClass = createEClass(CALCULATION_RESULT);
-		createEReference(calculationResultEClass, CALCULATION_RESULT__CAUSING_OBJECTS);
 		createEAttribute(calculationResultEClass, CALCULATION_RESULT__RESULTING_VALUE);
+		createEReference(calculationResultEClass, CALCULATION_RESULT__CAUSING_OBJECTS_GROUPS);
 
 		structureEClass = createEClass(STRUCTURE);
 		createEReference(structureEClass, STRUCTURE__PATTERN);
 
 		metricEClass = createEClass(METRIC);
+
+		causingObjectsGroupEClass = createEClass(CAUSING_OBJECTS_GROUP);
+		createEReference(causingObjectsGroupEClass, CAUSING_OBJECTS_GROUP__NAMED_CAUSING_OBJECTS);
+
+		namedCausingObjectEClass = createEClass(NAMED_CAUSING_OBJECT);
+		createEAttribute(namedCausingObjectEClass, NAMED_CAUSING_OBJECT__NAME);
+		createEReference(namedCausingObjectEClass, NAMED_CAUSING_OBJECT__CAUSING_OBJECT);
 
 		// Create enums
 		monotonicityEEnum = createEEnum(MONOTONICITY);
@@ -360,8 +428,8 @@ public class CalculationPackageImpl extends EPackageImpl implements CalculationP
 		addEParameter(op, ecorePackage.getEFloat(), "threshold", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(calculationResultEClass, CalculationResult.class, "CalculationResult", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getCalculationResult_CausingObjects(), ecorePackage.getEObject(), null, "causingObjects", null, 0, -1, CalculationResult.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCalculationResult_ResultingValue(), ecorePackage.getEFloat(), "resultingValue", null, 1, 1, CalculationResult.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCalculationResult_CausingObjectsGroups(), this.getCausingObjectsGroup(), null, "causingObjectsGroups", null, 0, -1, CalculationResult.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(structureEClass, Structure.class, "Structure", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getStructure_Pattern(), thePatternLanguagePackage.getPattern(), null, "pattern", null, 0, 1, Structure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -371,6 +439,13 @@ public class CalculationPackageImpl extends EPackageImpl implements CalculationP
 		addEParameter(op, ecorePackage.getEFloat(), "threshold", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(metricEClass, Metric.class, "Metric", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(causingObjectsGroupEClass, CausingObjectsGroup.class, "CausingObjectsGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getCausingObjectsGroup_NamedCausingObjects(), this.getNamedCausingObject(), null, "namedCausingObjects", null, 1, -1, CausingObjectsGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(namedCausingObjectEClass, NamedCausingObject.class, "NamedCausingObject", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getNamedCausingObject_Name(), ecorePackage.getEString(), "name", null, 0, 1, NamedCausingObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getNamedCausingObject_CausingObject(), ecorePackage.getEObject(), null, "causingObject", null, 0, 1, NamedCausingObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(monotonicityEEnum, Monotonicity.class, "Monotonicity");

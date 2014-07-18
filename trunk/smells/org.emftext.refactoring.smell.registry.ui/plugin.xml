@@ -36,6 +36,12 @@
       <attribute
             name="roleMapping">
       </attribute>
+      <attribute
+            name="bindings">
+      </attribute>
+      <attribute
+            name="quality">
+      </attribute>
    </extension>
    <extension
          point="org.eclipse.ui.ide.markerResolution">
@@ -99,15 +105,28 @@
                id="org.emftext.refactoring.smell.problem">
          </markerTypeReference>
          <markerFieldReference
-               id="org.eclipse.ui.ide.resourceField">
+               id="org.eclipse.ui.ide.resourceField"
+               visible="true">
          </markerFieldReference>
          <markerFieldReference
-               id="org.eclipse.ui.ide.severityAndDescriptionField">
+               id="org.emftext.refactoring.smell.problem.qualityField"
+               visible="true">
          </markerFieldReference>
          <markerFieldReference
-               id="org.eclipse.ui.ide.pathField">
+               id="org.eclipse.ui.ide.severityAndDescriptionField"
+               visible="true">
+         </markerFieldReference>
+         <markerFieldReference
+               id="org.eclipse.ui.ide.pathField"
+               visible="true">
          </markerFieldReference>
       </markerContentGenerator>
+      <markerField
+            class="org.emftext.refactoring.smell.registry.QualityField"
+            icon="icons/qualities.gif"
+            id="org.emftext.refactoring.smell.problem.qualityField"
+            name="Quality">
+      </markerField>
    </extension>
 
 </plugin>

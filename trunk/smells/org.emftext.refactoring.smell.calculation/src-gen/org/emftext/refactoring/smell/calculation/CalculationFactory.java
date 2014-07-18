@@ -58,6 +58,24 @@ public interface CalculationFactory extends EFactory {
 	Metric createMetric();
 
 	/**
+	 * Returns a new object of class '<em>Causing Objects Group</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Causing Objects Group</em>'.
+	 * @generated
+	 */
+	CausingObjectsGroup createCausingObjectsGroup();
+
+	/**
+	 * Returns a new object of class '<em>Named Causing Object</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Named Causing Object</em>'.
+	 * @generated
+	 */
+	NamedCausingObject createNamedCausingObject();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

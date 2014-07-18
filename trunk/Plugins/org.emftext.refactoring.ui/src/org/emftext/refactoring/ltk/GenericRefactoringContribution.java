@@ -69,17 +69,19 @@ public class GenericRefactoringContribution extends RefactoringContribution {
 			String roleName = split[0];
 			Role role = RoleUtil.getRoleByName(roleMapping, roleName);
 			if(role != null){
-				split = split[1].split(";");
-				List<EObject> boundElements = new ArrayList<EObject>();
-				for (int i = 0; i < split.length; i++) {
-					String uriString = split[i];
-					EObject element = getEObjectFromURIString(rs, uriString);
-					if(element != null){
-						boundElements.add(element);
+				if(split.length > 1){
+					split = split[1].split(";");
+					List<EObject> boundElements = new ArrayList<EObject>();
+					for (int i = 0; i < split.length; i++) {
+						String uriString = split[i];
+						EObject element = getEObjectFromURIString(rs, uriString);
+						if(element != null){
+							boundElements.add(element);
+						}
 					}
-				}
-				if(!boundElements.isEmpty()){
-					bindings.put(role, boundElements);
+					if(!boundElements.isEmpty()){
+						bindings.put(role, boundElements);
+					}
 				}
 			}
 		}

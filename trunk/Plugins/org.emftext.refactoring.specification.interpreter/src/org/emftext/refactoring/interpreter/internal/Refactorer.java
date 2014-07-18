@@ -19,6 +19,7 @@
 package org.emftext.refactoring.interpreter.internal;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -198,7 +199,7 @@ public class Refactorer implements IRefactorer {
 		copier.copyReferences();
 		Map<Role, List<EObject>> copiedInputRoleBinding = new HashMap<Role, List<EObject>>();
 		for (Role boundRole : filteredRoleBindings.keySet()) {
-			if(boundRole.getModifier().contains(RoleModifier.INPUT)){
+//			if(boundRole.getModifier().contains(RoleModifier.INPUT)){
 				List<EObject> copiedBoundElements = new ArrayList<EObject>();
 				List<EObject> boundElements = filteredRoleBindings.get(boundRole);
 				for (EObject originalBoundElement : boundElements) {
@@ -210,7 +211,7 @@ public class Refactorer implements IRefactorer {
 					copiedBoundElements.add(copiedBoundElement);
 				}
 				copiedInputRoleBinding.put(boundRole, copiedBoundElements);
-			}
+//			}
 		}
 		EObject copiedModel = copier.get(model);
 		//		interpreter.setRoleBindings(copiedInputRoleBinding);
@@ -301,49 +302,53 @@ public class Refactorer implements IRefactorer {
 	}
 
 	private Map<Role, List<EObject>> filterSelectedElements() {
-		List<EObject> filteredElements = getInput();
+//		List<EObject> filteredElements = getInput();
+		Map<EObject, Role> inverse = new HashMap<EObject, Role>();
+		Map<Role, List<EObject>> inputRoleBindings = getInputRoleBindings();
+		List<EObject> filteredElements = new ArrayList<EObject>();
+		for (Role role : inputRoleBindings.keySet()) {
+			List<EObject> elements = inputRoleBindings.get(role);
+			for (EObject element : elements) {
+				inverse.put(element, role);
+				filteredElements.add(element);
+			}
+		}
+		
 		List<EObject> elementsToRemove = new LinkedList<EObject>();
+		// TODO: hier nochmal darüber nachdenken, da bei "Slow For Loop" die CounterVariable gelöscht wird, die eigentlich gebraucht wird
 		for (EObject child : filteredElements) {
 			List<EObject> othersList = new LinkedList<EObject>(filteredElements);
 			othersList.remove(child);
 			for (EObject parent : othersList) {
 				if (EcoreUtil.isAncestor(parent, child)) {
 					elementsToRemove.add(child);
+					break;
 				}
 			}
 		}
+		Map<Role, List<EObject>> filteredRoleBindings = new HashMap<Role, List<EObject>>(inputRoleBindings);
 		for (EObject child : elementsToRemove) {
-			filteredElements.remove(child);
+			Role role = inverse.get(child);
+			List<EObject> boundElements = filteredRoleBindings.get(role);
+			boundElements.remove(child);
+//			filteredElements.remove(child);
 		}
-		//		Collections.sort(filteredElements, new Comparator<EObject>() {
-		//
-		//			public int compare(EObject o1, EObject o2) {
-		//				EObject parent1 = o1.eContainer();
-		//				EObject parent2 = o2.eContainer();
-		//				if (parent1.equals(parent2)) {
-		//					int index1 = ((List<?>) parent1.eGet(o1.eContainingFeature())).indexOf(o1);
-		//					int index2 = ((List<?>) parent1.eGet(o2.eContainingFeature())).indexOf(o2);
-		//					return index1 - index2;
-		//				}
-		//				return 0;
-		//			}
-		//		});
-		Map<Role, List<EObject>> filteredRoleBindings = new HashMap<Role, List<EObject>>();
-		for (EObject filteredElement : filteredElements) {
-			for (Role boundRole : roleBindings.keySet()) {
-				List<EObject> boundElements = roleBindings.get(boundRole);
-				if(boundElements.contains(filteredElement)){
-					List<EObject> filteredBoundElements = filteredRoleBindings.get(boundRole);
-					if(filteredBoundElements == null){
-						filteredBoundElements = new ArrayList<EObject>();
-						filteredRoleBindings.put(boundRole, filteredBoundElements);
-					}
-					if(!filteredBoundElements.contains(filteredElement)){
-						filteredBoundElements.add(filteredElement);
-					}
-				}
-			}
-		}
+//		Map<Role, List<EObject>> filteredRoleBindings = new HashMap<Role, List<EObject>>();
+//		for (EObject filteredElement : filteredElements) {
+//			for (Role boundRole : roleBindings.keySet()) {
+//				List<EObject> boundElements = roleBindings.get(boundRole);
+//				if(boundElements.contains(filteredElement)){
+//					List<EObject> filteredBoundElements = filteredRoleBindings.get(boundRole);
+//					if(filteredBoundElements == null){
+//						filteredBoundElements = new ArrayList<EObject>();
+//						filteredRoleBindings.put(boundRole, filteredBoundElements);
+//					}
+//					if(!filteredBoundElements.contains(filteredElement)){
+//						filteredBoundElements.add(filteredElement);
+//					}
+//				}
+//			}
+//		}
 		return filteredRoleBindings;
 	}
 
@@ -365,7 +370,8 @@ public class Refactorer implements IRefactorer {
 		for (String roleName : inputRoleBinding.keySet()) {
 			Role role = RoleUtil.getRoleByName(roleMapping, roleName);
 			List<Role> inputRoles = RoleUtil.getAllInputRoles(roleMapping);
-			if(role != null && inputRoles.contains(role)){
+//			if(role != null && inputRoles.contains(role)){
+			if(role != null){
 				List<EObject> resolvedElements = new ArrayList<EObject>();
 				for (EObject element : inputRoleBinding.get(roleName)) {
 					if(!element.eIsProxy()){
@@ -373,9 +379,12 @@ public class Refactorer implements IRefactorer {
 					}
 				}
 				if(!resolvedElements.isEmpty()){
-					List<EObject> filteredObjects = RoleUtil.filterObjectsByInputRoles(resolvedElements, roleMapping);
-					boundInputRoles.add(role);
-					roleBindings.put(role, filteredObjects);
+					if(inputRoles.contains(role)){
+						boundInputRoles.add(role);
+					}
+//					List<EObject> filteredObjects = RoleUtil.filterObjectsByInputRoles(resolvedElements, roleMapping);
+//					roleBindings.put(role, filteredObjects);
+					roleBindings.put(role, resolvedElements);
 				}
 			}
 		}
@@ -417,14 +426,15 @@ public class Refactorer implements IRefactorer {
 	}
 
 	public Map<Role, List<EObject>> getInputRoleBindings(){
-		Map<Role, List<EObject>> inputRoleBindings = new HashMap<Role, List<EObject>>();
-		if(boundInputRoles.isEmpty()){
-			boundInputRoles = RoleUtil.getBoundInputRoles(roleBindings);
-		}
-		for (Role inputRole : boundInputRoles) {
-			List<EObject> boundElements = roleBindings.get(inputRole);
-			inputRoleBindings.put(inputRole, boundElements);
-		}
-		return inputRoleBindings;
+//		Map<Role, List<EObject>> inputRoleBindings = new HashMap<Role, List<EObject>>();
+//		if(boundInputRoles.isEmpty()){
+//			boundInputRoles = RoleUtil.getBoundInputRoles(roleBindings);
+//		}
+//		for (Role inputRole : boundInputRoles) {
+//			List<EObject> boundElements = roleBindings.get(inputRole);
+//			inputRoleBindings.put(inputRole, boundElements);
+//		}
+//		return inputRoleBindings;
+		return roleBindings;
 	}
 }

@@ -98,6 +98,18 @@ public class CalculationSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case CalculationPackage.CAUSING_OBJECTS_GROUP: {
+				CausingObjectsGroup causingObjectsGroup = (CausingObjectsGroup)theEObject;
+				T result = caseCausingObjectsGroup(causingObjectsGroup);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CalculationPackage.NAMED_CAUSING_OBJECT: {
+				NamedCausingObject namedCausingObject = (NamedCausingObject)theEObject;
+				T result = caseNamedCausingObject(namedCausingObject);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -174,6 +186,36 @@ public class CalculationSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseMetric(Metric object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Causing Objects Group</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Causing Objects Group</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCausingObjectsGroup(CausingObjectsGroup object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Named Causing Object</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Named Causing Object</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseNamedCausingObject(NamedCausingObject object) {
 		return null;
 	}
 

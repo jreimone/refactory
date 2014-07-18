@@ -88,6 +88,14 @@ public class CalculationAdapterFactory extends AdapterFactoryImpl {
 				return createMetricAdapter();
 			}
 			@Override
+			public Adapter caseCausingObjectsGroup(CausingObjectsGroup object) {
+				return createCausingObjectsGroupAdapter();
+			}
+			@Override
+			public Adapter caseNamedCausingObject(NamedCausingObject object) {
+				return createNamedCausingObjectAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -174,6 +182,34 @@ public class CalculationAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createMetricAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.emftext.refactoring.smell.calculation.CausingObjectsGroup <em>Causing Objects Group</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.emftext.refactoring.smell.calculation.CausingObjectsGroup
+	 * @generated
+	 */
+	public Adapter createCausingObjectsGroupAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.emftext.refactoring.smell.calculation.NamedCausingObject <em>Named Causing Object</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.emftext.refactoring.smell.calculation.NamedCausingObject
+	 * @generated
+	 */
+	public Adapter createNamedCausingObjectAdapter() {
 		return null;
 	}
 

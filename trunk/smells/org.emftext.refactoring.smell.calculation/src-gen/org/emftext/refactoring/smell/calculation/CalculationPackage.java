@@ -150,22 +150,22 @@ public interface CalculationPackage extends EPackage {
 	int CALCULATION_RESULT = 2;
 
 	/**
-	 * The feature id for the '<em><b>Causing Objects</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALCULATION_RESULT__CAUSING_OBJECTS = 0;
-
-	/**
 	 * The feature id for the '<em><b>Resulting Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CALCULATION_RESULT__RESULTING_VALUE = 1;
+	int CALCULATION_RESULT__RESULTING_VALUE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Causing Objects Groups</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALCULATION_RESULT__CAUSING_OBJECTS_GROUPS = 1;
 
 	/**
 	 * The number of structural features of the '<em>Result</em>' class.
@@ -296,6 +296,71 @@ public interface CalculationPackage extends EPackage {
 	int METRIC_FEATURE_COUNT = CALCULATION_FEATURE_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link org.emftext.refactoring.smell.calculation.impl.CausingObjectsGroupImpl <em>Causing Objects Group</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.emftext.refactoring.smell.calculation.impl.CausingObjectsGroupImpl
+	 * @see org.emftext.refactoring.smell.calculation.impl.CalculationPackageImpl#getCausingObjectsGroup()
+	 * @generated
+	 */
+	int CAUSING_OBJECTS_GROUP = 5;
+
+	/**
+	 * The feature id for the '<em><b>Named Causing Objects</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CAUSING_OBJECTS_GROUP__NAMED_CAUSING_OBJECTS = 0;
+
+	/**
+	 * The number of structural features of the '<em>Causing Objects Group</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CAUSING_OBJECTS_GROUP_FEATURE_COUNT = 1;
+
+	/**
+	 * The meta object id for the '{@link org.emftext.refactoring.smell.calculation.impl.NamedCausingObjectImpl <em>Named Causing Object</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.emftext.refactoring.smell.calculation.impl.NamedCausingObjectImpl
+	 * @see org.emftext.refactoring.smell.calculation.impl.CalculationPackageImpl#getNamedCausingObject()
+	 * @generated
+	 */
+	int NAMED_CAUSING_OBJECT = 6;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMED_CAUSING_OBJECT__NAME = 0;
+
+	/**
+	 * The feature id for the '<em><b>Causing Object</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMED_CAUSING_OBJECT__CAUSING_OBJECT = 1;
+
+	/**
+	 * The number of structural features of the '<em>Named Causing Object</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMED_CAUSING_OBJECT_FEATURE_COUNT = 2;
+
+	/**
 	 * The meta object id for the '{@link org.emftext.refactoring.smell.calculation.Monotonicity <em>Monotonicity</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -303,7 +368,7 @@ public interface CalculationPackage extends EPackage {
 	 * @see org.emftext.refactoring.smell.calculation.impl.CalculationPackageImpl#getMonotonicity()
 	 * @generated
 	 */
-	int MONOTONICITY = 5;
+	int MONOTONICITY = 7;
 
 
 	/**
@@ -392,17 +457,6 @@ public interface CalculationPackage extends EPackage {
 	EClass getCalculationResult();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.emftext.refactoring.smell.calculation.CalculationResult#getCausingObjects <em>Causing Objects</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Causing Objects</em>'.
-	 * @see org.emftext.refactoring.smell.calculation.CalculationResult#getCausingObjects()
-	 * @see #getCalculationResult()
-	 * @generated
-	 */
-	EReference getCalculationResult_CausingObjects();
-
-	/**
 	 * Returns the meta object for the attribute '{@link org.emftext.refactoring.smell.calculation.CalculationResult#getResultingValue <em>Resulting Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -412,6 +466,17 @@ public interface CalculationPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getCalculationResult_ResultingValue();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.emftext.refactoring.smell.calculation.CalculationResult#getCausingObjectsGroups <em>Causing Objects Groups</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Causing Objects Groups</em>'.
+	 * @see org.emftext.refactoring.smell.calculation.CalculationResult#getCausingObjectsGroups()
+	 * @see #getCalculationResult()
+	 * @generated
+	 */
+	EReference getCalculationResult_CausingObjectsGroups();
 
 	/**
 	 * Returns the meta object for class '{@link org.emftext.refactoring.smell.calculation.Structure <em>Structure</em>}'.
@@ -443,6 +508,59 @@ public interface CalculationPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getMetric();
+
+	/**
+	 * Returns the meta object for class '{@link org.emftext.refactoring.smell.calculation.CausingObjectsGroup <em>Causing Objects Group</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Causing Objects Group</em>'.
+	 * @see org.emftext.refactoring.smell.calculation.CausingObjectsGroup
+	 * @generated
+	 */
+	EClass getCausingObjectsGroup();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.emftext.refactoring.smell.calculation.CausingObjectsGroup#getNamedCausingObjects <em>Named Causing Objects</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Named Causing Objects</em>'.
+	 * @see org.emftext.refactoring.smell.calculation.CausingObjectsGroup#getNamedCausingObjects()
+	 * @see #getCausingObjectsGroup()
+	 * @generated
+	 */
+	EReference getCausingObjectsGroup_NamedCausingObjects();
+
+	/**
+	 * Returns the meta object for class '{@link org.emftext.refactoring.smell.calculation.NamedCausingObject <em>Named Causing Object</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Named Causing Object</em>'.
+	 * @see org.emftext.refactoring.smell.calculation.NamedCausingObject
+	 * @generated
+	 */
+	EClass getNamedCausingObject();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.emftext.refactoring.smell.calculation.NamedCausingObject#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.emftext.refactoring.smell.calculation.NamedCausingObject#getName()
+	 * @see #getNamedCausingObject()
+	 * @generated
+	 */
+	EAttribute getNamedCausingObject_Name();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.emftext.refactoring.smell.calculation.NamedCausingObject#getCausingObject <em>Causing Object</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Causing Object</em>'.
+	 * @see org.emftext.refactoring.smell.calculation.NamedCausingObject#getCausingObject()
+	 * @see #getNamedCausingObject()
+	 * @generated
+	 */
+	EReference getNamedCausingObject_CausingObject();
 
 	/**
 	 * Returns the meta object for enum '{@link org.emftext.refactoring.smell.calculation.Monotonicity <em>Monotonicity</em>}'.
@@ -547,20 +665,20 @@ public interface CalculationPackage extends EPackage {
 		EClass CALCULATION_RESULT = eINSTANCE.getCalculationResult();
 
 		/**
-		 * The meta object literal for the '<em><b>Causing Objects</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CALCULATION_RESULT__CAUSING_OBJECTS = eINSTANCE.getCalculationResult_CausingObjects();
-
-		/**
 		 * The meta object literal for the '<em><b>Resulting Value</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute CALCULATION_RESULT__RESULTING_VALUE = eINSTANCE.getCalculationResult_ResultingValue();
+
+		/**
+		 * The meta object literal for the '<em><b>Causing Objects Groups</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CALCULATION_RESULT__CAUSING_OBJECTS_GROUPS = eINSTANCE.getCalculationResult_CausingObjectsGroups();
 
 		/**
 		 * The meta object literal for the '{@link org.emftext.refactoring.smell.calculation.impl.StructureImpl <em>Structure</em>}' class.
@@ -589,6 +707,50 @@ public interface CalculationPackage extends EPackage {
 		 * @generated
 		 */
 		EClass METRIC = eINSTANCE.getMetric();
+
+		/**
+		 * The meta object literal for the '{@link org.emftext.refactoring.smell.calculation.impl.CausingObjectsGroupImpl <em>Causing Objects Group</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.emftext.refactoring.smell.calculation.impl.CausingObjectsGroupImpl
+		 * @see org.emftext.refactoring.smell.calculation.impl.CalculationPackageImpl#getCausingObjectsGroup()
+		 * @generated
+		 */
+		EClass CAUSING_OBJECTS_GROUP = eINSTANCE.getCausingObjectsGroup();
+
+		/**
+		 * The meta object literal for the '<em><b>Named Causing Objects</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CAUSING_OBJECTS_GROUP__NAMED_CAUSING_OBJECTS = eINSTANCE.getCausingObjectsGroup_NamedCausingObjects();
+
+		/**
+		 * The meta object literal for the '{@link org.emftext.refactoring.smell.calculation.impl.NamedCausingObjectImpl <em>Named Causing Object</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.emftext.refactoring.smell.calculation.impl.NamedCausingObjectImpl
+		 * @see org.emftext.refactoring.smell.calculation.impl.CalculationPackageImpl#getNamedCausingObject()
+		 * @generated
+		 */
+		EClass NAMED_CAUSING_OBJECT = eINSTANCE.getNamedCausingObject();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute NAMED_CAUSING_OBJECT__NAME = eINSTANCE.getNamedCausingObject_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Causing Object</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference NAMED_CAUSING_OBJECT__CAUSING_OBJECT = eINSTANCE.getNamedCausingObject_CausingObject();
 
 		/**
 		 * The meta object literal for the '{@link org.emftext.refactoring.smell.calculation.Monotonicity <em>Monotonicity</em>}' enum.

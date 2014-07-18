@@ -29,8 +29,8 @@
       </genOperations>
     </genClasses>
     <genClasses ecoreClass="calculation.ecore#//CalculationResult">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference calculation.ecore#//CalculationResult/causingObjects"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute calculation.ecore#//CalculationResult/resultingValue"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference calculation.ecore#//CalculationResult/causingObjectsGroups"/>
     </genClasses>
     <genClasses ecoreClass="calculation.ecore#//Structure">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference calculation.ecore#//Structure/pattern"/>
@@ -40,5 +40,12 @@
       </genOperations>
     </genClasses>
     <genClasses ecoreClass="calculation.ecore#//Metric"/>
+    <genClasses ecoreClass="calculation.ecore#//CausingObjectsGroup">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference calculation.ecore#//CausingObjectsGroup/namedCausingObjects"/>
+    </genClasses>
+    <genClasses ecoreClass="calculation.ecore#//NamedCausingObject">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute calculation.ecore#//NamedCausingObject/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference calculation.ecore#//NamedCausingObject/causingObject"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>
