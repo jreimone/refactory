@@ -10,7 +10,7 @@ import "http://www.emftext.org/java/variables"
 import "http://www.emftext.org/java/statements"
 
 
-pattern rigidAlarmManager(repeatingExpression:MethodCall) = {
+pattern rigidAlarmManager(Selection:MethodCall) = {
 	Class.^extends(actualClass, superClassRef);
 	NamespaceClassifierReference.classifierReferences(superClassRef, classifierReference);
 	ClassifierReference.target(classifierReference, superClass);
@@ -20,8 +20,8 @@ pattern rigidAlarmManager(repeatingExpression:MethodCall) = {
 
 	ExpressionStatement.expression(bindingStatement, alarmIdentifier);
 	IdentifierReference.target(alarmIdentifier, alarmIdentifierReference);
-	IdentifierReference.next(alarmIdentifier, repeatingExpression);
-	MethodCall.target.name(repeatingExpression, "setRepeating");
+	IdentifierReference.next(alarmIdentifier, Selection);
+	MethodCall.target.name(Selection, "setRepeating");
 
 	LocalVariable.typeReference(alarmIdentifierReference, alarmReferenceClassfier);
 	NamespaceClassifierReference.classifierReferences.target.name(alarmReferenceClassfier, "AlarmManager");

@@ -9,6 +9,7 @@ import java.util.Map;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -19,19 +20,32 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.emftext.language.java.annotations.AnnotationAttribute;
+import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.expressions.AdditiveExpression;
 import org.emftext.language.java.expressions.AssignmentExpression;
 import org.emftext.language.java.expressions.AssignmentExpressionChild;
 import org.emftext.language.java.expressions.ExpressionList;
 import org.emftext.language.java.expressions.RelationExpression;
 import org.emftext.language.java.expressions.RelationExpressionChild;
+import org.emftext.language.java.generics.QualifiedTypeArgument;
+import org.emftext.language.java.generics.TypeArgument;
+import org.emftext.language.java.parameters.OrdinaryParameter;
+import org.emftext.language.java.parameters.ParametersFactory;
 import org.emftext.language.java.references.IdentifierReference;
+import org.emftext.language.java.references.ReferenceableElement;
+import org.emftext.language.java.references.ReferencesFactory;
 import org.emftext.language.java.resource.java.IJavaOptions;
 import org.emftext.language.java.statements.ForEachLoop;
 import org.emftext.language.java.statements.ForLoop;
 import org.emftext.language.java.statements.ForLoopInitializer;
 import org.emftext.language.java.statements.Statement;
+import org.emftext.language.java.statements.StatementListContainer;
+import org.emftext.language.java.statements.StatementsFactory;
 import org.emftext.language.java.statements.impl.StatementsFactoryImpl;
+import org.emftext.language.java.types.ClassifierReference;
+import org.emftext.language.java.types.Type;
+import org.emftext.language.java.types.TypeReference;
+import org.emftext.language.java.types.TypesFactory;
 import org.emftext.language.java.variables.LocalVariable;
 import org.emftext.language.java.variables.Variable;
 import org.emftext.language.refactoring.refactoring_specification.RefactoringSpecification;
@@ -49,19 +63,49 @@ public class ReplaceSlowForLoop extends AbstractRefactoringPostProcessor {
 			List<IModelRefactoringWizardPage> customWizardPages,
 			boolean isFakeRun, Map<EObject, EObject> copier) {
 
-		ForLoop fi = RoleUtil.getFirstObjectForRole("Selection", ForLoop.class, roleBindings);
+		ForLoop fi = RoleUtil.getFirstObjectForRole("ForLoop", ForLoop.class, roleBindings);
+		Variable indexVariable = RoleUtil.getFirstObjectForRole("CounterVariable", Variable.class, roleBindings);
+		Variable iterableVariable = RoleUtil.getFirstObjectForRole("IteratorVariable", Variable.class, roleBindings);
 
-		Variable indexVariable = getIndexVariable(fi.getInit());
-		Variable iterableVariable = getIterableVariable(indexVariable, (RelationExpression)fi.getCondition());
-		ForEachLoop extendedLoop = createExtendedForLoop(fi.getStatement());
+//		Variable indexVariable = getIndexVariable(fi.getInit());
+//		Variable iterableVariable = getIterableVariable(indexVariable, (RelationExpression)fi.getCondition());
+//		ForEachLoop extendedLoop = createExtendedForLoop(fi.getStatement());
+		ForEachLoop extendedLoop = createForEachLoop(fi, iterableVariable);
 
 		fi.addBeforeContainingStatement(extendedLoop);
-
+		StatementListContainer container = (StatementListContainer) fi.eContainer();
+		container.getStatements().remove(fi);
 		return Status.OK_STATUS;
+	}
 
-		/*return super.process(roleBindings, refactoredModel, resourceSet, change,
-				refSpec, customWizardPages, isFakeRun, copier);
-		 */
+	private ForEachLoop createForEachLoop(ForLoop forLoop, Variable iterableVariable) {
+		ForEachLoop forEachLoop = StatementsFactory.eINSTANCE.createForEachLoop();
+		forEachLoop.setStatement(forLoop.getStatement());
+		IdentifierReference iterableReference = ReferencesFactory.eINSTANCE.createIdentifierReference();
+		iterableReference.setTarget(iterableVariable);
+		forEachLoop.setCollection(iterableReference);
+		Classifier elementType = determineElementType(iterableVariable);
+		OrdinaryParameter parameter = ParametersFactory.eINSTANCE.createOrdinaryParameter();
+		ClassifierReference classifierReference = TypesFactory.eINSTANCE.createClassifierReference();
+		classifierReference.setTarget(elementType);
+		parameter.setTypeReference(classifierReference);
+		parameter.setName("forEachLoopElement");
+		forEachLoop.setNext(parameter);
+		return forEachLoop;
+	}
+
+	private Classifier determineElementType(Variable iterableVariable) {
+		TypeReference typeReference = iterableVariable.getTypeReference();
+		List<TypeArgument> typeArguments = typeReference.getPureClassifierReference().getTypeArguments();
+		TypeArgument typeArgument = typeArguments.get(0);
+		if(typeArgument instanceof QualifiedTypeArgument){
+			QualifiedTypeArgument qualifiedTypeArgument = (QualifiedTypeArgument) typeArgument;
+			Type targetType = qualifiedTypeArgument.getTypeReference().getTarget();
+			if(targetType instanceof Classifier){
+				return (Classifier) targetType;
+			}
+		}
+		return null;
 	}
 
 	private Variable getIterableVariable(Variable indexVariable, RelationExpression condition){
@@ -70,8 +114,11 @@ public class ReplaceSlowForLoop extends AbstractRefactoringPostProcessor {
 		for(RelationExpressionChild relationExpressionChild : condition.getChildren()){
 			if (relationExpressionChild instanceof IdentifierReference){
 				IdentifierReference ref = (IdentifierReference)relationExpressionChild;
-				test(ref);
-
+//				test(ref);
+				ReferenceableElement target = ref.getTarget();
+				if(target instanceof Variable){
+					return (Variable) target;
+				}
 			}
 			if (relationExpressionChild instanceof AdditiveExpression){
 				//relationExpressionChild
@@ -134,15 +181,28 @@ public class ReplaceSlowForLoop extends AbstractRefactoringPostProcessor {
 					(AssignmentExpression)expressionList.getExpressions().get(0);
 			System.out.println(assignmentExpression.getChild().eClass().getName());
 			IdentifierReference ref = (IdentifierReference)assignmentExpression.getChild();
+			ReferenceableElement target = ref.getTarget();
+			System.out.println(target.eClass().getName());
 			EStructuralFeature feature = ref.eClass().getEStructuralFeature("target");
 			Object test = ref.eGet(feature);
 			System.out.println(test);
+			Variable variable = determineVariabel(init);
+			System.out.println(variable);
 		}
-
-
 		return result;
 	}
 
+	private Variable determineVariabel(ForLoopInitializer init){
+		TreeIterator<EObject> iterator = init.eAllContents();
+		while (iterator.hasNext()) {
+			EObject eObject = (EObject) iterator.next();
+			if(eObject instanceof Variable){
+				return (Variable) eObject;
+			}
+		}
+		return null;
+	}
+	
 	private ForEachLoop createExtendedForLoop(Statement statement){
 		ForEachLoop result = null; 
 		StatementsFactoryImpl statementsFactory = new StatementsFactoryImpl();

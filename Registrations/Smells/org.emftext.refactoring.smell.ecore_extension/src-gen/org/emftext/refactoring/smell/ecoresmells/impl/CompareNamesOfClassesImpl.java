@@ -13,7 +13,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.emftext.refactoring.smell.calculation.CalculationFactory;
 import org.emftext.refactoring.smell.calculation.CalculationResult;
+import org.emftext.refactoring.smell.calculation.CausingObjectsGroup;
 import org.emftext.refactoring.smell.calculation.Monotonicity;
+import org.emftext.refactoring.smell.calculation.NamedCausingObject;
 import org.emftext.refactoring.smell.calculation.impl.MetricImpl;
 import org.emftext.refactoring.smell.ecoresmells.CompareNamesOfClasses;
 import org.emftext.refactoring.smell.ecoresmells.EcoresmellsPackage;
@@ -88,12 +90,18 @@ public class CompareNamesOfClassesImpl extends MetricImpl implements CompareName
 		}
 		for (List<EClassifier> list : classifiersWithSameName.values()) {
 			if(list.size() > 1){
-				result.getCausingObjects().addAll(list);
+				CausingObjectsGroup causingObjectsGroup = CalculationFactory.eINSTANCE.createCausingObjectsGroup();
+				for (EClassifier classifier : list) {
+					NamedCausingObject namedCausingObject = CalculationFactory.eINSTANCE.createNamedCausingObject();
+					causingObjectsGroup.getNamedCausingObjects().add(namedCausingObject);
+					namedCausingObject.setCausingObject(classifier);
+				}
+				result.getCausingObjectsGroups().add(causingObjectsGroup);
 			}
 		}
 		// means: classes with same name --> if only one is contained in the result it's OK, because no other
 		// class has the same name --> threshold must be set to 2 at least
-		result.setResultingValue(result.getCausingObjects().size());
+		result.setResultingValue(result.getCausingObjectsGroups().size());
 		return result;
 	}
 	

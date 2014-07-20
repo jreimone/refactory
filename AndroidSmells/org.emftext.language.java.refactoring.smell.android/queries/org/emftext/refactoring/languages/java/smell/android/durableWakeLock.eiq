@@ -10,7 +10,7 @@ import "http://www.emftext.org/java/variables"
 import "http://www.emftext.org/java/statements"
 
 
-pattern durableWakeLock(acquireExpression:MethodCall) = {
+pattern durableWakeLock(Selection:MethodCall) = {
 	Class.^extends(actualClass, superClassRef);
 	NamespaceClassifierReference.classifierReferences(superClassRef, classifierReference);
 	ClassifierReference.target(classifierReference, superClass);
@@ -20,9 +20,9 @@ pattern durableWakeLock(acquireExpression:MethodCall) = {
 	
 	ExpressionStatement.expression(bindingStatement, wakeLockIdentifier);
 	IdentifierReference.target(wakeLockIdentifier, wakeLockIdentifierReference);
-	IdentifierReference.next(wakeLockIdentifier, acquireExpression);
-	MethodCall.target.name(acquireExpression, "acquire");
-	neg find hasArguments_dur(acquireExpression);
+	IdentifierReference.next(wakeLockIdentifier, Selection);
+	MethodCall.target.name(Selection, "acquire");
+	neg find hasArguments_dur(Selection);
 
 	LocalVariable.typeReference(wakeLockIdentifierReference, wakeLockIdentifierReferenceClassfier);
 	NamespaceClassifierReference.classifierReferences.target.name(wakeLockIdentifierReferenceClassfier, "WakeLock");

@@ -10,15 +10,15 @@ import "http://www.emftext.org/java/variables"
 import "http://www.emftext.org/java/statements"
 
 
-pattern interruptingFromBackground(expression:ExpressionStatement){
+pattern interruptingFromBackground(Selection:ExpressionStatement){
 	Class.^extends(actualClass, superClassRef);
 	NamespaceClassifierReference.classifierReferences(superClassRef, classifierReference);
 	ClassifierReference.target(classifierReference, superClass);
 	find isServiceOrBroadcastReciever(superClass);
 	
-	find startsActivityOrToast(expression);
+	find startsActivityOrToast(Selection);
 	Class.members(actualClass, method);
-	find parentContainsSomething+(method, expression);
+	find parentContainsSomething+(method, Selection);
 }
 
 private pattern startsActivityOrToast(expression) {

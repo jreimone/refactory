@@ -7,17 +7,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.language.refactoring.roles.RoleModel;
 import org.emftext.refactoring.smell.calculation.CalculationFactory;
 import org.emftext.refactoring.smell.calculation.CalculationResult;
+import org.emftext.refactoring.smell.calculation.CausingObjectsGroup;
 import org.emftext.refactoring.smell.calculation.Monotonicity;
+import org.emftext.refactoring.smell.calculation.NamedCausingObject;
 import org.emftext.refactoring.smell.calculation.impl.MetricImpl;
-
 import org.emftext.refactoring.smell.rolessmell.DistinctRoleNames;
 import org.emftext.refactoring.smell.rolessmell.RolessmellPackage;
 
@@ -67,10 +66,16 @@ public class DistinctRoleNamesImpl extends MetricImpl implements DistinctRoleNam
 			}
 			for (List<Role> sameNamedRoles : rolesMap.values()) {
 				if(sameNamedRoles.size() > 1){
-					calculationResult.getCausingObjects().addAll(sameNamedRoles);
+					CausingObjectsGroup causingObjectsGroup = CalculationFactory.eINSTANCE.createCausingObjectsGroup();
+					for (Role role : sameNamedRoles) {
+						NamedCausingObject namedCausingObject = CalculationFactory.eINSTANCE.createNamedCausingObject();
+						causingObjectsGroup.getNamedCausingObjects().add(namedCausingObject);
+						namedCausingObject.setCausingObject(role);
+						calculationResult.getCausingObjectsGroups().add(causingObjectsGroup);
+					}
 				}
 			}
-			calculationResult.setResultingValue(calculationResult.getCausingObjects().size());
+			calculationResult.setResultingValue(calculationResult.getCausingObjectsGroups().size());
 		}
 		return calculationResult;
 	}

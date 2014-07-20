@@ -10,13 +10,13 @@ import "http://www.emftext.org/java/variables"
 import "http://www.emftext.org/java/statements"
 
 
-pattern noMemoryResolver(actualClass:Class) = {
-	Class.^extends(actualClass, superClassRef);
+pattern noMemoryResolver(Selection:Class) = {
+	Class.^extends(Selection, superClassRef);
 	NamespaceClassifierReference.classifierReferences(superClassRef, classifierReference);
 	ClassifierReference.target(classifierReference, superClass);
 	Class.name(superClass, "Activity");
 	
-	neg find hasMethod_mom(actualClass, "onLowMemoryResolver");
+	neg find hasMethod_mom(Selection, "onLowMemoryResolver");
 }
 
 private pattern hasMethod_mom(class, method) = {

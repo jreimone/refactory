@@ -27,7 +27,7 @@ public class EcoresmellsFactoryImpl extends EFactoryImpl implements EcoresmellsF
 	 */
 	public static EcoresmellsFactory init() {
 		try {
-			EcoresmellsFactory theEcoresmellsFactory = (EcoresmellsFactory)EPackage.Registry.INSTANCE.getEFactory("http://modelrefactoring.org/smell/calculation/ecore"); 
+			EcoresmellsFactory theEcoresmellsFactory = (EcoresmellsFactory)EPackage.Registry.INSTANCE.getEFactory(EcoresmellsPackage.eNS_URI);
 			if (theEcoresmellsFactory != null) {
 				return theEcoresmellsFactory;
 			}

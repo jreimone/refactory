@@ -1,13 +1,21 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: RoleModel Smells
+Bundle-Name: %pluginName
 Bundle-SymbolicName: org.emftext.refactoring.smell.roles;singleton:=true
 Bundle-Version: 0.0.1
-Bundle-Vendor: www.modelrefactoring.org
+Bundle-ClassPath: .
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Require-Bundle: org.emftext.refactoring.smell.calculation,
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore;visibility:=reexport,
+ org.emftext.refactoring.smell.calculation;visibility:=reexport,
+ org.eclipse.incquery.patternlanguage;visibility:=reexport,
+ org.eclipse.xtext.common.types;visibility:=reexport,
+ org.eclipse.xtext.xbase;visibility:=reexport,
  org.emftext.refactoring.smell.registry.ui,
  org.emftext.language.refactoring.roles
+Bundle-ActivationPolicy: lazy
 Export-Package: org.emftext.refactoring.smell.rolessmell,
  org.emftext.refactoring.smell.rolessmell.impl,
  org.emftext.refactoring.smell.rolessmell.util

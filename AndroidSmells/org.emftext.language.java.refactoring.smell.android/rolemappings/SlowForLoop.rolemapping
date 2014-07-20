@@ -5,6 +5,8 @@ ROLEMODELMAPPING FOR <http://www.emftext.org/java>
 	with an extended for-loop due to performance reasons.
 	See: http://www.modelrefactoring.org/smell_catalog/smells/slow_loop.html
 */
-"Replace slow for loop with extended for loop" maps <SelectX> { 
-	 Selection := java.statements.ForLoop; 
+"Replace slow for loop with extended for loop" maps <SlowForLoop> { 
+	 ForLoop := java.statements.ForLoop; 
+	 CounterVariable := java.variables.Variable;
+	 IteratorVariable := java.variables.Variable;
 }

@@ -10,7 +10,7 @@ import "http://www.emftext.org/java/statements"
 // inspired by the GReQL query for "early resource binding" from the following paper:
 // Marion Gottschalk, Mirco Joseﬁok, Jan Jelschen, Andreas Winter (2012) 
 // "Removing Energy Code Smells with Reengineering Services"
-pattern earlyResourceBinding(bindingStatement:ExpressionStatement){
+pattern earlyResourceBinding(Selection:ExpressionStatement){
 	// find the class extending 'Activity'
 	Class.^extends(actualClass, superClassRef);
 	NamespaceClassifierReference.classifierReferences(superClassRef, classifierReference);
@@ -20,11 +20,11 @@ pattern earlyResourceBinding(bindingStatement:ExpressionStatement){
 	Class.members(actualClass, onCreateMethod);
 	ClassMethod.name(onCreateMethod, "onCreate");
 	// find the binding statement calling 'requestLocationUpdates(..)' too early
-	ExpressionStatement.expression(bindingStatement, earlyBindingMethodCallReference);
+	ExpressionStatement.expression(Selection, earlyBindingMethodCallReference);
 	IdentifierReference.next(earlyBindingMethodCallReference, earlyBindingMethodCall);
 	MethodCall.target(earlyBindingMethodCall, requestLocationUpdatesMethod);
 	ClassMethod.name(requestLocationUpdatesMethod, "requestLocationUpdates");
-	find parentContainsBindingExpression+(onCreateMethod, bindingStatement);
+	find parentContainsBindingExpression+(onCreateMethod, Selection);
 }
 
 private pattern parentContainsBindingExpression(parent, child){

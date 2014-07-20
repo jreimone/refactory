@@ -1,12 +1,21 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Uml_extension
+Bundle-Name: %pluginName
 Bundle-SymbolicName: org.emftext.refactoring.smell.uml_extension;singleton:=true
 Bundle-Version: 1.0.0.qualifier
+Bundle-ClassPath: .
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.eclipse.uml2.uml,
- org.emftext.refactoring.smell.calculation,
+ org.eclipse.core.runtime,
+ org.eclipse.emf.ecore;visibility:=reexport,
+ org.emftext.refactoring.smell.calculation;visibility:=reexport,
+ org.eclipse.xtext.common.types;visibility:=reexport,
+ org.eclipse.xtext.xbase;visibility:=reexport,
+ org.eclipse.incquery.patternlanguage;visibility:=reexport,
  org.emftext.refactoring.smell.registry.ui
+Bundle-ActivationPolicy: lazy
 Export-Package: org.emftext.refactoring.smell.umlsmells,
  org.emftext.refactoring.smell.umlsmells.impl,
  org.emftext.refactoring.smell.umlsmells.util

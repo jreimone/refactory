@@ -7,12 +7,12 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.uml2.uml.Classifier;
 import org.eclipse.uml2.uml.Element;
 import org.eclipse.uml2.uml.Model;
-
 import org.emftext.refactoring.smell.calculation.CalculationFactory;
 import org.emftext.refactoring.smell.calculation.CalculationResult;
+import org.emftext.refactoring.smell.calculation.CausingObjectsGroup;
 import org.emftext.refactoring.smell.calculation.Monotonicity;
+import org.emftext.refactoring.smell.calculation.NamedCausingObject;
 import org.emftext.refactoring.smell.calculation.impl.MetricImpl;
-
 import org.emftext.refactoring.smell.umlsmells.SearchEmptyClassesAndInterfaces;
 import org.emftext.refactoring.smell.umlsmells.UmlsmellsPackage;
 
@@ -31,7 +31,7 @@ public class SearchEmptyClassesAndInterfacesImpl extends MetricImpl implements S
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SearchEmptyClassesAndInterfacesImpl() {
+	protected SearchEmptyClassesAndInterfacesImpl() {
 		super();
 	}
 
@@ -77,11 +77,15 @@ public class SearchEmptyClassesAndInterfacesImpl extends MetricImpl implements S
 			if(element instanceof Classifier){
 				Classifier classifier = (Classifier) element;
 				if(classifier.getAllAttributes().isEmpty() && classifier.getAllOperations().isEmpty()){
-					result.getCausingObjects().add(classifier);
+					CausingObjectsGroup causingObjectsGroup = CalculationFactory.eINSTANCE.createCausingObjectsGroup();
+					NamedCausingObject namedCausingObject = CalculationFactory.eINSTANCE.createNamedCausingObject();
+					causingObjectsGroup.getNamedCausingObjects().add(namedCausingObject);
+					namedCausingObject.setCausingObject(classifier);
+					result.getCausingObjectsGroups().add(causingObjectsGroup);
 				}
 			}
 		}
-		result.setResultingValue(result.getCausingObjects().size());
+		result.setResultingValue(result.getCausingObjectsGroups().size());
 		return result;
 	}
 } //SearchEmptyClassesAndInterfacesImpl

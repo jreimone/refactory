@@ -12,12 +12,12 @@ import "http://www.emftext.org/java/operators";
 import "http://www.emftext.org/java/instantiations";
 import "http://www.emftext.org/java/literals";
 
-import java ^java.math.BigInteger;
+//import java ^java.math.BigInteger;
 
-pattern slowForLoop(forLoop : ForLoop){
-	find slowForLoopInit(forLoop, variable);
-	find slowForLoopCondition(forLoop);
-	find slowForLoopUpdates(forLoop, variable);
+pattern slowForLoop(ForLoop : ForLoop, CounterVariable : Variable, IteratorVariable : Variable){
+	find slowForLoopInit(ForLoop, CounterVariable);
+	find slowForLoopCondition(ForLoop, IteratorVariable);
+	find slowForLoopUpdates(ForLoop, CounterVariable);
 }
 
 pattern slowForLoopInit(forLoop : ForLoop, variable : Variable){
@@ -31,7 +31,7 @@ private pattern initLocalVariable(loop : ForLoop, localVariable: LocalVariable, 
 	LocalVariable.initialValue(localVariable, initValue);
 	// check that value is 0
 	DecimalIntegerLiteral.decimalValue(initValue, value);
-	check(new BigInteger("0").equals(value));
+//	check(new BigInteger("0").equals(value));
 } 
 
 private pattern initVariable(loop : ForLoop, variable : Variable, value) {
@@ -43,17 +43,17 @@ private pattern initVariable(loop : ForLoop, variable : Variable, value) {
 	// check that value is 0
 	AssignmentExpression.value(assignment, initValue);
 	DecimalIntegerLiteral.decimalValue(initValue, value);
-	check(new BigInteger("0").equals(value));
+//	check(new BigInteger("0").equals(value));
 	// return Variable
 	AssignmentExpression.child(assignment, variableReference);
 	IdentifierReference.target(variableReference, variable);
 }
 
-pattern slowForLoopCondition(forLoop : ForLoop){
+pattern slowForLoopCondition(forLoop : ForLoop, iteratorVariable : Variable){
 	// check operator
 	find loopConditionOperators(forLoop, condition);
 	// check iterable variable
-	find loopConditionChildren(forLoop, condition);
+	find loopConditionChildren(forLoop, condition, iteratorVariable);
 }
 
 private pattern loopConditionOperators(loop : ForLoop, condition) {
@@ -62,11 +62,11 @@ private pattern loopConditionOperators(loop : ForLoop, condition) {
 	LessThan(operator);
 }
 
-private pattern loopConditionChildren(loop : ForLoop, condition) {
+private pattern loopConditionChildren(loop : ForLoop, condition, iteratorVariable : Variable) {
 	ForLoop.condition(loop, condition);
 	RelationExpression.children(condition, child);
-	IdentifierReference.target(child, variable);
-	find iterableVariable(variable, _type);
+	IdentifierReference.target(child, iteratorVariable);
+	find iterableVariable(iteratorVariable, _type);
 }
 
 pattern iterableVariable(variable : Variable, iterableVariableType){

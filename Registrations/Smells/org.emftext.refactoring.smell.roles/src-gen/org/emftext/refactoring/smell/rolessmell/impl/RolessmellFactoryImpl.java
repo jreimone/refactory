@@ -27,7 +27,7 @@ public class RolessmellFactoryImpl extends EFactoryImpl implements RolessmellFac
 	 */
 	public static RolessmellFactory init() {
 		try {
-			RolessmellFactory theRolessmellFactory = (RolessmellFactory)EPackage.Registry.INSTANCE.getEFactory("http://modelrefactoring.org/smell/calculation/roles"); 
+			RolessmellFactory theRolessmellFactory = (RolessmellFactory)EPackage.Registry.INSTANCE.getEFactory(RolessmellPackage.eNS_URI);
 			if (theRolessmellFactory != null) {
 				return theRolessmellFactory;
 			}
