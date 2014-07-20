@@ -11,12 +11,12 @@ import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Element;
 import org.eclipse.uml2.uml.Interface;
 import org.eclipse.uml2.uml.Model;
-
 import org.emftext.refactoring.smell.calculation.CalculationFactory;
 import org.emftext.refactoring.smell.calculation.CalculationResult;
+import org.emftext.refactoring.smell.calculation.CausingObjectsGroup;
 import org.emftext.refactoring.smell.calculation.Monotonicity;
+import org.emftext.refactoring.smell.calculation.NamedCausingObject;
 import org.emftext.refactoring.smell.calculation.impl.MetricImpl;
-
 import org.emftext.refactoring.smell.umlsmells.CheckInterfaceSpecifications;
 import org.emftext.refactoring.smell.umlsmells.UmlsmellsPackage;
 
@@ -35,7 +35,7 @@ public class CheckInterfaceSpecificationsImpl extends MetricImpl implements Chec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CheckInterfaceSpecificationsImpl() {
+	protected CheckInterfaceSpecificationsImpl() {
 		super();
 	}
 
@@ -99,8 +99,14 @@ public class CheckInterfaceSpecificationsImpl extends MetricImpl implements Chec
 				unusedInterfaces.add(interfaceClass);
 			}
 		}
-		result.getCausingObjects().addAll(unusedInterfaces);
-		result.setResultingValue(result.getCausingObjects().size());
+		CausingObjectsGroup causingObjectsGroup = CalculationFactory.eINSTANCE.createCausingObjectsGroup();
+		for (Interface unusedInterface : unusedInterfaces) {
+			NamedCausingObject namedCausingObject = CalculationFactory.eINSTANCE.createNamedCausingObject();
+			causingObjectsGroup.getNamedCausingObjects().add(namedCausingObject);
+			namedCausingObject.setCausingObject(unusedInterface);
+		}
+		result.getCausingObjectsGroups().add(causingObjectsGroup);
+		result.setResultingValue(result.getCausingObjectsGroups().size());
 		return result;
 	}
 

@@ -11,7 +11,9 @@ import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.emftext.refactoring.smell.calculation.CalculationFactory;
 import org.emftext.refactoring.smell.calculation.CalculationResult;
+import org.emftext.refactoring.smell.calculation.CausingObjectsGroup;
 import org.emftext.refactoring.smell.calculation.Monotonicity;
+import org.emftext.refactoring.smell.calculation.NamedCausingObject;
 import org.emftext.refactoring.smell.calculation.impl.MetricImpl;
 import org.emftext.refactoring.smell.ecoresmells.CountParametersOfMethods;
 import org.emftext.refactoring.smell.ecoresmells.EcoresmellsPackage;
@@ -87,7 +89,11 @@ public class CountParametersOfMethodsImpl extends MetricImpl implements CountPar
 					for (EOperation eop : ((EClass) eo).getEAllOperations()){
 						int parameterCount = eop.getEParameters().size();
 						if(parameterCount >= threshold){
-							result.getCausingObjects().add(eop);
+							CausingObjectsGroup causingObjectsGroup = CalculationFactory.eINSTANCE.createCausingObjectsGroup();
+							NamedCausingObject namedCausingObject = CalculationFactory.eINSTANCE.createNamedCausingObject();
+							causingObjectsGroup.getNamedCausingObjects().add(namedCausingObject);
+							namedCausingObject.setCausingObject(eop);
+							result.getCausingObjectsGroups().add(causingObjectsGroup);
 							if(parameterCount > result.getResultingValue()) {
 								// returns the highest parameter count
 								result.setResultingValue(parameterCount);

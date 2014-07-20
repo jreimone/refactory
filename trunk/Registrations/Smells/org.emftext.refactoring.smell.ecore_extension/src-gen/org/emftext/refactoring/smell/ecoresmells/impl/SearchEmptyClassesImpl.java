@@ -10,7 +10,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.emftext.refactoring.smell.calculation.CalculationFactory;
 import org.emftext.refactoring.smell.calculation.CalculationResult;
+import org.emftext.refactoring.smell.calculation.CausingObjectsGroup;
 import org.emftext.refactoring.smell.calculation.Monotonicity;
+import org.emftext.refactoring.smell.calculation.NamedCausingObject;
 import org.emftext.refactoring.smell.calculation.impl.MetricImpl;
 import org.emftext.refactoring.smell.ecoresmells.EcoresmellsPackage;
 import org.emftext.refactoring.smell.ecoresmells.SearchEmptyClasses;
@@ -83,12 +85,16 @@ public class SearchEmptyClassesImpl extends MetricImpl implements SearchEmptyCla
 			for (EObject eo : contents) {
 				if (eo instanceof EClass) {
 					if(((EClass) eo).getEAllAttributes().isEmpty() && ((EClass) eo).getEAllOperations().isEmpty()){
-						result.getCausingObjects().add(eo);
+						CausingObjectsGroup causingObjectsGroup = CalculationFactory.eINSTANCE.createCausingObjectsGroup();
+						NamedCausingObject namedCausingObject = CalculationFactory.eINSTANCE.createNamedCausingObject();
+						causingObjectsGroup.getNamedCausingObjects().add(namedCausingObject);
+						namedCausingObject.setCausingObject(eo);
+						result.getCausingObjectsGroups().add(causingObjectsGroup);
 					}
 				}
 			}
 		}
-		result.setResultingValue(result.getCausingObjects().size());
+		result.setResultingValue(result.getCausingObjectsGroups().size());
 		return result;
 	}
 	

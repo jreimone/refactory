@@ -27,7 +27,7 @@ public class UmlsmellsFactoryImpl extends EFactoryImpl implements UmlsmellsFacto
 	 */
 	public static UmlsmellsFactory init() {
 		try {
-			UmlsmellsFactory theUmlsmellsFactory = (UmlsmellsFactory)EPackage.Registry.INSTANCE.getEFactory("http://modelrefactoring.org/smell/calculation/uml"); 
+			UmlsmellsFactory theUmlsmellsFactory = (UmlsmellsFactory)EPackage.Registry.INSTANCE.getEFactory(UmlsmellsPackage.eNS_URI);
 			if (theUmlsmellsFactory != null) {
 				return theUmlsmellsFactory;
 			}

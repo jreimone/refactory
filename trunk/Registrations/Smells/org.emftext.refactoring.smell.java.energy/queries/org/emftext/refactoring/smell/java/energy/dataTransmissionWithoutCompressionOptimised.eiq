@@ -15,14 +15,14 @@ import "http://www.eclipse.org/emf/2002/Ecore"
 // "Towards an energy-consumption based complexity classification for resource substitution strategies"
 // the determined FileBody constructor is checked and must be replaced by a file that is compressed before 
 pattern dataTransmissionWithoutCompressionOptimised(
-		fileBodyConstructor: NewConstructorCall
+		Selection: NewConstructorCall
 //		, method: ClassMethod
 ){
-	find fileBodyConstructorWithFileConstructorParameter(fileBodyVar, fileBodyConstructor, _);
+	find fileBodyConstructorWithFileConstructorParameter(fileBodyVar, Selection, _);
 	find transmissionCoreMethodCalls(fileBodyVar, method);
 } or {
 	// caution: with this subpattern it cannot be assured if the passed file parameter wasn't compressed before!
-	find fileBodyConstructorWithFileParameter(fileBodyVar, _, fileBodyConstructor);
+	find fileBodyConstructorWithFileParameter(fileBodyVar, _, Selection);
 	find transmissionCoreMethodCalls(fileBodyVar, method);
 }
 

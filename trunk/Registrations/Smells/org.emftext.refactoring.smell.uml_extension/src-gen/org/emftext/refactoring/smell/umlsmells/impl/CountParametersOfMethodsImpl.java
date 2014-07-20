@@ -7,16 +7,15 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.uml2.uml.Classifier;
-import org.eclipse.uml2.uml.Element;
 import org.eclipse.uml2.uml.Model;
 import org.eclipse.uml2.uml.Operation;
 import org.eclipse.uml2.uml.Type;
-
 import org.emftext.refactoring.smell.calculation.CalculationFactory;
 import org.emftext.refactoring.smell.calculation.CalculationResult;
+import org.emftext.refactoring.smell.calculation.CausingObjectsGroup;
 import org.emftext.refactoring.smell.calculation.Monotonicity;
+import org.emftext.refactoring.smell.calculation.NamedCausingObject;
 import org.emftext.refactoring.smell.calculation.impl.MetricImpl;
-
 import org.emftext.refactoring.smell.umlsmells.CountParametersOfMethods;
 import org.emftext.refactoring.smell.umlsmells.UmlsmellsPackage;
 
@@ -35,7 +34,7 @@ public class CountParametersOfMethodsImpl extends MetricImpl implements CountPar
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CountParametersOfMethodsImpl() {
+	protected CountParametersOfMethodsImpl() {
 		super();
 	}
 
@@ -89,7 +88,11 @@ public class CountParametersOfMethodsImpl extends MetricImpl implements CountPar
 					if(parameterCount >= threshold){
 						// -2 because a new parameter object is added thus it would be again more than the threshold
 						for (int i = (((int)threshold - 2)); i < parameterCount; i++) {
-							result.getCausingObjects().add(operation.getOwnedParameters().get(i));
+							CausingObjectsGroup causingObjectsGroup = CalculationFactory.eINSTANCE.createCausingObjectsGroup();
+							NamedCausingObject namedCausingObject = CalculationFactory.eINSTANCE.createNamedCausingObject();
+							causingObjectsGroup.getNamedCausingObjects().add(namedCausingObject);
+							namedCausingObject.setCausingObject(operation.getOwnedParameters().get(i));
+							result.getCausingObjectsGroups().add(causingObjectsGroup);
 						}
 						if(parameterCount > result.getResultingValue()){
 							result.setResultingValue(parameterCount);
