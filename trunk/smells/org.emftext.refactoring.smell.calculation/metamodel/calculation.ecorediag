@@ -214,6 +214,18 @@
     <element xmi:type="ecore:EClass" href="calculation.ecore#//NamedCausingObject"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_FxJdUg3HEeSDr5tdBxedSg" x="35" y="385"/>
   </children>
+  <children xmi:type="notation:Shape" xmi:id="_z47yoH7lEeSlqIkTfjjtIA" type="Note" fontName="Segoe UI" description="NamedCausingObject = a referenced EObject with&#xD;&#xA;the name of the parameter of the IncQuery pattern that&#xD;&#xA;could be bound to this EObject." fillColor="13369343" transparency="0" lineColor="6737151" lineWidth="1">
+    <children xmi:type="notation:BasicDecorationNode" xmi:id="_z47ypH7lEeSlqIkTfjjtIA" type="DiagramName">
+      <element xsi:nil="true"/>
+    </children>
+    <children xmi:type="notation:BasicDecorationNode" xmi:id="_z47ypX7lEeSlqIkTfjjtIA" type="Description">
+      <element xsi:nil="true"/>
+    </children>
+    <styles xmi:type="notation:TextStyle" xmi:id="_z47yoX7lEeSlqIkTfjjtIA"/>
+    <styles xmi:type="notation:LineTypeStyle" xmi:id="_z47yon7lEeSlqIkTfjjtIA"/>
+    <element xsi:nil="true"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_z47yo37lEeSlqIkTfjjtIA" x="170" y="577"/>
+  </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_wPSlgV5BEeKN9vNNI_wJ3Q"/>
   <element xmi:type="ecore:EPackage" href="calculation.ecore#/"/>
   <edges xmi:type="notation:Connector" xmi:id="_XiqVoGPREeKeuoKtC2rhSQ" type="NoteAttachment" source="_R3gJoGPREeKeuoKtC2rhSQ" target="_WPp1oGPREeKeuoKtC2rhSQ" routing="Rectilinear" lineWidth="1">
@@ -323,5 +335,13 @@
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_dQ_y8w3HEeSDr5tdBxedSg" points="[5, 8, 1, -41]$[5, 39, 1, -10]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_dQ_y-A3HEeSDr5tdBxedSg" id="(0.46308724832214765,0.8431372549019608)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_dQ_y-Q3HEeSDr5tdBxedSg" id="(0.47058823529411764,0.18333333333333332)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_SsZf0H7mEeSlqIkTfjjtIA" type="NoteAttachment" source="_z47yoH7lEeSlqIkTfjjtIA" target="_FxJdUA3HEeSDr5tdBxedSg" lineWidth="1">
+    <styles xmi:type="notation:ArrowStyle" xmi:id="_SsZf0X7mEeSlqIkTfjjtIA"/>
+    <styles xmi:type="notation:LineTypeStyle" xmi:id="_SsZf0n7mEeSlqIkTfjjtIA"/>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_SsZf037mEeSlqIkTfjjtIA" points="[8, 0, 60, 176]$[8, -176, 60, 0]$[-35, -176, 17, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_SsipwH7mEeSlqIkTfjjtIA" id="(0.1501597444089457,0.0)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_SsipwX7mEeSlqIkTfjjtIA" id="(0.8859060402684564,0.3333333333333333)"/>
   </edges>
 </notation:Diagram>
