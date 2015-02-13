@@ -150,7 +150,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="appliedRole" lowerBound="1"
         eType="ecore:EClass ../../org.emftext.language.refactoring.roles/metamodel/roles.ecore#//Role"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="VariableAssignment" eSuperTypes="#//Instruction #//VariableDeclarationCommand">
+  <eClassifiers xsi:type="ecore:EClass" name="VariableAssignment" eSuperTypes="#//VariableDeclarationCommand">
     <eStructuralFeatures xsi:type="ecore:EReference" name="assignment" lowerBound="1"
         eType="#//ObjectAssignmentCommand" containment="true" eOpposite="#//ObjectAssignmentCommand/declaration"/>
   </eClassifiers>
