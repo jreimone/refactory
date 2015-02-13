@@ -14,6 +14,7 @@ import org.eclipse.incquery.runtime.api.IncQueryEngine;
 import org.eclipse.incquery.runtime.api.IncQueryMatcher;
 import org.eclipse.incquery.runtime.base.api.BaseIndexOptions;
 import org.eclipse.incquery.runtime.base.api.filters.IBaseIndexResourceFilter;
+import org.eclipse.incquery.runtime.emf.EMFScope;
 import org.eclipse.incquery.runtime.exception.IncQueryException;
 import org.emftext.refactoring.smell.calculation.CalculationFactory;
 import org.emftext.refactoring.smell.calculation.CalculationResult;
@@ -75,13 +76,11 @@ public class StructureCustom extends StructureImpl {
 //	}
 
 	private CalculationResult engineQueryNew(Pattern pattern, ResourceSet resourceSet) throws IncQueryException {
-		// IncQuery version 0.8
-
 		// create an *unmanaged* engine to ensure that noone else is going to use our engine
 //		AdvancedIncQueryEngine engine = AdvancedIncQueryEngine.createUnmanagedEngine(resourceSet);
 		// managed engine with better performance
 		BaseIndexOptions options = new BaseIndexOptions();
-		options.setResourceFilterConfiguration(new IBaseIndexResourceFilter() {
+		options.withResourceFilterConfiguration(new IBaseIndexResourceFilter() {
 		 
 		  @Override
 		  public boolean isResourceFiltered(Resource resource) {
@@ -89,7 +88,10 @@ public class StructureCustom extends StructureImpl {
 		    return "pathmap".equals(resource.getURI().scheme());
 		  }
 		});
-		IncQueryEngine engine = IncQueryEngine.on(resourceSet);
+		// maybe the options arent't needed?
+		// I added them for the JaMoPP case so that not alle stuff from the JDK is tried to be matched, too.
+		EMFScope scope = new EMFScope(resourceSet, options);
+		IncQueryEngine engine = IncQueryEngine.on(scope);
 		// A specification builder is used to translate patterns to query specifications
 		SpecificationBuilder builder = new SpecificationBuilder();
 		// attempt to retrieve a registered query specification		    
