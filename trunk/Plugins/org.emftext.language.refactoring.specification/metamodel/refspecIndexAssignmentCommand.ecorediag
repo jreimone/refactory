@@ -35,10 +35,6 @@
   <children xmi:type="notation:Node" xmi:id="_LPrQEDA8Ed-LIJwLORFO3Q" type="1001">
     <children xmi:type="notation:Node" xmi:id="_LPtsUDA8Ed-LIJwLORFO3Q" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_LPtsUTA8Ed-LIJwLORFO3Q" type="5001">
-      <children xmi:type="notation:Node" xmi:id="_MgOR8DA8Ed-LIJwLORFO3Q" type="2001">
-        <element xmi:type="ecore:EAttribute" href="refactoring_specification.ecore#//IndexVariable/name"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_MgOR8TA8Ed-LIJwLORFO3Q"/>
-      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_LPtsUjA8Ed-LIJwLORFO3Q"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_LPtsUzA8Ed-LIJwLORFO3Q"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_LPtsVDA8Ed-LIJwLORFO3Q"/>
@@ -148,9 +144,9 @@
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_5gGZgTBHEd-LIJwLORFO3Q" routing="Rectilinear" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_5gGZgjBHEd-LIJwLORFO3Q" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
     <element xmi:type="ecore:EReference" href="refactoring_specification.ecore#//IndexAssignmentCommand/variable"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_5gGZgzBHEd-LIJwLORFO3Q" points="[5, 34, -75, -169]$[5, 193, -75, -10]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_kuGYUn62Ed-a3qnRQR4mCg" id="(0.1206896551724138,0.18604651162790697)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_kuGYU362Ed-a3qnRQR4mCg" id="(0.8869565217391304,0.21568627450980393)"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_5gGZgzBHEd-LIJwLORFO3Q" points="[12, 34, -56, -167]$[12, 193, -56, -8]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_O9KrULOnEeSMj6p1HyuCtg" id="(0.1206896551724138,0.18604651162790697)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_O9KrUbOnEeSMj6p1HyuCtg" id="(0.8869565217391304,0.21568627450980393)"/>
   </edges>
   <edges xmi:type="notation:Edge" xmi:id="_IKX1kDBIEd-LIJwLORFO3Q" type="3002" source="_fC5y4DBQEd-LIJwLORFO3Q" target="_MXgX4ChGEd-47dx9YBAXow">
     <children xmi:type="notation:Node" xmi:id="_IKYcoDBIEd-LIJwLORFO3Q" type="4011">
@@ -176,7 +172,7 @@
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_XWidwTBIEd-LIJwLORFO3Q" routing="Rectilinear" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_XWidwjBIEd-LIJwLORFO3Q" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
     <element xmi:type="ecore:EReference" href="refactoring_specification.ecore#//IndexVariable/indexCommand"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_XWidwzBIEd-LIJwLORFO3Q" points="[-75, -10, 5, 193]$[-75, -169, 5, 34]"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_XWidwzBIEd-LIJwLORFO3Q" points="[-56, -8, 12, 193]$[-56, -167, 12, 34]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_XWmvMDBIEd-LIJwLORFO3Q" id="(0.8869565217391304,0.21568627450980393)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_XWmvMTBIEd-LIJwLORFO3Q" id="(0.1206896551724138,0.18604651162790697)"/>
   </edges>

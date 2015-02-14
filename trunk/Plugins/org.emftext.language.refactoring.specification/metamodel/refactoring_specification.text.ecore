@@ -51,6 +51,11 @@ package refactoring_specification refspec "http://www.emftext.org/language/refac
 		containment reference SourceContext source (1..1);
 		containment reference TargetContext target (1..1);
 	}
+	
+	class UNSET extends ReferenceCommand {
+		containment reference SourceContext source (1..1);
+		containment reference TargetContext target (1..1);
+	}
 
 	abstract class AttributeCommand extends Instruction { }
 
