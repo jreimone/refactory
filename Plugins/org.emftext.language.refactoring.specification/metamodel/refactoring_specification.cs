@@ -12,6 +12,7 @@
 //      - initial API and implementation
 // ******************************************************************************/
 
+@SuppressWarnings(noRuleForMetaClass)
 SYNTAXDEF refspec
 FOR <http://www.emftext.org/language/refactoring_specification>
 START RefactoringSpecification
@@ -98,6 +99,8 @@ RULES{
 	
 	SET ::= "set" #1 "use" #1 "of" #1 source #1 "in" #1 target;
 	
+	UNSET ::= "unset" #1 "use" #1 "of" #1 source #1 "in" #1 target;
+	
 	ASSIGN ::= "assign" #1 (sourceAttribute[DOT_NOTATION] #1 "for" #1 )? targetAttribute[DOT_NOTATION];
 	
 	Variable ::= name[LOWER_IDENTIFIER];
@@ -132,7 +135,7 @@ RULES{
 	
 	IndexVariable ::= name[LOWER_IDENTIFIER];
 	
-	REMOVE ::= "remove" (modifier)? removal;
+	REMOVE ::= "remove" (modifier)? removal ("at" index[LOWER_IDENTIFIER])?;
 	
 	RoleRemoval ::= role[UPPER_IDENTIFIER];
 	

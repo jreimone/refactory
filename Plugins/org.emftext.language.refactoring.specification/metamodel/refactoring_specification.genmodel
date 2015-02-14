@@ -115,7 +115,10 @@
     <genClasses image="false" ecoreClass="refactoring_specification.ecore#//Modifier"/>
     <genClasses ecoreClass="refactoring_specification.ecore#//DISTINCT"/>
     <genClasses image="false" ecoreClass="refactoring_specification.ecore#//DeleteCommand"/>
-    <genClasses ecoreClass="refactoring_specification.ecore#//UNSET"/>
+    <genClasses ecoreClass="refactoring_specification.ecore#//UNSET">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//UNSET/target"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//UNSET/source"/>
+    </genClasses>
     <genClasses ecoreClass="refactoring_specification.ecore#//REMOVE">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//REMOVE/removal"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference refactoring_specification.ecore#//REMOVE/modifier"/>

@@ -159,7 +159,12 @@
   <eClassifiers xsi:type="ecore:EClass" name="Modifier" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="DISTINCT" eSuperTypes="#//Modifier"/>
   <eClassifiers xsi:type="ecore:EClass" name="DeleteCommand" abstract="true" eSuperTypes="#//Instruction"/>
-  <eClassifiers xsi:type="ecore:EClass" name="UNSET" eSuperTypes="#//ReferenceCommand #//DeleteCommand"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UNSET" eSuperTypes="#//ReferenceCommand">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//TargetContext" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="#//SourceContext" containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="REMOVE" eSuperTypes="#//DeleteCommand #//ContainmentCommand">
     <eStructuralFeatures xsi:type="ecore:EReference" name="removal" lowerBound="1"
         eType="#//ObjectRemoval" containment="true"/>
