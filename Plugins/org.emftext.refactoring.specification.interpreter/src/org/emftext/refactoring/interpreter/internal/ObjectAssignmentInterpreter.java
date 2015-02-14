@@ -222,6 +222,7 @@ public class ObjectAssignmentInterpreter{
 				containers.add(object.eContainer());
 			}
 		}
+		// TODO elements then must be filtered by the given role referred from TRACE
 		roleBinding = containers;
 		context.addEObjectsForVariable(objectVar, containers);
 	}
