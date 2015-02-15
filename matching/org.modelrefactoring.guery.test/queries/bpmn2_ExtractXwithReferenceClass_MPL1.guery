@@ -11,7 +11,7 @@ where "target.isContainment()"
 connected by source(ContainerContainer>OrigContainer)[1,1] find all
 where "source.isContainment()"
 connected by containerRef(MovedReference>NewContainer)[1,1] find all
-where "!(containerRef.isContainment())"
+where "!containerRef.isContainment()"
 
 motif ExtractXwithReferenceClass
 select OrigContainer, Extract, NewContainer, ContainerContainer
