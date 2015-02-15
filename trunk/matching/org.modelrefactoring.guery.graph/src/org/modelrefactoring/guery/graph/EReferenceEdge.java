@@ -24,4 +24,16 @@ public abstract class EReferenceEdge extends Edge<EObjectVertex> {
 	public EReference getReference() {
 		return reference;
 	}
+	
+	/**
+	 * Returns whether an edge corresponds to a containment {@link EReference} from ecore.
+	 * This method should be a shortcut to the following check in a motif:
+	 * <code>someEdge is org.modelrefactoring.guery.graph.ContainmentEdge</code>
+	 * Instead this can be used: <code>someEdge.isContainment()</code> 
+	 * 
+	 * @return
+	 */
+	public boolean isContainment(){
+		return false;
+	}
 }
