@@ -58,6 +58,10 @@ import org.modelrefactoring.guery.resource.guery.mopp.GueryResourceFactory;
 import org.modelrefactoring.matching.guery.MotifInstance2RoleMappingConverter;
 import org.modelrefactoring.matching.guery.RoleModel2MotifConverter;
 
+import com.google.common.base.Joiner;
+import com.google.common.base.Splitter;
+import com.google.common.base.Strings;
+import com.google.common.collect.Collections2;
 import com.google.common.io.Files;
 
 @RunWith(Parameterized.class)
@@ -125,6 +129,7 @@ public class MotifSolvingAndCompareTest {
 		System.out.println("Max Results: " + maxResults);
 		List<org.modelrefactoring.guery.Motif> motifs = convertRoleModel2Motifs(roleModel);
 		for (org.modelrefactoring.guery.Motif motif : motifs) {
+			System.out.println((motifs.indexOf(motif) + 1) + ". motif");
 			String uriString = motif.eResource().getURI().toFileString();
 			List<RoleMapping> gueryParsingRoleMappings = testMotifOnMetamodelWithGUERYParsing(uriString, metamodel.eResource(), roleModel);
 			List<RoleMapping> emfTextParsingRoleMappings = testMotifOnMetamodelWithEMFTextParsing(uriString, metamodel.eResource(), roleModel);
@@ -214,6 +219,10 @@ public class MotifSolvingAndCompareTest {
 	}
 
 	private List<RoleMapping> solveMotifOnResource(Motif<MetamodelVertex, EReferenceEdge> motif, Resource resource, final RoleModel roleModel){
+		List<String> roles = motif.getRoles();
+		String usedRoles = Joiner.on(", ").join(roles);
+		System.out.println("used roles: " + usedRoles);
+		
 		MotifInstance2RoleMappingConverter converter = new MotifInstance2RoleMappingConverter(roleModel, maxResults);
 //		int processors = Runtime.getRuntime().availableProcessors();
 		int processors = 1;
