@@ -10,4 +10,9 @@ public class ContainmentEdge extends InternalEdge {
 		super(reference);
 	}
 
+	@Override
+	public boolean isContainment() {
+		return true;
+	}
+
 }

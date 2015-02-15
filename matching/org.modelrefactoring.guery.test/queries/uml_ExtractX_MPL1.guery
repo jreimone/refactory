@@ -2,12 +2,12 @@ motif ExtractX
 select OrigContainer, Extractee, NewContainer, ContainerContainer
 where "NewContainer.getEClass().getEAttributes().size() > 0"
 connected by extracts(OrigContainer>Extractee)[1,1] find all
-where "extracts is org.modelrefactoring.guery.graph.ContainmentEdge"
+where "extracts.isContainment()"
 connected by moved(NewContainer>Extractee)[1,1] find all
-where "moved is org.modelrefactoring.guery.graph.ContainmentEdge"
+where "moved.isContainment()"
 connected by target(ContainerContainer>NewContainer)[1,1] find all
-where "target is org.modelrefactoring.guery.graph.ContainmentEdge"
+where "target.isContainment()"
 connected by source(ContainerContainer>OrigContainer)[1,1] find all
-where "source is org.modelrefactoring.guery.graph.ContainmentEdge"
+where "source.isContainment()"
 connected by reference(OrigContainer>NewContainer)[1,1] find all
-where "!(reference is org.modelrefactoring.guery.graph.ContainmentEdge)"
+where "!reference.isContainment()"

@@ -233,9 +233,11 @@ public class RoleModel2MotifConverter {
 		}
 		Constraint edgeConstraint = GueryFactory.eINSTANCE.createConstraint();
 		if(collaboration instanceof RoleComposition){
-			edgeConstraint.setExpression(connection.getPath() + " is " + ContainmentEdge.class.getCanonicalName());
+//			edgeConstraint.setExpression(connection.getPath() + " is " + ContainmentEdge.class.getCanonicalName());
+			edgeConstraint.setExpression(connection.getPath() + ".isContainment()");
 		} else {
-			edgeConstraint.setExpression("!(" + connection.getPath() + " is " + ContainmentEdge.class.getCanonicalName() + ")");
+//			edgeConstraint.setExpression("!(" + connection.getPath() + " is " + ContainmentEdge.class.getCanonicalName() + ")");
+			edgeConstraint.setExpression("!" + connection.getPath() + ".isContainment()");
 		}
 		edgeSelection.getConstraints().add(edgeConstraint);
 	}
