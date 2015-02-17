@@ -120,7 +120,12 @@ public class MotifSolvingAndSaveTest {
 		System.out.println("##################################");
 		List<EClass> metaclasses = getMetaClasses(metamodel);
 		List<EStructuralFeature> structuralFeatures = getStructuralFeatures(metaclasses);
-		System.out.println("Metamodel: " + metamodel.getName() + " (MC: " + metaclasses.size() + ", SF: " + structuralFeatures.size() + ")");
+		
+		int metaclassCount = metaclasses.size();
+		int featureCount = structuralFeatures.size();
+		double featuresPerClass = (double) featureCount / (double) metaclassCount;
+		System.out.println("Metamodel: " + metamodel.getName() + " (MC: " + metaclassCount + ", SF: " + featureCount + ")");
+		System.out.println("Features/Metaclass: " + featuresPerClass);
 		System.out.println("RoleModel: " + roleModel.getName());
 		System.out.println("Max PathLength: " + maxPathLength);
 		System.out.println("Max Results: " + maxResults);
