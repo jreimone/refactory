@@ -13,5 +13,6 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.incquery.patternlanguage,
  org.eclipse.xtext.common.types,
  org.eclipse.emf.ecore.xmi,
- org.eclipse.incquery.patternlanguage.emf
+ org.eclipse.incquery.patternlanguage.emf,
+ org.eclipse.incquery.runtime
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
