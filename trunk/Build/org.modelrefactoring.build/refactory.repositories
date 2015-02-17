@@ -54,7 +54,6 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/releas
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/release/plugins/org.eclipse.incquery.tooling.ui_0.9.0.201502051519.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/release/plugins/org.eclipse.incquery.patternlanguage.ui_0.9.0.201502051519.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/release/plugins/org.eclipse.incquery.patternlanguage.emf.ui_0.9.0.201502051519.jar
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/release/plugins/org.eclipse.incquery.tooling.generator.sampleui_0.9.0.201502051519.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/release/plugins/org.eclipse.incquery.tooling.generator.model_0.9.0.201502051519.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/release/plugins/org.eclipse.incquery.tooling.generator.model.ui_0.9.0.201502051519.jar
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/incquery/updates/release/plugins/org.eclipse.incquery.databinding.runtime_0.9.0.201502051519.jar
