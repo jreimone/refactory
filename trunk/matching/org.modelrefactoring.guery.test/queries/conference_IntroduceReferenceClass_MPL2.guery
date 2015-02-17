@@ -1,0 +1,9 @@
+motif IntroduceReferenceClass
+select Derivee, DerivationContainer, Derivation, _DerivationContainer_Derivation_, _Derivation_Derivee_
+where "Derivation.getEClass().getEAttributes().size() > 0"
+connected by derivation(DerivationContainer>_DerivationContainer_Derivation_)[1,1] find all
+where "derivation.isContainment()"
+connected by _derivation_(_DerivationContainer_Derivation_>Derivation)[0,1] find all
+connected by derivees(Derivation>_Derivation_Derivee_)[1,1] find all
+where "!derivees.isContainment()"
+connected by _derivees_(_Derivation_Derivee_>Derivee)[0,1] find all

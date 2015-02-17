@@ -1,0 +1,5 @@
+motif RemoveUnusedContainedX
+select Removee, RemoveeContainer, _RemoveeContainer_Removee_
+connected by removees(RemoveeContainer>_RemoveeContainer_Removee_)[1,1] find all
+where "removees.isContainment()"
+connected by _removees_(_RemoveeContainer_Removee_>Removee)[0,1] find all

@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry exported="true" kind="lib" path="libs/commons-csv-1.1.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="http://commons.apache.org/proper/commons-csv/archives/1.1/apidocs/"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry exported="true" kind="lib" path="libs/orient-1.6.0-snapshot/blueprints-core-2.5.0-SNAPSHOT.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/orient-1.6.0-snapshot/blueprints-orient-graph-2.5.0-SNAPSHOT.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/orient-1.6.0-snapshot/commons-configuration-1.6.jar"/>

@@ -1,0 +1,104 @@
+Metamodel;MC Count;SF Count;SF/MC;RoleModel;R Count;C Count;C/R;MPL;Max Results;Roles;Overall time (s);Saving time (s);Query time (s);Found RoleMappings
+ecore;20;81;4,05;MoveX;3;3;1,0;1;100000;SourceContainer, TargetContainer, Movee;0,371;0,0;0,371;146
+ecore;20;81;4,05;IntroduceReferenceClass;3;2;0,6666666666666666;1;100000;Derivee, DerivationContainer, Derivation;0,103;0,0020;0,10099999999999999;345
+ecore;20;81;4,05;ExtractX;4;5;1,25;1;100000;OrigContainer, Extractee, NewContainer, ContainerContainer;0,102;0,0;0,102;87
+ecore;20;81;4,05;ExtractXwithReferenceClass;5;6;1,2;1;1000;OrigContainer, Extract, NewContainer, ContainerContainer, MovedReference;0,206;0,0;0,206;438
+ecore;20;81;4,05;ExtractXwithReferenceClass;5;6;1,2;1;1000;OrigContainer, Extract, NewContainer, ContainerContainer;0,102;0,0010;0,10099999999999999;455
+ecore;20;81;4,05;ExtractXwithReferenceClass;5;6;1,2;2;30000;OrigContainer, Extract, NewContainer, ContainerContainer, MovedReference, _OrigContainer_Extract_, _NewContainer_Extract_;2,159;0,05;2,109;23834
+ecore;20;81;4,05;ExtractXwithReferenceClass;5;6;1,2;2;30000;OrigContainer, Extract, NewContainer, ContainerContainer, _OrigContainer_Extract_, _NewContainer_Extract_;0,656;0,017;0,639;17970
+ecore;20;81;4,05;ExtractSubX;3;3;1,0;1;500000;Extractee, OrigContainer, NewContainer;0,109;0,0;0,109;35
+ecore;20;81;4,05;RemoveUnusedContainedX;2;1;0,5;1;10000;Removee, RemoveeContainer;0,109;0,0;0,109;47
+uml;242;594;2,4545454545454546;MoveX;3;3;1,0;1;100000;SourceContainer, TargetContainer, Movee;10,496;0,062;10,434000000000001;100000
+uml;242;594;2,4545454545454546;IntroduceReferenceClass;3;2;0,6666666666666666;1;100000;Derivee, DerivationContainer, Derivation;2,834;0,049;2,785;100000
+uml;242;594;2,4545454545454546;ExtractSubX;3;3;1,0;1;500000;Extractee, OrigContainer, NewContainer;57,792;0,048;57,744;49376
+uml;242;594;2,4545454545454546;RemoveUnusedContainedX;2;1;0,5;1;100000;Removee, RemoveeContainer;0,219;0,0;0,219;5794
+bpmn2;138;458;3,318840579710145;MoveX;3;3;1,0;1;100000;SourceContainer, TargetContainer, Movee;2,244;0,0;2,244;5506
+bpmn2;138;458;3,318840579710145;IntroduceReferenceClass;3;2;0,6666666666666666;1;100000;Derivee, DerivationContainer, Derivation;0,219;0,0;0,219;11124
+bpmn2;138;458;3,318840579710145;ExtractX;4;5;1,25;1;100000;OrigContainer, Extractee, NewContainer, ContainerContainer;6,44;0,094;6,346;78782
+bpmn2;138;458;3,318840579710145;ExtractSubX;3;3;1,0;1;1000000;Extractee, OrigContainer, NewContainer;2,408;0,0;2,408;19107
+bpmn2;138;458;3,318840579710145;RemoveUnusedContainedX;2;1;0,5;1;100000;Removee, RemoveeContainer;0,109;0,0;0,109;1874
+java;237;120;0,5063291139240507;MoveX;3;3;1,0;1;100000;SourceContainer, TargetContainer, Movee;6,001;0,0;6,001;1022
+java;237;120;0,5063291139240507;IntroduceReferenceClass;3;2;0,6666666666666666;1;100000;Derivee, DerivationContainer, Derivation;0,11;0,0;0,11;0
+java;237;120;0,5063291139240507;ExtractX;4;5;1,25;1;100000;OrigContainer, Extractee, NewContainer, ContainerContainer;0,328;0,0;0,328;0
+java;237;120;0,5063291139240507;ExtractSubX;3;3;1,0;1;500000;Extractee, OrigContainer, NewContainer;0,548;0,0;0,548;1924
+java;237;120;0,5063291139240507;RemoveUnusedContainedX;2;1;0,5;1;100000;Removee, RemoveeContainer;0,11;0,0;0,11;5517
+concretesyntax;47;65;1,3829787234042554;MoveX;3;3;1,0;1;100000;SourceContainer, TargetContainer, Movee;0,109;0,0;0,109;17
+concretesyntax;47;65;1,3829787234042554;IntroduceReferenceClass;3;2;0,6666666666666666;1;100000;Derivee, DerivationContainer, Derivation;0,109;0,0;0,109;112
+concretesyntax;47;65;1,3829787234042554;ExtractX;4;5;1,25;1;100000;OrigContainer, Extractee, NewContainer, ContainerContainer;0,11;0,0;0,11;0
+concretesyntax;47;65;1,3829787234042554;ExtractXwithReferenceClass;5;6;1,2;1;500000;OrigContainer, Extract, NewContainer, ContainerContainer, MovedReference;0,875;0,0;0,875;107
+concretesyntax;47;65;1,3829787234042554;ExtractXwithReferenceClass;5;6;1,2;1;500000;OrigContainer, Extract, NewContainer, ContainerContainer;2,737;0,078;2,6590000000000003;131961
+concretesyntax;47;65;1,3829787234042554;ExtractSubX;3;3;1,0;1;500000;Extractee, OrigContainer, NewContainer;0,109;0,0;0,109;2555
+concretesyntax;47;65;1,3829787234042554;RemoveUnusedContainedX;2;1;0,5;1;10000;Removee, RemoveeContainer;0,109;0,0;0,109;399
+feature;7;24;3,4285714285714284;MoveX;3;3;1,0;1;100000;SourceContainer, TargetContainer, Movee;0,125;0,0;0,125;6
+feature;7;24;3,4285714285714284;IntroduceReferenceClass;3;2;0,6666666666666666;1;100000;Derivee, DerivationContainer, Derivation;0,11;0,0;0,11;8
+feature;7;24;3,4285714285714284;ExtractX;4;5;1,25;1;1000;OrigContainer, Extractee, NewContainer, ContainerContainer;0,105;0,0;0,105;6
+feature;7;24;3,4285714285714284;ExtractX;4;5;1,25;2;1000;OrigContainer, Extractee, NewContainer, ContainerContainer, _OrigContainer_Extractee_, _NewContainer_Extractee_, _OrigContainer_NewContainer_;0,109;0,0;0,109;466
+feature;7;24;3,4285714285714284;ExtractX;4;5;1,25;3;10000;OrigContainer, Extractee, NewContainer, ContainerContainer, _OrigContainer_Extractee_, _NewContainer_Extractee_, _OrigContainer_NewContainer_;0,219;0,0;0,219;1052
+feature;7;24;3,4285714285714284;ExtractX;4;5;1,25;4;10000;OrigContainer, Extractee, NewContainer, ContainerContainer, _OrigContainer_Extractee_, _NewContainer_Extractee_, _OrigContainer_NewContainer_;0,111;0,0;0,111;1208
+feature;7;24;3,4285714285714284;ExtractX;4;5;1,25;5;10000;OrigContainer, Extractee, NewContainer, ContainerContainer, _OrigContainer_Extractee_, _NewContainer_Extractee_, _OrigContainer_NewContainer_;0,11;0,0;0,11;1208
+feature;7;24;3,4285714285714284;ExtractXwithReferenceClass;5;6;1,2;1;1000;OrigContainer, Extract, NewContainer, ContainerContainer, MovedReference;0,109;0,0;0,109;25
+feature;7;24;3,4285714285714284;ExtractXwithReferenceClass;5;6;1,2;1;1000;OrigContainer, Extract, NewContainer, ContainerContainer;0,109;0,0;0,109;10
+feature;7;24;3,4285714285714284;ExtractXwithReferenceClass;5;6;1,2;2;1000;OrigContainer, Extract, NewContainer, ContainerContainer, MovedReference, _OrigContainer_Extract_, _NewContainer_Extract_;0,125;0,0;0,125;218
+feature;7;24;3,4285714285714284;ExtractXwithReferenceClass;5;6;1,2;2;1000;OrigContainer, Extract, NewContainer, ContainerContainer, _OrigContainer_Extract_, _NewContainer_Extract_;0,109;0,0;0,109;118
+feature;7;24;3,4285714285714284;ExtractXwithReferenceClass;5;6;1,2;3;1000;OrigContainer, Extract, NewContainer, ContainerContainer, MovedReference, _OrigContainer_Extract_, _NewContainer_Extract_;0,12;0,0;0,12;802
+feature;7;24;3,4285714285714284;ExtractXwithReferenceClass;5;6;1,2;3;1000;OrigContainer, Extract, NewContainer, ContainerContainer, _OrigContainer_Extract_, _NewContainer_Extract_;0,112;0,0;0,112;445
+feature;7;24;3,4285714285714284;ExtractXwithReferenceClass;5;6;1,2;4;1000;OrigContainer, Extract, NewContainer, ContainerContainer, MovedReference, _OrigContainer_Extract_, _NewContainer_Extract_;0,109;0,0;0,109;904
+feature;7;24;3,4285714285714284;ExtractXwithReferenceClass;5;6;1,2;4;1000;OrigContainer, Extract, NewContainer, ContainerContainer, _OrigContainer_Extract_, _NewContainer_Extract_;0,11;0,0;0,11;523
+feature;7;24;3,4285714285714284;ExtractSubX;3;3;1,0;1;500000;Extractee, OrigContainer, NewContainer;0,109;0,0;0,109;3
+feature;7;24;3,4285714285714284;RemoveUnusedContainedX;2;1;0,5;1;1000;Removee, RemoveeContainer;0,109;0,0;0,109;7
+timedAutomata;77;124;1,6103896103896105;MoveX;3;3;1,0;1;100000;SourceContainer, TargetContainer, Movee;0,109;0,0;0,109;0
+timedAutomata;77;124;1,6103896103896105;IntroduceReferenceClass;3;2;0,6666666666666666;1;100000;Derivee, DerivationContainer, Derivation;0,11;0,0;0,11;1
+timedAutomata;77;124;1,6103896103896105;ExtractX;4;5;1,25;1;100000;OrigContainer, Extractee, NewContainer, ContainerContainer;0,125;0,0;0,125;0
+timedAutomata;77;124;1,6103896103896105;ExtractXwithReferenceClass;5;6;1,2;1;500000;OrigContainer, Extract, NewContainer, ContainerContainer, MovedReference;0,11;0,0;0,11;0
+timedAutomata;77;124;1,6103896103896105;ExtractXwithReferenceClass;5;6;1,2;1;500000;OrigContainer, Extract, NewContainer, ContainerContainer;0,11;0,0;0,11;3
+timedAutomata;77;124;1,6103896103896105;ExtractXwithReferenceClass;5;6;1,2;2;500000;OrigContainer, Extract, NewContainer, ContainerContainer, MovedReference, _OrigContainer_Extract_, _NewContainer_Extract_;0,109;0,0;0,109;0
+timedAutomata;77;124;1,6103896103896105;ExtractXwithReferenceClass;5;6;1,2;2;500000;OrigContainer, Extract, NewContainer, ContainerContainer, _OrigContainer_Extract_, _NewContainer_Extract_;0,111;0,0;0,111;18
+timedAutomata;77;124;1,6103896103896105;ExtractXwithReferenceClass;5;6;1,2;3;500000;OrigContainer, Extract, NewContainer, ContainerContainer, MovedReference, _OrigContainer_Extract_, _NewContainer_Extract_;0,109;0,0;0,109;0
+timedAutomata;77;124;1,6103896103896105;ExtractXwithReferenceClass;5;6;1,2;3;500000;OrigContainer, Extract, NewContainer, ContainerContainer, _OrigContainer_Extract_, _NewContainer_Extract_;0,11;0,0;0,11;82
+timedAutomata;77;124;1,6103896103896105;ExtractSubX;3;3;1,0;1;500000;Extractee, OrigContainer, NewContainer;0,109;0,0;0,109;0
+timedAutomata;77;124;1,6103896103896105;ExtractSubX;3;3;1,0;2;500000;Extractee, OrigContainer, NewContainer, _OrigContainer_Extractee_, _OrigContainer_NewContainer_, _NewContainer_Extractee_;0,109;0,0;0,109;0
+timedAutomata;77;124;1,6103896103896105;RemoveUnusedContainedX;2;1;0,5;1;1000;Removee, RemoveeContainer;0,11;0,0;0,11;5
+pl0;25;36;1,44;MoveX;3;3;1,0;1;100000;SourceContainer, TargetContainer, Movee;0,11;0,0;0,11;0
+pl0;25;36;1,44;IntroduceReferenceClass;3;2;0,6666666666666666;1;100000;Derivee, DerivationContainer, Derivation;0,11;0,0;0,11;0
+pl0;25;36;1,44;ExtractX;4;5;1,25;1;100000;OrigContainer, Extractee, NewContainer, ContainerContainer;0,109;0,0;0,109;0
+pl0;25;36;1,44;ExtractXwithReferenceClass;5;6;1,2;1;20000;OrigContainer, Extract, NewContainer, ContainerContainer, MovedReference;0,11;0,0;0,11;2
+pl0;25;36;1,44;ExtractXwithReferenceClass;5;6;1,2;1;20000;OrigContainer, Extract, NewContainer, ContainerContainer;0,11;0,0;0,11;135
+pl0;25;36;1,44;ExtractXwithReferenceClass;5;6;1,2;4;20000;OrigContainer, Extract, NewContainer, ContainerContainer, MovedReference, _OrigContainer_Extract_, _NewContainer_Extract_;0,219;0,0;0,219;207
+pl0;25;36;1,44;ExtractXwithReferenceClass;5;6;1,2;4;20000;OrigContainer, Extract, NewContainer, ContainerContainer, _OrigContainer_Extract_, _NewContainer_Extract_;0,329;0,0;0,329;10155
+pl0;25;36;1,44;ExtractSubX;3;3;1,0;1;500000;Extractee, OrigContainer, NewContainer;0,125;0,0;0,125;5
+pl0;25;36;1,44;RemoveUnusedContainedX;2;1;0,5;1;10000;Removee, RemoveeContainer;0,109;0,0;0,109;43
+owl;67;97;1,4477611940298507;MoveX;3;3;1,0;1;100000;SourceContainer, TargetContainer, Movee;0,221;0,0;0,221;294
+owl;67;97;1,4477611940298507;IntroduceReferenceClass;3;2;0,6666666666666666;1;100000;Derivee, DerivationContainer, Derivation;0,109;0,0;0,109;10
+owl;67;97;1,4477611940298507;ExtractX;4;5;1,25;1;100000;OrigContainer, Extractee, NewContainer, ContainerContainer;0,219;0,0;0,219;92
+owl;67;97;1,4477611940298507;ExtractXwithReferenceClass;5;6;1,2;1;100000;OrigContainer, Extract, NewContainer, ContainerContainer, MovedReference;1,862;0,015;1,8470000000000002;14955
+owl;67;97;1,4477611940298507;ExtractXwithReferenceClass;5;6;1,2;1;100000;OrigContainer, Extract, NewContainer, ContainerContainer;2,19;0,079;2,1109999999999998;73279
+owl;67;97;1,4477611940298507;ExtractSubX;3;3;1,0;1;500000;Extractee, OrigContainer, NewContainer;0,109;0,0;0,109;2223
+owl;67;97;1,4477611940298507;RemoveUnusedContainedX;2;1;0,5;1;1000;Removee, RemoveeContainer;0,109;0,0;0,109;561
+conference;9;10;1,1111111111111112;MoveX;3;3;1,0;1;100000;SourceContainer, TargetContainer, Movee;0,11;0,0;0,11;0
+conference;9;10;1,1111111111111112;MoveX;3;3;1,0;2;100000;SourceContainer, TargetContainer, Movee, _SourceContainer_Movee_, _TargetContainer_Movee_, _SourceContainer_TargetContainer_;0,11;0,0;0,11;0
+conference;9;10;1,1111111111111112;MoveX;3;3;1,0;3;100000;SourceContainer, TargetContainer, Movee, _SourceContainer_Movee_, _TargetContainer_Movee_, _SourceContainer_TargetContainer_;0,109;0,0;0,109;0
+conference;9;10;1,1111111111111112;MoveX;3;3;1,0;4;100000;SourceContainer, TargetContainer, Movee, _SourceContainer_Movee_, _TargetContainer_Movee_, _SourceContainer_TargetContainer_;0,109;0,0;0,109;0
+conference;9;10;1,1111111111111112;IntroduceReferenceClass;3;2;0,6666666666666666;1;100000;Derivee, DerivationContainer, Derivation;0,11;0,0;0,11;0
+conference;9;10;1,1111111111111112;IntroduceReferenceClass;3;2;0,6666666666666666;2;100000;Derivee, DerivationContainer, Derivation, _DerivationContainer_Derivation_, _Derivation_Derivee_;0,1;0,0;0,1;0
+conference;9;10;1,1111111111111112;IntroduceReferenceClass;3;2;0,6666666666666666;3;100000;Derivee, DerivationContainer, Derivation, _DerivationContainer_Derivation_, _Derivation_Derivee_;0,112;0,0;0,112;0
+conference;9;10;1,1111111111111112;IntroduceReferenceClass;3;2;0,6666666666666666;4;100000;Derivee, DerivationContainer, Derivation, _DerivationContainer_Derivation_, _Derivation_Derivee_;0,109;0,0;0,109;0
+conference;9;10;1,1111111111111112;ExtractX;4;5;1,25;1;100000;OrigContainer, Extractee, NewContainer, ContainerContainer;0,11;0,0;0,11;0
+conference;9;10;1,1111111111111112;ExtractX;4;5;1,25;2;100000;OrigContainer, Extractee, NewContainer, ContainerContainer, _OrigContainer_Extractee_, _NewContainer_Extractee_, _OrigContainer_NewContainer_;0,11;0,0;0,11;0
+conference;9;10;1,1111111111111112;ExtractX;4;5;1,25;3;100000;OrigContainer, Extractee, NewContainer, ContainerContainer, _OrigContainer_Extractee_, _NewContainer_Extractee_, _OrigContainer_NewContainer_;0,125;0,0;0,125;0
+conference;9;10;1,1111111111111112;ExtractX;4;5;1,25;4;100000;OrigContainer, Extractee, NewContainer, ContainerContainer, _OrigContainer_Extractee_, _NewContainer_Extractee_, _OrigContainer_NewContainer_;0,109;0,0;0,109;0
+conference;9;10;1,1111111111111112;ExtractXwithReferenceClass;5;6;1,2;1;1000;OrigContainer, Extract, NewContainer, ContainerContainer, MovedReference;0,109;0,0;0,109;0
+conference;9;10;1,1111111111111112;ExtractXwithReferenceClass;5;6;1,2;1;1000;OrigContainer, Extract, NewContainer, ContainerContainer;0,11;0,0;0,11;2
+conference;9;10;1,1111111111111112;ExtractXwithReferenceClass;5;6;1,2;2;1000;OrigContainer, Extract, NewContainer, ContainerContainer, MovedReference, _OrigContainer_Extract_, _NewContainer_Extract_;0,109;0,0;0,109;0
+conference;9;10;1,1111111111111112;ExtractXwithReferenceClass;5;6;1,2;2;1000;OrigContainer, Extract, NewContainer, ContainerContainer, _OrigContainer_Extract_, _NewContainer_Extract_;0,11;0,0;0,11;4
+conference;9;10;1,1111111111111112;ExtractXwithReferenceClass;5;6;1,2;3;1000;OrigContainer, Extract, NewContainer, ContainerContainer, MovedReference, _OrigContainer_Extract_, _NewContainer_Extract_;0,109;0,0;0,109;0
+conference;9;10;1,1111111111111112;ExtractXwithReferenceClass;5;6;1,2;3;1000;OrigContainer, Extract, NewContainer, ContainerContainer, _OrigContainer_Extract_, _NewContainer_Extract_;0,109;0,0;0,109;5
+conference;9;10;1,1111111111111112;ExtractXwithReferenceClass;5;6;1,2;4;1000;OrigContainer, Extract, NewContainer, ContainerContainer, MovedReference, _OrigContainer_Extract_, _NewContainer_Extract_;0,109;0,0;0,109;0
+conference;9;10;1,1111111111111112;ExtractXwithReferenceClass;5;6;1,2;4;1000;OrigContainer, Extract, NewContainer, ContainerContainer, _OrigContainer_Extract_, _NewContainer_Extract_;0,11;0,0;0,11;5
+conference;9;10;1,1111111111111112;ExtractSubX;3;3;1,0;1;500000;Extractee, OrigContainer, NewContainer;0,109;0,0;0,109;0
+conference;9;10;1,1111111111111112;ExtractSubX;3;3;1,0;2;500000;Extractee, OrigContainer, NewContainer, _OrigContainer_Extractee_, _OrigContainer_NewContainer_, _NewContainer_Extractee_;0,109;0,0;0,109;0
+conference;9;10;1,1111111111111112;ExtractSubX;3;3;1,0;3;500000;Extractee, OrigContainer, NewContainer, _OrigContainer_Extractee_, _OrigContainer_NewContainer_, _NewContainer_Extractee_;0,11;0,0;0,11;0
+conference;9;10;1,1111111111111112;ExtractSubX;3;3;1,0;4;500000;Extractee, OrigContainer, NewContainer, _OrigContainer_Extractee_, _OrigContainer_NewContainer_, _NewContainer_Extractee_;0,109;0,0;0,109;0
+conference;9;10;1,1111111111111112;RemoveUnusedContainedX;2;1;0,5;1;100000;Removee, RemoveeContainer;0,111;0,0;0,111;6
+conference;9;10;1,1111111111111112;RemoveUnusedContainedX;2;1;0,5;2;100000;Removee, RemoveeContainer, _RemoveeContainer_Removee_;0,108;0,0;0,108;9
+conference;9;10;1,1111111111111112;RemoveUnusedContainedX;2;1;0,5;3;100000;Removee, RemoveeContainer, _RemoveeContainer_Removee_;0,11;0,0;0,11;11
+conference;9;10;1,1111111111111112;RemoveUnusedContainedX;2;1;0,5;4;100000;Removee, RemoveeContainer, _RemoveeContainer_Removee_;0,109;0,0;0,109;12
