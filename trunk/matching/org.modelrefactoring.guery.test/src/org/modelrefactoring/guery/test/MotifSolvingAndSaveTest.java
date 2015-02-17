@@ -126,7 +126,11 @@ public class MotifSolvingAndSaveTest {
 		double featuresPerClass = (double) featureCount / (double) metaclassCount;
 		System.out.println("Metamodel: " + metamodel.getName() + " (MC: " + metaclassCount + ", SF: " + featureCount + ")");
 		System.out.println("Features/Metaclass: " + featuresPerClass);
-		System.out.println("RoleModel: " + roleModel.getName());
+		int roleCount = roleModel.getRoles().size();
+		int collCount = roleModel.getCollaborations().size();
+		double colPerRole = (double) collCount / (double) roleCount;
+		System.out.println("RoleModel: " + roleModel.getName() + " (R: " + roleCount + ", C: " + collCount + ")");
+		System.out.println("Collaborations/Role: " + colPerRole);
 		System.out.println("Max PathLength: " + maxPathLength);
 		System.out.println("Max Results: " + maxResults);
 		List<org.modelrefactoring.guery.Motif> motifs = convertRoleModel2MotifModel().getMotifs();
