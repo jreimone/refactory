@@ -137,7 +137,12 @@ public class MotifSolvingAndSaveTest {
 			}
 			System.out.println();
 			FileWriteResultListener writeResultListener = testMotifOnMetamodel(motif, "rolemappings/" + metamodel.getName() + "_" + roleModel.getName() + "_MPL" + maxPathLength + "_XSIMPLE" + index + "." + new RolemappingMetaInformation().getSyntaxName());
-			System.out.println("Very simple String-based saving took: " + writeResultListener.getTimeToWriteInSeconds() + "s");
+			double timeToWriteInSeconds = writeResultListener.getTimeToWriteInSeconds();
+			double overallTimeInSeconds = writeResultListener.getOverallTimeInSeconds();
+			double queryTime = overallTimeInSeconds - timeToWriteInSeconds;
+			System.out.println("Very simple String-based saving took: " + timeToWriteInSeconds + "s");
+			System.out.println("Overall time took: " + overallTimeInSeconds + "s");
+			System.out.println("Querying took approximately (overall - saving): " + queryTime + "s");
 			System.out.println("Found possible role mappings: " + writeResultListener.getFoundRoleMappingsCount());
 			File absFile = writeResultListener.getFile();
 			System.out.println("persisted role mappings:");
@@ -219,7 +224,13 @@ public class MotifSolvingAndSaveTest {
 		int vertexCount = graphAdapter.getVertexCount();
 		System.out.println("Vertex count: " + vertexCount);
 		FileWriteResultListener listener = new FileWriteResultListener(roleModel, maxResults, filePath);
+		
+		long start = System.currentTimeMillis();
 		engine.query(graphAdapter, motif, listener, ComputationMode.ALL_INSTANCES);
+		long end = System.currentTimeMillis();
+		double overallTimeInSeconds = (end - start)/1000.0d;
+		listener.setOverallUsedTime(overallTimeInSeconds);
+		
 		return listener;
 	}
 

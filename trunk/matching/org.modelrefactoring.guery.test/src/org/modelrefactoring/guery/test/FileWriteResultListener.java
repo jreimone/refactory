@@ -37,6 +37,7 @@ public class FileWriteResultListener extends MotifInstance2RoleMappingConverter 
 	private File file;
 	
 	private List<AdditionalResultListener> additionalListeners;
+	private double overallTimeInSeconds;
 
 	public FileWriteResultListener(RoleModel roleModel, int maxResultCount, String filePath) {
 		super(roleModel, maxResultCount);
@@ -116,7 +117,7 @@ public class FileWriteResultListener extends MotifInstance2RoleMappingConverter 
 
 	private String printRoleMappingSimple(RoleMapping roleMapping) {
 		StringBuffer buffer = new StringBuffer();
-		buffer.append(roleMapping.getName() + "{");
+		buffer.append("\"" + roleMapping.getName() + "\" maps <" + roleMapping.getMappedRoleModel().getName() + "> {");
 		List<ConcreteMapping> concreteMappings = roleMapping.getRoleToMetaelement();
 		for (ConcreteMapping concreteMapping : concreteMappings) {
 			Role role = concreteMapping.getRole();
@@ -129,7 +130,7 @@ public class FileWriteResultListener extends MotifInstance2RoleMappingConverter 
 			buffer.append(metaclass.getName());
 			List<CollaborationMapping> collaborationMappings = concreteMapping.getCollaborationMappings();
 			if(collaborationMappings.size() > 0){
-				buffer.append("[");
+				buffer.append("{");
 				for (CollaborationMapping collaborationMapping : collaborationMappings) {
 					MultiplicityCollaboration collaboration = collaborationMapping.getCollaboration();
 					buffer.append(collaboration.getTargetName() + ":=");
@@ -143,7 +144,7 @@ public class FileWriteResultListener extends MotifInstance2RoleMappingConverter 
 					}
 					buffer.append(";");
 				}
-				buffer.append("]");
+				buffer.append("}");
 			}
 			buffer.append(";");
 		}
@@ -179,5 +180,13 @@ public class FileWriteResultListener extends MotifInstance2RoleMappingConverter 
 	@Override
 	public List<AdditionalResultListener> getAdditionalListeners() {
 		return additionalListeners;
+	}
+
+	public void setOverallUsedTime(double overallTimeInSeconds) {
+		this.overallTimeInSeconds = overallTimeInSeconds;
+	}
+	
+	public double getOverallTimeInSeconds() {
+		return overallTimeInSeconds;
 	}
 }
