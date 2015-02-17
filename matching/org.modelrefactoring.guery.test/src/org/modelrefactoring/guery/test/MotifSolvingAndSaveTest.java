@@ -1,8 +1,11 @@
 package org.modelrefactoring.guery.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
@@ -16,8 +19,9 @@ import nz.ac.massey.cs.guery.Motif;
 import nz.ac.massey.cs.guery.MotifReaderException;
 import nz.ac.massey.cs.guery.impl.MultiThreadedGQLImpl;
 
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVPrinter;
 import org.eclipse.bpmn2.Bpmn2Package;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -39,6 +43,7 @@ import org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextM
 import org.emftext.language.refactoring.roles.resource.rolestext.mopp.RolestextResourceFactory;
 import org.emftext.language.timedAutomata.TimedAutomataPackage;
 import org.emftext.sdk.concretesyntax.ConcretesyntaxPackage;
+import org.junit.AfterClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -46,7 +51,6 @@ import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
 import org.modelrefactoring.guery.GueryPackage;
 import org.modelrefactoring.guery.MotifModel;
-import org.modelrefactoring.guery.Role;
 import org.modelrefactoring.guery.graph.EObjectVertex;
 import org.modelrefactoring.guery.graph.EPackageGraphAdapter;
 import org.modelrefactoring.guery.graph.EReferenceEdge;
@@ -56,13 +60,17 @@ import org.modelrefactoring.guery.resource.guery.mopp.GueryMetaInformation;
 import org.modelrefactoring.guery.resource.guery.mopp.GueryResourceFactory;
 import org.modelrefactoring.matching.guery.RoleModel2MotifConverter;
 
+import com.google.common.base.Joiner;
 import com.google.common.io.Files;
 
 @RunWith(Parameterized.class)
 public class MotifSolvingAndSaveTest {
 
 	private static final String CONFIG_FILE_PATH		= "config/MotifSolvingAndSaveTest.config";
-//	private static final String JENKINS_LINK_PREFIX	= "http://hudson-st.inf.tu-dresden.de:8080/job/GUERY%20DSL%20and%20Tests/ws/build/artifacts/projects/org.modelrefactoring.guery.test/";
+	//	private static final String JENKINS_LINK_PREFIX	= "http://hudson-st.inf.tu-dresden.de:8080/job/GUERY%20DSL%20and%20Tests/ws/build/artifacts/projects/org.modelrefactoring.guery.test/";
+
+	private static CSVPrinter csvPrinter;
+	private static File statisticsFile;
 
 	@Parameter(0)
 	public EPackage metamodel;
@@ -76,10 +84,16 @@ public class MotifSolvingAndSaveTest {
 	public String metamodelName;
 	@Parameter(5)
 	public String rolemodelName;
+	private int vertexCount;
+
+	private int edgeCount;
+
+	private double edgesPerVertex;
 
 	@Parameters(name = "MM = {4} | RM = {5} | MPL = {2} | MR = {3}")
 	public static Collection<Object[]> initParameterData(){
 		initLanguages();
+		initCSVPrinter();
 		List<Object[]> readData = new ArrayList<Object[]>();
 		File configFile = new File(CONFIG_FILE_PATH);
 		assertTrue("Config file " + CONFIG_FILE_PATH + " must exist", configFile.exists());
@@ -114,13 +128,45 @@ public class MotifSolvingAndSaveTest {
 		return readData;
 	}
 
+	private static void initCSVPrinter() {
+		// 15 Spalten
+		String[] header = new String[]{"Metamodel", "RoleModel", "MC Count", "SF Count", "SF/MC", "V Count", "E Count", "E/V", "R Count", "C Count", "C/R", "MPL", "Max Results", "Roles", "Overall time (s)", "Saving time (s)", "Query time (s)", "Found RoleMappings"};
+		CSVFormat csvFormat = CSVFormat.EXCEL.withHeader(header).withDelimiter(';');
+		String statisticsFilePath = "statistics/matching_" + System.currentTimeMillis() + ".csv";
+		statisticsFile = new File(statisticsFilePath);
+		if(statisticsFile.exists()){
+			statisticsFile.delete();
+		}
+		FileWriter writer;
+		csvPrinter = null;
+		try {
+			writer = new FileWriter(statisticsFile);
+			csvPrinter = csvFormat.print(writer);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@AfterClass
+	public static void finishTest(){
+		if(csvPrinter != null){
+			try {
+				csvPrinter.close();
+				System.out.println("statistics saved at");
+				System.out.println("[[ATTACHMENT|" + statisticsFile.getAbsoluteFile().getPath() + "]]");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
 	@Test
 	public void testAndGenerateRoleMappings() {
 		System.out.println();
 		System.out.println("##################################");
 		List<EClass> metaclasses = getMetaClasses(metamodel);
 		List<EStructuralFeature> structuralFeatures = getStructuralFeatures(metaclasses);
-		
+
 		int metaclassCount = metaclasses.size();
 		int featureCount = structuralFeatures.size();
 		double featuresPerClass = (double) featureCount / (double) metaclassCount;
@@ -136,23 +182,29 @@ public class MotifSolvingAndSaveTest {
 		List<org.modelrefactoring.guery.Motif> motifs = convertRoleModel2MotifModel().getMotifs();
 		int index = 0;
 		for (org.modelrefactoring.guery.Motif motif : motifs) {
-			System.out.print("Used roles: ");
-			List<Role> roles = motif.getVertexSelection().getRoles();
-			for (Role role : roles) {
-				System.out.print(role.getName());
-				if(roles.indexOf(role) < roles.size() - 1){
-					System.out.print(", ");
-				}
-			}
-			System.out.println();
-			FileWriteResultListener writeResultListener = testMotifOnMetamodel(motif, "rolemappings/" + metamodel.getName() + "_" + roleModel.getName() + "_MPL" + maxPathLength + "_XSIMPLE" + index + "." + new RolemappingMetaInformation().getSyntaxName());
+			Motif<MetamodelVertex, EReferenceEdge> motifByModel = this.<MetamodelVertex>getGueryMotifByMotif(motif);
+			String queriedRoles = Joiner.on(", ").join(motifByModel.getRoles());
+			System.out.println("Used roles: " + queriedRoles);
+			String resultFilePath = "rolemappings/" + metamodel.getName() + "_" + roleModel.getName() + "_MPL" + maxPathLength + "_XSIMPLE" + index + "." + new RolemappingMetaInformation().getSyntaxName();
+			FileWriteResultListener writeResultListener = solveMotifOnResource(motifByModel, resultFilePath);
 			double timeToWriteInSeconds = writeResultListener.getTimeToWriteInSeconds();
 			double overallTimeInSeconds = writeResultListener.getOverallTimeInSeconds();
 			double queryTime = overallTimeInSeconds - timeToWriteInSeconds;
 			System.out.println("Very simple String-based saving took: " + timeToWriteInSeconds + "s");
 			System.out.println("Overall time took: " + overallTimeInSeconds + "s");
 			System.out.println("Querying took approximately (overall - saving): " + queryTime + "s");
-			System.out.println("Found possible role mappings: " + writeResultListener.getFoundRoleMappingsCount());
+			int foundRoleMappingsCount = writeResultListener.getFoundRoleMappingsCount();
+			System.out.println("Found possible role mappings: " + foundRoleMappingsCount);
+
+			// "Metamodel", "RoleModel", "MC Count", "SF Count", "SF/MC", "V Count", "E Count", "E/V", "R Count", "C Count", "C/R", "MPL", "Max Results", "Roles", "Overall time (s)", "Saving time (s)", "Query time (s)", "Found RoleMappings"
+			if(csvPrinter != null){
+				try {
+					csvPrinter.printRecord(metamodelName, rolemodelName, metaclassCount, featureCount, doubleToString(featuresPerClass), doubleToString(vertexCount), doubleToString(edgeCount), doubleToString(edgesPerVertex), roleCount, collCount, doubleToString(colPerRole), maxPathLength, maxResults, queriedRoles, doubleToString(overallTimeInSeconds), doubleToString(timeToWriteInSeconds), doubleToString(queryTime), foundRoleMappingsCount);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+
 			File absFile = writeResultListener.getFile();
 			System.out.println("persisted role mappings:");
 			System.out.println("[[ATTACHMENT|" + absFile.getPath() + "]]");
@@ -161,6 +213,12 @@ public class MotifSolvingAndSaveTest {
 		}
 	}
 
+	private String doubleToString(double value){
+		String valueString = String.valueOf(value);
+		valueString = valueString.replace(".", ",");
+		return valueString;
+	}
+	
 	private List<EStructuralFeature> getStructuralFeatures(List<EClass> metaclasses) {
 		List<EStructuralFeature> structuralFeatures = new ArrayList<EStructuralFeature>();
 		for (EClass metaclass : metaclasses) {
@@ -218,10 +276,10 @@ public class MotifSolvingAndSaveTest {
 		return roleModel;
 	}
 
-	private FileWriteResultListener testMotifOnMetamodel(org.modelrefactoring.guery.Motif motif, String filePath){
-		Motif<MetamodelVertex, EReferenceEdge> motifByModel = this.<MetamodelVertex>getGueryMotifByMotif(motif);
-		return solveMotifOnResource(motifByModel, filePath);
-	}
+	//	private FileWriteResultListener testMotifOnMetamodel(org.modelrefactoring.guery.Motif motif, String filePath){
+	//		Motif<MetamodelVertex, EReferenceEdge> motifByModel = this.<MetamodelVertex>getGueryMotifByMotif(motif);
+	//		return solveMotifOnResource(motifByModel, filePath);
+	//	}
 
 
 	private FileWriteResultListener solveMotifOnResource(Motif<MetamodelVertex, EReferenceEdge> motif, String filePath){
@@ -230,16 +288,20 @@ public class MotifSolvingAndSaveTest {
 		GQL<MetamodelVertex, EReferenceEdge> engine = new MultiThreadedGQLImpl<MetamodelVertex, EReferenceEdge>(processors);
 		EPackageGraphAdapter graphAdapter = new EPackageGraphAdapter(metamodel);
 		graphAdapter.initialiseGraph();
-		int vertexCount = graphAdapter.getVertexCount();
+		vertexCount = graphAdapter.getVertexCount();
+		edgeCount = graphAdapter.getEdgeCount();
+		edgesPerVertex = (double) edgeCount / (double) vertexCount;
 		System.out.println("Vertex count: " + vertexCount);
+		System.out.println("Edge count: " + edgeCount);
+		System.out.println("Edges/Vertex: " + edgesPerVertex);
 		FileWriteResultListener listener = new FileWriteResultListener(roleModel, maxResults, filePath);
-		
+
 		long start = System.currentTimeMillis();
 		engine.query(graphAdapter, motif, listener, ComputationMode.ALL_INSTANCES);
 		long end = System.currentTimeMillis();
 		double overallTimeInSeconds = (end - start)/1000.0d;
 		listener.setOverallUsedTime(overallTimeInSeconds);
-		
+
 		return listener;
 	}
 

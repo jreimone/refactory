@@ -1,0 +1,8 @@
+motif MoveX
+select SourceContainer, TargetContainer, Movee
+connected by sourceContainment(SourceContainer>Movee)[1,1] find all
+where "sourceContainment.isContainment()"
+connected by targetContainment(TargetContainer>Movee)[1,1] find all
+where "targetContainment.isContainment()"
+connected by containerReference(SourceContainer>TargetContainer)[1,1] find all
+where "!containerReference.isContainment()"
