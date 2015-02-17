@@ -94,6 +94,7 @@ public class EPackageGraphAdapter/*<Vertex extends EObjectVertex, Edge extends E
 		createInheritedReferencesOfPackage(metamodel);
 		List<EPackage> subpackages = metamodel.getESubpackages();
 		for (EPackage subpackage : subpackages) {
+			// FIXME wenn das hier rekursiv gemacht wird, dann hängt es beu UML + ExtractXwithReferenceClass - Endlosschleife?
 			createInheritedReferencesOfPackage(subpackage);
 		}
 		//			}
