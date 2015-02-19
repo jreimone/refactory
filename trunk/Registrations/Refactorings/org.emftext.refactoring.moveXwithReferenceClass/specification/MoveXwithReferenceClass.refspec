@@ -1,0 +1,11 @@
+REFACTORING FOR <MoveXwithReferenceClass>
+
+STEPS { 
+	object sourceContainer := SourceContainer from uptree(INPUT);
+	object targetContainer := TargetContainer from path(sourceContainer);
+	index moveeIndex := first(INPUT);
+
+	move sourceContainer.sourceContainment to targetContainer.targetContainment;
+	create new mr:MovedReference in sourceContainer.referer at moveeIndex;
+	set use of targetContainer in mr.targetReference;
+} 

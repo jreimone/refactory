@@ -1,0 +1,12 @@
+RoleModel MoveXwithReferenceClass { 
+	ROLE SourceContainer ; 
+	input ROLE Movee ; 
+	ROLE TargetContainer ; 
+	optional  ROLE MovedReference ;
+	
+	transitive : SourceContainer [1..1] <>- Movee sourceContainment [0..*];
+	transitive : TargetContainer [1..1] <>- Movee targetContainment [0..*];
+	transitive : SourceContainer [1..1] <>- MovedReference referer [0..*];
+	transitive : MovedReference  [1 ..1 ]  -- TargetContainer targetReference [1 ..1 ] ; 
+	
+}
