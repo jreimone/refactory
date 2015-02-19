@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.emftext.language.refactoring.composition/src-gen"
+    editDirectory="/org.emftext.language.refactoring.composition.edit/src-gen" editorDirectory="/org.emftext.language.refactoring.composition.editor/src-gen"
+    modelPluginID="org.emftext.language.refactoring.composition" modelName="Refactoringcomposition"
+    editPluginClass="org.emftext.language.refactoring.composition.provider.RefactoringcompositionEditPlugin"
+    editorPluginClass="org.emftext.language.refactoring.composition.presentation.RefactoringcompositionEditorPlugin"
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" testsDirectory="/org.emftext.language.refactoring.composition.tests/src-gen"
+    testSuiteClass="org.emftext.language.refactoring.composition.tests.RefactoringcompositionAllTests"
+    importerID="de.christophseidl.emf.ggimporter" complianceLevel="6.0" copyrightFields="false"
+    usedGenPackages="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore ../../org.emftext.language.refactoring.rolemapping/metamodel/rolemapping.genmodel#//rolemapping ../../org.emftext.language.refactoring.roles/metamodel/roles.genmodel#//roles"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>refactoringcomposition.ecore</foreignModel>
+  <genPackages prefix="Refactoringcomposition" basePackage="org.emftext.language.refactoring"
+      disposableProviderFactory="true" ecorePackage="refactoringcomposition.ecore#/">
+    <genClasses ecoreClass="refactoringcomposition.ecore#//CompositeRoleMapping">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute refactoringcomposition.ecore#//CompositeRoleMapping/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference refactoringcomposition.ecore#//CompositeRoleMapping/targetMetamodel"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference refactoringcomposition.ecore#//CompositeRoleMapping/first"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference refactoringcomposition.ecore#//CompositeRoleMapping/sequence"/>
+    </genClasses>
+    <genClasses ecoreClass="refactoringcomposition.ecore#//BoundRoleMapping">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference refactoringcomposition.ecore#//BoundRoleMapping/nextMapping"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference refactoringcomposition.ecore#//BoundRoleMapping/previousMapping"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference refactoringcomposition.ecore#//BoundRoleMapping/bindings"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference refactoringcomposition.ecore#//BoundRoleMapping/roleMapping"/>
+    </genClasses>
+    <genClasses ecoreClass="refactoringcomposition.ecore#//SourceTargetBinding">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference refactoringcomposition.ecore#//SourceTargetBinding/source"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference refactoringcomposition.ecore#//SourceTargetBinding/target"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference refactoringcomposition.ecore#//SourceTargetBinding/sourceRoleModel"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference refactoringcomposition.ecore#//SourceTargetBinding/targetRoleModel"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
