@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: org.emftext.language.refactoring.composition;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-ClassPath: .
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.emftext.language.refactoring.refactoringcomposition,
+ org.emftext.language.refactoring.refactoringcomposition.impl,
+ org.emftext.language.refactoring.refactoringcomposition.util
+Require-Bundle: org.emftext.language.refactoring.roles;visibility:=reexport,
+ org.eclipse.core.runtime,
+ org.eclipse.emf.ecore;visibility:=reexport,
+ org.emftext.language.refactoring.rolemapping;visibility:=reexport
+Bundle-ActivationPolicy: lazy
