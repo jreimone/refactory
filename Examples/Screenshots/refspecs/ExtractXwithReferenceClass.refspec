@@ -1,0 +1,13 @@
+REFACTORING FOR <ExtractXwithReferenceClass>
+
+STEPS { 
+	object containerContainerObject := ContainerContainer from uptree(INPUT);
+	object origContainerObject := OrigContainer from path(INPUT);
+	index extractsIndex := first(INPUT);
+	 
+	create new nc:NewContainer in containerContainerObject.target;
+	assign nc.newName;
+	move origContainerObject.extracts to nc;
+	create new mr:MovedReference in origContainerObject.referer at extractsIndex;
+	set use of nc in mr.containerRef;
+} 

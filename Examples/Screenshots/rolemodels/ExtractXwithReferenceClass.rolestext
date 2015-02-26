@@ -1,0 +1,14 @@
+RoleModel ExtractXwithReferenceClass { 
+	ROLE OrigContainer ; 
+	input ROLE Extract ; 
+	ROLE NewContainer (newName) ; 
+	ROLE ContainerContainer ; 
+	optional ROLE MovedReference ;
+	
+	OrigContainer  [1 ..1 ]  <>- Extract extracts [0 ..* ] ; 
+	OrigContainer  [1 ..1 ]  <>- MovedReference referer [1 ..1 ] ; 
+	NewContainer  [1 ..1 ]  <>- Extract moved [0 ..* ] ; 
+	ContainerContainer	[1 ..1 ]  <>- NewContainer target [1 ..1 ] ; 
+	ContainerContainer	[1 ..1 ]  <>- OrigContainer source [1 ..1 ] ; 
+	MovedReference  [1 ..1 ]  -- NewContainer containerRef [1 ..1 ] ; 
+}

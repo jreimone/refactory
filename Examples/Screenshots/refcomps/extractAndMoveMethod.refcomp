@@ -1,0 +1,6 @@
+COMPOSITE REFACTORING "Extract and Move Method"
+FOR <http://www.emftext.org/java>
+
+<Extract Method> -> <Move Method> {
+	<ExtractXwithReferenceClass>.NewContainer = <MoveX>.Movee;
+}
