@@ -19,7 +19,6 @@ import java.lang.reflect.InvocationTargetException;
 
 import org.eclipse.compare.CompareEditorInput;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.compare.Comparison;
 import org.eclipse.emf.compare.EMFCompare;
@@ -27,7 +26,10 @@ import org.eclipse.emf.compare.domain.ICompareEditingDomain;
 import org.eclipse.emf.compare.domain.impl.EMFCompareEditingDomain;
 import org.eclipse.emf.compare.scope.DefaultComparisonScope;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.provider.EcoreItemProviderAdapterFactory;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
+import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
+import org.eclipse.emf.edit.provider.resource.ResourceItemProviderAdapterFactory;
 import org.eclipse.ltk.ui.refactoring.ChangePreviewViewerInput;
 import org.eclipse.ltk.ui.refactoring.IChangePreviewViewer;
 import org.eclipse.swt.widgets.Composite;
@@ -55,14 +57,21 @@ public class ModelChangePreviewer implements IChangePreviewViewer {
 		EObject fakeRefactoredModel = change.getRefactorer().getFakeRefactoredModel();
 	    
 		EMFCompare comparator = EMFCompare.builder().build();
-		DefaultComparisonScope scope = new DefaultComparisonScope(originalModel, fakeRefactoredModel, null);
-	    Comparison comparison = comparator.compare(scope);
+		// is needed for better preview - before, preview was subtractive, the other way around it us additive when new elements are created
+//		DefaultComparisonScope scope = new DefaultComparisonScope(originalModel, fakeRefactoredModel, null);
+		DefaultComparisonScope scope = new DefaultComparisonScope(fakeRefactoredModel, originalModel, null);
+		Comparison comparison = comparator.compare(scope);
 	    // the following is needed to avoid NPE at EMFCompareStructureMergeViewer.updateProblemIndication(EMFCompareStructureMergeViewer.java:1000)
 	    comparison.setDiagnostic(Diagnostic.OK_INSTANCE);
 		
-		ICompareEditingDomain editingDomain = EMFCompareEditingDomain.create(originalModel, fakeRefactoredModel, null);
-		AdapterFactory adapterFactory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
-	    CompareEditorInput compareEditorInput = new RefactoringCompareEditorInput(comparison, editingDomain, adapterFactory);
+	    // is needed for better preview - before, preview was subtractive, the other way around it us additive when new elements are created
+//		ICompareEditingDomain editingDomain = EMFCompareEditingDomain.create(originalModel, fakeRefactoredModel, null);
+		ICompareEditingDomain editingDomain = EMFCompareEditingDomain.create(fakeRefactoredModel, originalModel, null);
+		ComposedAdapterFactory adapterFactory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
+		adapterFactory.addAdapterFactory(new ResourceItemProviderAdapterFactory());
+		adapterFactory.addAdapterFactory(new EcoreItemProviderAdapterFactory());
+		adapterFactory.addAdapterFactory(new ReflectiveItemProviderAdapterFactory());
+	    CompareEditorInput compareEditorInput = new RefactoringCompareEditorInput(scope, comparison, editingDomain, adapterFactory);
 	    try {
 			compareEditorInput.run(new NullProgressMonitor());
 		} catch (InterruptedException e) {
