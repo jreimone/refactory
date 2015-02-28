@@ -1,0 +1,12 @@
+CoED for <http://www.eclipse.org/emf/2002/Ecore>
+import owl:<http://org.emftext/owl.ecore>
+(
+	incoming refactoring owl:<Rename Element>
+	outgoing corefactoring <Rename EElement> $
+		owlModel = IN;
+		owlNameable = owlModel.Nameable;
+		owlName = owlNameable.name;
+		OUT.Nameable.name = owlName + "_fromAule";
+		//OUT.Nameable.name = blaBlub.Nameable.name + "_fromOWL"
+	$
+)

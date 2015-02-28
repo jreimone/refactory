@@ -27,6 +27,7 @@ import org.eclipse.emf.compare.match.IMatchEngine;
 import org.eclipse.emf.compare.match.eobject.IEObjectMatcher;
 import org.eclipse.emf.compare.match.impl.MatchEngineFactoryImpl;
 import org.eclipse.emf.compare.match.impl.MatchEngineFactoryRegistryImpl;
+import org.eclipse.emf.compare.scope.DefaultComparisonScope;
 import org.eclipse.emf.compare.scope.IComparisonScope;
 import org.eclipse.emf.compare.utils.UseIdentifiers;
 import org.eclipse.emf.ecore.EAttribute;
@@ -199,7 +200,8 @@ public class CoRefactoringTestSuite {
 		matchEngineRegistry.add(matchEngineFactory);
 		EMFCompare comparator = EMFCompare.builder().setMatchEngineFactoryRegistry(matchEngineRegistry).build();
 		// Compare the two models
-		IComparisonScope scope = EMFCompare.createDefaultScope(compareModel, expectedModel);
+//		IComparisonScope scope = EMFCompare.createDefaultScope(compareModel, expectedModel);
+		DefaultComparisonScope scope = new DefaultComparisonScope(compareModel, expectedModel, null);
 		Comparison comparison = comparator.compare(scope);
 		List<Diff> differences = comparison.getDifferences();
 		for (Diff diff : differences) {
@@ -472,8 +474,15 @@ public class CoRefactoringTestSuite {
 
 	protected static void registerRefactoring(RoleModel roleModel, RefactoringSpecification refSpec) {
 		try {
-			IRoleModelRegistry.INSTANCE.registerRoleModel(roleModel);
-			IRefactoringSpecificationRegistry.INSTANCE.registerRefSpec(refSpec);
+			RoleModel registeredRolemodel = IRoleModelRegistry.INSTANCE.getRoleModelByName(roleModel.getName());
+			if(registeredRolemodel == null){
+				IRoleModelRegistry.INSTANCE.registerRoleModel(roleModel);
+				registeredRolemodel = roleModel;
+			}
+			RefactoringSpecification registeredRefspec = IRefactoringSpecificationRegistry.INSTANCE.getRefSpec(registeredRolemodel);
+			if(registeredRefspec == null){
+				IRefactoringSpecificationRegistry.INSTANCE.registerRefSpec(refSpec);
+			}
 		} catch (RoleModelAlreadyRegisteredException | RefSpecAlreadyRegisteredException e) {
 			e.printStackTrace();
 		}

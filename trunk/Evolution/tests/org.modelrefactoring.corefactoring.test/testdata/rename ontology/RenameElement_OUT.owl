@@ -1,0 +1,24 @@
+Prefix: : <FooBar#>
+
+Ontology: FooBar
+	
+Class: Person
+
+Class: Employee
+	SubClassOf: Person
+	
+Class: Address
+
+ObjectProperty: hasAddress
+	Domain: Person
+	Range: Address
+	
+ObjectProperty: hasNeighbour
+	Domain: Person
+	Range: Person
+	
+DataProperty: hasSalary
+	Domain: Person
+	Range: xsd:int
+
+DisjointClasses: Person, Address
