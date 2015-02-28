@@ -33,6 +33,8 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.uml2.uml.UMLPackage;
+import org.emftext.language.ecore.resource.text.mopp.TextEcoreResourceFactory;
+import org.emftext.language.ecore.resource.text.util.TextEcoreResourceUtil;
 import org.emftext.language.java.resource.JaMoPPUtil;
 import org.emftext.language.pl0.PL0Package;
 import org.emftext.language.refactoring.rolemapping.resource.rolemapping.mopp.RolemappingMetaInformation;
@@ -311,7 +313,18 @@ public class MotifSolvingAndSaveTest {
 		assertTrue("File '" + path + "' doesn't exist", file.exists());
 		URI uri = URI.createFileURI(file.getAbsolutePath());
 		ResourceSet rs = new ResourceSetImpl();
-		Resource resource = rs.getResource(uri, true);
+		Resource resource = null;
+		if(path.endsWith(".text.ecore")){
+			TextEcoreResourceFactory factory = new TextEcoreResourceFactory();
+			resource = factory.createResource(uri);
+			try {
+				resource.load(Collections.emptyMap());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+			resource = rs.getResource(uri, true);
+		}
 		EObject model = resource.getContents().get(0);
 		assertTrue("Given model must contain an EPackage", model instanceof EPackage);
 		return (EPackage) model;
