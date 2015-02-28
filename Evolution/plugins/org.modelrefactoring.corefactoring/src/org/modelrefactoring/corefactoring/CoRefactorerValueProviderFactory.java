@@ -1,11 +1,16 @@
 package org.modelrefactoring.corefactoring;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.emftext.language.refactoring.rolemapping.AttributeMapping;
+import org.emftext.language.refactoring.rolemapping.ConcreteMapping;
 import org.emftext.language.refactoring.rolemapping.RoleMapping;
 import org.emftext.language.refactoring.roles.Role;
 import org.emftext.refactoring.interpreter.IRefactorer;
@@ -20,7 +25,7 @@ public class CoRefactorerValueProviderFactory implements IValueProviderFactory {
 	private IRefactorer initialRefactorer;
 	private IRefactorer dependentRefactorer;
 	private Map<EObject, CoRefactoringValueProvider> valueProviderMap;
-	
+
 	private boolean bindingWasInterpreted = false;
 
 	public CoRefactorerValueProviderFactory(IRefactorer initialRefactorer, IRefactorer dependentRefactorer, String bindingExpression) {
@@ -49,6 +54,7 @@ public class CoRefactorerValueProviderFactory implements IValueProviderFactory {
 		EObject fakeRefactoredModel = dependentRefactorer.getFakeRefactoredModel();
 		Map<Role, List<EObject>> roleBindings = dependentRefactorer.getInterpreter().getFakeInterpreter().getRoleBindings();
 		RoleMapping dependentRolemapping = dependentRefactorer.getRoleMapping();
+		fixRoleBindings(fakeRefactoredModel, dependentRolemapping, roleBindings);
 		GenericBindingResolverFactory resolverFactory = new GenericBindingResolverFactory(initialRefactorer, fakeRefactoredModel, dependentRolemapping, roleBindings);
 		PropertyHandlerFactory.disposeAll();
 		PropertyHandlerFactory.registerPropertyHandler(Object.class, resolverFactory.getGenericResolver());
@@ -58,12 +64,50 @@ public class CoRefactorerValueProviderFactory implements IValueProviderFactory {
 		System.out.println(result);
 	}
 
-//	private InverseableCopier copyDependentModel(EObject dependentModel) {
-//		InverseableCopier copier = new InverseableCopier(false, true);
-//		copier.copy(dependentModel);
-//		copier.copyReferences();
-//		return copier;
-//	}
+	// TODO: investigate why this hack is needed at all!!!
+	// aus irgendeinem Grund enthält das RoleBinding der Rolle 'NewFeature' beim co-refactoren von Ecore 'Replace Data Value with Object'
+	// 2 Elemente: zwei EReferences, eine mit null als Namen und die andere korrekt benannt nach fake-Interpretation
+	// nach fake run muss aber alles gebunden sein mit default Werten, null darf gar nicht auftreten
+	// also schauen, warum überhaupt 2 Elemente in dieser Liste erscheinen
+	private void fixRoleBindings(EObject model, RoleMapping rolemapping, Map<Role, List<EObject>> roleBindings) {
+		List<ConcreteMapping> mappings = rolemapping.getRoleToMetaelement();
+		for (ConcreteMapping concreteMapping : mappings) {
+			Role role = concreteMapping.getRole();
+			// check the role
+			List<EObject> boundElements = null;
+			if(roleBindings.containsKey(role)){
+				boundElements = roleBindings.get(role);
+				if(boundElements == null){
+					roleBindings.remove(role);
+				}
+			}
+			// and now the role attribute
+			if(boundElements != null){
+				List<EObject> elementsToRemove = new ArrayList<EObject>();
+				List<AttributeMapping> attributeMappings = concreteMapping.getAttributeMappings();
+				for (EObject boundElement : boundElements) {
+					for (AttributeMapping attributeMapping : attributeMappings) {
+						EAttribute attribute = attributeMapping.getClassAttribute();
+						Object attributeValue = boundElement.eGet(attribute);
+						if(attributeValue == null){ 
+							// something went wrong, after fake interpretation all roles and attributes must be bound
+							// so remove the binding and the structural feature
+							elementsToRemove.add(boundElement);
+							EcoreUtil.remove(boundElement);
+						}
+					}
+				}
+				boundElements.removeAll(elementsToRemove);
+			}
+		}
+	}
+
+	//	private InverseableCopier copyDependentModel(EObject dependentModel) {
+	//		InverseableCopier copier = new InverseableCopier(false, true);
+	//		copier.copy(dependentModel);
+	//		copier.copyReferences();
+	//		return copier;
+	//	}
 
 	@Override
 	public void registerValueProviderForCommand(EObject command, IValueProvider<?, ?> valueProvider) {
