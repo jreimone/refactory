@@ -71,7 +71,7 @@ git:https://github.com/DevBoost/EMFText-Zoo.git!Inhabitants/PL0/
 git:https://github.com/DevBoost/EMFText-Zoo.git!Inhabitants/TimedAutomata/
 
 // UML2
-get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/uml2/downloads/drops/4.1.1/R201309020826/mdt-uml2-runtime-4.1.1.zip
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/uml2/downloads/drops/4.1.2/R201402022055/mdt-uml2-runtime-4.1.2.zip
 
 // BPMN2
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/mdt/bpmn2/downloads/drops/0.7/S20111111/site.zip!site/plugins/org.eclipse.bpmn2_0.7.0.201111091619.jar
