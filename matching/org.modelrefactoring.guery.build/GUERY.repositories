@@ -61,6 +61,10 @@ svn:svn+ssh://hudson@svn-st.inf.tu-dresden.de/srv/svn/refactory/trunk/Plugins/or
 svn:svn+ssh://hudson@svn-st.inf.tu-dresden.de/srv/svn/refactory/trunk/Plugins/org.emftext.language.refactoring.specification
 svn:svn+ssh://hudson@svn-st.inf.tu-dresden.de/srv/svn/refactory/trunk/Plugins/org.emftext.refactoring.registry.refactoringspecification
 
+// Ecore Text
+get:http://www.emftext.org/update/plugins/org.emftext.language.ecore.resource.text_0.9.9.v201207310007.jar
+get:http://www.emftext.org/update/plugins/org.emftext.language.ecore.resource_0.9.9.v201207310007.jar
+
 // JaMoPP
 get:http://jamopp.org/update_trunk/org.jamopp.deploy-complete.zip
 
