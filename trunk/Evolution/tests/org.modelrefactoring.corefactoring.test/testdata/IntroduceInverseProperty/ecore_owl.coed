@@ -1,0 +1,8 @@
+CoED for <http://www.eclipse.org/emf/2002/Ecore>
+import owl:<http://org.emftext/owl.ecore>
+(
+	incoming refactoring owl:<Introduce Inverse Property>
+	outgoing corefactoring <Introduce Inverse Reference>$
+		OUT.InverseReference.name = IN.InverseReference.name;
+	$
+)
