@@ -59,8 +59,9 @@ public class QueryUtil {
 
 	public static String getLineInFile(File file, int lineNumber){
 		assertTrue(file.exists());
+		BufferedReader reader = null;
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader(file));
+			reader = new BufferedReader(new FileReader(file));
 			for (int i = 0; i < lineNumber; i++) {
 				String line = reader.readLine();
 				if(line == null){
@@ -70,11 +71,18 @@ public class QueryUtil {
 					return line;
 				}
 			}
+			reader.close();
 		} catch (FileNotFoundException e) {
 			//
 		} catch (IOException e) {
 			e.printStackTrace();
-		} 
+		} finally{
+			try {
+				reader.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 		return null;
 	}
 
