@@ -85,7 +85,8 @@ public class GenericBindingResolver extends MapVariableResolver implements Prope
 		EObject roleElement = null;
 		if(!isUndefined){
 			if(isINcontext){
-				roleElement = RoleUtil.getFirstObjectForRole(name, EObject.class, initialRefactorer.getInterpreter().getRoleBindings());
+				Map<Role, List<EObject>> incomingRoleBindings = initialRefactorer.getInterpreter().getRoleBindings();
+				roleElement = RoleUtil.getFirstObjectForRole(name, EObject.class, incomingRoleBindings);
 				value = inVariables.get(name);
 			} else {
 				value = outVariables.get(name);
