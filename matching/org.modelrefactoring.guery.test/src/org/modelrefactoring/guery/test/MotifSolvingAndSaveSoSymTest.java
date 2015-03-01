@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.uml2.uml.UMLPackage;
 import org.emftext.language.ecore.resource.text.mopp.TextEcoreResourceFactory;
@@ -323,11 +324,13 @@ public class MotifSolvingAndSaveSoSymTest {
 		if(path.endsWith(".text.ecore")){
 			TextEcoreResourceFactory factory = new TextEcoreResourceFactory();
 			resource = factory.createResource(uri);
+			rs.getResources().add(resource);
 			try {
 				resource.load(Collections.emptyMap());
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			EcoreUtil.resolveAll(resource);
 		} else {
 			resource = rs.getResource(uri, true);
 		}

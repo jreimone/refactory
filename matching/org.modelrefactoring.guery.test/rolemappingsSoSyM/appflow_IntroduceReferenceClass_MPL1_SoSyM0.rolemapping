@@ -1,0 +1,8 @@
+"IntroduceReferenceClass for statemodel" maps <IntroduceReferenceClass> {Derivee:=State;DerivationContainer:=StateModel{derivation:=states:State;};Derivation:=State{derivees:=reachable:State;};}
+"IntroduceReferenceClass for statemodel" maps <IntroduceReferenceClass> {Derivee:=State;DerivationContainer:=StateModel{derivation:=states:State;};Derivation:=State{derivees:=successors:State;};}
+"IntroduceReferenceClass for statemodel" maps <IntroduceReferenceClass> {Derivee:=State;DerivationContainer:=Application{derivation:=statemodel:StateModel;};Derivation:=StateModel{derivees:=finalStates:State;};}
+"IntroduceReferenceClass for statemodel" maps <IntroduceReferenceClass> {Derivee:=State;DerivationContainer:=Application{derivation:=statemodel:StateModel;};Derivation:=StateModel{derivees:=startStates:State;};}
+"IntroduceReferenceClass for statemodel" maps <IntroduceReferenceClass> {Derivee:=State;DerivationContainer:=StateModel{derivation:=states:State;};Derivation:=State{derivees:=predecessors:State;};}
+"IntroduceReferenceClass for screenimport" maps <IntroduceReferenceClass> {Derivee:=ScreenImport;DerivationContainer:=ScreenImport{derivation:=settings:ParameterSetting;};Derivation:=ParameterSetting{derivees:=screenImport:ScreenImport;};}
+"IntroduceReferenceClass for statemodel" maps <IntroduceReferenceClass> {Derivee:=Transition;DerivationContainer:=StateModel{derivation:=states:State;};Derivation:=State{derivees:=fanIn:Transition;};}
+"IntroduceReferenceClass for statemodel" maps <IntroduceReferenceClass> {Derivee:=Transition;DerivationContainer:=StateModel{derivation:=states:State;};Derivation:=State{derivees:=fanOut:Transition;};}
