@@ -55,32 +55,35 @@ public class EPackageGraphAdapter/*<Vertex extends EObjectVertex, Edge extends E
 
 	@Override
 	protected void createGraph() {
-//		List<EObject> contents = getResource().getContents();
-		//		for (EObject model : contents) {
-		//			if(model instanceof EPackage){
-		//				EPackage epackage = (EPackage) model;
-		addNodesForPackage(metamodel);
-		//			}
-		//		}
+		addNodesForMetamodel(metamodel);
 		if(!useOnlySuperClasses()){
 			createInheritedReferences();
 		}
 	}
 
-	private void addNodesForPackage(EPackage epackage) {
+	private void addNodesForMetamodel(EPackage metamodel) {
+		List<EClass> allMetaclasses = getMetaclassesFromPackageRecursively(metamodel);
+		for (EClass metaclass : allMetaclasses) {
+			MetamodelVertex metaclassVertex = getFactory().createVertex(metaclass);
+			if(metaclassVertex != null){
+				addNode(metaclassVertex);
+			}
+		}
+	}
+	
+	private List<EClass> getMetaclassesFromPackageRecursively(EPackage epackage){
+		List<EClass> allMetaclasses = new ArrayList<EClass>();
 		List<EClassifier> classifiers = epackage.getEClassifiers();
 		for (EClassifier classifier : classifiers) {
 			if(classifier instanceof EClass){
-				MetamodelVertex classVertex = getFactory().createVertex(classifier);
-				if(classVertex != null){
-					addNode(classVertex);
-				}
+				allMetaclasses.add((EClass) classifier);
 			}
 		}
 		List<EPackage> subpackages = epackage.getESubpackages();
 		for (EPackage subpackage : subpackages) {
-			addNodesForPackage(subpackage);
+			allMetaclasses.addAll(getMetaclassesFromPackageRecursively(subpackage));
 		}
+		return allMetaclasses;
 	}
 
 	public boolean useOnlySuperClasses(){
@@ -106,7 +109,7 @@ public class EPackageGraphAdapter/*<Vertex extends EObjectVertex, Edge extends E
 		//			}
 		//		}
 	}
-
+	
 	private void createInheritedReferencesOfPackage(EPackage epackage) {
 		EList<EClassifier> classifiers = epackage.getEClassifiers();
 		for (EClassifier classifier : classifiers) {
