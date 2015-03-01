@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
@@ -32,6 +31,7 @@ public class EPackageGraphAdapter/*<Vertex extends EObjectVertex, Edge extends E
 
 	private Map<EClass, Set<EClass>> subClasses;
 	private EPackage metamodel;
+	private List<EClass> allMetaclasses;
 
 	public EPackageGraphAdapter(Resource resource) {
 		super(resource, new MetamodelGraphAdapterFactory(resource));
@@ -57,12 +57,12 @@ public class EPackageGraphAdapter/*<Vertex extends EObjectVertex, Edge extends E
 	protected void createGraph() {
 		addNodesForMetamodel(metamodel);
 		if(!useOnlySuperClasses()){
-			createInheritedReferences();
+			createInheritedReferencesOfMetamodel();
 		}
 	}
 
 	private void addNodesForMetamodel(EPackage metamodel) {
-		List<EClass> allMetaclasses = getMetaclassesFromPackageRecursively(metamodel);
+		allMetaclasses = getMetaclassesFromPackageRecursively(metamodel);
 		for (EClass metaclass : allMetaclasses) {
 			MetamodelVertex metaclassVertex = getFactory().createVertex(metaclass);
 			if(metaclassVertex != null){
@@ -70,7 +70,7 @@ public class EPackageGraphAdapter/*<Vertex extends EObjectVertex, Edge extends E
 			}
 		}
 	}
-	
+
 	private List<EClass> getMetaclassesFromPackageRecursively(EPackage epackage){
 		List<EClass> allMetaclasses = new ArrayList<EClass>();
 		List<EClassifier> classifiers = epackage.getEClassifiers();
@@ -89,52 +89,28 @@ public class EPackageGraphAdapter/*<Vertex extends EObjectVertex, Edge extends E
 	public boolean useOnlySuperClasses(){
 		return false;
 	}
-	
-	/*
-	 * Loest Vererbungsproblem
-	 * eingehende Referenzen der Oberklasse werden in Unterklasse geschrieben
-	 * (ausgehende Referenzen der Oberklassen werden schon in addNode(..) erzeugt)
-	 */
-	public void createInheritedReferences(){
-		//		List<EObject> contents = getResource().getContents();
-		//		for (EObject model : contents) {
-		//			if(model instanceof EPackage){
-		//				EPackage epackage = (EPackage) model;
-		createInheritedReferencesOfPackage(metamodel);
-		List<EPackage> subpackages = metamodel.getESubpackages();
-		for (EPackage subpackage : subpackages) {
-			// FIXME wenn das hier rekursiv gemacht wird, dann hängt es beu UML + ExtractXwithReferenceClass - Endlosschleife?
-			createInheritedReferencesOfPackage(subpackage);
-		}
-		//			}
-		//		}
-	}
-	
-	private void createInheritedReferencesOfPackage(EPackage epackage) {
-		EList<EClassifier> classifiers = epackage.getEClassifiers();
-		for (EClassifier classifier : classifiers) {
-			if(classifier instanceof EClass){
-				EClass clazz = (EClass) classifier;
-				EClassVertex classVertexSub = index.get(clazz);
-				List<EClass> allSuperTypes = clazz.getEAllSuperTypes();
-				for (EClass superClass:allSuperTypes){
-					EClassVertex classVertexSuper = index.get(superClass);
-					if (vertex2IncomingEdges.containsKey(classVertexSuper)){
-						List<EReferenceEdge> references = vertex2IncomingEdges.get(classVertexSuper);
-						for (EReferenceEdge referenceEdge:references){
-							EClass sourceClass = (EClass)referenceEdge.getStart().getModelElement();
-							EClassVertex classVertexSource = index.get(sourceClass);
-							EdgeType edgeType = EdgeType.DIRECTED;
-							EReferenceEdge newInheritedIncomingEdge = getFactory().createEdge(classVertexSource, classVertexSub, referenceEdge.getReference());
-							if(newInheritedIncomingEdge != null){
-								getGraph().addEdge(newInheritedIncomingEdge, classVertexSource, classVertexSub, edgeType);
-								Set<EReferenceEdge> edges = referenceEdgeMap.get(newInheritedIncomingEdge.getReference());
-								if(edges == null){
-									edges = new HashSet<EReferenceEdge>();
-									referenceEdgeMap.put(newInheritedIncomingEdge.getReference(), edges);
-								}
-								edges.add(newInheritedIncomingEdge);
+
+	private void createInheritedReferencesOfMetamodel() {
+		for (EClass metaclass : allMetaclasses) {
+			EClassVertex classVertexSub = index.get(metaclass);
+			List<EClass> allSuperTypes = metaclass.getEAllSuperTypes();
+			for (EClass superClass:allSuperTypes){
+				EClassVertex classVertexSuper = index.get(superClass);
+				if (vertex2IncomingEdges.containsKey(classVertexSuper)){
+					List<EReferenceEdge> references = vertex2IncomingEdges.get(classVertexSuper);
+					for (EReferenceEdge referenceEdge:references){
+						EClass sourceClass = (EClass)referenceEdge.getStart().getModelElement();
+						EClassVertex classVertexSource = index.get(sourceClass);
+						EdgeType edgeType = EdgeType.DIRECTED;
+						EReferenceEdge newInheritedIncomingEdge = getFactory().createEdge(classVertexSource, classVertexSub, referenceEdge.getReference());
+						if(newInheritedIncomingEdge != null){
+							getGraph().addEdge(newInheritedIncomingEdge, classVertexSource, classVertexSub, edgeType);
+							Set<EReferenceEdge> edges = referenceEdgeMap.get(newInheritedIncomingEdge.getReference());
+							if(edges == null){
+								edges = new HashSet<EReferenceEdge>();
+								referenceEdgeMap.put(newInheritedIncomingEdge.getReference(), edges);
 							}
+							edges.add(newInheritedIncomingEdge);
 						}
 					}
 				}
