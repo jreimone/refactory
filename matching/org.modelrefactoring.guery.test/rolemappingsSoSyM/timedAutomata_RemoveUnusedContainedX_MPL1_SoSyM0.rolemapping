@@ -1,5 +1,5 @@
+"RemoveUnusedContainedX for core" maps <RemoveUnusedContainedX> {Removee:=Edge;RemoveeContainer:=Template{removees:=edges:Edge;};}
+"RemoveUnusedContainedX for core" maps <RemoveUnusedContainedX> {Removee:=Location;RemoveeContainer:=Template{removees:=locations:Location;};}
+"RemoveUnusedContainedX for core" maps <RemoveUnusedContainedX> {Removee:=Template;RemoveeContainer:=Project{removees:=templates:Template;};}
 "RemoveUnusedContainedX for core" maps <RemoveUnusedContainedX> {Removee:=Declaration;RemoveeContainer:=Template{removees:=declarations:Declaration;};}
 "RemoveUnusedContainedX for core" maps <RemoveUnusedContainedX> {Removee:=Declaration;RemoveeContainer:=Project{removees:=globalDeclarations:Declaration;};}
-"RemoveUnusedContainedX for core" maps <RemoveUnusedContainedX> {Removee:=Location;RemoveeContainer:=Template{removees:=locations:Location;};}
-"RemoveUnusedContainedX for core" maps <RemoveUnusedContainedX> {Removee:=Edge;RemoveeContainer:=Template{removees:=edges:Edge;};}
-"RemoveUnusedContainedX for core" maps <RemoveUnusedContainedX> {Removee:=Template;RemoveeContainer:=Project{removees:=templates:Template;};}

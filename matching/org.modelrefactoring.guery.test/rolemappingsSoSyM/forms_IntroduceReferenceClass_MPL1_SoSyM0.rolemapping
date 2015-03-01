@@ -1,0 +1,1 @@
+"IntroduceReferenceClass for forms" maps <IntroduceReferenceClass> {Derivee:=Option;DerivationContainer:=Group{derivation:=items:Item;};Derivation:=Item{derivees:=dependentOf:Option;};}

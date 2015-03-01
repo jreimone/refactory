@@ -1,0 +1,2 @@
+"ExtractXwithReferenceClass for forms" maps <ExtractXwithReferenceClass> {OrigContainer:=Item{extracts:=itemType:ItemType;};Extract:=ItemType;NewContainer:=Item{moved:=itemType:ItemType;};ContainerContainer:=Group{source:=items:Item;target:=items:Item;};}
+"ExtractXwithReferenceClass for forms" maps <ExtractXwithReferenceClass> {OrigContainer:=Group{extracts:=items:Item;};Extract:=Item;NewContainer:=Group{moved:=items:Item;};ContainerContainer:=Form{source:=groups:Group;target:=groups:Group;};}

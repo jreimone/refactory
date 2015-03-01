@@ -1,2 +1,2 @@
-"IntroduceReferenceClass for owl" maps <IntroduceReferenceClass> {Derivee:=Ontology;DerivationContainer:=OntologyDocument{derivation:=ontology:Ontology;};Derivation:=Ontology{derivees:=imports:Ontology;};}
 "IntroduceReferenceClass for owl" maps <IntroduceReferenceClass> {Derivee:=Ontology;DerivationContainer:=OntologyDocument{derivation:=namespace:Namespace;};Derivation:=Namespace{derivees:=importedOntology:Ontology;};}
+"IntroduceReferenceClass for owl" maps <IntroduceReferenceClass> {Derivee:=Ontology;DerivationContainer:=OntologyDocument{derivation:=ontology:Ontology;};Derivation:=Ontology{derivees:=imports:Ontology;};}

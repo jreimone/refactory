@@ -1,0 +1,4 @@
+"RemoveUnusedContainedX for conference" maps <RemoveUnusedContainedX> {Removee:=Participant;RemoveeContainer:=Conference{removees:=speakers:Participant;};}
+"RemoveUnusedContainedX for conference" maps <RemoveUnusedContainedX> {Removee:=Talk;RemoveeContainer:=Slot{removees:=talk:Talk;};}
+"RemoveUnusedContainedX for conference" maps <RemoveUnusedContainedX> {Removee:=Slot;RemoveeContainer:=Track{removees:=slots:Slot;};}
+"RemoveUnusedContainedX for conference" maps <RemoveUnusedContainedX> {Removee:=ConferenceElement;RemoveeContainer:=Conference{removees:=elements:ConferenceElement;};}

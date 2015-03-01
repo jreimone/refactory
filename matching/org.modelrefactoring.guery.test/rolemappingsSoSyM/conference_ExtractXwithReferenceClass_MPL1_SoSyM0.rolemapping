@@ -1,0 +1,1 @@
+"ExtractXwithReferenceClass for conference" maps <ExtractXwithReferenceClass> {OrigContainer:=Slot{extracts:=talk:Talk;};Extract:=Talk;NewContainer:=Slot{moved:=talk:Talk;};ContainerContainer:=Track{source:=slots:Slot;target:=slots:Slot;};}

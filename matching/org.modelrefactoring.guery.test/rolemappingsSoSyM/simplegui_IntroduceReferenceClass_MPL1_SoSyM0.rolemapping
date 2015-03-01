@@ -1,0 +1,3 @@
+"IntroduceReferenceClass for simplegui" maps <IntroduceReferenceClass> {Derivee:=Container;DerivationContainer:=Frame{derivation:=children:UIElement;};Derivation:=UIElement{derivees:=parent:Container;};}
+"IntroduceReferenceClass for simplegui" maps <IntroduceReferenceClass> {Derivee:=Container;DerivationContainer:=Container{derivation:=children:UIElement;};Derivation:=UIElement{derivees:=parent:Container;};}
+"IntroduceReferenceClass for simplegui" maps <IntroduceReferenceClass> {Derivee:=Container;DerivationContainer:=Panel{derivation:=children:UIElement;};Derivation:=UIElement{derivees:=parent:Container;};}

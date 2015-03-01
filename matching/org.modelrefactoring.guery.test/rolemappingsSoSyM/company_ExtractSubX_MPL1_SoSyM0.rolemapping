@@ -1,0 +1,6 @@
+"ExtractSubX for company" maps <ExtractSubX> {Extractee:=Employee;OrigContainer:=Department{extracts:=employees:Employee;newParent:=subDepartments:Department;};NewContainer:=Department{moved:=employees:Employee;};}
+"ExtractSubX for company" maps <ExtractSubX> {Extractee:=Employee;OrigContainer:=Department{extracts:=employees:Employee;newParent:=subDepartments:Department;};NewContainer:=Department{moved:=manager:Employee;};}
+"ExtractSubX for company" maps <ExtractSubX> {Extractee:=Employee;OrigContainer:=Department{extracts:=manager:Employee;newParent:=subDepartments:Department;};NewContainer:=Department{moved:=employees:Employee;};}
+"ExtractSubX for company" maps <ExtractSubX> {Extractee:=Employee;OrigContainer:=Department{extracts:=manager:Employee;newParent:=subDepartments:Department;};NewContainer:=Department{moved:=manager:Employee;};}
+"ExtractSubX for company" maps <ExtractSubX> {Extractee:=Department;OrigContainer:=Company{extracts:=departments:Department;newParent:=departments:Department;};NewContainer:=Department{moved:=subDepartments:Department;};}
+"ExtractSubX for company" maps <ExtractSubX> {Extractee:=Department;OrigContainer:=Department{extracts:=subDepartments:Department;newParent:=subDepartments:Department;};NewContainer:=Department{moved:=subDepartments:Department;};}
