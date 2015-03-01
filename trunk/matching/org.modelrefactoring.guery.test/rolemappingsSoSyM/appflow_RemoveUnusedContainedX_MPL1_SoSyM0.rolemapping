@@ -1,0 +1,13 @@
+"RemoveUnusedContainedX for appflow" maps <RemoveUnusedContainedX> {Removee:=Screen;RemoveeContainer:=Application{removees:=screens:Screen;};}
+"RemoveUnusedContainedX for screenimport" maps <RemoveUnusedContainedX> {Removee:=Screen;RemoveeContainer:=ScreenTemplate{removees:=screen:Screen;};}
+"RemoveUnusedContainedX for statemodel" maps <RemoveUnusedContainedX> {Removee:=Transition;RemoveeContainer:=StateModel{removees:=transitions:Transition;};}
+"RemoveUnusedContainedX for screenimport" maps <RemoveUnusedContainedX> {Removee:=ParameterSetting;RemoveeContainer:=ScreenImport{removees:=settings:ParameterSetting;};}
+"RemoveUnusedContainedX for widgets" maps <RemoveUnusedContainedX> {Removee:=Widget;RemoveeContainer:=Panel{removees:=compounds:Widget;};}
+"RemoveUnusedContainedX for screenimport" maps <RemoveUnusedContainedX> {Removee:=Widget;RemoveeContainer:=ScreenImport{removees:=compounds:Widget;};}
+"RemoveUnusedContainedX for screenmodel" maps <RemoveUnusedContainedX> {Removee:=Widget;RemoveeContainer:=Screen{removees:=compounds:Widget;};}
+"RemoveUnusedContainedX for screenmodel" maps <RemoveUnusedContainedX> {Removee:=Widget;RemoveeContainer:=Composite{removees:=compounds:Widget;};}
+"RemoveUnusedContainedX for appflow" maps <RemoveUnusedContainedX> {Removee:=StateModel;RemoveeContainer:=Application{removees:=statemodel:StateModel;};}
+"RemoveUnusedContainedX for statemodel" maps <RemoveUnusedContainedX> {Removee:=Event;RemoveeContainer:=StateModel{removees:=events:Event;};}
+"RemoveUnusedContainedX for statemodel" maps <RemoveUnusedContainedX> {Removee:=Action;RemoveeContainer:=State{removees:=action:Action;};}
+"RemoveUnusedContainedX for appflow" maps <RemoveUnusedContainedX> {Removee:=ScreenTemplate;RemoveeContainer:=Application{removees:=templates:ScreenTemplate;};}
+"RemoveUnusedContainedX for statemodel" maps <RemoveUnusedContainedX> {Removee:=State;RemoveeContainer:=StateModel{removees:=states:State;};}

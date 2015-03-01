@@ -1,2 +1,2 @@
-"ExtractSubX for pl0" maps <ExtractSubX> {Extractee:=Term;OrigContainer:=TermExpression{extracts:=obligatory:Term;newParent:=optional:OptionalTerm;};NewContainer:=OptionalTerm{moved:=term:Term;};}
 "ExtractSubX for pl0" maps <ExtractSubX> {Extractee:=Factor;OrigContainer:=Term{extracts:=obligatory:Factor;newParent:=optional:OptionalFactor;};NewContainer:=OptionalFactor{moved:=factor:Factor;};}
+"ExtractSubX for pl0" maps <ExtractSubX> {Extractee:=Term;OrigContainer:=TermExpression{extracts:=obligatory:Term;newParent:=optional:OptionalTerm;};NewContainer:=OptionalTerm{moved:=term:Term;};}

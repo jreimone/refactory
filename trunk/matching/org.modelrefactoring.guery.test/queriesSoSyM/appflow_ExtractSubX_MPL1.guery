@@ -1,0 +1,9 @@
+motif ExtractSubX
+select Extractee, OrigContainer, NewContainer
+where "NewContainer.getEClass().getEAttributes().size() > 0"
+connected by extracts(OrigContainer>Extractee)[1,1] find all
+where "extracts.isContainment()"
+connected by newParent(OrigContainer>NewContainer)[1,1] find all
+where "newParent.isContainment()"
+connected by moved(NewContainer>Extractee)[1,1] find all
+where "moved.isContainment()"

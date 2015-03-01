@@ -6,7 +6,9 @@ package org.modelrefactoring.guery.test;
 import static org.junit.Assert.*;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -24,7 +26,9 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
+import org.emftext.language.ecore.resource.text.mopp.TextEcoreResourceFactory;
 import org.emftext.language.java.JavaPackage;
 import org.emftext.language.pl0.PL0Package;
 import org.emftext.language.pl0extended.Pl0extendedPackage;
@@ -126,18 +130,31 @@ public class GraphAdapterTest {
 		testGraphAdapter(TimedAutomataPackage.eINSTANCE.eResource(), TimedAutomataPackage.eINSTANCE);
 	}
 
-	private EPackage getMetamodelFromFile(String metamodelPath) {
+	protected EPackage getMetamodelFromFile(String metamodelPath) {
 		File mmFile = new File(metamodelPath);
 		assertTrue("File '" + mmFile.getPath() + "' doesn't exist", mmFile.exists());
 		URI uri = URI.createFileURI(mmFile.getAbsolutePath());
 		ResourceSet rs = new ResourceSetImpl();
-		Resource mmResource = rs.getResource(uri, true);
+		Resource mmResource = null;
+		if(metamodelPath.endsWith(".text.ecore")){
+			TextEcoreResourceFactory factory = new TextEcoreResourceFactory();
+			mmResource = factory.createResource(uri);
+			rs.getResources().add(mmResource);
+			try {
+				mmResource.load(Collections.emptyMap());
+				EcoreUtil.resolveAll(rs);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+			mmResource = rs.getResource(uri, true);
+		}
 		assertTrue("Resource '" + uri.toString() + "' must contain an EPackage", mmResource.getContents().get(0) instanceof EPackage);
 		EPackage metamodel = (EPackage) mmResource.getContents().get(0);
 		return metamodel;
 	}
 
-	private void testGraphAdapter(Resource mmResource, EPackage metamodel){
+	protected void testGraphAdapter(Resource mmResource, EPackage metamodel){
 		graphAdapter = new EPackageGraphAdapter(mmResource);
 		graphAdapter.initialiseGraph();
 		Iterator<MetamodelVertex> vertices = graphAdapter.getVertices();
@@ -146,6 +163,8 @@ public class GraphAdapterTest {
 		// 2. print and compare the graph with the previously created map
 		System.out.println("~~~~~~~~~~~~~~~");
 		System.out.println(mmResource.getURI().toString());
+		System.out.println("vertices: " + graphAdapter.getVertexCount());
+		System.out.println("edges: " + graphAdapter.getEdgeCount());
 		System.out.println();
 		Map<String, EClassVertex> vertexMetaclasses = new HashMap<String, EClassVertex>();
 		while (vertices.hasNext()) {
@@ -155,11 +174,17 @@ public class GraphAdapterTest {
 			vertexMetaclasses.put(eclassVertex.getEClass().getName(), eclassVertex);
 			EObject element = vertex.getModelElement();
 			assertTrue("Input was an EPackage, i.e. the wrapped vertex must be an EClass", element instanceof EClass);
-			System.out.println(((EClass) element).getName());
-			Iterator<EReferenceEdge> outEdges = graphAdapter.getOutEdges(vertex);
-			printEdges(outEdges, "---", "-->", true, metaclasses);
-			Iterator<EReferenceEdge> inEdges = graphAdapter.getInEdges(vertex);
-			printEdges(inEdges, "<--", "---", false, metaclasses);
+			int inCount = eclassVertex.getInEdges().size();
+			int outCount = eclassVertex.getOutEdges().size();
+			if(printVertices()){
+				System.out.println(((EClass) element).getName() + " (in: " + inCount+ ", out: " + outCount + ")");
+			}
+			if(printEdges()){
+				Iterator<EReferenceEdge> outEdges = graphAdapter.getOutEdges(vertex);
+				printEdges(outEdges, "---", "-->", true, metaclasses);
+				Iterator<EReferenceEdge> inEdges = graphAdapter.getInEdges(vertex);
+				printEdges(inEdges, "<--", "---", false, metaclasses);
+			}
 		}
 		// 3. some additional comparison
 		//		int eclassesCount = metaclasses.size();
@@ -168,6 +193,14 @@ public class GraphAdapterTest {
 		//		assertEquals("The vertices must count the same as EClasses in the metamodel ", vertexCount, eclassesCount);
 	}
 
+	protected boolean printVertices(){
+		return true;
+	}
+	
+	protected boolean printEdges(){
+		return true;
+	}
+	
 	private void compareInternalVerticesAndMetaclasses(Map<String, EClassVertex> vertexMetaclasses, Map<String, EClass> metaclasses) {
 		System.out.println("Vertex count: " + vertexMetaclasses.size() + "; Metaclasses count: " + metaclasses.size());
 		assertEquals("Vertex and Metaclasses count must be equal", metaclasses.size(), vertexMetaclasses.size());

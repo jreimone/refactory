@@ -1,3 +1,3 @@
-"ExtractSubX for feature" maps <ExtractSubX> {Extractee:=FeatureModel;OrigContainer:=FeatureModel{extracts:=children:FeatureModel;newParent:=children:FeatureModel;};NewContainer:=FeatureModel{moved:=children:FeatureModel;};}
 "ExtractSubX for feature" maps <ExtractSubX> {Extractee:=Feature;OrigContainer:=FeatureModel{extracts:=root:Feature;newParent:=children:FeatureModel;};NewContainer:=FeatureModel{moved:=root:Feature;};}
 "ExtractSubX for feature" maps <ExtractSubX> {Extractee:=Constraint;OrigContainer:=FeatureModel{extracts:=constraints:Constraint;newParent:=children:FeatureModel;};NewContainer:=FeatureModel{moved:=constraints:Constraint;};}
+"ExtractSubX for feature" maps <ExtractSubX> {Extractee:=FeatureModel;OrigContainer:=FeatureModel{extracts:=children:FeatureModel;newParent:=children:FeatureModel;};NewContainer:=FeatureModel{moved:=children:FeatureModel;};}
