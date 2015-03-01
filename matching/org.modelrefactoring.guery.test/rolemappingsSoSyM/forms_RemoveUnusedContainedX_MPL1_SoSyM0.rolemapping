@@ -1,5 +1,5 @@
-"RemoveUnusedContainedX for forms" maps <RemoveUnusedContainedX> {Removee:=ItemType;RemoveeContainer:=Item{removees:=itemType:ItemType;};}
-"RemoveUnusedContainedX for forms" maps <RemoveUnusedContainedX> {Removee:=Group;RemoveeContainer:=Form{removees:=groups:Group;};}
 "RemoveUnusedContainedX for forms" maps <RemoveUnusedContainedX> {Removee:=Option;RemoveeContainer:=Decision{removees:=options:Option;};}
 "RemoveUnusedContainedX for forms" maps <RemoveUnusedContainedX> {Removee:=Option;RemoveeContainer:=Choice{removees:=options:Option;};}
+"RemoveUnusedContainedX for forms" maps <RemoveUnusedContainedX> {Removee:=Group;RemoveeContainer:=Form{removees:=groups:Group;};}
+"RemoveUnusedContainedX for forms" maps <RemoveUnusedContainedX> {Removee:=ItemType;RemoveeContainer:=Item{removees:=itemType:ItemType;};}
 "RemoveUnusedContainedX for forms" maps <RemoveUnusedContainedX> {Removee:=Item;RemoveeContainer:=Group{removees:=items:Item;};}

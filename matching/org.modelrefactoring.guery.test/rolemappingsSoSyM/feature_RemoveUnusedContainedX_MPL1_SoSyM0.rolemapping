@@ -1,7 +1,7 @@
-"RemoveUnusedContainedX for feature" maps <RemoveUnusedContainedX> {Removee:=Attribute;RemoveeContainer:=Feature{removees:=attributes:Attribute;};}
 "RemoveUnusedContainedX for feature" maps <RemoveUnusedContainedX> {Removee:=FeatureModel;RemoveeContainer:=FeatureModel{removees:=children:FeatureModel;};}
-"RemoveUnusedContainedX for feature" maps <RemoveUnusedContainedX> {Removee:=Feature;RemoveeContainer:=Group{removees:=childFeatures:Feature;};}
-"RemoveUnusedContainedX for feature" maps <RemoveUnusedContainedX> {Removee:=Feature;RemoveeContainer:=FeatureModel{removees:=root:Feature;};}
 "RemoveUnusedContainedX for feature" maps <RemoveUnusedContainedX> {Removee:=Annotation;RemoveeContainer:=Feature{removees:=annotations:Annotation;};}
-"RemoveUnusedContainedX for feature" maps <RemoveUnusedContainedX> {Removee:=Group;RemoveeContainer:=Feature{removees:=groups:Group;};}
+"RemoveUnusedContainedX for feature" maps <RemoveUnusedContainedX> {Removee:=Feature;RemoveeContainer:=FeatureModel{removees:=root:Feature;};}
+"RemoveUnusedContainedX for feature" maps <RemoveUnusedContainedX> {Removee:=Feature;RemoveeContainer:=Group{removees:=childFeatures:Feature;};}
 "RemoveUnusedContainedX for feature" maps <RemoveUnusedContainedX> {Removee:=Constraint;RemoveeContainer:=FeatureModel{removees:=constraints:Constraint;};}
+"RemoveUnusedContainedX for feature" maps <RemoveUnusedContainedX> {Removee:=Group;RemoveeContainer:=Feature{removees:=groups:Group;};}
+"RemoveUnusedContainedX for feature" maps <RemoveUnusedContainedX> {Removee:=Attribute;RemoveeContainer:=Feature{removees:=attributes:Attribute;};}

@@ -1,3 +1,3 @@
 "MoveX for actions" maps <MoveX> {SourceContainer:=State{containerReference:=predecessors:State;sourceContainment:=action:Action;};TargetContainer:=State{targetContainment:=action:Action;};Movee:=Action;}
-"MoveX for actions" maps <MoveX> {SourceContainer:=State{containerReference:=successors:State;sourceContainment:=action:Action;};TargetContainer:=State{targetContainment:=action:Action;};Movee:=Action;}
 "MoveX for actions" maps <MoveX> {SourceContainer:=State{containerReference:=reachable:State;sourceContainment:=action:Action;};TargetContainer:=State{targetContainment:=action:Action;};Movee:=Action;}
+"MoveX for actions" maps <MoveX> {SourceContainer:=State{containerReference:=successors:State;sourceContainment:=action:Action;};TargetContainer:=State{targetContainment:=action:Action;};Movee:=Action;}

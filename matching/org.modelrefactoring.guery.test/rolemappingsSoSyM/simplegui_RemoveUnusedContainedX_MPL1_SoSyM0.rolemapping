@@ -1,3 +1,3 @@
 "RemoveUnusedContainedX for simplegui" maps <RemoveUnusedContainedX> {Removee:=UIElement;RemoveeContainer:=Frame{removees:=children:UIElement;};}
-"RemoveUnusedContainedX for simplegui" maps <RemoveUnusedContainedX> {Removee:=UIElement;RemoveeContainer:=Container{removees:=children:UIElement;};}
 "RemoveUnusedContainedX for simplegui" maps <RemoveUnusedContainedX> {Removee:=UIElement;RemoveeContainer:=Panel{removees:=children:UIElement;};}
+"RemoveUnusedContainedX for simplegui" maps <RemoveUnusedContainedX> {Removee:=UIElement;RemoveeContainer:=Container{removees:=children:UIElement;};}

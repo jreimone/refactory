@@ -64,6 +64,7 @@ public class EPackageGraphAdapter/*<Vertex extends EObjectVertex, Edge extends E
 	private void addNodesForMetamodel(EPackage metamodel) {
 		allMetaclasses = getMetaclassesFromPackageRecursively(metamodel);
 		for (EClass metaclass : allMetaclasses) {
+			populateSubTypeHierarchy(metaclass);
 			MetamodelVertex metaclassVertex = getFactory().createVertex(metaclass);
 			if(metaclassVertex != null){
 				addNode(metaclassVertex);
@@ -96,6 +97,7 @@ public class EPackageGraphAdapter/*<Vertex extends EObjectVertex, Edge extends E
 			List<EClass> allSuperTypes = metaclass.getEAllSuperTypes();
 			for (EClass superClass:allSuperTypes){
 				EClassVertex classVertexSuper = index.get(superClass);
+				// inherit incoming edges
 				if (vertex2IncomingEdges.containsKey(classVertexSuper)){
 					List<EReferenceEdge> references = vertex2IncomingEdges.get(classVertexSuper);
 					for (EReferenceEdge referenceEdge:references){
@@ -126,7 +128,6 @@ public class EPackageGraphAdapter/*<Vertex extends EObjectVertex, Edge extends E
 				getGraph().addVertex(eclassVertex);
 				index.put(eclassVertex.getEClass(), eclassVertex);
 				EClass eClass = eclassVertex.getEClass();
-				populateSubTypeHierarchy(eClass);
 				EdgeType edgeType = EdgeType.DIRECTED;
 				List<EReference> references = eClass.getEAllReferences();
 				for (EReference reference : references) { //enthaelt Referenzen von EClass mit namen
