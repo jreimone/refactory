@@ -1,0 +1,2 @@
+"RemoveUnusedContainedX for textadventure" maps <RemoveUnusedContainedX> {Removee:=AdventureElement;RemoveeContainer:=Adventure{removees:=elements:AdventureElement;};}
+"RemoveUnusedContainedX for textadventure" maps <RemoveUnusedContainedX> {Removee:=Item;RemoveeContainer:=Room{removees:=items:Item;};}

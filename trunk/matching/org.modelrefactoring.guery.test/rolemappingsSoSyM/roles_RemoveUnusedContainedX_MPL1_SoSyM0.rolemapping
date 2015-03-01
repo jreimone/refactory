@@ -1,0 +1,9 @@
+"RemoveUnusedContainedX for roles" maps <RemoveUnusedContainedX> {Removee:=RoleAttribute;RemoveeContainer:=Role{removees:=attributes:RoleAttribute;};}
+"RemoveUnusedContainedX for roles" maps <RemoveUnusedContainedX> {Removee:=Collaboration;RemoveeContainer:=RoleModel{removees:=collaborations:Collaboration;};}
+"RemoveUnusedContainedX for roles" maps <RemoveUnusedContainedX> {Removee:=Multiplicity;RemoveeContainer:=RoleComposition{removees:=targetMultiplicity:Multiplicity;};}
+"RemoveUnusedContainedX for roles" maps <RemoveUnusedContainedX> {Removee:=Multiplicity;RemoveeContainer:=RoleAssociation{removees:=sourceMultiplicity:Multiplicity;};}
+"RemoveUnusedContainedX for roles" maps <RemoveUnusedContainedX> {Removee:=Multiplicity;RemoveeContainer:=RoleAssociation{removees:=targetMultiplicity:Multiplicity;};}
+"RemoveUnusedContainedX for roles" maps <RemoveUnusedContainedX> {Removee:=Multiplicity;RemoveeContainer:=RoleComposition{removees:=sourceMultiplicity:Multiplicity;};}
+"RemoveUnusedContainedX for roles" maps <RemoveUnusedContainedX> {Removee:=Multiplicity;RemoveeContainer:=MultiplicityCollaboration{removees:=sourceMultiplicity:Multiplicity;};}
+"RemoveUnusedContainedX for roles" maps <RemoveUnusedContainedX> {Removee:=Multiplicity;RemoveeContainer:=MultiplicityCollaboration{removees:=targetMultiplicity:Multiplicity;};}
+"RemoveUnusedContainedX for roles" maps <RemoveUnusedContainedX> {Removee:=Role;RemoveeContainer:=RoleModel{removees:=roles:Role;};}

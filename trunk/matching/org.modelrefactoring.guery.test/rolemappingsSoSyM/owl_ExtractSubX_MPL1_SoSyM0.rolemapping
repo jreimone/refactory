@@ -1,6 +1,6 @@
 "ExtractSubX for owl" maps <ExtractSubX> {Extractee:=DataConjunction;OrigContainer:=DataConjunction{extracts:=dataConjunctions:DataConjunction;newParent:=dataPrimaries:DataPrimary;};NewContainer:=DataPrimary{moved:=dataConjunctions:DataConjunction;};}
-"ExtractSubX for owl" maps <ExtractSubX> {Extractee:=Annotation;OrigContainer:=ObjectPropertyMin{extracts:=annotations:Annotation;newParent:=primary:Primary;};NewContainer:=Primary{moved:=annotations:Annotation;};}
 "ExtractSubX for owl" maps <ExtractSubX> {Extractee:=Annotation;OrigContainer:=ObjectPropertyOnly{extracts:=annotations:Annotation;newParent:=primary:Primary;};NewContainer:=Primary{moved:=annotations:Annotation;};}
-"ExtractSubX for owl" maps <ExtractSubX> {Extractee:=Annotation;OrigContainer:=ObjectPropertyMax{extracts:=annotations:Annotation;newParent:=primary:Primary;};NewContainer:=Primary{moved:=annotations:Annotation;};}
 "ExtractSubX for owl" maps <ExtractSubX> {Extractee:=Annotation;OrigContainer:=ObjectPropertySome{extracts:=annotations:Annotation;newParent:=primary:Primary;};NewContainer:=Primary{moved:=annotations:Annotation;};}
+"ExtractSubX for owl" maps <ExtractSubX> {Extractee:=Annotation;OrigContainer:=ObjectPropertyMax{extracts:=annotations:Annotation;newParent:=primary:Primary;};NewContainer:=Primary{moved:=annotations:Annotation;};}
 "ExtractSubX for owl" maps <ExtractSubX> {Extractee:=Annotation;OrigContainer:=ObjectPropertyExactly{extracts:=annotations:Annotation;newParent:=primary:Primary;};NewContainer:=Primary{moved:=annotations:Annotation;};}
+"ExtractSubX for owl" maps <ExtractSubX> {Extractee:=Annotation;OrigContainer:=ObjectPropertyMin{extracts:=annotations:Annotation;newParent:=primary:Primary;};NewContainer:=Primary{moved:=annotations:Annotation;};}
