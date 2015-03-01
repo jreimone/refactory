@@ -1,4 +1,4 @@
-"RemoveUnusedContainedX for company" maps <RemoveUnusedContainedX> {Removee:=Employee;RemoveeContainer:=Department{removees:=manager:Employee;};}
-"RemoveUnusedContainedX for company" maps <RemoveUnusedContainedX> {Removee:=Employee;RemoveeContainer:=Department{removees:=employees:Employee;};}
-"RemoveUnusedContainedX for company" maps <RemoveUnusedContainedX> {Removee:=Department;RemoveeContainer:=Company{removees:=departments:Department;};}
 "RemoveUnusedContainedX for company" maps <RemoveUnusedContainedX> {Removee:=Department;RemoveeContainer:=Department{removees:=subDepartments:Department;};}
+"RemoveUnusedContainedX for company" maps <RemoveUnusedContainedX> {Removee:=Department;RemoveeContainer:=Company{removees:=departments:Department;};}
+"RemoveUnusedContainedX for company" maps <RemoveUnusedContainedX> {Removee:=Employee;RemoveeContainer:=Department{removees:=employees:Employee;};}
+"RemoveUnusedContainedX for company" maps <RemoveUnusedContainedX> {Removee:=Employee;RemoveeContainer:=Department{removees:=manager:Employee;};}

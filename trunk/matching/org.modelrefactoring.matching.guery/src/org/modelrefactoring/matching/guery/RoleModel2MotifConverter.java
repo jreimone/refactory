@@ -61,35 +61,41 @@ public class RoleModel2MotifConverter {
 	protected boolean useNonOptionalRolesOnly(){
 		return false;
 	}
+	
+	protected boolean addMotifsWithoutOptionalRolesCombinations() {
+		return true;
+	}
 
 	private void transform() {
 		if(!useNonOptionalRolesOnly()){
 			motifModel.getMotifs().add(createMotif(initialRolemodel));
-			List<Role> optionalRoles = getOptionalRoles(initialRolemodel);
-			CombinationGenerator<Role> generator = new CombinationGenerator<Role>();
-			List<Role> mappedRoles = null;
-			if(roleMapping != null){
-				mappedRoles = roleMapping.getAllMappedRoles();
-			}
-			for (int count = 1; count <= optionalRoles.size(); count++) {
-				List<List<Role>> countCombinations = generator.getCombinations(optionalRoles, count);
-				for (List<Role> rolesToRemove : countCombinations) {
-					if(mappedRoles != null){
-						boolean roleAlreadyMapped = false;
-						for (Role roleToRemove : rolesToRemove) {
-							if(mappedRoles.contains(roleToRemove)){
-								roleAlreadyMapped = true;
-								break;
+			if(addMotifsWithoutOptionalRolesCombinations()){
+				List<Role> optionalRoles = getOptionalRoles(initialRolemodel);
+				CombinationGenerator<Role> generator = new CombinationGenerator<Role>();
+				List<Role> mappedRoles = null;
+				if(roleMapping != null){
+					mappedRoles = roleMapping.getAllMappedRoles();
+				}
+				for (int count = 1; count <= optionalRoles.size(); count++) {
+					List<List<Role>> countCombinations = generator.getCombinations(optionalRoles, count);
+					for (List<Role> rolesToRemove : countCombinations) {
+						if(mappedRoles != null){
+							boolean roleAlreadyMapped = false;
+							for (Role roleToRemove : rolesToRemove) {
+								if(mappedRoles.contains(roleToRemove)){
+									roleAlreadyMapped = true;
+									break;
+								}
+							}
+							if(roleAlreadyMapped){
+								continue;
 							}
 						}
-						if(roleAlreadyMapped){
-							continue;
-						}
-					}
 
-					RoleModel copiedRoleModel = removeRolesAndReturnCopy(initialRolemodel, rolesToRemove);
-					Motif motif = createMotif(copiedRoleModel);
-					motifModel.getMotifs().add(motif);
+						RoleModel copiedRoleModel = removeRolesAndReturnCopy(initialRolemodel, rolesToRemove);
+						Motif motif = createMotif(copiedRoleModel);
+						motifModel.getMotifs().add(motif);
+					}
 				}
 			}
 		} else {

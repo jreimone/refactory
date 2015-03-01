@@ -1,2 +1,2 @@
-"RemoveUnusedContainedX for sandwich_simple" maps <RemoveUnusedContainedX> {Removee:=Instruction;RemoveeContainer:=Recipe{removees:=instructions:Instruction;};}
 "RemoveUnusedContainedX for sandwich_simple" maps <RemoveUnusedContainedX> {Removee:=Ingredient;RemoveeContainer:=Recipe{removees:=ingredients:Ingredient;};}
+"RemoveUnusedContainedX for sandwich_simple" maps <RemoveUnusedContainedX> {Removee:=Instruction;RemoveeContainer:=Recipe{removees:=instructions:Instruction;};}

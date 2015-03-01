@@ -1,5 +1,5 @@
-"IntroduceReferenceClass for roles" maps <IntroduceReferenceClass> {Derivee:=Collaboration;DerivationContainer:=RoleModel{derivation:=roles:Role;};Derivation:=Role{derivees:=outgoing:Collaboration;};}
 "IntroduceReferenceClass for roles" maps <IntroduceReferenceClass> {Derivee:=Collaboration;DerivationContainer:=RoleModel{derivation:=roles:Role;};Derivation:=Role{derivees:=incoming:Collaboration;};}
-"IntroduceReferenceClass for roles" maps <IntroduceReferenceClass> {Derivee:=Role;DerivationContainer:=RoleModel{derivation:=collaborations:Collaboration;};Derivation:=Collaboration{derivees:=target:Role;};}
-"IntroduceReferenceClass for roles" maps <IntroduceReferenceClass> {Derivee:=Role;DerivationContainer:=Role{derivation:=attributes:RoleAttribute;};Derivation:=RoleAttribute{derivees:=attributeRole:Role;};}
+"IntroduceReferenceClass for roles" maps <IntroduceReferenceClass> {Derivee:=Collaboration;DerivationContainer:=RoleModel{derivation:=roles:Role;};Derivation:=Role{derivees:=outgoing:Collaboration;};}
 "IntroduceReferenceClass for roles" maps <IntroduceReferenceClass> {Derivee:=Role;DerivationContainer:=RoleModel{derivation:=collaborations:Collaboration;};Derivation:=Collaboration{derivees:=source:Role;};}
+"IntroduceReferenceClass for roles" maps <IntroduceReferenceClass> {Derivee:=Role;DerivationContainer:=Role{derivation:=attributes:RoleAttribute;};Derivation:=RoleAttribute{derivees:=attributeRole:Role;};}
+"IntroduceReferenceClass for roles" maps <IntroduceReferenceClass> {Derivee:=Role;DerivationContainer:=RoleModel{derivation:=collaborations:Collaboration;};Derivation:=Collaboration{derivees:=target:Role;};}

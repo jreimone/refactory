@@ -1,4 +1,4 @@
-"IntroduceReferenceClass for company" maps <IntroduceReferenceClass> {Derivee:=Employee;DerivationContainer:=Department{derivation:=employees:Employee;};Derivation:=Employee{derivees:=departmentHead:Employee;};}
-"IntroduceReferenceClass for company" maps <IntroduceReferenceClass> {Derivee:=Employee;DerivationContainer:=Department{derivation:=manager:Employee;};Derivation:=Employee{derivees:=departmentHead:Employee;};}
-"IntroduceReferenceClass for company" maps <IntroduceReferenceClass> {Derivee:=Employee;DerivationContainer:=Department{derivation:=employees:Employee;};Derivation:=Employee{derivees:=mentor:Employee;};}
 "IntroduceReferenceClass for company" maps <IntroduceReferenceClass> {Derivee:=Employee;DerivationContainer:=Department{derivation:=manager:Employee;};Derivation:=Employee{derivees:=mentor:Employee;};}
+"IntroduceReferenceClass for company" maps <IntroduceReferenceClass> {Derivee:=Employee;DerivationContainer:=Department{derivation:=employees:Employee;};Derivation:=Employee{derivees:=mentor:Employee;};}
+"IntroduceReferenceClass for company" maps <IntroduceReferenceClass> {Derivee:=Employee;DerivationContainer:=Department{derivation:=manager:Employee;};Derivation:=Employee{derivees:=departmentHead:Employee;};}
+"IntroduceReferenceClass for company" maps <IntroduceReferenceClass> {Derivee:=Employee;DerivationContainer:=Department{derivation:=employees:Employee;};Derivation:=Employee{derivees:=departmentHead:Employee;};}

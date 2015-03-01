@@ -1,10 +1,14 @@
 motif ExtractXwithReferenceClass
-select OrigContainer, Extract, NewContainer, ContainerContainer
+select OrigContainer, Extract, NewContainer, ContainerContainer, MovedReference
 connected by extracts(OrigContainer>Extract)[1,1] find all
 where "extracts.isContainment()"
+connected by referer(OrigContainer>MovedReference)[1,1] find all
+where "referer.isContainment()"
 connected by moved(NewContainer>Extract)[1,1] find all
 where "moved.isContainment()"
 connected by target(ContainerContainer>NewContainer)[1,1] find all
 where "target.isContainment()"
 connected by source(ContainerContainer>OrigContainer)[1,1] find all
 where "source.isContainment()"
+connected by containerRef(MovedReference>NewContainer)[1,1] find all
+where "!containerRef.isContainment()"

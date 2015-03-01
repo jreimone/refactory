@@ -1,8 +1,6 @@
 package org.modelrefactoring.guery.test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,12 +9,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.bpmn2.Bpmn2Package;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -247,6 +247,47 @@ public class MetamodelGraphStatisticsTest extends AbstractPersistCSVFileTest {
 				System.out.println("Metaclass '" + name + "' is external");
 			}
 		}
+		// now check the edges and references
+		for (String className : vertexMetaclasses.keySet()) {
+			EClassVertex vertex = vertexMetaclasses.get(className);
+			EClass metaclass = metaclasses.get(className);
+			Resource sourceResource = getResourceForEClass(metaclass);
+			List<EReference> allOutgoingReferences = metaclass.getEAllReferences();
+			List<EClass> targetClassesInSameResource = new ArrayList<EClass>();
+			for (EReference outgoingReference : allOutgoingReferences) {
+				EClass targetClass = outgoingReference.getEReferenceType();
+				Resource targetResource = getResourceForEClass(targetClass);
+				if(sourceResource.equals(targetResource)){
+					targetClassesInSameResource.add(targetClass);
+				}
+				Set<EClass> targetSubtypes = graphAdapter.getSubTypeHierarchy().get(targetClass);
+				if(targetSubtypes != null){
+					for (EClass targetSubClass : targetSubtypes) {
+						targetResource = getResourceForEClass(targetSubClass);
+						if(sourceResource.equals(targetResource)){
+							targetClassesInSameResource.add(targetSubClass);
+						}
+					}
+				}
+				// remove the count of target classes contained in another resource
+			}
+			int outgoingReferencesCount = targetClassesInSameResource.size();
+			assertEquals("Outgoing reference and edge count of '" + className + "' must be equal", outgoingReferencesCount, vertex.getOutEdges().size());
+		}
+	}
+	
+	private Resource getResourceForEClass(EClass metaclass){
+		EcoreUtil.resolveAll(metaclass);
+		if(metaclass.eIsProxy()){
+			return null;
+		}
+		EObject parent = metaclass.eContainer();
+		EObject model = null;
+		while (parent != null) {
+			model = parent;
+			parent = parent.eContainer();
+		}
+		return model.eResource();
 	}
 	
 	private void printEdges(Iterator<EReferenceEdge> edges, String startArrow, String endArrow, boolean out, Map<String, EClass> metaclasses) {

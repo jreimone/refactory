@@ -13,4 +13,8 @@ public class RoleModel2MotifConverterWithoutOptionalRoles extends RoleModel2Moti
 	protected boolean useNonOptionalRolesOnly() {
 		return true;
 	}
+	
+//	protected boolean addMotifsWithoutOptionalRolesCombinations() {
+//		return false;
+//	}
 }
