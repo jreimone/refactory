@@ -1,0 +1,1 @@
+"IntroduceReferenceClass for core" maps <IntroduceReferenceClass> {Derivee:=Expression;DerivationContainer:=Template{derivation:=locations:Location;};Derivation:=Location{derivees:=invariant:Expression;};}

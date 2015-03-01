@@ -1,0 +1,2 @@
+"IntroduceReferenceClass for concretesyntax" maps <IntroduceReferenceClass> {Derivee:=ConcreteSyntax;DerivationContainer:=ConcreteSyntax{derivation:=imports:Import;};Derivation:=Import{derivees:=concreteSyntax:ConcreteSyntax;};}
+"IntroduceReferenceClass for concretesyntax" maps <IntroduceReferenceClass> {Derivee:=Placeholder;DerivationContainer:=ConcreteSyntax{derivation:=syntheticTokens:CompleteTokenDefinition;};Derivation:=CompleteTokenDefinition{derivees:=attributeReferences:Placeholder;};}

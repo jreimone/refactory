@@ -1,0 +1,2 @@
+"ExtractSubX for concretesyntax" maps <ExtractSubX> {Extractee:=SyntaxElement;OrigContainer:=EnumTerminal{extracts:=children:SyntaxElement;newParent:=literals:EnumLiteralTerminal;};NewContainer:=EnumLiteralTerminal{moved:=children:SyntaxElement;};}
+"ExtractSubX for concretesyntax" maps <ExtractSubX> {Extractee:=Annotation;OrigContainer:=ConcreteSyntax{extracts:=annotations:Annotation;newParent:=imports:Import;};NewContainer:=Import{moved:=annotations:Annotation;};}

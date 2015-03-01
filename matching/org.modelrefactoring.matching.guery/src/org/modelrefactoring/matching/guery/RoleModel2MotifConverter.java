@@ -25,12 +25,11 @@ import org.modelrefactoring.guery.GueryFactory;
 import org.modelrefactoring.guery.Motif;
 import org.modelrefactoring.guery.MotifModel;
 import org.modelrefactoring.guery.VertexSelection;
-import org.modelrefactoring.guery.graph.ContainmentEdge;
 
 public class RoleModel2MotifConverter {
 
 	public static final String INTERMEDIATE_IDENTIFIER	= "_";
-	
+
 	private RoleModel initialRolemodel;
 	private MotifModel motifModel;
 
@@ -41,7 +40,7 @@ public class RoleModel2MotifConverter {
 	public RoleModel2MotifConverter(RoleModel roleModel){
 		this.initialRolemodel = roleModel;
 	}
-	
+
 	/**
 	 * This constructor is used if some roles were mapped manually already
 	 * in an existing role mapping. 
@@ -59,51 +58,72 @@ public class RoleModel2MotifConverter {
 		return motifModel;
 	}
 
+	protected boolean useNonOptionalRolesOnly(){
+		return false;
+	}
+
 	private void transform() {
-		motifModel.getMotifs().add(createMotif(initialRolemodel));
-		List<Role> roles = initialRolemodel.getRoles();
+		if(!useNonOptionalRolesOnly()){
+			motifModel.getMotifs().add(createMotif(initialRolemodel));
+			List<Role> optionalRoles = getOptionalRoles(initialRolemodel);
+			CombinationGenerator<Role> generator = new CombinationGenerator<Role>();
+			List<Role> mappedRoles = null;
+			if(roleMapping != null){
+				mappedRoles = roleMapping.getAllMappedRoles();
+			}
+			for (int count = 1; count <= optionalRoles.size(); count++) {
+				List<List<Role>> countCombinations = generator.getCombinations(optionalRoles, count);
+				for (List<Role> rolesToRemove : countCombinations) {
+					if(mappedRoles != null){
+						boolean roleAlreadyMapped = false;
+						for (Role roleToRemove : rolesToRemove) {
+							if(mappedRoles.contains(roleToRemove)){
+								roleAlreadyMapped = true;
+								break;
+							}
+						}
+						if(roleAlreadyMapped){
+							continue;
+						}
+					}
+
+					RoleModel copiedRoleModel = removeRolesAndReturnCopy(initialRolemodel, rolesToRemove);
+					Motif motif = createMotif(copiedRoleModel);
+					motifModel.getMotifs().add(motif);
+				}
+			}
+		} else {
+			List<Role> optionalRoles = getOptionalRoles(initialRolemodel);
+			RoleModel nonOptionalRoleModel = removeRolesAndReturnCopy(initialRolemodel, optionalRoles);
+			motifModel.getMotifs().add(createMotif(nonOptionalRoleModel));
+		}
+	}
+
+	private List<Role> getOptionalRoles(RoleModel roleModel) {
+		List<Role> roles = roleModel.getRoles();
 		List<Role> optionalRoles = new ArrayList<Role>();
 		for (Role role : roles) {
 			if(role.getModifier().contains(RoleModifier.OPTIONAL)){
 				optionalRoles.add(role);
 			}
 		}
-		CombinationGenerator<Role> generator = new CombinationGenerator<Role>();
-		List<Role> mappedRoles = null;
-		if(roleMapping != null){
-			mappedRoles = roleMapping.getAllMappedRoles();
-		}
-		for (int count = 1; count <= optionalRoles.size(); count++) {
-			List<List<Role>> countCombinations = generator.getCombinations(optionalRoles, count);
-			for (List<Role> rolesToRemove : countCombinations) {
-				if(mappedRoles != null){
-					boolean roleAlreadyMapped = false;
-					for (Role roleToRemove : rolesToRemove) {
-						if(mappedRoles.contains(roleToRemove)){
-							roleAlreadyMapped = true;
-							break;
-						}
-					}
-					if(roleAlreadyMapped){
-						continue;
-					}
-				}
-				EcoreUtil.Copier copier = new EcoreUtil.Copier(true, false);
-				RoleModel copiedRoleModel = (RoleModel) copier.copy(initialRolemodel);
-				copier.copyReferences();
-				for (Role roleToRemove : rolesToRemove) {
-					copiedRoleModel.getRoles().remove(copier.get(roleToRemove));
-					for (Collaboration collaboration : roleToRemove.getIncoming()) {
-						EcoreUtil.delete(copier.get(collaboration));
-					}
-					for (Collaboration collaboration : roleToRemove.getOutgoing()) {
-						EcoreUtil.delete(copier.get(collaboration));
-					}
-				}
-				Motif motif = createMotif(copiedRoleModel);
-				motifModel.getMotifs().add(motif);
+		return optionalRoles;
+	}
+
+	protected RoleModel removeRolesAndReturnCopy(RoleModel original, List<Role> rolesToRemove){
+		EcoreUtil.Copier copier = new EcoreUtil.Copier(true, false);
+		RoleModel copiedRoleModel = (RoleModel) copier.copy(original);
+		copier.copyReferences();
+		for (Role roleToRemove : rolesToRemove) {
+			copiedRoleModel.getRoles().remove(copier.get(roleToRemove));
+			for (Collaboration collaboration : roleToRemove.getIncoming()) {
+				EcoreUtil.delete(copier.get(collaboration));
+			}
+			for (Collaboration collaboration : roleToRemove.getOutgoing()) {
+				EcoreUtil.delete(copier.get(collaboration));
 			}
 		}
+		return copiedRoleModel;
 	}
 
 	private Motif createMotif(RoleModel roleModel) {
@@ -175,7 +195,7 @@ public class RoleModel2MotifConverter {
 		}
 		return null;
 	}
-	
+
 	private void createMultiplicityCollaboration(Motif motif, MultiplicityCollaboration collaboration) {
 		Role sourceRole = collaboration.getSource();
 		Role targetRole = collaboration.getTarget();
@@ -233,10 +253,10 @@ public class RoleModel2MotifConverter {
 		}
 		Constraint edgeConstraint = GueryFactory.eINSTANCE.createConstraint();
 		if(collaboration instanceof RoleComposition){
-//			edgeConstraint.setExpression(connection.getPath() + " is " + ContainmentEdge.class.getCanonicalName());
+			//			edgeConstraint.setExpression(connection.getPath() + " is " + ContainmentEdge.class.getCanonicalName());
 			edgeConstraint.setExpression(connection.getPath() + ".isContainment()");
 		} else {
-//			edgeConstraint.setExpression("!(" + connection.getPath() + " is " + ContainmentEdge.class.getCanonicalName() + ")");
+			//			edgeConstraint.setExpression("!(" + connection.getPath() + " is " + ContainmentEdge.class.getCanonicalName() + ")");
 			edgeConstraint.setExpression("!" + connection.getPath() + ".isContainment()");
 		}
 		edgeSelection.getConstraints().add(edgeConstraint);

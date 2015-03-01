@@ -34,7 +34,6 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.uml2.uml.UMLPackage;
 import org.emftext.language.ecore.resource.text.mopp.TextEcoreResourceFactory;
-import org.emftext.language.ecore.resource.text.util.TextEcoreResourceUtil;
 import org.emftext.language.java.resource.JaMoPPUtil;
 import org.emftext.language.pl0.PL0Package;
 import org.emftext.language.refactoring.rolemapping.resource.rolemapping.mopp.RolemappingMetaInformation;
@@ -91,12 +90,12 @@ public class MotifSolvingAndSaveTest {
 	private int edgeCount;
 
 	private double edgesPerVertex;
-
+	
 	@Parameters(name = "MM = {4} | RM = {5} | MPL = {2} | MR = {3}")
 	public static Collection<Object[]> initParameterData(){
 		initLanguages();
 		initCSVPrinter();
-		List<Object[]> readData = new ArrayList<Object[]>();
+ 		List<Object[]> readData = new ArrayList<Object[]>();
 		File configFile = new File(CONFIG_FILE_PATH);
 		assertTrue("Config file " + CONFIG_FILE_PATH + " must exist", configFile.exists());
 		try {
@@ -288,7 +287,7 @@ public class MotifSolvingAndSaveTest {
 		//		int processors = Runtime.getRuntime().availableProcessors();
 		int processors = 1;
 		GQL<MetamodelVertex, EReferenceEdge> engine = new MultiThreadedGQLImpl<MetamodelVertex, EReferenceEdge>(processors);
-		EPackageGraphAdapter graphAdapter = new EPackageGraphAdapter(metamodel);
+		EPackageGraphAdapter graphAdapter = getGraphAdapter();
 		graphAdapter.initialiseGraph();
 		vertexCount = graphAdapter.getVertexCount();
 		edgeCount = graphAdapter.getEdgeCount();
@@ -305,6 +304,10 @@ public class MotifSolvingAndSaveTest {
 		listener.setOverallUsedTime(overallTimeInSeconds);
 
 		return listener;
+	}
+
+	public EPackageGraphAdapter getGraphAdapter() {
+		return new EPackageGraphAdapter(metamodel);
 	}
 
 
