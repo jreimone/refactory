@@ -62,7 +62,9 @@ public class EPackageGraphAdapter/*<Vertex extends EObjectVertex, Edge extends E
 		addNodesForPackage(metamodel);
 		//			}
 		//		}
-		createInheritedReferences();
+		if(!useOnlySuperClasses()){
+			createInheritedReferences();
+		}
 	}
 
 	private void addNodesForPackage(EPackage epackage) {
@@ -81,12 +83,16 @@ public class EPackageGraphAdapter/*<Vertex extends EObjectVertex, Edge extends E
 		}
 	}
 
+	public boolean useOnlySuperClasses(){
+		return false;
+	}
+	
 	/*
 	 * Loest Vererbungsproblem
 	 * eingehende Referenzen der Oberklasse werden in Unterklasse geschrieben
 	 * (ausgehende Referenzen der Oberklassen werden schon in addNode(..) erzeugt)
 	 */
-	private void createInheritedReferences(){
+	public void createInheritedReferences(){
 		//		List<EObject> contents = getResource().getContents();
 		//		for (EObject model : contents) {
 		//			if(model instanceof EPackage){
