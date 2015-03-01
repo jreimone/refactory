@@ -79,8 +79,7 @@ public class StructureCustom extends StructureImpl {
 		// create an *unmanaged* engine to ensure that noone else is going to use our engine
 //		AdvancedIncQueryEngine engine = AdvancedIncQueryEngine.createUnmanagedEngine(resourceSet);
 		// managed engine with better performance
-		BaseIndexOptions options = new BaseIndexOptions();
-		options.withResourceFilterConfiguration(new IBaseIndexResourceFilter() {
+		BaseIndexOptions options = new BaseIndexOptions().withResourceFilterConfiguration(new IBaseIndexResourceFilter() {
 		 
 		  @Override
 		  public boolean isResourceFiltered(Resource resource) {
