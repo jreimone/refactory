@@ -2,6 +2,8 @@
 
 Documentation can be found under: http://www.modelrefactoring.org/
 
+Our Quality Smell catalogue can be found here: https://martinbrylski.github.io/android_smells/ 
+
 Current version 0.9.2 can be installed with update site URL: http://www.modelrefactoring.org/update/
 
 Watch a video:
