@@ -1,10 +1,8 @@
 # Refactory - Model Refactorings for [EMF](https://eclipse.org/modeling/emf/)-based DSLs
 
-Documentation can be found under: http://www.modelrefactoring.org/
+Documentation can be found under: https://www.modelrefactoring.org/
 
-Our Quality Smell catalogue can be found here: https://martinbrylski.github.io/android_smells/ 
-
-Current version 0.9.2 can be installed with update site URL: http://www.modelrefactoring.org/update/
+Our Quality Smell catalogue can be found here: https://www.modelrefactoring.org/smell_catalog
 
 Watch a video:
 
